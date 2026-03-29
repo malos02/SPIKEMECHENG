@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPIKE | Engineering Hub PRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#020408;--surface:#080d14;--surface2:#0d1520;--border:#151f2e;--border2:#1e2d40;--text:#c8d8e8;--muted:#4a6080;--accent:#1e7fff;--accent2:#00d4aa;--danger:#ff4444;--warn:#ff8c00;}
+        *{box-sizing:border-box;margin:0;padding:0;}
+        body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+        ::-webkit-scrollbar{width:4px;height:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px;}
+
+        /* ── AUTH SCREEN ── */
+        #authScreen{position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;align-items:center;justify-content:center;}
+        .auth-card{background:var(--surface);border:1px solid var(--border2);border-radius:12px;padding:40px;width:100%;max-width:420px;box-shadow:0 40px 80px rgba(0,0,0,.6);animation:slideUp .3s ease;}
+        .auth-logo{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.08em;color:#fff;text-align:center;line-height:1;}
+        .auth-logo span{color:var(--accent);}
+        .auth-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-top:4px;margin-bottom:32px;}
+        .auth-tabs{display:flex;border-bottom:1px solid var(--border2);margin-bottom:24px;}
+        .auth-tab{flex:1;padding:10px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;text-align:center;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;}
+        .auth-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+        .auth-field{margin-bottom:14px;}
+        .auth-field label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);display:block;margin-bottom:6px;}
+        .auth-field input{background:var(--surface2)!important;border:1px solid var(--border2)!important;color:var(--text)!important;font-family:'Space Grotesk',sans-serif;font-size:13px;padding:11px 14px;border-radius:6px;width:100%;transition:border-color .15s;outline:none;}
+        .auth-field input:focus{border-color:var(--accent)!important;box-shadow:0 0 0 2px rgba(30,127,255,.12);}
+        .auth-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:13px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:all .15s;margin-top:6px;}
+        .auth-btn:hover{background:#3b8fff;box-shadow:0 4px 20px rgba(30,127,255,.3);}
+        .auth-btn:disabled{opacity:.5;cursor:not-allowed;}
+        .auth-err{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--danger);background:rgba(255,68,68,.08);border:1px solid rgba(255,68,68,.2);border-radius:5px;padding:10px 12px;margin-top:12px;display:none;}
+        .auth-info{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent2);background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:5px;padding:10px 12px;margin-top:12px;display:none;}
+        .role-badge{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:2px 7px;border-radius:3px;margin-left:6px;}
+        .role-admin{background:rgba(30,127,255,.15);color:var(--accent);}
+        .role-viewer{background:rgba(74,96,128,.2);color:var(--muted);}
+
+        /* ── CONFIG BANNER ── */
+        #configBanner{display:none;background:rgba(255,140,0,.08);border-bottom:1px solid rgba(255,140,0,.25);padding:10px 32px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--warn);align-items:center;gap:10px;}
+
+        /* ── SIDEBAR ── */
+        .sidebar{background:linear-gradient(180deg,#030810,#020408);width:260px;height:100vh;position:fixed;border-right:1px solid var(--border);z-index:40;display:flex;flex-direction:column;padding:28px 20px;overflow-y:auto;}
+        .logo-text{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:.08em;color:#fff;line-height:1;}
+        .logo-bolt{color:var(--accent);}
+        .logo-sub{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:.25em;text-transform:uppercase;margin-top:4px;}
+        .nav-section-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.2em;margin-bottom:10px;padding-left:4px;}
+        .nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:6px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;border-left:2px solid transparent;margin-bottom:2px;}
+        .nav-item:hover{background:var(--surface2);color:var(--text);}
+        .nav-item.active{background:var(--surface2);color:#fff;border-left-color:var(--accent);}
+        .nav-item i{width:16px;text-align:center;color:var(--accent);font-size:11px;}
+        .eng-item{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:6px;cursor:pointer;transition:all .18s;margin-bottom:2px;border-left:2px solid transparent;}
+        .eng-item:hover{background:var(--surface2);}
+        .eng-item.active{background:var(--surface2);border-left-color:var(--accent);}
+        .eng-avatar{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+        .eng-name{font-size:12px;font-weight:500;color:var(--text);}
+        .add-eng-btn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:5px;transition:background .15s;width:100%;}
+        .add-eng-btn:hover{background:var(--surface2);}
+
+        /* ── MAIN ── */
+        .main-content{margin-left:260px;padding:32px;min-height:100vh;background:var(--bg);}
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;}
+        .card-header{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);border-left:2px solid var(--accent);padding-left:10px;margin-bottom:16px;}
+        .page-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;color:#fff;}
+        .page-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px;}
+
+        table{width:100%;border-collapse:collapse;}
+        thead{border-bottom:1px solid var(--border2);}
+        th{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);padding:12px 16px;text-align:left;}
+        td{padding:11px 16px;font-size:12px;}
+        tbody tr{border-bottom:1px solid var(--border);transition:background .15s;cursor:pointer;}
+        tbody tr:hover{background:var(--surface2);}
+
+        .badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 8px;border-radius:3px;}
+        .badge-blue{background:rgba(30,127,255,.12);color:#4da6ff;}
+        .status-late{color:var(--danger);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11px;}
+        .status-ontime{color:var(--accent);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11px;}
+        .status-shipped{color:var(--accent2);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11px;}
+        .status-inprog{color:var(--muted);font-weight:600;font-family:'JetBrains Mono',monospace;font-size:11px;}
+        .status-week{color:var(--warn);font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11px;}
+
+        .late-row{background:rgba(255,68,68,.04)!important;border-left:3px solid var(--danger)!important;}
+        .late-row:hover{background:rgba(255,68,68,.08)!important;}
+        .shipped-row td{color:var(--accent2)!important;opacity:.5;text-decoration:line-through;}
+        .shipped-row{border-left:3px solid var(--accent2)!important;}
+
+        .progress-track{background:var(--border2);height:3px;border-radius:99px;overflow:hidden;width:80px;}
+        .progress-fill{height:100%;background:var(--accent);border-radius:99px;}
+
+        .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px 22px;}
+        .stat-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;}
+        .stat-value{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.04em;margin-top:4px;line-height:1;}
+        .stat-delta{font-family:'JetBrains Mono',monospace;font-size:9px;margin-top:6px;}
+        .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+
+        .alert-panel{background:rgba(255,68,68,.06);border:1px solid rgba(255,68,68,.2);border-radius:8px;padding:16px 20px;margin-bottom:20px;}
+        .alert-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--danger);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+        .alert-item{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,68,68,.1);font-size:11px;}
+        .alert-item:last-child{border:none;}
+        .alert-dot{width:6px;height:6px;border-radius:50%;background:var(--danger);flex-shrink:0;animation:pulse 2s infinite;}
+        @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+        .filter-bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+        .filter-btn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:5px 10px;border-radius:4px;border:1px solid var(--border2);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;}
+        .filter-btn:hover{border-color:var(--accent);color:var(--text);}
+        .filter-btn.active{background:rgba(30,127,255,.15);border-color:var(--accent);color:var(--accent);}
+        .filter-btn.f-late.active{background:rgba(255,68,68,.12);border-color:var(--danger);color:var(--danger);}
+        .filter-btn.f-warn.active{background:rgba(255,140,0,.12);border-color:var(--warn);color:var(--warn);}
+        .filter-btn.f-ok.active{background:rgba(0,212,170,.12);border-color:var(--accent2);color:var(--accent2);}
+
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:100;align-items:center;justify-content:center;padding:20px;}
+        .modal-overlay.open{display:flex;}
+        .modal-box{background:var(--surface);border:1px solid var(--border2);border-radius:10px;overflow:hidden;width:100%;max-width:860px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 40px 80px rgba(0,0,0,.7);animation:slideUp .22s ease;}
+        .modal-box.sm{max-width:400px;}
+        @keyframes slideUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+        .modal-accent{height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+        .modal-body{padding:28px;overflow-y:auto;}
+
+        label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);display:block;margin-bottom:6px;}
+        input[type="text"],input[type="date"],input[type="email"],input[type="password"],select,textarea{background:var(--surface2)!important;border:1px solid var(--border2)!important;color:var(--text)!important;font-family:'Space Grotesk',sans-serif;font-size:12px;padding:9px 11px;border-radius:5px;width:100%;transition:border-color .15s;outline:none;}
+        input:focus,select:focus,textarea:focus{border-color:var(--accent)!important;box-shadow:0 0 0 2px rgba(30,127,255,.1);}
+        select option{background:#0d1520;}
+
+        .ms-row{display:grid;grid-template-columns:20px 1fr 130px;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid var(--border);}
+        .ms-row:last-child{border-bottom:none;}
+        input[type="checkbox"].ms-check{width:15px;height:15px;accent-color:var(--accent);cursor:pointer;}
+        .ms-name{font-size:11px;font-weight:600;color:#7090b0;text-transform:uppercase;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+        .ms-name.shipped{color:var(--accent2);}
+
+        .log-box{font-family:'JetBrains Mono',monospace;font-size:9px;line-height:1.7;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:10px;overflow-y:auto;height:150px;}
+        .log-box div{padding:1px 0;border-bottom:1px solid var(--border);}
+
+        .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);border-left:1px solid var(--border);border-top:1px solid var(--border);}
+        .cal-hdr{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);text-align:center;padding:12px 4px;background:var(--bg);border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
+        .calendar-day{background:var(--surface);min-height:100px;padding:8px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .15s;}
+        .calendar-day:hover{background:var(--surface2);}
+        .cal-day-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px;}
+        .calendar-day.today .cal-day-num{color:var(--accent);text-decoration:underline;}
+        .cal-evt{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;margin-top:3px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .cal-ifa{background:rgba(30,127,255,.18);color:#60a5fa;}
+        .cal-ifc{background:rgba(255,140,0,.18);color:#fbbf24;}
+        .calendar-empty{background:var(--bg);}
+        .month-nav-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);width:30px;height:30px;border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+        .month-nav-btn:hover{background:var(--border2);}
+
+        .btn-primary{background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:all .15s;}
+        .btn-primary:hover{background:#3b8fff;box-shadow:0 4px 20px rgba(30,127,255,.35);}
+        .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted);padding:10px 20px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:all .15s;}
+        .btn-ghost:hover{border-color:var(--accent);color:var(--text);}
+        .btn-danger{background:transparent;border:none;color:var(--danger);font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;}
+
+        .toast{position:fixed;bottom:24px;right:24px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);z-index:999;box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateY(80px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:10px;max-width:320px;}
+        .toast.show{transform:translateY(0);opacity:1;}
+
+        .save-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);}
+        .save-dot.syncing{background:var(--warn);animation:pulse 1s infinite;}
+        .save-dot.error{background:var(--danger);}
+        .tab-content{display:none;}
+        .tab-content.active{display:block;}
+        #projectSearch{background:var(--surface2)!important;border:1px solid var(--border2)!important;border-radius:5px;font-size:11px!important;width:200px;}
+        .spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spin .6s linear infinite;margin-right:6px;}
+        @keyframes spin{to{transform:rotate(360deg);}}
+        .viewer-lock{opacity:.45;pointer-events:none;cursor:not-allowed;}
+        .viewer-tip{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);padding:4px 8px;border:1px solid var(--border2);border-radius:4px;}
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     AUTH SCREEN
+════════════════════════════════════════════════════════ -->
+<div id="authScreen">
+    <div class="auth-card">
+        <div class="auth-logo">SPI<span>⚡</span>KE</div>
+        <div class="auth-sub">Engineering Hub PRO</div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="tabLogin"    onclick="switchAuthTab('login')">Sign In</div>
+            <div class="auth-tab"        id="tabRegister" onclick="switchAuthTab('register')">Register</div>
+        </div>
+
+        <!-- LOGIN -->
+        <div id="loginForm">
+            <div class="auth-field"><label>Email</label><input type="email" id="loginEmail" placeholder="you@company.com" autocomplete="email"></div>
+            <div class="auth-field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
+            <button class="auth-btn" onclick="doLogin()">Sign In</button>
+            <div class="auth-err" id="loginErr"></div>
+        </div>
+
+        <!-- REGISTER -->
+        <div id="registerForm" style="display:none;">
+            <div class="auth-field"><label>Full Name</label><input type="text" id="regName" placeholder="Jane Smith"></div>
+            <div class="auth-field"><label>Email</label><input type="email" id="regEmail" placeholder="you@company.com"></div>
+            <div class="auth-field"><label>Password</label><input type="password" id="regPass" placeholder="Min 6 characters"></div>
+            <div class="auth-field">
+                <label>Role</label>
+                <select id="regRole">
+                    <option value="viewer">Viewer — Read-only access</option>
+                    <option value="admin">Admin — Full access</option>
+                </select>
+            </div>
+            <button class="auth-btn" onclick="doRegister()">Create Account</button>
+            <div class="auth-err" id="regErr"></div>
+            <div class="auth-info" id="regInfo"></div>
+        </div>
+
+        <!-- CONFIG NOTE -->
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border2);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);line-height:1.8;">
+            <div style="color:var(--warn);margin-bottom:6px;"><i class="fa-solid fa-triangle-exclamation" style="margin-right:4px;"></i>SETUP REQUIRED</div>
+            Replace <code style="color:var(--accent);">SUPABASE_URL</code> and <code style="color:var(--accent);">SUPABASE_ANON_KEY</code> at the top of the &lt;script&gt; with your project credentials from <strong>supabase.com → Project Settings → API</strong>.
+        </div>
+    </div>
+</div>
+
+<!-- CONFIG BANNER (shown when keys are placeholders) -->
+<div id="configBanner" style="display:none;background:rgba(255,140,0,.08);border-bottom:1px solid rgba(255,140,0,.25);padding:10px 32px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--warn);display:none;align-items:center;gap:10px;">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    Running in <strong>LOCAL MODE</strong> — Supabase not configured. Data saved to localStorage only. Add your Supabase URL + key to enable cloud sync & auth.
+    <button onclick="this.parentElement.style.display='none'" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--muted);">✕</button>
+</div>
+
+<div id="toastEl" class="toast"><i id="toastIcon" class="fa-solid fa-check-circle"></i><span id="toastMsg">Saved</span></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="mainSidebar" style="display:none;">
+    <div style="margin-bottom:28px;">
+        <div class="logo-text">SPI<span class="logo-bolt">⚡</span>KE</div>
+        <div class="logo-sub">Engineering Hub PRO</div>
+    </div>
+    <nav style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:24px;">
+        <div>
+            <div class="nav-section-label">Main Views</div>
+            <div onclick="clearFiltersAndSwitch('dashboard')" id="nav-dashboard" class="nav-item active"><i class="fa-solid fa-gauge-high"></i>Dashboard</div>
+            <div onclick="clearFiltersAndSwitch('projects')"  id="nav-projects"  class="nav-item"><i class="fa-solid fa-list-check"></i>Projects List</div>
+            <div onclick="clearFiltersAndSwitch('calendar')"  id="nav-calendar"  class="nav-item"><i class="fa-solid fa-calendar-alt"></i>Calendar</div>
+            <div onclick="clearFiltersAndSwitch('kpi')"       id="nav-kpi"       class="nav-item"><i class="fa-solid fa-chart-line"></i>KPI View</div>
+        </div>
+        <div>
+            <div class="nav-section-label">Engineers & Load</div>
+            <div id="sidebarEngineerList"></div>
+            <button id="addEngBtn" onclick="openEngineerModal(-1)" class="add-eng-btn"><i class="fa-solid fa-plus"></i>Add Engineer</button>
+        </div>
+        <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--border);">
+            <!-- Current user info -->
+            <div id="userInfo" style="margin-bottom:12px;background:var(--surface2);border-radius:6px;padding:10px 12px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:3px;">SIGNED IN AS</div>
+                <div style="font-size:12px;font-weight:600;color:var(--text);word-break:break-all;" id="userEmail"></div>
+                <div id="userRoleDisplay" style="margin-top:4px;"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><div class="save-dot" id="saveDot"></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);" id="saveStatusText">Ready</span></div>
+            <button onclick="doSignOut()" style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);background:none;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:6px;padding:4px 0;"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</button>
+            <button onclick="clearAllData()" style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);background:none;border:none;cursor:pointer;margin-top:6px;text-transform:uppercase;letter-spacing:.1em;"><i class="fa-solid fa-trash" style="margin-right:4px;"></i>Reset Local Data</button>
+        </div>
+    </nav>
+</aside>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════════════ -->
+<main class="main-content" id="mainContent" style="display:none;">
+    <header style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;">
+        <div>
+            <div id="viewTitle" class="page-title">System Dashboard</div>
+            <div id="viewSubtitle" class="page-sub">Pipeline Status & Deadline Monitoring</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+            <div class="stat-card" style="padding:10px 18px;display:flex;align-items:center;gap:12px;">
+                <span class="stat-label" style="font-size:8px;">Tracked<br>Jobs</span>
+                <span id="activeCount" class="stat-value" style="font-size:1.8rem;color:var(--accent);">0</span>
+            </div>
+            <div class="stat-card" style="padding:10px 18px;display:flex;align-items:center;gap:12px;">
+                <span class="stat-label" style="font-size:8px;">Late<br>Now</span>
+                <span id="lateCount" class="stat-value" style="font-size:1.8rem;color:var(--danger);">0</span>
+            </div>
+            <button id="addProjectBtn" onclick="openAddModal()" class="btn-primary" style="padding:12px 22px;"><i class="fa-solid fa-plus" style="margin-right:8px;"></i>Add Project</button>
+        </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="tab-dashboard" class="tab-content active">
+        <div id="alertPanel" class="alert-panel" style="display:none;">
+            <div class="alert-title"><i class="fa-solid fa-triangle-exclamation"></i><span id="alertCount">0</span> Projects Need Immediate Attention</div>
+            <div id="alertList"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:20px;">
+            <div class="card"><div class="card-header">Team Workload Balance</div><div style="height:180px;"><canvas id="workloadChart"></canvas></div></div>
+            <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
+                <div class="card-header" style="text-align:center;border-left:none;padding-left:0;">Status Breakdown</div>
+                <div style="height:160px;"><canvas id="statusChart"></canvas></div>
+            </div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden;">
+            <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                <span class="card-header" style="margin:0;">Priority Pipeline</span>
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="setDashFilter('all',this)">All</button>
+                    <button class="filter-btn f-late" onclick="setDashFilter('late',this)">🔴 Late</button>
+                    <button class="filter-btn f-warn" onclick="setDashFilter('week',this)">⚠️ Due This Week</button>
+                    <button class="filter-btn f-ok"   onclick="setDashFilter('ontime',this)">✅ On Track</button>
+                    <button class="filter-btn"        onclick="setDashFilter('shipped',this)">📦 Shipped</button>
+                </div>
+            </div>
+            <table><thead><tr><th>ID</th><th>Project Name</th><th>Engineer</th><th>Progress</th><th>Milestone</th><th>Status</th></tr></thead><tbody id="dashboardTableBody"></tbody></table>
+        </div>
+    </section>
+
+    <!-- PROJECTS LIST -->
+    <section id="tab-projects" class="tab-content">
+        <div class="card" style="padding:0;overflow:hidden;">
+            <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                <span class="card-header" style="margin:0;">Master Project Registry</span>
+                <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                    <div class="filter-bar">
+                        <button class="filter-btn active" onclick="setProjFilter('all',this)">All</button>
+                        <button class="filter-btn f-late" onclick="setProjFilter('late',this)">Late</button>
+                        <button class="filter-btn f-warn" onclick="setProjFilter('week',this)">Due This Week</button>
+                        <button class="filter-btn f-ok"   onclick="setProjFilter('ontime',this)">On Track</button>
+                        <button class="filter-btn"        onclick="setProjFilter('shipped',this)">Shipped</button>
+                    </div>
+                    <input type="text" id="projectSearch" placeholder="Search…" onkeyup="searchProjects()" style="padding:7px 12px;">
+                </div>
+            </div>
+            <table><thead><tr><th>ID</th><th>Project Name</th><th>Engineer</th><th>IFA Due</th><th>IFC Due</th><th>Milestone</th><th>Status</th></tr></thead><tbody id="projectsFullTableBody"></tbody></table>
+        </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section id="tab-calendar" class="tab-content">
+        <div class="card" style="padding:0;overflow:hidden;">
+            <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+                <span id="calMonthTitle" class="card-header" style="margin:0;"></span>
+                <div style="display:flex;gap:8px;">
+                    <button class="month-nav-btn" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left" style="font-size:10px;"></i></button>
+                    <button class="month-nav-btn" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right" style="font-size:10px;"></i></button>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);">
+                <div class="cal-hdr">Sun</div><div class="cal-hdr">Mon</div><div class="cal-hdr">Tue</div><div class="cal-hdr">Wed</div><div class="cal-hdr">Thu</div><div class="cal-hdr">Fri</div><div class="cal-hdr">Sat</div>
+            </div>
+            <div id="calendarGrid" class="calendar-grid"></div>
+        </div>
+    </section>
+
+    <!-- KPI -->
+    <section id="tab-kpi" class="tab-content">
+        <div class="kpi-grid" id="kpiCards"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+            <div class="card"><div class="card-header">On-Time Delivery Rate</div><div style="height:200px;"><canvas id="kpiOnTimeChart"></canvas></div></div>
+            <div class="card"><div class="card-header">Projects Per Engineer</div><div style="height:200px;"><canvas id="kpiEngChart"></canvas></div></div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden;">
+            <div style="padding:12px 20px;border-bottom:1px solid var(--border);"><span class="card-header" style="margin:0;">Engineer Performance Breakdown</span></div>
+            <table><thead><tr><th>Engineer</th><th>Total</th><th>Shipped</th><th>Late</th><th>On Track</th><th>Avg Progress</th></tr></thead><tbody id="kpiTableBody"></tbody></table>
+        </div>
+    </section>
+</main>
+
+<!-- ═══════════════════════════════════════════════════════
+     PROJECT MODAL
+════════════════════════════════════════════════════════ -->
+<div id="projectModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-accent"></div>
+        <div class="modal-body">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+                <div id="modalTitle" style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;color:#fff;">New Project</div>
+                <button onclick="closeModals()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;">&times;</button>
+            </div>
+            <form id="projectForm">
+                <input type="hidden" id="edit_index">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                    <div><label>Project ID</label><input type="text" id="m_id" required></div>
+                    <div><label>Project Name</label><input type="text" id="m_name" required></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+                    <div><label>Engineer</label><select id="m_eng" required></select></div>
+                    <div><label>IFA Due Date</label><input type="date" id="m_ifa"></div>
+                    <div><label>IFC Due Date</label><input type="date" id="m_ifc"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                    <div>
+                        <label style="color:var(--accent2);letter-spacing:.15em;margin-bottom:10px;">Milestone Progression</label>
+                        <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;"><div id="milestoneInputsContainer"></div></div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:14px;">
+                        <div><label>Technical Notes</label><textarea id="m_notes" rows="3"></textarea></div>
+                        <div>
+                            <label style="color:var(--accent);">History Logs</label>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;">
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-bottom:4px;">OWNERSHIP</div><div id="ownerLogContainer" class="log-box"></div></div>
+                                <div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);margin-bottom:4px;">MILESTONES</div><div id="milestoneLogContainer" class="log-box"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+                    <button type="button" onclick="closeModals()" class="btn-ghost">Discard</button>
+                    <button type="submit" class="btn-primary" id="projectSaveBtn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ENGINEER MODAL -->
+<div id="engineerModal" class="modal-overlay">
+    <div class="modal-box sm">
+        <div class="modal-accent"></div>
+        <div class="modal-body">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+                <div id="engModalTitle" style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.06em;color:#fff;">Engineer</div>
+                <button onclick="closeModals()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;">&times;</button>
+            </div>
+            <form id="engineerForm">
+                <input type="hidden" id="eng_edit_index">
+                <div style="margin-bottom:14px;"><label>Full Name</label><input type="text" id="eng_name" required></div>
+                <div style="margin-bottom:24px;"><label>Initials (2 chars)</label><input type="text" id="eng_initial" required maxlength="2" style="text-transform:uppercase;"></div>
+                <button type="submit" class="btn-primary" style="width:100%;margin-bottom:12px;">Confirm</button>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <button type="button" onclick="closeModals()" class="btn-ghost" style="font-size:9px;padding:8px 16px;">Cancel</button>
+                    <button type="button" id="engDeleteBtn" onclick="confirmDeleteEngineer()" class="btn-danger" style="display:none;">Delete Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  ① SUPABASE CONFIG — Replace these two values with your own:
+//     supabase.com → your project → Project Settings → API
+// ═══════════════════════════════════════════════════════════════════
+const SUPABASE_URL      = 'https://jubvevpjdfkkrrszwjko.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_W5jnoY-a_4FapoGrsuAC7g_rxzicaQh';
+
+// ═══════════════════════════════════════════════════════════════════
+//  SUPABASE CLIENT — auto-falls-back to local mode if not configured
+// ═══════════════════════════════════════════════════════════════════
+const CONFIGURED = !SUPABASE_URL.startsWith('YOUR_');
+let sb = null;
+if (CONFIGURED) {
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} else {
+    document.getElementById('configBanner').style.display = 'flex';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  AUTH STATE
+// ═══════════════════════════════════════════════════════════════════
+let currentUser = null;   // Supabase user object
+let currentRole = 'viewer'; // 'admin' | 'viewer'
+
+function isAdmin() { return currentRole === 'admin'; }
+
+function applyRoleUI() {
+    const isA = isAdmin();
+    ['addProjectBtn','addEngBtn'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.style.display = isA ? '' : 'none'; }
+    });
+    document.getElementById('userEmail').innerText = currentUser?.email || 'Unknown';
+    const rd = document.getElementById('userRoleDisplay');
+    rd.innerHTML = `<span class="role-badge ${isA ? 'role-admin' : 'role-viewer'}">${currentRole}</span>`;
+}
+
+// ── AUTH TAB SWITCH ──────────────────────────────────────
+function switchAuthTab(tab) {
+    document.getElementById('loginForm').style.display    = tab === 'login'    ? '' : 'none';
+    document.getElementById('registerForm').style.display = tab === 'register' ? '' : 'none';
+    document.getElementById('tabLogin').classList.toggle('active',    tab === 'login');
+    document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+}
+
+// ── LOGIN ────────────────────────────────────────────────
+async function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass  = document.getElementById('loginPass').value;
+    const errEl = document.getElementById('loginErr');
+    const btn   = document.querySelector('#loginForm .auth-btn');
+    errEl.style.display = 'none';
+
+    if (!CONFIGURED) {
+        // Local mode: accept any credentials, default admin
+        currentUser = { email, id: 'local-user' };
+        currentRole = 'admin';
+        showApp();
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Signing in…';
+    const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+    btn.disabled = false; btn.innerText = 'Sign In';
+
+    if (error) { errEl.innerText = error.message; errEl.style.display = 'block'; return; }
+    currentUser = data.user;
+    await loadUserRole();
+    showApp();
+}
+
+// ── REGISTER ─────────────────────────────────────────────
+async function doRegister() {
+    const name  = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const pass  = document.getElementById('regPass').value;
+    const role  = document.getElementById('regRole').value;
+    const errEl = document.getElementById('regErr');
+    const infoEl= document.getElementById('regInfo');
+    const btn   = document.querySelector('#registerForm .auth-btn');
+    errEl.style.display = 'none'; infoEl.style.display = 'none';
+
+    if (!CONFIGURED) {
+        infoEl.innerText = 'Local mode: registration skipped. Use Sign In.';
+        infoEl.style.display = 'block'; return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Creating account…';
+
+    const { data, error } = await sb.auth.signUp({
+        email, password: pass,
+        options: { data: { full_name: name, role } }
+    });
+    btn.disabled = false; btn.innerText = 'Create Account';
+
+    if (error) { errEl.innerText = error.message; errEl.style.display = 'block'; return; }
+
+    // Insert role into profiles table (RLS: only the user themselves can do this on signup)
+    if (data.user) {
+        await sb.from('profiles').upsert({ id: data.user.id, email, full_name: name, role });
+    }
+
+    infoEl.innerText = 'Account created! Check your email to confirm, then sign in.';
+    infoEl.style.display = 'block';
+}
+
+// ── LOAD ROLE ────────────────────────────────────────────
+async function loadUserRole() {
+    if (!sb || !currentUser) { currentRole = 'admin'; return; }
+    const { data } = await sb.from('profiles').select('role').eq('id', currentUser.id).single();
+    currentRole = data?.role || 'viewer';
+}
+
+// ── SIGN OUT ─────────────────────────────────────────────
+async function doSignOut() {
+    if (sb) await sb.auth.signOut();
+    currentUser = null; currentRole = 'viewer';
+    document.getElementById('mainSidebar').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('authScreen').style.display  = 'flex';
+}
+
+// ── SHOW APP ─────────────────────────────────────────────
+function showApp() {
+    document.getElementById('authScreen').style.display  = 'none';
+    document.getElementById('mainSidebar').style.display = 'flex';
+    document.getElementById('mainContent').style.display = 'block';
+    applyRoleUI();
+    loadData().then(refreshUI);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  CONSTANTS
+// ═══════════════════════════════════════════════════════════════════
+const MS_NAMES = ["Design","IFA","Customer Approval","IFC Started","IDR Review","IFC Completed","Live on Floor","Project Shipped"];
+const MON = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const AVB = ['#1e3a5f','#1a3d30','#3d2a10','#1a3a40','#2e1a4a','#3d1a1a','#2a3a1a','#3a1a30'];
+const AVF = ['#4da6ff','#00d4aa','#fbbf24','#22d3ee','#a78bfa','#f87171','#86efac','#f9a8d4'];
+
+const LS_P = 'spike_projects', LS_E = 'spike_engineers';
+const DEF_E = [{name:'Bryan Haro',initial:'BH'},{name:'Edwin Ojeda',initial:'EO'},{name:'Mario Galdamez',initial:'MG'},{name:'Masoom Patel',initial:'MP'}];
+const DEF_P = [{id:'S0110852',name:'15kV LBS Unit',eng:'Mario Galdamez',notes:'',ownerLog:["Created by Mario Galdamez"],milestoneLog:["Workflow Init"],milestones:[true,true,true,false,false,false,false,false],milestoneDates:["2026-03-01","2026-03-05","2026-03-10","","","","",""],ifa:'2026-03-24',ifc:'2026-03-30'}];
+
+// ═══════════════════════════════════════════════════════════════════
+//  DATA LAYER — Supabase if configured, localStorage fallback
+// ═══════════════════════════════════════════════════════════════════
+let engineers=[], projects=[];
+
+async function loadData() {
+    if (CONFIGURED && sb && currentUser) {
+        setSaveStatus('syncing','Syncing…');
+        try {
+            const [ep, pp] = await Promise.all([
+                sb.from('engineers').select('*').order('name'),
+                sb.from('projects').select('*').order('created_at', { ascending: false })
+            ]);
+            if (ep.error) throw ep.error;
+            if (pp.error) throw pp.error;
+            // Map DB snake_case → app camelCase
+            engineers = ep.data || [];
+            projects  = (pp.data || []).map(dbToApp);
+            setSaveStatus('ok', 'Cloud synced');
+            return;
+        } catch(e) {
+            console.warn('Supabase load failed, falling back to localStorage:', e.message);
+            setSaveStatus('error','Sync failed — using local');
+        }
+    }
+    // localStorage fallback
+    try {
+        engineers = JSON.parse(localStorage.getItem(LS_E)) || DEF_E;
+        projects  = JSON.parse(localStorage.getItem(LS_P))  || DEF_P;
+    } catch { engineers = DEF_E; projects = DEF_P; }
+    setSaveStatus('ok','Local data loaded');
+}
+
+// Convert DB row → app object
+function dbToApp(row) {
+    return {
+        id: row.project_id, name: row.name, eng: row.engineer_name,
+        ifa: row.ifa_date || '', ifc: row.ifc_date || '',
+        notes: row.notes || '',
+        ownerLog: row.owner_log || [],
+        milestoneLog: row.milestone_log || [],
+        milestones: row.milestones || Array(8).fill(false),
+        milestoneDates: row.milestone_dates || Array(8).fill(''),
+        _dbId: row.id  // internal UUID
+    };
+}
+// Convert app object → DB row
+function appToDB(p) {
+    return {
+        project_id: p.id, name: p.name, engineer_name: p.eng,
+        ifa_date: p.ifa || null, ifc_date: p.ifc || null,
+        notes: p.notes || '',
+        owner_log: p.ownerLog,
+        milestone_log: p.milestoneLog,
+        milestones: p.milestones,
+        milestone_dates: p.milestoneDates,
+        user_id: currentUser?.id   // RLS: ties row to auth.uid()
+    };
+}
+
+async function saveProject(p, isNew) {
+    setSaveStatus('syncing','Saving…');
+    if (CONFIGURED && sb && currentUser && isAdmin()) {
+        try {
+            const row = appToDB(p);
+            let res;
+            if (isNew) {
+                res = await sb.from('projects').insert(row).select().single();
+            } else {
+                res = await sb.from('projects').update(row).eq('id', p._dbId).select().single();
+            }
+            if (res.error) throw res.error;
+            p._dbId = res.data.id;
+            setSaveStatus('ok','Cloud saved');
+            return;
+        } catch(e) { setSaveStatus('error','Save failed'); console.error(e); }
+    }
+    localSave();
+}
+
+async function saveEngineer(eng, isNew) {
+    setSaveStatus('syncing','Saving…');
+    if (CONFIGURED && sb && currentUser && isAdmin()) {
+        try {
+            let res;
+            if (isNew) {
+                res = await sb.from('engineers').insert({ name: eng.name, initial: eng.initial, user_id: currentUser.id }).select().single();
+            } else {
+                res = await sb.from('engineers').update({ name: eng.name, initial: eng.initial }).eq('id', eng._dbId).select().single();
+            }
+            if (res.error) throw res.error;
+            eng._dbId = res.data.id;
+            setSaveStatus('ok','Cloud saved');
+            return;
+        } catch(e) { setSaveStatus('error','Save failed'); console.error(e); }
+    }
+    localSave();
+}
+
+async function deleteEngineerDB(eng) {
+    if (CONFIGURED && sb && currentUser && isAdmin() && eng._dbId) {
+        const { error } = await sb.from('engineers').delete().eq('id', eng._dbId);
+        if (error) console.error('Delete engineer error:', error);
+    }
+    localSave();
+}
+
+function localSave() {
+    try {
+        localStorage.setItem(LS_E, JSON.stringify(engineers));
+        localStorage.setItem(LS_P, JSON.stringify(projects));
+        setSaveStatus('ok','Saved locally · ' + new Date().toLocaleTimeString());
+    } catch { setSaveStatus('error','Storage error'); }
+}
+
+function clearAllData() {
+    if (!confirm('Delete ALL local data and reset to defaults?')) return;
+    localStorage.removeItem(LS_E); localStorage.removeItem(LS_P);
+    engineers = DEF_E; projects = DEF_P;
+    refreshUI(); showToast('Local data reset','warning');
+}
+
+function setSaveStatus(state, msg) {
+    const dot = document.getElementById('saveDot');
+    const txt = document.getElementById('saveStatusText');
+    if (!dot || !txt) return;
+    dot.className = 'save-dot' + (state === 'syncing' ? ' syncing' : state === 'error' ? ' error' : '');
+    txt.innerText = msg;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════════════
+let sidebarFilter='all', dashFilter='all', projFilter='all';
+const TODAY=new Date(); TODAY.setHours(0,0,0,0);
+let calYear=TODAY.getFullYear(), calMonth=TODAY.getMonth();
+
+// ═══════════════════════════════════════════════════════════════════
+//  STATUS LOGIC
+// ═══════════════════════════════════════════════════════════════════
+function statusKey(p) {
+    let ai=-1; p.milestones.forEach((m,i)=>{if(m)ai=i;});
+    if(ai===7) return 'shipped';
+    const ifa=p.ifa?new Date(p.ifa):null, ifc=p.ifc?new Date(p.ifc):null;
+    if((ai===1&&ifa&&TODAY>ifa)||([3,4,5].includes(ai)&&ifc&&TODAY>ifc)) return 'late';
+    const wk=new Date(TODAY); wk.setDate(wk.getDate()+7);
+    if((ifa&&ifa>=TODAY&&ifa<=wk)||(ifc&&ifc>=TODAY&&ifc<=wk)) return 'week';
+    if(ai===1||[3,4,5].includes(ai)) return 'ontime';
+    return 'inprog';
+}
+function statusHTML(p) {
+    const m={shipped:'<span class="status-shipped">SHIPPED</span>',late:'<span class="status-late">LATE</span>',week:'<span class="status-week">DUE SOON</span>',ontime:'<span class="status-ontime">ON TIME</span>',inprog:'<span class="status-inprog">IN PROGRESS</span>'};
+    return m[statusKey(p)];
+}
+function applyF(data,f){ return f==='all'?data:data.filter(p=>statusKey(p)===f); }
+function baseData(){ return sidebarFilter==='all'?projects:projects.filter(p=>p.eng===sidebarFilter); }
+
+// ═══════════════════════════════════════════════════════════════════
+//  TABS
+// ═══════════════════════════════════════════════════════════════════
+function switchTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    document.getElementById('tab-'+id).classList.add('active');
+    document.getElementById('nav-'+id).classList.add('active');
+    const T={dashboard:['System Dashboard','Pipeline Status & Deadline Monitoring'],projects:['Master Registry','All Tracked Projects'],calendar:['Schedule Calendar','IFA & IFC Due Date Overview'],kpi:['Executive KPI View','Performance Metrics & Team Analytics']};
+    const t=T[id]||T.dashboard;
+    document.getElementById('viewTitle').innerText=sidebarFilter==='all'?t[0]:sidebarFilter+' — '+t[0];
+    document.getElementById('viewSubtitle').innerText=t[1];
+    refreshUI();
+}
+function clearFiltersAndSwitch(id){ sidebarFilter='all'; switchTab(id); }
+
+function setDashFilter(f,btn){ dashFilter=f; document.querySelectorAll('#tab-dashboard .filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderDashTable(applyF(baseData(),dashFilter)); }
+function setProjFilter(f,btn){ projFilter=f; document.querySelectorAll('#tab-projects .filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); renderProjTable(applyF(baseData(),projFilter)); }
+
+// ═══════════════════════════════════════════════════════════════════
+//  REFRESH
+// ═══════════════════════════════════════════════════════════════════
+function refreshUI() {
+    const d=baseData();
+    renderAlerts(d); renderDashTable(applyF(d,dashFilter)); renderProjTable(applyF(d,projFilter));
+    renderCalendar(d); renderKPI(); renderSidebar(); updateCharts();
+    populateEngDropdowns();
+    document.getElementById('activeCount').innerText=projects.length;
+    document.getElementById('lateCount').innerText=projects.filter(p=>statusKey(p)==='late').length;
+}
+
+// ── ALERTS ──────────────────────────────────────────────
+function renderAlerts(data) {
+    const late=data.filter(p=>statusKey(p)==='late'), week=data.filter(p=>statusKey(p)==='week');
+    const panel=document.getElementById('alertPanel'), list=document.getElementById('alertList');
+    const all=[...late.map(p=>({p,t:'late'})),...week.map(p=>({p,t:'week'}))];
+    if(!all.length){ panel.style.display='none'; return; }
+    panel.style.display='block';
+    document.getElementById('alertCount').innerText=all.length;
+    list.innerHTML=all.slice(0,6).map(({p,t})=>`<div class="alert-item" onclick="openEditModal(projects.find(x=>x.id==='${p.id}'))" style="cursor:pointer;"><div class="alert-dot" style="${t==='week'?'background:var(--warn);':''}"></div><span style="font-weight:700;color:#fff;min-width:90px;">${p.id}</span><span style="color:var(--muted);flex:1;">${p.name}</span><span style="color:var(--muted);min-width:60px;font-size:10px;">${p.eng.split(' ')[0]}</span><span>${t==='late'?'<span style="color:var(--danger);">OVERDUE</span>':'<span style="color:var(--warn);">Due This Week</span>'}</span></div>`).join('');
+}
+
+// ── SIDEBAR ─────────────────────────────────────────────
+function renderSidebar() {
+    const c=document.getElementById('sidebarEngineerList'); c.innerHTML='';
+    engineers.forEach((eng,idx)=>{
+        const ci=idx%AVB.length, active=sidebarFilter===eng.name;
+        const cnt=projects.filter(p=>p.eng===eng.name).length;
+        const late=projects.filter(p=>p.eng===eng.name&&statusKey(p)==='late').length;
+        const div=document.createElement('div'); div.className=`eng-item${active?' active':''}`;
+        div.innerHTML=`<div style="display:flex;align-items:center;gap:8px;flex:1;" onclick="sidebarFilter='${eng.name}';refreshUI();"><div class="eng-avatar" style="background:${AVB[ci]};color:${AVF[ci]};">${eng.initial}</div><div><div class="eng-name">${eng.name}</div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:${late>0?'var(--danger)':'var(--muted)'};">${cnt} jobs${late>0?` · ${late} late`:''}</div></div></div>${isAdmin()?`<button onclick="event.stopPropagation();openEngineerModal(${idx})" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;"><i class="fa-solid fa-pencil" style="font-size:9px;"></i></button>`:''}`;
+        c.appendChild(div);
+    });
+}
+
+// ── TABLES ──────────────────────────────────────────────
+function makeRow(p,cols) {
+    const ship=p.milestones[7], late=statusKey(p)==='late';
+    const lastM=p.milestones.reduce((prev,cur,i)=>cur?MS_NAMES[i]:prev,"None");
+    const prog=Math.round((p.milestones.filter(m=>m).length/8)*100);
+    const tr=document.createElement('tr');
+    if(ship)tr.classList.add('shipped-row'); else if(late)tr.classList.add('late-row');
+    tr.onclick=()=>openEditModal(p);
+    tr.innerHTML=cols(p,lastM,prog); return tr;
+}
+function renderDashTable(data) {
+    const tb=document.getElementById('dashboardTableBody');
+    tb.innerHTML=data.length?'':'<tr><td colspan="6" style="text-align:center;padding:30px;color:var(--muted);font-size:11px;">No projects match this filter</td></tr>';
+    data.slice(0,15).forEach(p=>tb.appendChild(makeRow(p,(p,m,pg)=>`<td style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:11px;">${p.id}</td><td style="font-weight:600;">${p.name}</td><td style="color:var(--muted);font-size:11px;">${p.eng}</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="progress-track"><div class="progress-fill" style="width:${pg}%"></div></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);">${pg}%</span></div></td><td><span class="badge badge-blue">${m}</span></td><td>${statusHTML(p)}</td>`)));
+}
+function renderProjTable(data) {
+    const tb=document.getElementById('projectsFullTableBody');
+    tb.innerHTML=data.length?'':'<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted);font-size:11px;">No projects match this filter</td></tr>';
+    data.forEach(p=>tb.appendChild(makeRow(p,(p,m)=>`<td style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent);font-size:11px;">${p.id}</td><td style="font-weight:600;">${p.name}</td><td style="color:var(--muted);font-size:11px;">${p.eng}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">${p.ifa||'—'}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">${p.ifc||'—'}</td><td><span class="badge badge-blue">${m}</span></td><td>${statusHTML(p)}</td>`)));
+    document.getElementById('activeCount').innerText=projects.length;
+}
+
+// ── CHARTS ──────────────────────────────────────────────
+function updateCharts() {
+    if(window.wC)window.wC.destroy();
+    window.wC=new Chart(document.getElementById('workloadChart'),{type:'bar',data:{labels:engineers.map(e=>e.initial),datasets:[{data:engineers.map(e=>projects.filter(p=>p.eng===e.name).length),backgroundColor:'#1e7fff',borderRadius:3,barThickness:22}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#4a6080',font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'#0d1520'},ticks:{color:'#4a6080',stepSize:1,font:{family:'JetBrains Mono',size:10}}}}}});
+    const sc={late:0,week:0,ontime:0,inprog:0,shipped:0};
+    projects.forEach(p=>{const k=statusKey(p);sc[k]=(sc[k]||0)+1;});
+    if(window.sC)window.sC.destroy();
+    window.sC=new Chart(document.getElementById('statusChart'),{type:'doughnut',data:{labels:['Late','Due Soon','On Time','In Progress','Shipped'],datasets:[{data:[sc.late,sc.week,sc.ontime,sc.inprog,sc.shipped],backgroundColor:['#ff4444','#ff8c00','#1e7fff','#2a4060','#00d4aa'],borderWidth:0,cutout:'75%'}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#4a6080',boxWidth:8,font:{size:8,family:'JetBrains Mono'},padding:8}}}}});
+}
+
+// ── KPI ─────────────────────────────────────────────────
+function renderKPI() {
+    const total=projects.length,shipped=projects.filter(p=>p.milestones[7]).length;
+    const late=projects.filter(p=>statusKey(p)==='late').length;
+    const ontime=projects.filter(p=>['ontime','shipped'].includes(statusKey(p))).length;
+    const pct=total>0?Math.round((ontime/total)*100):0;
+    const avgP=total>0?Math.round(projects.reduce((s,p)=>s+(p.milestones.filter(m=>m).length/8)*100,0)/total):0;
+    document.getElementById('kpiCards').innerHTML=`<div class="stat-card"><div class="stat-label">Total Projects</div><div class="stat-value" style="color:var(--text);">${total}</div><div class="stat-delta" style="color:var(--muted);">Across ${engineers.length} engineers</div></div><div class="stat-card"><div class="stat-label">On-Time Rate</div><div class="stat-value" style="color:${pct>=80?'var(--accent2)':pct>=60?'var(--accent)':'var(--danger)'};">${pct}%</div><div class="stat-delta" style="color:var(--muted);">${ontime} of ${total} tracked</div></div><div class="stat-card"><div class="stat-label">Shipped</div><div class="stat-value" style="color:var(--accent2);">${shipped}</div><div class="stat-delta" style="color:var(--muted);">${total>0?Math.round((shipped/total)*100):0}% completion rate</div></div><div class="stat-card"><div class="stat-label">Avg Progress</div><div class="stat-value" style="color:${late>0?'var(--danger)':'var(--accent)'};">${avgP}%</div><div class="stat-delta" style="color:${late>0?'var(--danger)':'var(--muted)'};">${late>0?`${late} overdue`:'All on schedule'}</div></div>`;
+    if(window.kpiO)window.kpiO.destroy();
+    window.kpiO=new Chart(document.getElementById('kpiOnTimeChart'),{type:'doughnut',data:{labels:['On Time/Shipped','Late','In Progress'],datasets:[{data:[ontime,late,total-ontime-late],backgroundColor:['#00d4aa','#ff4444','#2a4060'],borderWidth:0,cutout:'72%'}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#4a6080',boxWidth:8,font:{size:9,family:'JetBrains Mono'},padding:10}}}}});
+    if(window.kpiE)window.kpiE.destroy();
+    window.kpiE=new Chart(document.getElementById('kpiEngChart'),{type:'bar',data:{labels:engineers.map(e=>e.initial),datasets:[{label:'Projects',data:engineers.map(e=>projects.filter(p=>p.eng===e.name).length),backgroundColor:'#1e7fff',borderRadius:3,barThickness:22}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#4a6080',font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'#0d1520'},ticks:{color:'#4a6080',stepSize:1,font:{family:'JetBrains Mono',size:10}}}}}});
+    const tb=document.getElementById('kpiTableBody'); tb.innerHTML='';
+    engineers.forEach((eng,idx)=>{
+        const ci=idx%AVB.length, ep=projects.filter(p=>p.eng===eng.name);
+        const eS=ep.filter(p=>p.milestones[7]).length,eL=ep.filter(p=>statusKey(p)==='late').length,eO=ep.filter(p=>statusKey(p)==='ontime').length;
+        const eA=ep.length>0?Math.round(ep.reduce((s,p)=>s+(p.milestones.filter(m=>m).length/8)*100,0)/ep.length):0;
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td><div style="display:flex;align-items:center;gap:8px;"><div class="eng-avatar" style="background:${AVB[ci]};color:${AVF[ci]};">${eng.initial}</div><span style="font-weight:600;">${eng.name}</span></div></td><td style="font-family:'JetBrains Mono',monospace;font-weight:700;">${ep.length}</td><td style="color:var(--accent2);font-family:'JetBrains Mono',monospace;font-weight:700;">${eS}</td><td style="color:${eL>0?'var(--danger)':'var(--muted)'};font-family:'JetBrains Mono',monospace;font-weight:700;">${eL}</td><td style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:700;">${eO}</td><td><div style="display:flex;align-items:center;gap:8px;"><div class="progress-track" style="width:80px;"><div class="progress-fill" style="width:${eA}%;background:${eA>=80?'var(--accent2)':'var(--accent)'}"></div></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);">${eA}%</span></div></td>`;
+        tb.appendChild(tr);
+    });
+}
+
+// ── CALENDAR ────────────────────────────────────────────
+function changeMonth(d){ calMonth+=d; if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;} renderCalendar(baseData()); }
+function renderCalendar(data) {
+    const grid=document.getElementById('calendarGrid'); grid.innerHTML='';
+    document.getElementById('calMonthTitle').innerText=`${MON[calMonth]} ${calYear}`;
+    const fd=new Date(calYear,calMonth,1).getDay(), dim=new Date(calYear,calMonth+1,0).getDate();
+    const ts=`${TODAY.getFullYear()}-${String(TODAY.getMonth()+1).padStart(2,'0')}-${String(TODAY.getDate()).padStart(2,'0')}`;
+    for(let i=0;i<fd;i++){const e=document.createElement('div');e.className='calendar-day calendar-empty';grid.appendChild(e);}
+    for(let d=1;d<=dim;d++){
+        const dk=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const div=document.createElement('div'); div.className='calendar-day'+(dk===ts?' today':'');
+        div.innerHTML=`<div class="cal-day-num">${d}</div>`;
+        data.filter(p=>p.ifa===dk).forEach(p=>{const ev=document.createElement('div');ev.className='cal-evt cal-ifa';ev.innerText=`${p.id}: IFA`;ev.onclick=e=>{e.stopPropagation();openEditModal(p);};div.appendChild(ev);});
+        data.filter(p=>p.ifc===dk).forEach(p=>{const ev=document.createElement('div');ev.className='cal-evt cal-ifc';ev.innerText=`${p.id}: IFC`;ev.onclick=e=>{e.stopPropagation();openEditModal(p);};div.appendChild(ev);});
+        grid.appendChild(div);
+    }
+}
+
+// ── MODALS ──────────────────────────────────────────────
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModals(){document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModals();}));
+
+function openAddModal(){
+    if(!isAdmin()){showToast('Viewers cannot add projects','error');return;}
+    document.getElementById('projectForm').reset();
+    document.getElementById('edit_index').value="-1";
+    document.getElementById('modalTitle').innerText="New Project";
+    document.getElementById('ownerLogContainer').innerHTML='';
+    document.getElementById('milestoneLogContainer').innerHTML='';
+    buildMSRows(); populateEngDropdowns(); openModal('projectModal');
+}
+function openEditModal(project){
+    if(!project) return;
+    const idx=projects.findIndex(p=>p.id===project.id);
+    document.getElementById('edit_index').value=idx;
+    document.getElementById('modalTitle').innerText=`${isAdmin()?'Edit':'View'} — ${project.id}`;
+    document.getElementById('m_id').value=project.id;
+    document.getElementById('m_name').value=project.name;
+    document.getElementById('m_notes').value=project.notes||'';
+    document.getElementById('m_ifa').value=project.ifa||'';
+    document.getElementById('m_ifc').value=project.ifc||'';
+    populateEngDropdowns(project.eng);
+    document.getElementById('ownerLogContainer').innerHTML=project.ownerLog.map(l=>`<div>⚡ ${l}</div>`).join('');
+    document.getElementById('milestoneLogContainer').innerHTML=project.milestoneLog.map(l=>`<div>📌 ${l}</div>`).join('');
+    buildMSRows(project);
+    // Lock form if viewer
+    const fields=['m_id','m_name','m_eng','m_ifa','m_ifc','m_notes'];
+    fields.forEach(id=>{const el=document.getElementById(id);if(el)el.disabled=!isAdmin();});
+    document.querySelectorAll('.ms-check,.ms-date-input').forEach(el=>el.disabled=!isAdmin());
+    document.getElementById('projectSaveBtn').style.display=isAdmin()?'':'none';
+    openModal('projectModal');
+}
+function buildMSRows(p=null){
+    const c=document.getElementById('milestoneInputsContainer'); c.innerHTML='';
+    MS_NAMES.forEach((name,i)=>{
+        const chk=p?p.milestones[i]:false, dt=p?(p.milestoneDates[i]||''):'';
+        const row=document.createElement('div'); row.className='ms-row';
+        row.innerHTML=`<input type="checkbox" class="ms-check" ${chk?'checked':''}><span class="ms-name ${name==='Project Shipped'?'shipped':''}">${name}</span><input type="date" class="ms-date-input" value="${dt}" style="font-size:10px;padding:5px 8px;height:28px;">`;
+        c.appendChild(row);
+    });
+}
+function populateEngDropdowns(v=null){
+    const s=document.getElementById('m_eng');
+    s.innerHTML=`<option value="Unassigned">Unassigned</option>`+engineers.map(e=>`<option value="${e.name}" ${e.name===v?'selected':''}>${e.name}</option>`).join('');
+}
+
+// ── PROJECT FORM ────────────────────────────────────────
+document.getElementById('projectForm').onsubmit=async e=>{
+    e.preventDefault();
+    if(!isAdmin()){showToast('Viewers cannot save projects','error');return;}
+    const idx=parseInt(document.getElementById('edit_index').value), ne=document.getElementById('m_eng').value;
+    const ds=new Date().toLocaleDateString();
+    const states=Array.from(document.querySelectorAll('.ms-check')).map(c=>c.checked);
+    const dates=Array.from(document.querySelectorAll('.ms-date-input')).map(d=>d.value);
+    const btn=document.getElementById('projectSaveBtn');
+    btn.disabled=true; btn.innerHTML='<span class="spinner"></span>Saving…';
+    if(idx===-1){
+        const p={id:document.getElementById('m_id').value,name:document.getElementById('m_name').value,eng:ne,ifa:document.getElementById('m_ifa').value,ifc:document.getElementById('m_ifc').value,notes:document.getElementById('m_notes').value,ownerLog:[`Created by ${ne} on ${ds}`],milestoneLog:["Workflow Initialized"],milestones:states,milestoneDates:dates};
+        projects.unshift(p);
+        await saveProject(p,true);
+        showToast('Project added','success');
+    } else {
+        const p=projects[idx];
+        if(p.eng!==ne) p.ownerLog.unshift(`Transferred: ${p.eng} → ${ne} (${ds})`);
+        states.forEach((s,i)=>{if(s!==p.milestones[i]||dates[i]!==p.milestoneDates[i]) p.milestoneLog.unshift(`${MS_NAMES[i]} updated: ${dates[i]||'✓'} (${ds})`);});
+        p.id=document.getElementById('m_id').value; p.name=document.getElementById('m_name').value;
+        p.eng=ne; p.ifa=document.getElementById('m_ifa').value; p.ifc=document.getElementById('m_ifc').value;
+        p.notes=document.getElementById('m_notes').value; p.milestones=states; p.milestoneDates=dates;
+        await saveProject(p,false);
+        showToast('Project updated','success');
+    }
+    btn.disabled=false; btn.innerText='Save Changes';
+    closeModals(); refreshUI();
+};
+
+// ── ENGINEER MODAL ──────────────────────────────────────
+function openEngineerModal(idx){
+    if(!isAdmin()){showToast('Viewers cannot manage engineers','error');return;}
+    document.getElementById('eng_edit_index').value=idx;
+    const del=document.getElementById('engDeleteBtn');
+    if(idx===-1){document.getElementById('engModalTitle').innerText="Add Engineer";document.getElementById('engineerForm').reset();del.style.display='none';}
+    else{document.getElementById('engModalTitle').innerText="Edit Member";document.getElementById('eng_name').value=engineers[idx].name;document.getElementById('eng_initial').value=engineers[idx].initial;del.style.display='inline';}
+    openModal('engineerModal');
+}
+async function confirmDeleteEngineer(){
+    const idx=parseInt(document.getElementById('eng_edit_index').value), eng=engineers[idx];
+    if(!confirm(`Remove ${eng.name} from the team?`)) return;
+    projects.forEach(p=>{if(p.eng===eng.name){p.eng="Unassigned";p.ownerLog.unshift(`Ownership Shift: ${eng.name} deleted → Unassigned`);}});
+    engineers.splice(idx,1); if(sidebarFilter===eng.name) sidebarFilter='all';
+    await deleteEngineerDB(eng);
+    closeModals(); refreshUI(); showToast(`${eng.name} removed`,'warning');
+}
+document.getElementById('engineerForm').onsubmit=async e=>{
+    e.preventDefault();
+    const idx=parseInt(document.getElementById('eng_edit_index').value);
+    const name=document.getElementById('eng_name').value, init=document.getElementById('eng_initial').value.toUpperCase();
+    if(idx===-1){
+        const eng={name,initial:init};
+        engineers.push(eng);
+        await saveEngineer(eng,true);
+        showToast(`${name} added`,'success');
+    } else {
+        const old=engineers[idx].name;
+        projects.forEach(p=>{if(p.eng===old)p.eng=name;});
+        engineers[idx].name=name; engineers[idx].initial=init;
+        await saveEngineer(engineers[idx],false);
+        showToast(`${name} updated`,'success');
+    }
+    closeModals(); refreshUI();
+};
+
+// ── SEARCH ──────────────────────────────────────────────
+function searchProjects(){
+    const q=document.getElementById('projectSearch').value.toLowerCase();
+    renderProjTable(applyF(baseData(),projFilter).filter(p=>p.id.toLowerCase().includes(q)||p.name.toLowerCase().includes(q)||p.eng.toLowerCase().includes(q)));
+}
+
+// ── TOAST ───────────────────────────────────────────────
+let toastT;
+function showToast(msg,type='success'){
+    const el=document.getElementById('toastEl'),ic=document.getElementById('toastIcon'),tx=document.getElementById('toastMsg');
+    const icons={success:'fa-check-circle',warning:'fa-exclamation-triangle',error:'fa-times-circle'};
+    const cols={success:'var(--accent2)',warning:'var(--warn)',error:'var(--danger)'};
+    ic.className=`fa-solid ${icons[type]}`; ic.style.color=cols[type];
+    tx.innerText=msg; el.className=`toast ${type} show`;
+    clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+// ── AUTH STATE LISTENER (Supabase session restore) ──────
+(async()=>{
+    if(!CONFIGURED || !sb){
+        // Show auth screen for local mode — user still "signs in"
+        return;
+    }
+    // Restore existing session automatically
+    const { data:{ session } } = await sb.auth.getSession();
+    if(session){
+        currentUser = session.user;
+        await loadUserRole();
+        showApp();
+    }
+    // Listen for future auth changes (tab focus, token refresh, etc.)
+    sb.auth.onAuthStateChange(async(_event, session)=>{
+        if(session && !currentUser){
+            currentUser = session.user;
+            await loadUserRole();
+            showApp();
+        } else if(!session && currentUser){
+            currentUser = null;
+            document.getElementById('authScreen').style.display='flex';
+            document.getElementById('mainSidebar').style.display='none';
+            document.getElementById('mainContent').style.display='none';
+        }
+    });
+})();
+
+// Allow Enter key on auth inputs
+['loginEmail','loginPass'].forEach(id=>{
+    document.getElementById(id).addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+});
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SUPABASE SETUP GUIDE (read this before going live)
+     ────────────────────────────────────────────────────────────────
+     1. Create a project at supabase.com
+     2. Run this SQL in the SQL Editor:
+
+     -- PROFILES (stores user roles)
+     create table profiles (
+       id uuid references auth.users on delete cascade primary key,
+       email text, full_name text,
+       role text not null default 'viewer' check (role in ('admin','viewer')),
+       created_at timestamptz default now()
+     );
+     alter table profiles enable row level security;
+     create policy "Users can view all profiles"   on profiles for select using (true);
+     create policy "Users can insert own profile"  on profiles for insert with check (auth.uid() = id);
+     create policy "Users can update own profile"  on profiles for update using (auth.uid() = id);
+
+     -- ENGINEERS
+     create table engineers (
+       id uuid primary key default gen_random_uuid(),
+       name text not null, initial text not null,
+       user_id uuid references auth.users,
+       created_at timestamptz default now()
+     );
+     alter table engineers enable row level security;
+     create policy "Anyone authenticated can view engineers"
+       on engineers for select using (auth.role() = 'authenticated');
+     create policy "Admins can insert engineers"
+       on engineers for insert with check (
+         exists (select 1 from profiles where id = auth.uid() and role = 'admin')
+       );
+     create policy "Admins can update engineers"
+       on engineers for update using (
+         exists (select 1 from profiles where id = auth.uid() and role = 'admin')
+       );
+     create policy "Admins can delete engineers"
+       on engineers for delete using (
+         exists (select 1 from profiles where id = auth.uid() and role = 'admin')
+       );
+
+     -- PROJECTS
+     create table projects (
+       id uuid primary key default gen_random_uuid(),
+       project_id text not null,
+       name text not null,
+       engineer_name text,
+       ifa_date date, ifc_date date,
+       notes text,
+       owner_log jsonb default '[]',
+       milestone_log jsonb default '[]',
+       milestones boolean[] default array[false,false,false,false,false,false,false,false],
+       milestone_dates text[] default array['','','','','','','',''],
+       user_id uuid references auth.users,
+       created_at timestamptz default now()
+     );
+     alter table projects enable row level security;
+     create policy "Authenticated users can view all projects"
+       on projects for select using (auth.role() = 'authenticated');
+     create policy "Admins can insert projects"
+       on projects for insert with check (
+         exists (select 1 from profiles where id = auth.uid() and role = 'admin')
+       );
+     create policy "Admins can update projects"
+       on projects for update using (
+         exists (select 1 from profiles where id = auth.uid() and role = 'admin')
+       );
+     create policy "Admins can delete projects"
+       on projects for delete using (
+         exists (select 1 from profiles where id = auth.uid() and role = 'admin')
+       );
+
+     3. Replace SUPABASE_URL and SUPABASE_ANON_KEY at the top of the script.
+     4. Go to Authentication → Email in your Supabase dashboard and
+        configure your allowed domains / disable email confirmation if testing.
+════════════════════════════════════════════════════════════════════ -->
+</body>
+</html>

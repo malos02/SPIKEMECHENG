@@ -1,0 +1,2223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPIKE — Engineering Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --spike:#29ABE2;--spike2:#1a8bbf;--spike-glow:rgba(41,171,226,.2);--spike-dim:rgba(41,171,226,.08);
+  --bg:#000;--s1:#0d0d0d;--s2:#141414;--s3:#1c1c1c;--s4:#242424;
+  --b1:rgba(255,255,255,.07);--b2:rgba(255,255,255,.13);--b3:rgba(41,171,226,.35);
+  --t1:#fff;--t2:#888;--t3:#444;
+  --acc:#29ABE2;--acc2:#1a8bbf;--gr:#22d47a;--am:#f5a623;--rd:#f55353;--tl:#14c4b2;--pu:#a96df7;--co:#f97244;
+  --fh:'Barlow',sans-serif;--fb:'Inter',sans-serif;--fm:'DM Mono',monospace;
+  --r:6px;--rs:3px;--rl:10px;
+}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);font-size:14px;line-height:1.5;overflow-x:hidden}
+/* ── PM (read-only) MODE — hides every edit/admin affordance ───────────── */
+body.pm-mode #ni-dashboard,
+body.pm-mode #ni-kpi,
+body.pm-mode #ni-gantt,
+body.pm-mode #ni-bnb,
+body.pm-mode #ni-admin,
+body.pm-mode .nav-grp:has(#ni-admin) .nav-grp-label,
+body.pm-mode .pm-hide,
+body.pm-mode #boss-tag{display:none !important}
+body.pm-mode .pm-badge{display:inline-flex !important}
+body.pm-mode #view-projects table th:last-child,
+body.pm-mode #view-projects table td:last-child,
+body.pm-mode #view-engineer table th:last-child,
+body.pm-mode #view-engineer table td:last-child{display:none !important}
+body.pm-mode .g-row{cursor:default !important}
+.pm-badge{display:none;align-items:center;gap:6px;padding:4px 10px;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.4);border-radius:var(--rs);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--am)}
+.app{display:flex;min-height:100vh}
+.sidebar{width:232px;min-width:232px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:20}
+.logo{padding:0;border-bottom:1px solid var(--b1);background:var(--bg)}
+.logo-spike{display:flex;align-items:center;justify-content:center;padding:18px 20px 14px}
+.logo-sp,.logo-ke{font-family:var(--fh);font-size:28px;font-weight:900;font-style:italic;color:#fff;letter-spacing:-1px;line-height:1}
+.logo-sub-row{display:flex;align-items:center;justify-content:center;gap:6px;padding:0 20px 14px}
+.logo-sub{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:2.5px;text-transform:uppercase}
+.logo-sub-line{flex:1;height:1px;background:var(--b1)}
+nav{padding:12px 10px;flex:1}
+.nav-grp{margin-bottom:16px}
+.nav-grp-label{font-size:9px;font-weight:700;letter-spacing:1.8px;color:var(--t3);text-transform:uppercase;padding:0 8px 6px}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--rs);cursor:pointer;color:var(--t2);font-size:12.5px;font-weight:400;transition:all .12s;margin-bottom:1px;border:1px solid transparent;user-select:none}
+.ni:hover{background:var(--s3);color:var(--t1)}
+.ni.active{background:var(--spike-dim);color:var(--spike);border-color:rgba(41,171,226,.18);font-weight:600}
+.ni svg{flex-shrink:0;opacity:.6}.ni.active svg{opacity:1}
+.sb-footer{padding:12px 16px;border-top:1px solid var(--b1);font-size:10px;color:var(--t3)}
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:var(--s1);border-bottom:1px solid var(--b1);position:sticky;top:0;z-index:10;flex-shrink:0;height:52px}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.ptitle{font-family:var(--fh);font-size:15px;font-weight:800;font-style:italic;letter-spacing:-.2px;text-transform:uppercase}
+.topbar-divider{width:1px;height:18px;background:var(--b1)}
+.tbar-r{display:flex;align-items:center;gap:6px}
+.content{padding:20px 24px;overflow-y:auto;flex:1}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:var(--rs);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .12s;font-family:var(--fb);line-height:1;text-transform:uppercase;letter-spacing:.4px}
+.btn-pr{background:var(--spike);color:#000}.btn-pr:hover{background:#36bcf5}
+.btn-gh{background:var(--s3);color:var(--t2);border:1px solid var(--b1)}.btn-gh:hover{background:var(--s4);color:var(--t1)}
+.btn-sm{padding:5px 10px;font-size:11px}
+.view{display:none}.view.active{display:block}
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px}
+.kc{background:var(--s2);border:1px solid var(--b1);border-top:2px solid var(--kc,var(--spike));padding:14px 15px;position:relative;overflow:hidden}
+.kc.clickable{cursor:pointer;transition:all .12s}
+.kc.clickable:hover{background:var(--s3);border-color:var(--b2);transform:translateY(-1px)}
+.kc.clickable::after{content:'';position:absolute;top:6px;right:8px;width:5px;height:5px;border-right:1.5px solid var(--t3);border-bottom:1.5px solid var(--t3);transform:rotate(-45deg);opacity:.5;transition:opacity .12s}
+.kc.clickable:hover::after{opacity:1;border-color:var(--spike)}
+.kc-lbl{font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px}
+.kc-val{font-family:var(--fh);font-size:28px;font-weight:900;font-style:italic;letter-spacing:-1.5px;line-height:1;color:var(--t1)}
+.kc-val span{font-size:13px;font-weight:500;opacity:.5;font-style:normal}
+.kc-sub{font-size:10px;color:var(--t2);margin-top:4px}
+.sec{margin-bottom:20px}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sec-title{font-family:var(--fh);font-size:13px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.sec-title::before{content:'';width:3px;height:14px;background:var(--spike);display:inline-block}
+.sec-sub{font-size:10.5px;color:var(--t3);margin-top:2px}
+.pill{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:2px;white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
+.pg{background:rgba(34,212,122,.1);color:var(--gr)}
+.pa{background:rgba(245,166,35,.1);color:var(--am)}
+.pb{background:var(--spike-dim);color:var(--spike)}
+.pr{background:rgba(245,83,83,.1);color:var(--rd)}
+.pp{background:rgba(169,109,247,.1);color:var(--pu)}
+.pgr{background:var(--s3);color:var(--t2)}
+.vtag{display:inline-flex;align-items:center;font-size:10px;font-weight:800;padding:2px 6px;font-family:var(--fm);letter-spacing:.5px}
+.v15{background:rgba(245,83,83,.08);color:#f87171;border:1px solid rgba(245,83,83,.2)}
+.v38{background:rgba(245,166,35,.08);color:#fbbf24;border:1px solid rgba(245,166,35,.2)}
+.vmv{background:var(--spike-dim);color:var(--spike);border:1px solid rgba(41,171,226,.2)}
+.vlv{background:rgba(34,212,122,.08);color:#4ade80;border:1px solid rgba(34,212,122,.2)}
+.ttag{display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;padding:2px 7px;background:var(--s3);color:var(--t2);border:1px solid var(--b1)}
+.wl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.ec{background:var(--s2);border:1px solid var(--b1);padding:12px;cursor:pointer;transition:all .12s;border-top:2px solid transparent}
+.ec:hover{border-color:var(--b2);border-top-color:var(--spike);transform:translateY(-1px)}
+.ec.bnb{border-top-color:var(--pu)}
+.ec.over{border-top-color:var(--rd)}
+.ec-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.av{width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:11px;font-weight:900;font-style:italic;flex-shrink:0;border:1px solid}
+.ec-name{font-weight:700;font-size:12.5px;font-family:var(--fh)}
+.ec-role{font-size:10px;color:var(--t3);margin-top:1px;text-transform:uppercase;letter-spacing:.5px}
+.wbar{height:3px;background:var(--s4);margin-bottom:6px}
+.wfill{height:100%;transition:width .6s cubic-bezier(.4,0,.2,1);background:var(--spike)}
+.wfill.hi{background:var(--am)}.wfill.ov{background:var(--rd)}.wfill.bn{background:var(--pu)}
+.ec-meta{display:flex;justify-content:space-between;font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px}
+.ec-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid var(--b1)}
+.es{font-size:9.5px;color:var(--t2);text-align:center;text-transform:uppercase;letter-spacing:.4px}
+.es strong{display:block;font-size:16px;font-weight:900;font-family:var(--fh);font-style:italic;letter-spacing:-1px}
+.tw{background:var(--s2);border:1px solid var(--b1);overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th{text-align:left;font-size:9.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;padding:9px 12px;background:var(--s1);border-bottom:1px solid var(--b1);white-space:nowrap}
+th.sortable{cursor:pointer;user-select:none}th.sortable:hover{color:var(--spike)}
+th.sort-asc::after{content:' ↑';color:var(--spike)}th.sort-desc::after{content:' ↓';color:var(--spike)}
+td{padding:10px 12px;border-bottom:1px solid var(--b1);font-size:12px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.018)}
+.pname{font-weight:600;color:var(--t1)}
+.pid{font-family:var(--fm);font-size:10px;color:var(--spike);font-weight:700;letter-spacing:.5px;background:var(--spike-dim);padding:2px 5px;display:inline-block;border:1px solid rgba(41,171,226,.2)}
+.ms-row{display:flex;align-items:center;gap:2px}
+.msd{width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0}
+.msd.done{background:rgba(34,212,122,.12);color:var(--gr);border:1px solid rgba(34,212,122,.25)}
+.msd.todo{background:var(--s3);color:var(--t3);border:1px solid var(--b1)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.pbar{display:flex;align-items:center;gap:6px}
+.ptrack{height:3px;background:var(--s4);overflow:hidden;width:50px}
+.pfill{height:100%;background:var(--spike);transition:width .4s}
+.ppct{font-family:var(--fm);font-size:11px;font-weight:500;min-width:28px;color:var(--spike)}
+.fbar{display:flex;align-items:center;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.fsel{background:var(--s2);border:1px solid var(--b1);color:var(--t2);font-family:var(--fb);font-size:11.5px;padding:5px 24px 5px 9px;cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23444' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 7px center}
+.fsel:focus{border-color:var(--spike);color:var(--t1)}
+.sbox{flex:1;max-width:220px;background:var(--s2);border:1px solid var(--b1);display:flex;align-items:center;gap:5px;padding:5px 9px}
+.sbox:focus-within{border-color:var(--spike)}
+.sbox input{background:none;border:none;outline:none;font-family:var(--fb);font-size:11.5px;color:var(--t1);width:100%}
+.sbox input::placeholder{color:var(--t3)}
+.chart-row{display:grid;gap:8px;margin-bottom:18px}
+.cr2{grid-template-columns:1fr 1fr}.cr3{grid-template-columns:1fr 1fr 1fr}.cr32{grid-template-columns:2fr 1fr}
+.cc{background:var(--s2);border:1px solid var(--b1);padding:14px 16px;border-top:2px solid var(--b1)}
+.cc-title{font-family:var(--fh);font-size:12px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.3px;margin-bottom:1px}
+.cc-sub{font-size:10px;color:var(--t3);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.gantt-wrap{background:var(--s2);border:1px solid var(--b1);overflow:hidden}
+.g-hrow{display:flex;border-bottom:1px solid var(--b1);background:var(--s1)}
+.g-lbl-hd{width:200px;min-width:200px;border-right:1px solid var(--b1);padding:8px 12px;font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.g-months{flex:1;display:flex}
+.g-month{flex:1;text-align:center;font-size:9px;font-weight:700;padding:8px 2px;color:var(--t3);border-right:1px solid var(--b1);text-transform:uppercase;letter-spacing:.8px}
+.g-month:last-child{border-right:none}.g-month.cur{color:var(--spike)}
+.g-row{display:flex;align-items:stretch;border-bottom:1px solid var(--b1);min-height:40px}
+.g-row:last-child{border-bottom:none}
+.g-lbl{width:200px;min-width:200px;border-right:1px solid var(--b1);padding:6px 12px;display:flex;flex-direction:column;justify-content:center}
+.g-lbl-name{font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-lbl-meta{font-size:9.5px;color:var(--t3);margin-top:1px;text-transform:uppercase;letter-spacing:.3px}
+.g-track{flex:1;position:relative}
+.g-bar{position:absolute;height:16px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:var(--fm);overflow:hidden;min-width:20px;border-width:1px;border-style:solid}
+.today-line{position:absolute;width:1.5px;height:100%;top:0;opacity:.7;z-index:2;pointer-events:none;background:var(--spike)}
+.g-dot{position:absolute;width:6px;height:6px;border-radius:50%;top:50%;transform:translate(-50%,-50%);z-index:3;border:1.5px solid var(--bg)}
+.g-legend{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:9px 12px;border-top:1px solid var(--b1);font-size:10px;color:var(--t2)}
+.gl-item{display:flex;align-items:center;gap:4px}
+/* Calendar */
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cal-title{font-family:var(--fh);font-size:22px;font-weight:900;font-style:italic;letter-spacing:-1px;text-transform:uppercase}
+.cal-subtitle{font-size:10px;color:var(--t3);margin-top:2px;text-transform:uppercase;letter-spacing:.8px}
+.cal-controls{display:flex;align-items:center;gap:6px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1)}
+.cal-dow{background:var(--s1);padding:7px 8px;font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;text-align:center}
+.cal-cell{background:var(--s2);min-height:100px;padding:7px;transition:background .1s}
+.cal-cell:hover{background:var(--s3)}
+.cal-cell.today{background:rgba(41,171,226,.05);border-top:2px solid var(--spike)}
+.cal-cell.other-month{background:var(--s1);opacity:.4}
+.cal-cell.weekend{background:rgba(0,0,0,.3)}
+.cal-day-num{font-family:var(--fh);font-size:11px;font-weight:800;font-style:italic;color:var(--t3);margin-bottom:4px;line-height:1}
+.cal-cell.today .cal-day-num{color:var(--spike)}
+.cal-event{display:flex;align-items:center;padding:2px 5px;margin-bottom:2px;font-size:9px;font-weight:600;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:1.4;border-left:2px solid currentColor;text-transform:uppercase;letter-spacing:.3px}
+.cal-event:hover{opacity:.75}
+.cal-more{font-size:9px;color:var(--t3);padding:1px 3px;margin-top:2px;cursor:pointer;text-transform:uppercase;letter-spacing:.5px}
+.cal-more:hover{color:var(--spike)}
+.cal-legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.cal-leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.5px}
+.cal-leg-dot{width:7px;height:7px;flex-shrink:0}
+.ev-start{background:rgba(34,212,122,.1);color:#22d47a}
+.ev-end{background:rgba(245,83,83,.1);color:#f55353}
+.ev-active{background:var(--spike-dim);color:var(--spike)}
+.ev-idr{background:rgba(169,109,247,.1);color:#a96df7}
+.ev-ifa_due_ok{background:var(--spike-dim);color:var(--spike)}
+.ev-ifa_due_warn{background:rgba(245,166,35,.15);color:var(--am)}
+.ev-ifa_due_urgent{background:rgba(245,83,83,.15);color:var(--rd);animation:pulse 1.5s infinite}
+.ev-ifc_due_ok{background:rgba(169,109,247,.1);color:var(--pu)}
+.ev-ifc_due_warn{background:rgba(245,166,35,.15);color:var(--am)}
+.ev-ifc_due_urgent{background:rgba(245,83,83,.15);color:var(--rd);animation:pulse 1.5s infinite}
+/* Day popup */
+.day-popup{display:none;position:fixed;z-index:200;background:var(--s2);border:1px solid var(--b2);padding:16px;width:300px;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+.day-popup.open{display:block}
+.day-popup-title{font-family:var(--fh);font-size:13px;font-weight:800;font-style:italic;text-transform:uppercase;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.day-popup-close{cursor:pointer;color:var(--t3);font-size:16px;line-height:1}.day-popup-close:hover{color:var(--spike)}
+.dp-event{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--b1)}
+.dp-event:last-child{border-bottom:none}
+.dp-ev-dot{width:7px;height:7px;margin-top:4px;flex-shrink:0}
+.dp-ev-name{font-weight:600;font-size:12px}
+.dp-ev-meta{font-size:10px;color:var(--t3);margin-top:1px;text-transform:uppercase;letter-spacing:.4px}
+/* Modal */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.mbg.open{display:flex}
+.modal{background:var(--s2);border:1px solid var(--b2);border-top:2px solid var(--spike);padding:24px;width:680px;max-width:96vw;max-height:88vh;overflow-y:auto}
+.modal-title{font-family:var(--fh);font-size:18px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:.3px;margin-bottom:18px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ff{display:flex;flex-direction:column;gap:4px}.ff.full{grid-column:1/-1}
+.flbl{font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.finp,.fsel2,.ftxt{background:var(--s3);border:1px solid var(--b1);padding:8px 11px;font-family:var(--fb);font-size:12.5px;color:var(--t1);outline:none;transition:border .12s;width:100%}
+.finp:focus,.fsel2:focus,.ftxt:focus{border-color:var(--spike)}
+.fsel2{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23444' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding-right:26px;cursor:pointer}
+.ftxt{resize:vertical;min-height:56px}
+.ms-checks{display:flex;gap:5px;flex-wrap:wrap}
+.msc{display:flex;align-items:center;gap:5px;background:var(--s3);border:1px solid var(--b1);padding:6px 9px;cursor:pointer;font-size:11px;font-weight:600;color:var(--t2);transition:all .12s;user-select:none;text-transform:uppercase;letter-spacing:.4px}
+.msc.on{background:rgba(34,212,122,.08);border-color:rgba(34,212,122,.3);color:var(--gr)}
+.msc input{display:none}
+.msc-dot{width:11px;height:11px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:8px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;padding-top:14px;border-top:1px solid var(--b1)}
+.dd-grp{margin-bottom:18px}
+.dd-grp:last-child{margin-bottom:0}
+.dd-grp-hd{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--b1)}
+.dd-grp-title{font-family:var(--fh);font-size:12px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.3px}
+.dd-grp-count{font-family:var(--fm);font-size:11px;color:var(--t2);background:var(--s3);padding:2px 7px;border:1px solid var(--b1)}
+.dd-empty{font-size:11px;color:var(--t3);padding:8px 0;font-style:italic}
+.dd-tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.dd-tbl th{text-align:left;font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;padding:6px 8px;background:var(--s1);border-bottom:1px solid var(--b1);white-space:nowrap}
+.dd-tbl td{padding:7px 8px;border-bottom:1px solid var(--b1);vertical-align:middle}
+.dd-tbl tr:last-child td{border-bottom:none}
+.dd-tbl tr:hover td{background:rgba(255,255,255,.02)}
+.dd-formula{background:var(--s1);border:1px solid var(--b1);border-left:2px solid var(--spike);padding:8px 12px;font-size:11px;color:var(--t2);margin-bottom:16px;font-family:var(--fm);line-height:1.5}
+.dd-late-cell{color:var(--rd);font-weight:600}
+.dd-ontime-cell{color:var(--gr);font-weight:600}
+.dd-open-cell{color:var(--am);font-weight:600}
+.boss-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;padding:3px 8px;background:var(--spike-dim);color:var(--spike);letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(41,171,226,.2)}
+.user-chip{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--t2);padding:4px 9px;background:var(--s3);border:1px solid var(--b1)}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--s4)}
+.empty{text-align:center;padding:44px;color:var(--t3);font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.xfer-log{margin-top:16px;padding-top:14px;border-top:1px solid var(--b1)}
+.xfer-title{font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.xfer-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;position:relative}
+.xfer-item::before{content:'';position:absolute;left:11px;top:22px;width:1px;bottom:-10px;background:var(--b1)}
+.xfer-item:last-child::before{display:none}
+.xfer-dot{width:22px;height:22px;border-radius:50%;background:var(--s3);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;flex-shrink:0;z-index:1}
+.xfer-dot.current{background:var(--spike-dim);border-color:rgba(41,171,226,.3);color:var(--spike)}
+.xfer-info{flex:1}
+.xfer-name{font-size:12px;font-weight:600;color:var(--t1)}
+.xfer-date{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.4px;margin-top:1px}
+.xfer-from{font-size:10px;color:var(--t2);margin-top:1px}
+.ms-prog-row{display:grid;grid-template-columns:28px 1fr 140px;align-items:center;padding:9px 12px;border-bottom:1px solid var(--b1);background:var(--s2);transition:background .1s}
+.ms-prog-row:last-child{border-bottom:none}
+.ms-prog-row.done-row{background:rgba(34,212,122,.05)}
+.ms-cb{width:15px;height:15px;accent-color:var(--spike);cursor:pointer;flex-shrink:0}
+.ms-prog-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3);transition:color .12s}
+.ms-prog-label.done{color:var(--gr)}
+.ms-date-inp{background:var(--s3);border:1px solid var(--b1);color:var(--t2);font-family:var(--fm);font-size:10.5px;padding:4px 8px;outline:none;width:100%;transition:border .12s}
+.ms-date-inp:focus{border-color:var(--spike);color:var(--t1)}
+.ms-date-inp::-webkit-calendar-picker-indicator{filter:invert(.35);cursor:pointer}
+.color-swatch{width:22px;height:22px;cursor:pointer;border:2px solid transparent;transition:transform .1s,border-color .1s}
+.color-swatch:hover{transform:scale(1.15)}
+.color-swatch.selected{border-color:#fff;transform:scale(1.15)}
+@keyframes spin{to{transform:rotate(360deg)}}
+#toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1400px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.wl-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1100px){.wl-grid{grid-template-columns:repeat(2,1fr)}.cr3{grid-template-columns:1fr 1fr}.cr32{grid-template-columns:1fr}}
+@media(max-width:900px){.sidebar{display:none}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen" style="display:none;position:fixed;inset:0;background:var(--bg);z-index:999;align-items:center;justify-content:center;flex-direction:column">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.03;pointer-events:none" viewBox="0 0 400 400"><polygon points="220,20 140,210 195,210 170,390 280,170 220,170" fill="#29ABE2"/></svg>
+  <div style="width:340px;max-width:94vw;position:relative">
+    <div style="text-align:center;margin-bottom:36px">
+      <div style="font-family:'Barlow',sans-serif;font-size:56px;font-weight:900;font-style:italic;letter-spacing:-3px;line-height:1;display:inline-flex;align-items:center">
+        <span style="color:#fff">SP</span>
+        <svg width="30" height="60" viewBox="0 0 30 60" fill="none" style="margin:0 1px"><polygon points="20,0 6,30 16,30 10,60 28,26 16,26" fill="#29ABE2"/></svg>
+        <span style="color:#fff">KE</span>
+      </div>
+      <div style="font-size:9px;font-weight:700;color:var(--t3);letter-spacing:3px;text-transform:uppercase;margin-top:6px">Engineering · Project Tracker</div>
+    </div>
+    <div style="background:var(--s2);border:1px solid var(--b1);border-top:2px solid var(--spike);padding:28px">
+      <div style="font-family:var(--fh);font-size:13px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;color:var(--t2)">Team Access</div>
+      <div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:20px">Enter team or PM password to continue</div>
+      <div style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">Password</div>
+      <input id="pw-input" class="finp" type="password" placeholder="Enter team password" style="width:100%;margin-bottom:8px;font-size:16px;letter-spacing:3px" onkeydown="if(event.key==='Enter')checkPassword()">
+      <div id="pw-error" style="display:none;font-size:11px;color:var(--rd);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px">⚡ Incorrect password — try again</div>
+      <button class="btn btn-pr" style="width:100%;justify-content:center;padding:11px;font-size:13px;margin-top:4px" onclick="checkPassword()">Enter <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+    <div style="text-align:center;margin-top:16px;font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">SPIKE Engineering © 2025</div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="app-loading" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;align-items:center;justify-content:center;flex-direction:column;gap:12px">
+  <div style="width:28px;height:28px;border:2px solid #222;border-top-color:#29ABE2;border-radius:50%;animation:spin .7s linear infinite"></div>
+  <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px">Loading projects…</div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" style="position:fixed;bottom:20px;right:20px;background:var(--s3);border:1px solid var(--b2);border-left:2px solid var(--spike);padding:9px 14px;font-size:12px;font-weight:600;z-index:600;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none;text-transform:uppercase;letter-spacing:.4px"></div>
+
+<!-- APP -->
+<div class="app" id="app-shell" style="display:none">
+
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-spike">
+      <span class="logo-sp">SP</span>
+      <svg width="18" height="36" viewBox="0 0 18 36" fill="none"><polygon points="12,0 4,18 10,18 6,36 16,16 10,16" fill="#29ABE2"/></svg>
+      <span class="logo-ke">KE</span>
+    </div>
+    <div class="logo-sub-row"><div class="logo-sub-line"></div><div class="logo-sub">Eng Tracker</div><div class="logo-sub-line"></div></div>
+  </div>
+  <nav>
+    <div class="nav-grp">
+      <div class="nav-grp-label">Overview</div>
+      <div class="ni active" id="ni-dashboard" onclick="showView('dashboard',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Boss Dashboard</div>
+      <div class="ni" id="ni-kpi" onclick="showView('kpi',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>KPI Reports</div>
+    </div>
+    <div class="nav-grp">
+      <div class="nav-grp-label">Projects</div>
+      <div class="ni" id="ni-projects" onclick="showView('projects',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>All Projects</div>
+      <div class="ni" id="ni-gantt" onclick="showView('gantt',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="4" height="16" rx="1"/><rect x="9" y="8" width="8" height="4" rx="1"/><rect x="9" y="14" width="5" height="4" rx="1"/></svg>Gantt Timeline</div>
+      <div class="ni" id="ni-calendar" onclick="showView('calendar',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Monthly Calendar</div>
+      <div class="ni" id="ni-bnb" onclick="showView('bnb',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>BNB Team</div>
+    </div>
+    <div class="nav-grp">
+      <div class="nav-grp-label">Engineers</div>
+      <div id="eng-nav-list"></div>
+    </div>
+    <div class="nav-grp">
+      <div class="nav-grp-label">Admin</div>
+      <div class="ni" id="ni-admin" onclick="showView('admin',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M12 14c-5 0-7 2-7 3v1h14v-1c0-1-2-3-7-3z"/><path d="M18 8l1.5-1.5M18 8l1.5 1.5M6 8L4.5 6.5M6 8L4.5 9.5"/></svg>Manage Team</div>
+    </div>
+  </nav>
+  <div class="sb-footer">Last sync: <span id="last-update">—</span></div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="ptitle" id="page-title">Dashboard</div>
+      <div class="topbar-divider"></div>
+      <div class="boss-badge" id="boss-tag">⚡ Executive View</div>
+      <div class="pm-badge"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>PM View · Read Only</div>
+    </div>
+    <div class="tbar-r">
+      <div class="user-chip"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="color:var(--spike);font-weight:600;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Team Access</span></div>
+      <button class="btn btn-gh btn-sm" onclick="exportCSV()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
+      <button class="btn btn-pr btn-sm pm-hide" onclick="openModal()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Project</button>
+      <button class="btn btn-gh btn-sm" onclick="doLogout()" title="Lock" style="padding:5px 7px"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></button>
+    </div>
+  </div>
+
+  <div class="content">
+
+  <!-- DASHBOARD -->
+  <div class="view active" id="view-dashboard">
+    <div class="kpi-grid" id="kpi-row"></div>
+    <div class="chart-row cr3">
+      <div class="cc"><div class="cc-title">Workload by Engineer</div><div class="cc-sub">Active projects per person</div><div style="position:relative;height:180px"><canvas id="cWorkload"></canvas></div></div>
+      <div class="cc"><div class="cc-title">Product Mix</div><div class="cc-sub">All projects by type</div><div style="position:relative;height:180px"><canvas id="cTypes"></canvas></div></div>
+      <div class="cc"><div class="cc-title">Voltage Distribution</div><div class="cc-sub">15kV · 38kV · MV · LV</div><div style="position:relative;height:180px"><canvas id="cVoltage"></canvas></div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-hd">
+        <div><div class="sec-title">Engineer Workload</div><div class="sec-sub">Click any card to view that engineer's projects</div></div>
+        <div style="display:flex;gap:10px;font-size:10px;color:var(--t2);align-items:center;text-transform:uppercase;letter-spacing:.5px">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;background:var(--spike);display:inline-block"></span>Normal</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;background:var(--am);display:inline-block"></span>Heavy</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;background:var(--rd);display:inline-block"></span>Overloaded</span>
+        </div>
+      </div>
+      <div class="wl-grid" id="workload-grid"></div>
+    </div>
+    <div class="sec">
+      <div class="sec-hd"><div class="sec-title">Active Projects</div><button class="btn btn-gh btn-sm" onclick="showView('projects',document.getElementById('ni-projects'))">View All →</button></div>
+      <div class="tw"><table><thead><tr><th class="sortable" id="dth-name" onclick="setDashSort('name')">Project</th><th class="sortable" id="dth-engineer" onclick="setDashSort('engineer')">Engineer</th><th class="sortable" id="dth-type" onclick="setDashSort('type')">Type</th><th class="sortable" id="dth-voltage" onclick="setDashSort('voltage')">Voltage</th><th class="sortable" id="dth-pm" onclick="setDashSort('pm')">PM / Sales</th><th class="sortable" id="dth-ifaDue" onclick="setDashSort('ifaDue')">IFA Due</th><th class="sortable" id="dth-ifcDue" onclick="setDashSort('ifcDue')">IFC Due</th><th class="sortable" id="dth-milestones" onclick="setDashSort('milestones')">Milestones</th><th class="sortable" id="dth-progress" onclick="setDashSort('progress')">Progress</th><th class="sortable" id="dth-status" onclick="setDashSort('status')">Status</th><th>Notes</th></tr></thead><tbody id="dash-table"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- ALL PROJECTS -->
+  <div class="view" id="view-projects">
+    <div class="fbar">
+      <div class="sbox"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="opacity:.4;flex-shrink:0"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="s-proj" placeholder="Search projects…" oninput="renderProjects()"></div>
+      <select class="fsel" id="f-eng" onchange="renderProjects()"><option value="">All Engineers</option></select>
+      <select class="fsel" id="f-type" onchange="renderProjects()"><option value="">All Types</option><option>Switch</option><option>Switchboard</option><option>Switchrack</option><option>Switchgear</option><option>MCC</option><option>Transformer</option><option>Panel</option><option>Bus Duct</option><option>Load Center</option></select>
+      <select class="fsel" id="f-volt" onchange="renderProjects()"><option value="">All Voltages</option><option>15kV</option><option>38kV</option><option>Medium Voltage</option><option>Low Voltage</option></select>
+      <select class="fsel" id="f-stat" onchange="renderProjects()"><option value="">All Statuses</option><option>In Progress</option><option>Complete</option><option>On Hold</option></select>
+      <select class="fsel" id="f-ms" onchange="renderProjects()"><option value="">All Milestones</option><option value="design_done">Design Done</option><option value="ifa_pending">IFA Pending</option><option value="ifa_done">IFA Done</option><option value="adj_done">Customer Approval Done</option><option value="ifc_done">IFC Done</option><option value="idr_pending">IDR Pending</option><option value="idr_done">IDR Done</option><option value="live">Live on Floor</option><option value="shipped">Project Shipped</option></select>
+    </div>
+    <div class="tw"><table><thead><tr><th class="sortable" id="th-id" onclick="setSort('id')">ID</th><th class="sortable" id="th-name" onclick="setSort('name')">Project Name</th><th class="sortable" id="th-engineer" onclick="setSort('engineer')">Engineer</th><th class="sortable" id="th-type" onclick="setSort('type')">Type</th><th class="sortable" id="th-voltage" onclick="setSort('voltage')">Voltage</th><th class="sortable" id="th-pm" onclick="setSort('pm')">PM</th><th class="sortable" id="th-sales" onclick="setSort('sales')">Sales</th><th class="sortable" id="th-start" onclick="setSort('start')">Start</th><th class="sortable" id="th-end" onclick="setSort('end')">Target</th><th class="sortable" id="th-ifaDue" onclick="setSort('ifaDue')">IFA Due</th><th class="sortable" id="th-ifcDue" onclick="setSort('ifcDue')">IFC Due</th><th class="sortable" id="th-milestones" onclick="setSort('milestones')">Milestones</th><th class="sortable" id="th-progress" onclick="setSort('progress')">Progress</th><th class="sortable" id="th-status" onclick="setSort('status')">Status</th><th>Notes</th><th></th></tr></thead><tbody id="proj-table"></tbody></table></div>
+  </div>
+
+  <!-- GANTT -->
+  <div class="view" id="view-gantt">
+    <div class="fbar">
+      <select class="fsel" id="g-eng" onchange="renderGantt()"><option value="">All Engineers</option></select>
+      <select class="fsel" id="g-type" onchange="renderGantt()"><option value="">All Types</option><option>Switch</option><option>Switchboard</option><option>Switchrack</option><option>Switchgear</option><option>MCC</option><option>Transformer</option><option>Panel</option><option>Bus Duct</option><option>Load Center</option></select>
+      <select class="fsel" id="g-stat" onchange="renderGantt()"><option value="">All Statuses</option><option>In Progress</option><option>Complete</option><option>On Hold</option></select>
+    </div>
+    <div class="gantt-wrap" id="gantt-container"></div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="view" id="view-calendar">
+    <div class="cal-nav">
+      <div><div class="cal-title" id="cal-title">March 2025</div><div class="cal-subtitle" id="cal-subtitle">0 projects active</div></div>
+      <div class="cal-controls">
+        <select class="fsel" id="cal-eng" onchange="renderCalendar()"><option value="">All Engineers</option></select>
+        <select class="fsel" id="cal-type" onchange="renderCalendar()"><option value="">All Types</option><option>Switch</option><option>Switchboard</option><option>Switchrack</option><option>Switchgear</option><option>MCC</option><option>Transformer</option><option>Panel</option><option>Bus Duct</option><option>Load Center</option></select>
+        <button class="btn btn-gh btn-sm" id="cal-ms-toggle" onclick="toggleCalMsMode()" title="Toggle milestone accomplishments view">🏆 Milestones</button>
+        <button class="btn btn-gh btn-sm" onclick="calStep(-1)">← Prev</button>
+        <button class="btn btn-gh btn-sm" onclick="calToday()">Today</button>
+        <button class="btn btn-gh btn-sm" onclick="calStep(1)">Next →</button>
+      </div>
+    </div>
+    <div class="cal-legend" id="cal-legend-normal">
+      <span style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Legend:</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--gr)"></span>Project Start</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--rd)"></span>Target End</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--pu)"></span>Est. IDR</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--spike)"></span>IFA Due</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--am)"></span>IFA Due ≤7d</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--rd)"></span>IFA Due ≤3d 🔴</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--pu)"></span>IFC Due</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--am)"></span>IFC Due ≤7d</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--rd)"></span>IFC Due ≤3d 🔴</span>
+    </div>
+    <div class="cal-legend" id="cal-legend-ms" style="display:none">
+      <span style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Milestones:</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:#888"></span>Design</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--spike)"></span>IFA</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--tl)"></span>Cust. Approval</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--pu)"></span>IFC Started</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--am)"></span>IDR Review</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--gr)"></span>Live on Floor</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--co)"></span>Shipped</span>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+
+  <!-- KPI -->
+  <div class="view" id="view-kpi">
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:8px">
+      <div class="kc" style="--kc:var(--spike)"><div class="kc-lbl">Total Projects YTD</div><div class="kc-val" id="k-ytd">0</div><div class="kc-sub">All engineers + BNB</div></div>
+      <div class="kc clickable" style="--kc:var(--gr)" onclick="openDrill('ifc-rate')"><div class="kc-lbl">IFC On-Time Rate</div><div class="kc-val" id="k-ifc-ontime">—</div><div class="kc-sub" id="k-ifc-ontime-sub">No completed IFCs yet</div></div>
+      <div class="kc clickable" style="--kc:var(--tl)" onclick="openDrill('ifa-rate')"><div class="kc-lbl">IFA On-Time Rate</div><div class="kc-val" id="k-ifa-ontime">—</div><div class="kc-sub" id="k-ifa-ontime-sub">No IFA activity yet</div></div>
+      <div class="kc" style="--kc:var(--pu)"><div class="kc-lbl">BNB Share</div><div class="kc-val" id="k-bnbpct">0<span>%</span></div><div class="kc-sub">Of total active work</div></div>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:8px">
+      <div class="kc clickable" style="--kc:var(--gr)" onclick="openDrill('ifc-ontime')"><div class="kc-lbl">IFC On-Time</div><div class="kc-val" id="k-ifc-on">0</div><div class="kc-sub">Completed ≤ due date</div></div>
+      <div class="kc clickable" style="--kc:var(--rd)" onclick="openDrill('ifc-late')"><div class="kc-lbl">IFC Late</div><div class="kc-val" id="k-ifc-late-done">0</div><div class="kc-sub">Completed after / past due</div></div>
+      <div class="kc clickable" style="--kc:var(--am)" onclick="openDrill('ifc-open')"><div class="kc-lbl">IFC In Progress</div><div class="kc-val" id="k-ifc-open">0</div><div class="kc-sub">Open & not yet due</div></div>
+      <div class="kc clickable" style="--kc:var(--rd)" onclick="openDrill('ifc-overdue')"><div class="kc-lbl">IFC Overdue</div><div class="kc-val" id="k-ifc-overdue">0</div><div class="kc-sub">Open & past due date</div></div>
+    </div>
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px">
+      <div class="kc clickable" style="--kc:var(--gr)" onclick="openDrill('ifa-ontime')"><div class="kc-lbl">IFA On-Time</div><div class="kc-val" id="k-ifa-on">0</div><div class="kc-sub">Completed ≤ due date</div></div>
+      <div class="kc clickable" style="--kc:var(--rd)" onclick="openDrill('ifa-late')"><div class="kc-lbl">IFA Late</div><div class="kc-val" id="k-ifa-late-done">0</div><div class="kc-sub">Completed after / past due</div></div>
+      <div class="kc clickable" style="--kc:var(--am)" onclick="openDrill('ifa-open')"><div class="kc-lbl">IFA In Progress</div><div class="kc-val" id="k-ifa-open">0</div><div class="kc-sub">Open & not yet due</div></div>
+      <div class="kc clickable" style="--kc:var(--rd)" onclick="openDrill('ifa-overdue')"><div class="kc-lbl">IFA Overdue</div><div class="kc-val" id="k-ifa-late">0</div><div class="kc-sub">Open & past due date</div></div>
+    </div>
+    <div class="chart-row cr2">
+      <div class="cc"><div class="cc-title">IFC Throughput by Engineer</div><div class="cc-sub">On-time vs late (includes overdue & uncompleted)</div><div style="position:relative;height:200px"><canvas id="cMonthly"></canvas></div></div>
+      <div class="cc"><div class="cc-title">Cycle Time by Product Type</div><div class="cc-sub">Average weeks design vs total</div><div style="position:relative;height:200px"><canvas id="cCycle"></canvas></div></div>
+    </div>
+    <div class="chart-row cr32">
+      <div class="cc"><div class="cc-title">Engineer Throughput</div><div class="cc-sub">Completed projects per engineer</div><div style="position:relative;height:170px"><canvas id="cThroughput"></canvas></div></div>
+      <div class="cc"><div class="cc-title">Milestone Health</div><div class="cc-sub">% active with milestone done</div><div style="position:relative;height:170px"><canvas id="cMsHealth"></canvas></div></div>
+    </div>
+  </div>
+
+  <!-- BNB -->
+  <div class="view" id="view-bnb">
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px">
+      <div class="kc" style="--kc:var(--pu)"><div class="kc-lbl">BNB Active</div><div class="kc-val" id="bnb-active">0</div><div class="kc-sub">Projects assigned</div></div>
+      <div class="kc" style="--kc:var(--tl)"><div class="kc-lbl">Avg Progress</div><div class="kc-val" id="bnb-prog">—</div><div class="kc-sub">Across all BNB work</div></div>
+      <div class="kc" style="--kc:var(--am)"><div class="kc-lbl">IDR Pending</div><div class="kc-val" id="bnb-idrp">0</div><div class="kc-sub">Needs internal review</div></div>
+      <div class="kc" style="--kc:var(--rd)"><div class="kc-lbl">IFA Overdue</div><div class="kc-val" id="bnb-ifa-late">0</div><div class="kc-sub">Past IFA due date</div></div>
+    </div>
+    <div class="tw"><table><thead><tr><th>Project</th><th>Type</th><th>Voltage</th><th>PM / Sales</th><th>IFA Due</th><th>IFC Due</th><th>Milestones</th><th>Progress</th><th>Status</th><th>Notes</th><th></th></tr></thead><tbody id="bnb-table"></tbody></table></div>
+  </div>
+
+  <!-- ENGINEER VIEW -->
+  <div class="view" id="view-engineer"><div id="eng-view-content"></div></div>
+
+  <!-- ADMIN -->
+  <div class="view" id="view-admin">
+    <div class="sec">
+      <div class="sec-hd">
+        <div><div class="sec-title">Engineer Roster</div><div class="sec-sub">Add or remove engineers — changes apply immediately to the whole app</div></div>
+        <button class="btn btn-pr btn-sm" onclick="openAddEngineerModal()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Engineer</button>
+      </div>
+      <div class="tw"><table><thead><tr><th>Avatar</th><th>ID</th><th>Name</th><th>Role</th><th>Color</th><th></th></tr></thead><tbody id="admin-eng-table"></tbody></table></div>
+    </div>
+  </div>
+
+  </div>
+</main>
+</div><!-- /app -->
+
+<!-- MODAL -->
+<div class="mbg" id="add-modal" onclick="if(event.target===this)closeModal()">
+<div class="modal">
+  <div class="modal-title" id="modal-title">Add New Project</div>
+  <div class="fg">
+    <div class="ff"><div class="flbl">Project ID</div><input class="finp" id="f-id" placeholder="e.g. P-2025-042"></div>
+    <div class="ff"><div class="flbl">Project Name *</div><input class="finp" id="f-name" placeholder="e.g. Bay 3 Switchrack"></div>
+    <div class="ff"><div class="flbl">Engineer *</div><select class="fsel2" id="f-engineer" onchange="updateHistoryLog()"><option value="">Select engineer…</option></select></div>
+    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Product Type * <span onclick="openTypeModal()" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-type-m"><option value="">Select type…</option></select></div>
+    <div class="ff"><div class="flbl">Voltage Level *</div><select class="fsel2" id="f-voltage"><option value="">Select voltage…</option><option>15kV</option><option>38kV</option><option>Medium Voltage</option><option>Low Voltage</option></select></div>
+    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Project Manager <span onclick="openPeopleModal('pm')" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-pm"><option value="">Select PM…</option></select></div>
+    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Sales Rep <span onclick="openPeopleModal('sales')" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-sales"><option value="">Select Sales…</option></select></div>
+    <div class="ff"><div class="flbl">Start Date</div><input class="finp" id="f-start" type="date"></div>
+    <div class="ff"><div class="flbl">Target Live Date</div><input class="finp" id="f-end" type="date"></div>
+    <div class="ff"><div class="flbl">IFA Due Date</div><input class="finp" id="f-ifa-due" type="date"></div>
+    <div class="ff"><div class="flbl">IFC Due Date</div><input class="finp" id="f-ifc-due" type="date"></div>
+    <div class="ff full"><div class="flbl">Notes</div><textarea class="ftxt" id="f-notes" placeholder="e.g. Waiting on customer drawings, on hold per client request…" style="min-height:52px"></textarea></div>
+  </div>
+
+  <!-- MILESTONE PROGRESSION — full width panel matching screenshot -->
+  <div style="margin-top:14px;border-top:1px solid var(--b1);padding-top:14px">
+    <div style="font-size:9px;font-weight:700;color:var(--spike);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:6px">
+      <span style="width:3px;height:12px;background:var(--spike);display:inline-block"></span>
+      Milestone Progression
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--b1)">
+
+      <!-- LEFT: milestone rows -->
+      <div style="border-right:1px solid var(--b1)">
+        <!-- header -->
+        <div style="display:grid;grid-template-columns:28px 1fr 130px;align-items:center;background:var(--s1);padding:6px 10px;border-bottom:1px solid var(--b1)">
+          <span></span>
+          <span style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Milestone</span>
+          <span style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px;text-align:right">Date Completed</span>
+        </div>
+        <!-- Design -->
+        <div class="ms-prog-row" id="mpr-design">
+          <input type="checkbox" class="ms-cb" id="mc-design" onchange="toggleMilestone('design',this)">
+          <span class="ms-prog-label" id="mpl-design">Design</span>
+          <input type="date" class="ms-date-inp" id="md-design" onchange="syncMilestoneCheck('design')">
+        </div>
+        <!-- IFA -->
+        <div class="ms-prog-row" id="mpr-ifa">
+          <input type="checkbox" class="ms-cb" id="mc-ifa" onchange="toggleMilestone('ifa',this)">
+          <span class="ms-prog-label" id="mpl-ifa">IFA</span>
+          <input type="date" class="ms-date-inp" id="md-ifa" onchange="syncMilestoneCheck('ifa')">
+        </div>
+        <!-- Customer Approval -->
+        <div class="ms-prog-row" id="mpr-adj">
+          <input type="checkbox" class="ms-cb" id="mc-adj" onchange="toggleMilestone('adj',this)">
+          <span class="ms-prog-label" id="mpl-adj">Customer Approval</span>
+          <input type="date" class="ms-date-inp" id="md-adj" onchange="syncMilestoneCheck('adj')">
+        </div>
+        <!-- IFC Started -->
+        <div class="ms-prog-row" id="mpr-ifc">
+          <input type="checkbox" class="ms-cb" id="mc-ifc" onchange="toggleMilestone('ifc',this)">
+          <span class="ms-prog-label" id="mpl-ifc">IFC Started</span>
+          <input type="date" class="ms-date-inp" id="md-ifc" onchange="syncMilestoneCheck('ifc')">
+        </div>
+        <!-- IDR Review -->
+        <div class="ms-prog-row" id="mpr-idr">
+          <input type="checkbox" class="ms-cb" id="mc-idr" onchange="toggleMilestone('idr',this)">
+          <span class="ms-prog-label" id="mpl-idr">IDR Review</span>
+          <input type="date" class="ms-date-inp" id="md-idr" onchange="syncMilestoneCheck('idr')">
+        </div>
+        <!-- Live on Floor -->
+        <div class="ms-prog-row" id="mpr-live">
+          <input type="checkbox" class="ms-cb" id="mc-live" onchange="toggleMilestone('live',this)">
+          <span class="ms-prog-label" id="mpl-live">Live on Floor</span>
+          <input type="date" class="ms-date-inp" id="md-live" onchange="syncMilestoneCheck('live')">
+        </div>
+        <!-- Project Shipped (ifc_shipped maps to ms.shipped) -->
+        <div class="ms-prog-row" id="mpr-shipped" style="border-bottom:none">
+          <input type="checkbox" class="ms-cb" id="mc-shipped" onchange="toggleMilestone('shipped',this)">
+          <span class="ms-prog-label" id="mpl-shipped" style="color:var(--gr)">Project Shipped</span>
+          <input type="date" class="ms-date-inp" id="md-shipped" onchange="syncMilestoneCheck('shipped')">
+        </div>
+      </div>
+
+      <!-- RIGHT: history logs panel -->
+      <div style="display:flex;flex-direction:column">
+        <div style="background:var(--s1);padding:6px 10px;border-bottom:1px solid var(--b1)">
+          <span style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1px">History Log</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;flex:1;border-bottom:1px solid var(--b1)">
+          <div style="border-right:1px solid var(--b1);padding:8px 10px">
+            <div style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Ownership</div>
+            <div id="hist-ownership" style="font-size:11px;color:var(--t2);line-height:1.7">—</div>
+          </div>
+          <div style="padding:8px 10px">
+            <div style="font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">Milestones</div>
+            <div id="hist-milestones" style="font-size:11px;color:var(--t2);line-height:1.7">—</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="xfer-history-section" style="display:none" class="ff full">
+    <div class="xfer-log">
+      <div class="xfer-title">Transfer History</div>
+      <div id="xfer-history-list"></div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-gh" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-pr" onclick="saveProject()">Save Project</button>
+  </div>
+</div>
+</div>
+
+<!-- ENGINEER MODAL -->
+<div class="mbg" id="eng-modal" onclick="if(event.target===this)closeEngModal()">
+<div class="modal" style="width:480px">
+  <div class="modal-title" id="eng-modal-title">Add Engineer</div>
+  <div class="fg">
+    <div class="ff"><div class="flbl">Full Name *</div><input class="finp" id="ef-name" placeholder="e.g. John Smith"></div>
+    <div class="ff"><div class="flbl">Initials (2–3 chars) *</div><input class="finp" id="ef-id" placeholder="e.g. JS" maxlength="3" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()"></div>
+    <div class="ff"><div class="flbl">Role</div><select class="fsel2" id="ef-role"><option value="Engineer">Engineer</option><option value="External Designer">External Designer</option><option value="Lead Engineer">Lead Engineer</option><option value="Designer">Designer</option></select></div>
+    <div class="ff"><div class="flbl">Accent Color</div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px" id="ef-color-swatches">
+        <!-- populated dynamically by openAddEngineerModal() -->
+      </div>
+    </div>
+    <div class="ff"><div class="flbl">BNB / External Team?</div>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:4px">
+        <input type="checkbox" id="ef-isbnb" style="accent-color:var(--spike);width:14px;height:14px">
+        <span style="font-size:12px;color:var(--t2)">Mark as external/BNB team member</span>
+      </label>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-gh" onclick="closeEngModal()">Cancel</button>
+    <button class="btn btn-pr" onclick="saveEngineer()">Save Engineer</button>
+  </div>
+</div>
+</div>
+
+<!-- PEOPLE MODAL -->
+<div class="mbg" id="people-modal" onclick="if(event.target===this)closePeopleModal()">
+<div class="modal" style="width:520px">
+  <div class="modal-title" id="people-modal-title">Manage Project Managers</div>
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Current Team</div>
+    <div id="people-list" style="display:flex;flex-direction:column;gap:4px;margin-bottom:14px"></div>
+    <div style="display:flex;gap:8px;align-items:stretch">
+      <input class="finp" id="people-new-input" placeholder="Full name…" style="flex:1" onkeydown="if(event.key==='Enter')addPerson()">
+      <button class="btn btn-pr" onclick="addPerson()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add</button>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-gh" onclick="closePeopleModal()">Close</button>
+  </div>
+</div>
+</div>
+
+<!-- PRODUCT TYPE MODAL -->
+<div class="mbg" id="type-modal" onclick="if(event.target===this)closeTypeModal()">
+<div class="modal" style="width:520px">
+  <div class="modal-title">Manage Product Types</div>
+  <div style="margin-bottom:14px">
+    <div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Current Types</div>
+    <div id="type-list" style="display:flex;flex-direction:column;gap:4px;margin-bottom:14px"></div>
+    <div style="display:flex;gap:8px;align-items:stretch">
+      <input class="finp" id="type-new-input" placeholder="e.g. Cable Tap Box…" style="flex:1" onkeydown="if(event.key==='Enter')addProductType()">
+      <button class="btn btn-pr" onclick="addProductType()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add</button>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-gh" onclick="closeTypeModal()">Close</button>
+  </div>
+</div>
+</div>
+
+<!-- DAY POPUP -->
+<div class="day-popup" id="day-popup">
+  <div class="day-popup-title"><span id="dp-title">—</span><span class="day-popup-close" onclick="closeDayPopup()">✕</span></div>
+  <div id="dp-events"></div>
+</div>
+
+<!-- KPI DRILL-DOWN MODAL -->
+<div class="mbg" id="drill-modal" onclick="if(event.target===this)closeDrillModal()">
+<div class="modal" style="width:880px">
+  <div class="modal-title" id="drill-title">KPI Detail</div>
+  <div class="dd-formula" id="drill-formula"></div>
+  <div id="drill-body"></div>
+  <div class="modal-actions">
+    <button class="btn btn-gh" onclick="closeDrillModal()">Close</button>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ══ CONFIG — EDIT THESE ═══════════════════════════════════════════════════
+const TEAM_PASSWORD = 'SPIKE2025';        // 🔧 your team password
+const PM_PASSWORD   = 'PM2026';           // 🔧 PM read-only password (share this w/ PMs)
+const SUPABASE_URL  = 'https://zxgueylsdhgpukivmako.supabase.co';    // 🔧 from Supabase settings
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4Z3VleWxzZGhncHVraXZtYWtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MzU3MTQsImV4cCI6MjA4OTUxMTcxNH0.dnFA7MkE5nJ-hvl9k0EeJY3J-ExUadhgs3_F2ksO3Jk'; // 🔧 from Supabase settings
+// ══════════════════════════════════════════════════════════════════════════
+
+const SESSION_KEY = 'spike_auth';
+const PM_SESSION_KEY = 'spike_pm';
+let sb = null, realtimeCh = null;
+let IS_PM = false;
+
+// ── Engineers ─────────────────────────────────────────────────────────────
+const BUILTIN_ENGINEERS = [
+  {id:'BH', name:'Bryan Haro',       color:'#29ABE2', bg:'rgba(41,171,226,.15)', role:'Engineer', _builtin:true},
+  {id:'EO', name:'Edwin Ojeda',      color:'#22d47a', bg:'rgba(34,212,122,.15)', role:'Engineer', _builtin:true},
+  {id:'MG', name:'Mario Galdamez',   color:'#f5a623', bg:'rgba(245,166,35,.15)', role:'Engineer', _builtin:true},
+  {id:'CK', name:'Corey Kidd',       color:'#f55353', bg:'rgba(245,83,83,.15)',  role:'Engineer', _builtin:true},
+  {id:'JJ', name:'Jose Jasso',       color:'#a96df7', bg:'rgba(169,109,247,.15)',role:'Engineer', _builtin:true},
+  {id:'MP', name:'Masoom Patel',     color:'#14c4b2', bg:'rgba(20,196,178,.15)', role:'Engineer', _builtin:true},
+  {id:'OP', name:'Osvaldo Perez',    color:'#f97244', bg:'rgba(249,114,68,.15)', role:'Engineer', _builtin:true},
+  {id:'EL', name:'Erik Leal',        color:'#e855a0', bg:'rgba(232,85,160,.15)', role:'Engineer', _builtin:true},
+  {id:'MW', name:'Micaiah Williams', color:'#c8f026', bg:'rgba(200,240,38,.15)', role:'Engineer', _builtin:true},
+  {id:'BN', name:'BNB Team',         color:'#a96df7', bg:'rgba(169,109,247,.15)',role:'External Designer', isBnb:true, _builtin:true},
+];
+let ENGINEERS = [...BUILTIN_ENGINEERS];
+
+let PROJECTS = [];
+let TRANSFER_HISTORY = {}; // keyed by proj_id → [{from, to, date}]
+let DRILL_DATA = {}; // populated by renderKPI — backs the click-to-drill-down on KPI cards
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function msPct(ms){const k=['design','ifa','ifc','adj','idr','live'];return Math.round(k.filter(x=>ms[x]).length/k.length*100)}
+function getEng(name){return ENGINEERS.find(e=>e.name===name)||{color:'#29ABE2',bg:'rgba(41,171,226,.15)',id:'??'}}
+function vcls(v){return v==='15kV'?'v15':v==='38kV'?'v38':v==='Medium Voltage'?'vmv':'vlv'}
+function vshort(v){return v==='15kV'?'15kV':v==='38kV'?'38kV':v==='Medium Voltage'?'MV':'LV'}
+function spill(s){return s==='Complete'?'<span class="pill pg">Complete</span>':s==='On Hold'?'<span class="pill pa">On Hold</span>':'<span class="pill pb">In Progress</span>'}
+function msBadges(ms,msDates){
+  const map={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',live:'Live on Floor'};
+  return Object.entries(map).map(([k,label])=>{
+    let tip=label;
+    if(ms[k]){
+      const d=msDates&&msDates[k]?new Date(msDates[k]+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+      tip=label+' ✓'+(d?' — '+d:'');
+    } else {
+      tip=label+' — Pending';
+    }
+    return `<span class="msd ${ms[k]?'done':'todo'}" title="${tip}">${ms[k]?'✓':'·'}</span>`;
+  }).join('');
+}
+function av(eng,size=34){
+  return `<div class="av" style="width:${size}px;height:${size}px;font-size:${Math.round(size*.32)}px;background:${eng.bg};color:${eng.color};border-color:${eng.color}33">${eng.id}</div>`;
+}
+function fmt(d){if(!d)return'—';const dt=new Date(d+'T00:00');return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'})}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+function showAppLoading(on){document.getElementById('app-loading').style.display=on?'flex':'none';}
+
+// IFA due helpers
+function ifaDaysLeft(ifaDue){
+  if(!ifaDue)return null;
+  const now=new Date();now.setHours(0,0,0,0);
+  return Math.round((new Date(ifaDue+'T00:00')-now)/(864e5));
+}
+function ifaBadge(p){
+  if(p.ms.ifa) return '<span class="pill pg" style="font-size:9px">IFA ✓</span>';
+  if(!p.ifaDue) return '<span style="font-size:10px;color:var(--t3)">—</span>';
+  const d=ifaDaysLeft(p.ifaDue);
+  if(d===null)return '—';
+  if(d<0)  return `<span class="pill pr" style="font-size:9px">IFA ${Math.abs(d)}d LATE</span>`;
+  if(d===0)return `<span class="pill pr" style="font-size:9px;animation:pulse 1s infinite">IFA TODAY</span>`;
+  if(d<=3) return `<span class="pill pr" style="font-size:9px;animation:pulse 1.5s infinite">IFA ${d}d left</span>`;
+  if(d<=7) return `<span class="pill pa" style="font-size:9px">IFA ${d}d left</span>`;
+  return `<span class="pill pb" style="font-size:9px">IFA ${fmt(p.ifaDue)}</span>`;
+}
+
+// IFC due helpers
+function ifcDaysLeft(ifcDue){
+  if(!ifcDue)return null;
+  const now=new Date();now.setHours(0,0,0,0);
+  return Math.round((new Date(ifcDue+'T00:00')-now)/(864e5));
+}
+function ifcBadge(p){
+  if(p.ms.live) return '<span class="pill pg" style="font-size:9px">IFC ✓</span>';
+  if(!p.ifcDue) return '<span style="font-size:10px;color:var(--t3)">—</span>';
+  const d=ifcDaysLeft(p.ifcDue);
+  if(d===null)return '—';
+  if(d<0)  return `<span class="pill pr" style="font-size:9px">IFC ${Math.abs(d)}d LATE</span>`;
+  if(d===0)return `<span class="pill pr" style="font-size:9px;animation:pulse 1s infinite">IFC TODAY</span>`;
+  if(d<=3) return `<span class="pill pr" style="font-size:9px;animation:pulse 1.5s infinite">IFC ${d}d left</span>`;
+  if(d<=7) return `<span class="pill pa" style="font-size:9px">IFC ${d}d left</span>`;
+  return `<span class="pill pp" style="font-size:9px">IFC ${fmt(p.ifcDue)}</span>`;
+}
+
+// ── Auth ──────────────────────────────────────────────────────────────────
+function applyPmMode(on){
+  IS_PM=on;
+  document.body.classList.toggle('pm-mode',on);
+}
+function checkPassword(){
+  const entered=document.getElementById('pw-input').value;
+  const err=document.getElementById('pw-error');
+  if(entered===TEAM_PASSWORD || entered===PM_PASSWORD){
+    const isPm = (entered===PM_PASSWORD);
+    sessionStorage.setItem(SESSION_KEY,'1');
+    if(isPm) sessionStorage.setItem(PM_SESSION_KEY,'1');
+    else sessionStorage.removeItem(PM_SESSION_KEY);
+    applyPmMode(isPm);
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app-shell').style.display='flex';
+    err.style.display='none';
+    initSupabaseAndLoad();
+    // PMs land on All Projects since the dashboard nav is hidden
+    if(isPm) setTimeout(()=>showView('projects',document.getElementById('ni-projects')),50);
+  } else {
+    err.style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+    document.getElementById('pw-input').style.borderColor='var(--rd)';
+    setTimeout(()=>document.getElementById('pw-input').style.borderColor='',1200);
+  }
+}
+function doLogout(){
+  sessionStorage.removeItem(SESSION_KEY);
+  sessionStorage.removeItem(PM_SESSION_KEY);
+  applyPmMode(false);
+  if(realtimeCh&&sb)sb.removeChannel(realtimeCh);
+  document.getElementById('app-shell').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('pw-input').value='';
+}
+
+// ── Supabase ──────────────────────────────────────────────────────────────
+function loadScript(src){return new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+async function initSupabaseAndLoad(){
+  if(SUPABASE_URL==='YOUR_SUPABASE_URL'){refreshAll();return;}
+  try{
+    await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js');
+    sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    await loadFromDB();
+    subscribeRealtime();
+  }catch(e){console.error('Supabase:',e);refreshAll();}
+}
+async function loadFromDB(){
+  showAppLoading(true);
+
+  // Fetch each table independently — a missing table won't crash the others
+  let projRes, xferRes, peopleRes, engRes;
+  try { projRes  = await sb.from('projects').select('*').order('created_at',{ascending:false}); }
+  catch(e){ projRes={error:e,data:null}; }
+  try { xferRes  = await sb.from('project_transfers').select('*').order('transferred_at',{ascending:true}); }
+  catch(e){ xferRes={error:e,data:null}; }
+  try { peopleRes = await sb.from('people').select('*').order('name',{ascending:true}); }
+  catch(e){ peopleRes={error:e,data:null}; }
+  try { engRes   = await sb.from('engineers').select('*').order('created_at',{ascending:true}); }
+  catch(e){ engRes={error:e,data:null}; }
+  let typeRes;
+  try { typeRes  = await sb.from('product_types').select('*').order('name',{ascending:true}); }
+  catch(e){ typeRes={error:e,data:null}; }
+
+  showAppLoading(false);
+
+  // Log any table errors to console so you can see what's missing
+  if(projRes.error)  console.warn('projects table:',  projRes.error.message||projRes.error);
+  if(xferRes.error)  console.warn('project_transfers:',xferRes.error.message||xferRes.error);
+  if(peopleRes.error)console.warn('people table:',    peopleRes.error.message||peopleRes.error);
+  if(engRes.error)   console.warn('engineers table:', engRes.error.message||engRes.error);
+  if(typeRes.error)  console.warn('product_types table:', typeRes.error.message||typeRes.error);
+
+  if(projRes.error){ refreshAll(); return; }
+  PROJECTS=projRes.data.map(r=>({
+    id:r.proj_id,name:r.name,desc:r.description||'',
+    engineer:r.engineer,type:r.type,voltage:r.voltage,
+    pm:r.pm,sales:r.sales,status:r.status,
+    start:r.start_date,end:r.end_date,
+    ifaDue:r.ifa_due_date||null,
+    ifcDue:r.ifc_due_date||null,
+    notes:r.notes||'',
+    ms:{design:r.ms_design||false,ifa:r.ms_ifa||false,ifc:r.ms_ifc||false,adj:r.ms_adj||false,idr:r.ms_idr||false,live:r.ms_live||false,shipped:r.ms_shipped||false},
+    msDates:{design:r.ms_design_date||'',ifa:r.ms_ifa_date||'',ifc:r.ms_ifc_date||'',adj:r.ms_adj_date||'',idr:r.ms_idr_date||'',live:r.ms_live_date||'',shipped:r.ms_shipped_date||''},
+    _dbid:r.id
+  }));
+
+  // Transfer history
+  TRANSFER_HISTORY={};
+  if(!xferRes.error && xferRes.data){
+    xferRes.data.forEach(r=>{
+      if(!TRANSFER_HISTORY[r.proj_id]) TRANSFER_HISTORY[r.proj_id]=[];
+      TRANSFER_HISTORY[r.proj_id].push({from:r.from_engineer,to:r.to_engineer,date:r.transferred_at});
+    });
+  }
+
+  // People (PM & Sales) — gracefully skipped if table missing
+  if(!peopleRes.error && peopleRes.data){
+    const dbPMs  = peopleRes.data.filter(r=>r.role==='pm').map(r=>({name:r.name,role:'pm',_dbid:r.id}));
+    const dbSales= peopleRes.data.filter(r=>r.role==='sales').map(r=>({name:r.name,role:'sales',_dbid:r.id}));
+    PM_LIST   = [{name:'TBD',role:'pm',_dbid:null},   ...dbPMs];
+    SALES_LIST= [{name:'TBD',role:'sales',_dbid:null}, ...dbSales];
+  }
+
+  // Engineers — gracefully skipped if table missing
+  if(!engRes.error && engRes.data){
+    const dbEngs=engRes.data.map(r=>({
+      id:r.initials,name:r.name,color:r.color,
+      bg:hexToRgba(r.color,.15),role:r.role,
+      ...(r.is_bnb?{isBnb:true}:{}),
+      _builtin:false,_dbid:r.id
+    }));
+    ENGINEERS=[...BUILTIN_ENGINEERS];
+    dbEngs.forEach(e=>{ if(!ENGINEERS.some(x=>x.name===e.name)) ENGINEERS.push(e); });
+  }
+
+  // Product types from DB
+  if(!typeRes.error && typeRes.data && typeRes.data.length>0){
+    const dbTypes=typeRes.data.map(r=>({name:r.name,_dbid:r.id}));
+    // Merge: keep defaults, add DB types not already present
+    PRODUCT_TYPES=[...DEFAULT_TYPES.map(n=>({name:n,_dbid:null}))];
+    dbTypes.forEach(t=>{if(!PRODUCT_TYPES.some(x=>x.name===t.name))PRODUCT_TYPES.push(t);});
+  }
+
+  refreshAll();
+}
+function subscribeRealtime(){
+  realtimeCh=sb.channel('spike-changes')
+    .on('postgres_changes',{event:'*',schema:'public',table:'projects'},()=>{loadFromDB();showToast('⚡ Updated by team member');})
+    .on('postgres_changes',{event:'*',schema:'public',table:'people'},()=>{loadFromDB();showToast('⚡ People list updated');})
+    .on('postgres_changes',{event:'*',schema:'public',table:'engineers'},()=>{loadFromDB();showToast('⚡ Team roster updated');})
+    .on('postgres_changes',{event:'*',schema:'public',table:'product_types'},()=>{loadFromDB();showToast('⚡ Product types updated');})
+    .subscribe();
+}
+function refreshAll(){
+  buildEngNav();
+  populateCalFilters();
+  populateGanttFilters();
+  populateFilters();
+  populateTypeFilters();
+  document.getElementById('last-update').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  // Re-render whichever view is currently active
+  const active=document.querySelector('.view.active');
+  if(!active) return;
+  const id=active.id;
+  if(id==='view-dashboard')    renderDashboard();
+  else if(id==='view-projects') renderProjects();
+  else if(id==='view-gantt')    renderGantt();
+  else if(id==='view-calendar') renderCalendar();
+  else if(id==='view-kpi')      renderKPI();
+  else if(id==='view-bnb')      renderBNB();
+  else if(id==='view-admin')    renderAdminEngTable();
+  else                          renderDashboard();
+}
+
+// ── Views ─────────────────────────────────────────────────────────────────
+function showView(name,el){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  if(el)el.classList.add('active');
+  const titles={dashboard:'Dashboard',kpi:'KPI Reports',projects:'All Projects',gantt:'Gantt Timeline',bnb:'BNB Team',engineer:'Engineer View',calendar:'Monthly Calendar',admin:'Manage Team'};
+  document.getElementById('page-title').textContent=titles[name]||name;
+  document.getElementById('boss-tag').style.display=name==='dashboard'?'':'none';
+  const renders={dashboard:renderDashboard,projects:()=>{populateFilters();renderProjects()},gantt:()=>{populateGanttFilters();renderGantt()},calendar:()=>{populateCalFilters();calYear=calYear||new Date().getFullYear();calMonth=calMonth!==undefined?calMonth:new Date().getMonth();renderCalendar()},kpi:renderKPI,bnb:renderBNB,admin:renderAdminEngTable};
+  if(renders[name])renders[name]();
+}
+
+function buildEngNav(){
+  document.getElementById('eng-nav-list').innerHTML=ENGINEERS.map(e=>`<div class="ni" onclick="viewEngineer('${e.name}',this)">${av(e,18)}<span style="font-size:12px">${e.name}</span></div>`).join('');
+}
+
+// ── Dashboard ─────────────────────────────────────────────────────────────
+let charts={};
+function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+
+// ── Dashboard table sorting ───────────────────────────────────────────────
+let dashSort={col:null,dir:1};
+const DASH_SORT_COLS=['name','engineer','type','voltage','pm','ifaDue','ifcDue','milestones','progress','status'];
+function setDashSort(col){
+  if(dashSort.col===col){dashSort.dir*=-1;}
+  else{dashSort={col,dir:(col==='progress'||col==='milestones')?-1:1};}
+  DASH_SORT_COLS.forEach(c=>{
+    const th=document.getElementById('dth-'+c);
+    if(!th)return;
+    th.classList.remove('sort-asc','sort-desc');
+    if(dashSort.col===c)th.classList.add(dashSort.dir===1?'sort-asc':'sort-desc');
+  });
+  renderDashboard();
+}
+
+function renderDashboard(){
+  const active=PROJECTS.filter(p=>p.status!=='Complete');
+  const done=PROJECTS.filter(p=>p.status==='Complete');
+  const bnb=PROJECTS.filter(p=>p.engineer==='BNB Team');
+  const idrPend=PROJECTS.filter(p=>!p.ms.idr&&p.status!=='Complete');
+  const inProg=PROJECTS.filter(p=>p.status==='In Progress');
+  const onHold=PROJECTS.filter(p=>p.status==='On Hold');
+  const ifaLate=PROJECTS.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<0&&p.status!=='Complete');
+  const ifcLate=PROJECTS.filter(p=>!p.ms.live&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<0&&p.status!=='Complete');
+
+  document.getElementById('kpi-row').innerHTML=`
+    <div class="kc" style="--kc:var(--spike)"><div class="kc-lbl">Active Projects</div><div class="kc-val">${active.length}</div><div class="kc-sub">${inProg.length} in progress · ${onHold.length} on hold</div></div>
+    <div class="kc" style="--kc:var(--gr)"><div class="kc-lbl">Completed</div><div class="kc-val">${done.length}</div><div class="kc-sub">All time completions</div></div>
+    <div class="kc" style="--kc:var(--rd)"><div class="kc-lbl">IFA Overdue</div><div class="kc-val">${ifaLate.length}</div><div class="kc-sub">Past IFA due date</div></div>
+    <div class="kc" style="--kc:var(--pu)"><div class="kc-lbl">IFC Overdue</div><div class="kc-val">${ifcLate.length}</div><div class="kc-sub">Past IFC due date</div></div>
+    <div class="kc" style="--kc:var(--pu)"><div class="kc-lbl">BNB Projects</div><div class="kc-val">${bnb.length}</div><div class="kc-sub">External team</div></div>
+    <div class="kc" style="--kc:var(--am)"><div class="kc-lbl">IDR Pending</div><div class="kc-val">${idrPend.length}</div><div class="kc-sub">Needs review</div></div>
+    <div class="kc" style="--kc:var(--tl)"><div class="kc-lbl">Engineers Active</div><div class="kc-val">${ENGINEERS.filter(e=>!e.isBnb&&PROJECTS.some(p=>p.engineer===e.name&&p.status!=='Complete')).length}<span>/${ENGINEERS.filter(e=>!e.isBnb).length}</span></div><div class="kc-sub">Of total team</div></div>`;
+
+  const nonBnb=ENGINEERS.filter(e=>!e.isBnb);
+  destroyChart('cWorkload');
+  charts.cWorkload=new Chart(document.getElementById('cWorkload'),{
+    type:'bar',
+    data:{labels:nonBnb.map(e=>e.name.split(' ')[0]),datasets:[{data:nonBnb.map(e=>PROJECTS.filter(p=>p.engineer===e.name&&p.status!=='Complete').length),backgroundColor:nonBnb.map(e=>e.color+'33'),borderColor:nonBnb.map(e=>e.color),borderWidth:1.5,borderRadius:2,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{color:'#444',font:{size:9}},grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true},x:{ticks:{color:'#444',font:{size:9}},grid:{display:false}}}}
+  });
+
+  const types={};PROJECTS.forEach(p=>{types[p.type]=(types[p.type]||0)+1});
+  const tCol={'Switch':'#5b9bd5','Switchboard':'#29ABE2','Switchrack':'#0d8fc7','Switchgear':'#14c4b2','MCC':'#f5a623','Transformer':'#a96df7','Panel':'#22d47a','Bus Duct':'#f97244','Load Center':'#e855a0'};
+  destroyChart('cTypes');
+  charts.cTypes=new Chart(document.getElementById('cTypes'),{
+    type:'doughnut',
+    data:{labels:Object.keys(types),datasets:[{data:Object.values(types),backgroundColor:Object.keys(types).map(k=>(tCol[k]||'#888')+'44'),borderColor:Object.keys(types).map(k=>tCol[k]||'#888'),borderWidth:1.5}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#666',font:{size:9},boxWidth:8,padding:5}}}}
+  });
+
+  const volts={};PROJECTS.forEach(p=>{const s=vshort(p.voltage);volts[s]=(volts[s]||0)+1});
+  const vCol={'15kV':'#f55353','38kV':'#f5a623','MV':'#29ABE2','LV':'#22d47a'};
+  destroyChart('cVoltage');
+  charts.cVoltage=new Chart(document.getElementById('cVoltage'),{
+    type:'doughnut',
+    data:{labels:Object.keys(volts),datasets:[{data:Object.values(volts),backgroundColor:Object.keys(volts).map(k=>(vCol[k]||'#888')+'44'),borderColor:Object.keys(volts).map(k=>vCol[k]||'#888'),borderWidth:1.5}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{color:'#666',font:{size:9},boxWidth:8,padding:5}}}}
+  });
+
+  const MAX_LOAD=5;
+  document.getElementById('workload-grid').innerHTML=ENGINEERS.map(eng=>{
+    const projs=PROJECTS.filter(p=>p.engineer===eng.name&&p.status!=='Complete');
+    const pct=Math.min(Math.round(projs.length/MAX_LOAD*100),100);
+    const lc=pct>=100?'ov':pct>=70?'hi':'';
+    const fillCls=eng.isBnb?'bn':lc;
+    const dotColor=pct>=100?'#f55353':pct>=70?'#f5a623':'#29ABE2';
+    const done=PROJECTS.filter(p=>p.engineer===eng.name&&p.status==='Complete').length;
+    const ifaAlert=projs.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<=3).length;
+    const ifcAlert=projs.filter(p=>!p.ms.live&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<=3).length;
+    return `<div class="ec ${eng.isBnb?'bnb':''} ${pct>=100?'over':''}" onclick="viewEngineer('${eng.name}',null)">
+      <div class="ec-hd">${av(eng,34)}<div><div class="ec-name">${eng.name}</div><div class="ec-role">${eng.role}</div></div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:4px">
+          ${ifaAlert>0?`<span style="font-size:9px;color:var(--rd);font-weight:700;font-family:var(--fm)">IFA!</span>`:''}
+          ${ifcAlert>0?`<span style="font-size:9px;color:var(--pu);font-weight:700;font-family:var(--fm)">IFC!</span>`:''}
+          <span style="width:6px;height:6px;background:${dotColor};display:inline-block;box-shadow:0 0 8px ${dotColor}"></span>
+        </div>
+      </div>
+      <div class="wbar"><div class="wfill ${fillCls}" style="width:${pct}%"></div></div>
+      <div class="ec-meta"><span>${projs.length} active</span><span style="color:${pct>=100?'#f55353':pct>=70?'#f5a623':'#444'}">${pct}% load</span></div>
+      <div class="ec-stats">
+        <div class="es"><strong style="color:${eng.color}">${projs.length}</strong>Active</div>
+        <div class="es"><strong style="color:var(--gr)">${done}</strong>Done</div>
+        <div class="es"><strong style="color:${ifaAlert?'var(--rd)':'var(--t1)'}">${ifaAlert||projs.filter(p=>p.ms.idr).length}</strong>${ifaAlert?'IFA!':'IDR✓'}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const tbody=document.getElementById('dash-table');
+  let list=PROJECTS.filter(p=>p.status!=='Complete');
+  // Apply sort if one is active
+  if(dashSort.col){
+    const c=dashSort.col, d=dashSort.dir;
+    list.sort((a,b)=>{
+      // Special handling for date columns: empty dates always at the bottom
+      if(c==='ifaDue'||c==='ifcDue'){
+        const aEmpty=!a[c], bEmpty=!b[c];
+        if(aEmpty && bEmpty) return 0;
+        if(aEmpty) return 1;   // a goes after b
+        if(bEmpty) return -1;  // b goes after a
+        const va=new Date(a[c]+'T00:00').getTime();
+        const vb=new Date(b[c]+'T00:00').getTime();
+        return (va-vb)*d;
+      }
+      let va, vb;
+      if(c==='progress'){va=msPct(a.ms);vb=msPct(b.ms);}
+      else if(c==='status'){va=STATUS_ORDER[a.status]??99;vb=STATUS_ORDER[b.status]??99;}
+      else if(c==='milestones'){va=Object.values(a.ms).filter(Boolean).length;vb=Object.values(b.ms).filter(Boolean).length;}
+      else if(c==='pm'){va=(a.pm||'').toLowerCase();vb=(b.pm||'').toLowerCase();}
+      else {va=(a[c]||'').toString().toLowerCase();vb=(b[c]||'').toString().toLowerCase();}
+      if(va<vb)return -1*d;
+      if(va>vb)return 1*d;
+      return 0;
+    });
+  }
+  list=list.slice(0,15);
+  tbody.innerHTML=list.length?list.map(p=>{
+    const e=getEng(p.engineer);const pct=msPct(p.ms);
+    return `<tr>
+      <td><div class="pname">${p.name}</div><div class="pid">${p.id}</div></td>
+      <td><div style="display:flex;align-items:center;gap:5px">${av(e,22)}<span style="font-size:11px">${p.engineer}</span></div></td>
+      <td><span class="ttag">${p.type}</span></td>
+      <td><span class="vtag ${vcls(p.voltage)}">${vshort(p.voltage)}</span></td>
+      <td style="font-size:11px;color:var(--t2)">${p.pm} / ${p.sales}</td>
+      <td>${ifaBadge(p)}</td>
+      <td>${ifcBadge(p)}</td>
+      <td><div class="ms-row">${msBadges(p.ms,p.msDates)}</div></td>
+      <td><div class="pbar"><div class="ptrack"><div class="pfill" style="width:${pct}%"></div></div><span class="ppct">${pct}%</span></div></td>
+      <td>${spill(p.status)}</td>
+      <td style="font-size:11px;color:var(--t2);max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.notes||'').replace(/"/g,'&quot;')}">${p.notes||'<span style=color:var(--t3)>—</span>'}</td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="10" class="empty">⚡ No active projects — click Add Project to get started</td></tr>';
+}
+
+// ── All Projects ──────────────────────────────────────────────────────────
+function populateFilters(){
+  document.getElementById('f-eng').innerHTML='<option value="">All Engineers</option>'+[...new Set(PROJECTS.map(p=>p.engineer))].map(n=>`<option>${n}</option>`).join('');
+}
+let projSort={col:null,dir:1};
+const PROJ_SORT_COLS=['id','name','engineer','type','voltage','pm','sales','start','end','ifaDue','ifcDue','milestones','progress','status'];
+const PROJ_DATE_COLS=['start','end','ifaDue','ifcDue'];
+function setSort(col){
+  if(projSort.col===col){projSort.dir*=-1;}
+  else{projSort={col,dir:(col==='progress'||col==='milestones')?-1:1};}
+  PROJ_SORT_COLS.forEach(c=>{
+    const th=document.getElementById('th-'+c);
+    if(!th)return;
+    th.classList.remove('sort-asc','sort-desc');
+    if(projSort.col===c) th.classList.add(projSort.dir===1?'sort-asc':'sort-desc');
+  });
+  renderProjects();
+}
+const STATUS_ORDER={'In Progress':0,'On Hold':1,'Complete':2};
+function renderProjects(){
+  const q=document.getElementById('s-proj').value.toLowerCase();
+  const fEng=document.getElementById('f-eng').value;
+  const fType=document.getElementById('f-type').value;
+  const fVolt=document.getElementById('f-volt').value;
+  const fStat=document.getElementById('f-stat').value;
+  const fMs=document.getElementById('f-ms').value;
+  let list=PROJECTS.filter(p=>{
+    if(fEng&&p.engineer!==fEng)return false;
+    if(fType&&p.type!==fType)return false;
+    if(fVolt&&p.voltage!==fVolt)return false;
+    if(fStat&&p.status!==fStat)return false;
+    if(fMs==='design_done'&&!p.ms.design)return false;
+    if(fMs==='ifa_pending'&&(p.ms.ifa||p.status==='Complete'))return false;
+    if(fMs==='ifa_done'&&!p.ms.ifa)return false;
+    if(fMs==='adj_done'&&!p.ms.adj)return false;
+    if(fMs==='ifc_done'&&!p.ms.ifc)return false;
+    if(fMs==='idr_pending'&&(p.ms.idr||p.status==='Complete'))return false;
+    if(fMs==='idr_done'&&!p.ms.idr)return false;
+    if(fMs==='live'&&!p.ms.live)return false;
+    if(fMs==='shipped'&&!p.ms.shipped)return false;
+    if(q&&!p.name.toLowerCase().includes(q)&&!p.id.toLowerCase().includes(q)&&!p.engineer.toLowerCase().includes(q))return false;
+    return true;
+  });
+  if(projSort.col){
+    const c=projSort.col, d=projSort.dir;
+    list.sort((a,b)=>{
+      // Date columns: empty dates always sort to the bottom
+      if(PROJ_DATE_COLS.includes(c)){
+        const aEmpty=!a[c], bEmpty=!b[c];
+        if(aEmpty && bEmpty) return 0;
+        if(aEmpty) return 1;
+        if(bEmpty) return -1;
+        return (new Date(a[c]+'T00:00').getTime() - new Date(b[c]+'T00:00').getTime())*d;
+      }
+      let va, vb;
+      if(c==='progress'){va=msPct(a.ms);vb=msPct(b.ms);}
+      else if(c==='status'){va=STATUS_ORDER[a.status]??9;vb=STATUS_ORDER[b.status]??9;}
+      else if(c==='milestones'){va=Object.values(a.ms).filter(Boolean).length;vb=Object.values(b.ms).filter(Boolean).length;}
+      else {va=(a[c]||'').toString().toLowerCase();vb=(b[c]||'').toString().toLowerCase();}
+      if(va<vb)return -1*d;
+      if(va>vb)return 1*d;
+      return 0;
+    });
+  }
+  const tbody=document.getElementById('proj-table');
+  if(!list.length){tbody.innerHTML='<tr><td colspan="15" class="empty">No projects match filters</td></tr>';return;}
+  tbody.innerHTML=list.map(p=>{
+    const e=getEng(p.engineer);const pct=msPct(p.ms);
+    return `<tr>
+      <td><span class="pid">${p.id}</span></td>
+      <td class="pname">${p.name}</td>
+      <td><div style="display:flex;align-items:center;gap:5px">${av(e,20)}<div><span style="font-size:11px">${p.engineer}</span>${(TRANSFER_HISTORY[p.id]||[]).length>0?`<div style="font-size:9px;color:var(--am);text-transform:uppercase;letter-spacing:.4px">↔ ${(TRANSFER_HISTORY[p.id]||[]).length}x transfer</div>`:''}</div></div></td>
+      <td><span class="ttag">${p.type}</span></td>
+      <td><span class="vtag ${vcls(p.voltage)}">${vshort(p.voltage)}</span></td>
+      <td style="font-size:11px">${p.pm}</td>
+      <td style="font-size:11px">${p.sales}</td>
+      <td style="font-size:10.5px;color:var(--t2)">${fmt(p.start)}</td>
+      <td style="font-size:10.5px;color:var(--t2)">${fmt(p.end)}</td>
+      <td>${ifaBadge(p)}</td>
+      <td>${ifcBadge(p)}</td>
+      <td><div class="ms-row">${msBadges(p.ms,p.msDates)}</div></td>
+      <td><div class="pbar"><div class="ptrack"><div class="pfill" style="width:${pct}%"></div></div><span class="ppct">${pct}%</span></div></td>
+      <td>${spill(p.status)}</td>
+      <td style="font-size:11px;color:var(--t2);max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.notes||'').replace(/"/g,'&quot;')}">${p.notes||'—'}</td>
+      <td><button class="btn btn-gh btn-sm" onclick="openEditModal('${p.id}')">Edit</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ── Gantt ─────────────────────────────────────────────────────────────────
+function populateGanttFilters(){
+  document.getElementById('g-eng').innerHTML='<option value="">All Engineers</option>'+[...new Set(PROJECTS.map(p=>p.engineer))].map(n=>`<option>${n}</option>`).join('');
+}
+function renderGantt(){
+  const fEng=document.getElementById('g-eng').value;
+  const fType=document.getElementById('g-type').value;
+  const fStat=document.getElementById('g-stat').value;
+  let list=PROJECTS.filter(p=>{if(fEng&&p.engineer!==fEng)return false;if(fType&&p.type!==fType)return false;if(fStat&&p.status!==fStat)return false;return true;}).slice(0,20);
+  const today=new Date();
+  const startM=0,numM=12;
+  const todayPct=((today.getMonth()-startM)+today.getDate()/31)/numM;
+  const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let html=`<div class="g-hrow"><div class="g-lbl-hd">Project / Engineer</div><div class="g-months">${MONTHS.map((m,i)=>`<div class="g-month ${i===today.getMonth()?'cur':''}">${m}</div>`).join('')}</div></div>`;
+  if(!list.length){html+='<div class="empty">No projects to show</div>';}
+  else{list.forEach(p=>{
+    const e=getEng(p.engineer);
+    const ps=new Date((p.start||'2025-01-01')+'T00:00'),pe=new Date((p.end||'2025-12-31')+'T00:00');
+    const sp=Math.max(0,(ps.getMonth()-startM+ps.getDate()/31)/numM)*100;
+    const ep=Math.min(100,(pe.getMonth()-startM+pe.getDate()/31)/numM)*100;
+    const w=Math.max(ep-sp,1.5);
+    const pct=msPct(p.ms);
+    const bc=p.engineer==='BNB Team'?'rgba(169,109,247,.25)':pct===100?'rgba(34,212,122,.2)':pct>=50?'rgba(41,171,226,.2)':'rgba(245,166,35,.18)';
+    const tc=p.engineer==='BNB Team'?'#a96df7':pct===100?'#22d47a':pct>=50?'#29ABE2':'#f5a623';
+    const msDots=[{k:'design',pos:.15,done:p.ms.design},{k:'ifa',pos:.35,done:p.ms.ifa},{k:'ifc',pos:.6,done:p.ms.ifc},{k:'live',pos:.95,done:p.ms.live}];
+    const dots=msDots.filter(m=>m.done).map(m=>{const mlp=sp+(ep-sp)*m.pos;return`<div class="g-dot" style="left:${mlp}%;background:#22d47a" title="${m.k} complete"></div>`;}).join('');
+    // IFA due marker
+    let ifaMark='';
+    if(p.ifaDue&&!p.ms.ifa){
+      const id=new Date(p.ifaDue+'T00:00');
+      const ifaPct=Math.max(0,Math.min(100,(id.getMonth()-startM+id.getDate()/31)/numM*100));
+      const d=ifaDaysLeft(p.ifaDue);
+      const mc=d<=3?'#f55353':d<=7?'#f5a623':'#29ABE2';
+      ifaMark=`<div style="position:absolute;left:${ifaPct}%;top:50%;transform:translate(-50%,-50%);width:8px;height:8px;background:${mc};z-index:4;border:1.5px solid var(--bg)" title="IFA due ${fmt(p.ifaDue)}"></div>`;
+    }
+    // IFC due marker
+    let ifcMark='';
+    if(p.ifcDue&&!p.ms.live){
+      const id=new Date(p.ifcDue+'T00:00');
+      const ifcPct=Math.max(0,Math.min(100,(id.getMonth()-startM+id.getDate()/31)/numM*100));
+      const d=ifcDaysLeft(p.ifcDue);
+      const mc=d<=3?'#f55353':d<=7?'#f5a623':'#a96df7';
+      ifcMark=`<div style="position:absolute;left:${ifcPct}%;top:calc(50% + 8px);transform:translate(-50%,-50%);width:8px;height:8px;background:${mc};z-index:4;border:1.5px solid var(--bg);border-radius:50%" title="IFC due ${fmt(p.ifcDue)}"></div>`;
+    }
+    html+=`<div class="g-row" style="cursor:pointer" onclick="openEditModal('${p.id}')" title="Click to open ${p.id}">
+      <div class="g-lbl" style="border-left:2px solid ${e.color}"><div class="g-lbl-name">${p.id}</div><div class="g-lbl-meta">${p.engineer} · ${p.type}</div></div>
+      <div class="g-track">
+        <div class="today-line" style="left:${todayPct*100}%"></div>
+        <div class="g-bar" style="left:${sp}%;width:${w}%;background:${bc};color:${tc};border-color:${tc}44">${pct}%</div>
+        ${dots}${ifaMark}${ifcMark}
+      </div>
+    </div>`;
+  });}
+  html+=`<div class="g-legend">
+    <span class="gl-item"><span style="width:22px;height:2px;background:rgba(41,171,226,.6);display:inline-block"></span>In Progress</span>
+    <span class="gl-item"><span style="width:22px;height:2px;background:rgba(34,212,122,.6);display:inline-block"></span>Complete</span>
+    <span class="gl-item"><span style="width:22px;height:2px;background:rgba(169,109,247,.5);display:inline-block"></span>BNB</span>
+    <span class="gl-item"><span style="width:1.5px;height:12px;background:var(--spike);display:inline-block"></span>Today</span>
+    <span class="gl-item"><span style="width:8px;height:8px;background:#22d47a;border-radius:50%;display:inline-block"></span>Milestone done</span>
+    <span class="gl-item"><span style="width:8px;height:8px;background:var(--am);display:inline-block"></span>IFA due</span>
+    <span class="gl-item"><span style="width:8px;height:8px;background:var(--rd);display:inline-block"></span>IFA urgent</span>
+    <span class="gl-item"><span style="width:8px;height:8px;background:var(--pu);border-radius:50%;display:inline-block"></span>IFC due</span>
+    <span class="gl-item"><span style="width:8px;height:8px;background:var(--rd);border-radius:50%;display:inline-block"></span>IFC urgent</span>
+  </div>`;
+  document.getElementById('gantt-container').innerHTML=html;
+}
+
+// ── Calendar ──────────────────────────────────────────────────────────────
+let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
+let calMsMode=false;
+const MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function calStep(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}else if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+function calToday(){calYear=new Date().getFullYear();calMonth=new Date().getMonth();renderCalendar();}
+function toggleCalMsMode(){
+  calMsMode=!calMsMode;
+  const btn=document.getElementById('cal-ms-toggle');
+  btn.style.background=calMsMode?'var(--spike)':'';
+  btn.style.color=calMsMode?'#000':'';
+  document.getElementById('cal-legend-normal').style.display=calMsMode?'none':'';
+  document.getElementById('cal-legend-ms').style.display=calMsMode?'':'none';
+  renderCalendar();
+}
+function populateCalFilters(){
+  document.getElementById('cal-eng').innerHTML='<option value="">All Engineers</option>'+[...new Set(PROJECTS.map(p=>p.engineer))].map(n=>`<option>${n}</option>`).join('');
+}
+function buildCalEvents(projs){
+  const map={};
+  const add=(ds,ev)=>{if(!ds)return;if(!map[ds])map[ds]=[];map[ds].push(ev);};
+  projs.forEach(p=>{
+    const e=getEng(p.engineer);
+    // Project start
+    if(p.start) add(p.start,{type:'start',label:`▶ ${p.id}`,color:e.color,proj:p});
+    // Target end
+    if(p.end) add(p.end,{type:'end',label:`◼ ${p.id}`,color:'#f55353',proj:p});
+    // IDR estimated (75% through project)
+    if(!p.ms.idr&&p.start&&p.end&&p.status!=='Complete'){
+      const s=new Date(p.start+'T00:00'),en=new Date(p.end+'T00:00');
+      const dt=new Date(s.getTime()+(en.getTime()-s.getTime())*.75);
+      add(dt.toISOString().split('T')[0],{type:'idr',label:`IDR: ${p.id}`,color:'#a96df7',proj:p});
+    }
+    // IFA due — urgent color coding
+    if(!p.ms.ifa&&p.ifaDue&&p.status!=='Complete'){
+      const d=ifaDaysLeft(p.ifaDue);
+      const evType=d<=3?'ifa_due_urgent':d<=7?'ifa_due_warn':'ifa_due_ok';
+      const col=d<=3?'#f55353':d<=7?'#f5a623':'#29ABE2';
+      add(p.ifaDue,{type:evType,label:`IFA: ${p.id}`,color:col,proj:p});
+    }
+    // IFC due — urgent color coding
+    if(!p.ms.live&&p.ifcDue&&p.status!=='Complete'){
+      const d=ifcDaysLeft(p.ifcDue);
+      const evType=d<=3?'ifc_due_urgent':d<=7?'ifc_due_warn':'ifc_due_ok';
+      const col=d<=3?'#f55353':d<=7?'#f5a623':'#a96df7';
+      add(p.ifcDue,{type:evType,label:`IFC: ${p.id}`,color:col,proj:p});
+    }
+  });
+  return map;
+}
+function buildMsCalEvents(projs){
+  // Shows milestone completion dates as calendar events
+  const map={};
+  const add=(ds,ev)=>{if(!ds)return;if(!map[ds])map[ds]=[];map[ds].push(ev);};
+  const MS_CAL=[
+    {k:'design',label:'Design',color:'#888'},
+    {k:'ifa',label:'IFA',color:'#29ABE2'},
+    {k:'adj',label:'Cust. Approval',color:'#14c4b2'},
+    {k:'ifc',label:'IFC Started',color:'#a96df7'},
+    {k:'idr',label:'IDR Review',color:'#f5a623'},
+    {k:'live',label:'Live on Floor',color:'#22d47a'},
+    {k:'shipped',label:'Shipped',color:'#f97244'},
+  ];
+  projs.forEach(p=>{
+    MS_CAL.forEach(({k,label,color})=>{
+      if(p.ms[k]&&p.msDates&&p.msDates[k]){
+        add(p.msDates[k],{type:'ms_'+k,label:`${p.id}: ${label}`,color,proj:p,msLabel:label});
+      }
+    });
+  });
+  return map;
+}
+function renderCalendar(){
+  const fEng=document.getElementById('cal-eng').value;
+  const fType=document.getElementById('cal-type').value;
+  let projs=PROJECTS.filter(p=>{if(fEng&&p.engineer!==fEng)return false;if(fType&&p.type!==fType)return false;return true;});
+  const mStart=new Date(calYear,calMonth,1),mEnd=new Date(calYear,calMonth+1,0);
+  const cnt=projs.filter(p=>{if(!p.start||!p.end)return false;const s=new Date(p.start+'T00:00'),e=new Date(p.end+'T00:00');return s<=mEnd&&e>=mStart;}).length;
+  document.getElementById('cal-title').textContent=MONTH_NAMES[calMonth]+' '+calYear;
+  if(calMsMode){
+    const msCount=projs.reduce((a,p)=>{const d=p.msDates||{};return a+Object.values(d).filter(v=>v&&v.slice(0,7)===`${calYear}-${String(calMonth+1).padStart(2,'0')}`).length;},0);
+    document.getElementById('cal-subtitle').textContent=`${msCount} milestone${msCount!==1?'s':''} completed this month`;
+  } else {
+    const mm=String(calMonth+1).padStart(2,'0');
+    const keyDates=projs.reduce((a,p)=>{
+      let n=0;
+      if(p.start&&p.start.slice(0,7)===`${calYear}-${mm}`)n++;
+      if(p.end&&p.end.slice(0,7)===`${calYear}-${mm}`)n++;
+      if(!p.ms.ifa&&p.ifaDue&&p.ifaDue.slice(0,7)===`${calYear}-${mm}`)n++;
+      if(!p.ms.live&&p.ifcDue&&p.ifcDue.slice(0,7)===`${calYear}-${mm}`)n++;
+      return a+n;
+    },0);
+    document.getElementById('cal-subtitle').textContent=`${keyDates} key date${keyDates!==1?'s':''} this month`;
+  }
+  const evMap=calMsMode?buildMsCalEvents(projs):buildCalEvents(projs);
+  const today=new Date(),todayStr=today.toISOString().split('T')[0];
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const daysInPrev=new Date(calYear,calMonth,0).getDate();
+  const ORDER=calMsMode?{}:{start:0,end:1,ifa_due_urgent:2,ifc_due_urgent:3,ifa_due_warn:4,ifc_due_warn:5,idr:6,ifa_due_ok:7,ifc_due_ok:8,active:9};
+  let html=`<div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>`;
+  let total=0;
+  for(let i=0;i<firstDay;i++){html+=`<div class="cal-cell other-month ${(i===0||i===6)?'weekend':''}"><div class="cal-day-num">${daysInPrev-firstDay+1+i}</div></div>`;total++;}
+  for(let d=1;d<=daysInMonth;d++){
+    const mm=String(calMonth+1).padStart(2,'0'),dd=String(d).padStart(2,'0'),ds=`${calYear}-${mm}-${dd}`;
+    const dow=(firstDay+d-1)%7,isWknd=(dow===0||dow===6),isToday=ds===todayStr;
+    const events=(evMap[ds]||[]).sort((a,b)=>(ORDER[a.type]||9)-(ORDER[b.type]||9));
+    const visible=events.slice(0,3),hidden=events.length-3;
+    const evHtml=visible.map(ev=>{
+      const cls=ev.type.startsWith('ms_')?'ev-active':ev.type==='start'?'ev-start':ev.type==='end'?'ev-end':ev.type==='idr'?'ev-idr':ev.type==='ifa_due_urgent'?'ev-ifa_due_urgent':ev.type==='ifa_due_warn'?'ev-ifa_due_warn':ev.type==='ifa_due_ok'?'ev-ifa_due_ok':ev.type==='ifc_due_urgent'?'ev-ifc_due_urgent':ev.type==='ifc_due_warn'?'ev-ifc_due_warn':ev.type==='ifc_due_ok'?'ev-ifc_due_ok':'ev-active';
+      return `<div class="cal-event ${cls}" style="border-left-color:${ev.color}" onclick="openDayPopup('${ds}',event)">${ev.label}</div>`;
+    }).join('');
+    html+=`<div class="cal-cell ${isToday?'today':''} ${isWknd?'weekend':''}" data-date="${ds}">
+      <div class="cal-day-num">${d}</div>${evHtml}${hidden>0?`<div class="cal-more" onclick="openDayPopup('${ds}',event)">+${hidden} more</div>`:''}
+    </div>`;total++;
+  }
+  const rem=(7-(total%7))%7;
+  for(let i=1;i<=rem;i++){const dow=total%7;html+=`<div class="cal-cell other-month ${(dow===0||dow===6)?'weekend':''}"><div class="cal-day-num">${i}</div></div>`;total++;}
+  document.getElementById('cal-grid').innerHTML=`<div class="cal-dow">Sun</div><div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div><div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>`+html.replace(/<div class="cal-dow">[^<]*<\/div>/g,'');
+}
+function openDayPopup(dateStr,evt){
+  evt.stopPropagation();
+  const fEng=document.getElementById('cal-eng').value;
+  const fType=document.getElementById('cal-type').value;
+  const projs=PROJECTS.filter(p=>{if(fEng&&p.engineer!==fEng)return false;if(fType&&p.type!==fType)return false;return true;});
+  const evMap=calMsMode?buildMsCalEvents(projs):buildCalEvents(projs);
+  const events=evMap[dateStr]||[];
+  const d=new Date(dateStr+'T00:00');
+  document.getElementById('dp-title').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  if(!events.length){document.getElementById('dp-events').innerHTML='<div style="color:var(--t3);font-size:11px;padding:8px 0;text-transform:uppercase;letter-spacing:.5px">No activity this day.</div>';
+  }else{
+    const seen=new Set();
+    const unique=events.filter(ev=>{const k=(ev.proj?.id||'?')+ev.type;if(seen.has(k))return false;seen.add(k);return true;});
+    document.getElementById('dp-events').innerHTML=unique.map(ev=>{
+      const isMsEv=ev.type.startsWith('ms_');
+      const tl=isMsEv?`✓ Milestone completed — ${ev.msLabel}`:ev.type==='start'?'Starts today':ev.type==='end'?'Target end date':ev.type==='idr'?'IDR review due':ev.type.startsWith('ifa_due')?`⚡ IFA Due — ${ifaDaysLeft(ev.proj?.ifaDue)<=0?'OVERDUE':`${ifaDaysLeft(ev.proj?.ifaDue)}d left`}`:ev.type.startsWith('ifc_due')?`⚡ IFC Due — ${ifcDaysLeft(ev.proj?.ifcDue)<=0?'OVERDUE':`${ifcDaysLeft(ev.proj?.ifcDue)}d left`}`:ev.type==='active'?'In progress':'Event';
+      return `<div class="dp-event"><div class="dp-ev-dot" style="background:${ev.color}"></div><div style="flex:1"><div class="dp-ev-name">${ev.proj?.id||''} — ${ev.proj?.name||ev.label}</div><div class="dp-ev-meta">${ev.proj?.engineer||''} · ${ev.proj?.type||''}</div><div class="dp-ev-meta" style="color:${ev.color};margin-top:2px">${tl}</div>${ev.proj?.notes?`<div class="dp-ev-meta" style="margin-top:2px;font-style:italic">${ev.proj.notes}</div>`:''}</div>${ev.proj?.id?`<button class="btn btn-gh btn-sm" style="padding:3px 8px;font-size:10px;flex-shrink:0;margin-left:8px" onclick="closeDayPopup();openEditModal('${ev.proj.id}')">Open</button>`:''}</div>`;
+    }).join('');
+  }
+  const popup=document.getElementById('day-popup');
+  popup.classList.add('open');
+  const x=Math.min(evt.clientX+10,window.innerWidth-320),y=Math.min(evt.clientY+10,window.innerHeight-380);
+  popup.style.left=x+'px';popup.style.top=y+'px';
+}
+function closeDayPopup(){document.getElementById('day-popup').classList.remove('open');}
+document.addEventListener('click',e=>{const p=document.getElementById('day-popup');if(p.classList.contains('open')&&!p.contains(e.target))closeDayPopup();});
+
+// ── KPI Drill-Down ────────────────────────────────────────────────────────
+function closeDrillModal(){document.getElementById('drill-modal').classList.remove('open');}
+function ddDateCell(d){return d?`<span style="font-family:var(--fm);font-size:10.5px;color:var(--t2)">${fmt(d)}</span>`:'<span style="color:var(--t3)">—</span>';}
+function ddProjCell(p){return `<div style="font-weight:600;color:var(--t1);font-size:11.5px">${p.name}</div><div class="pid" style="margin-top:2px">${p.id}</div>`;}
+function ddDeltaCell(metric, p){
+  // shows delta between due date and completion (if completed) or days late (if overdue & open)
+  const dueKey = metric==='ifc' ? 'ifcDue' : 'ifaDue';
+  const doneKey = metric;
+  const due = p[dueKey];
+  const doneDate = p.msDates && p.msDates[doneKey];
+  if(!due) return '<span style="color:var(--t3)">—</span>';
+  if(p.ms[doneKey] && doneDate){
+    const diff = Math.round((new Date(doneDate+'T00:00') - new Date(due+'T00:00'))/86400000);
+    if(diff<=0) return `<span class="dd-ontime-cell">${diff===0?'on time':Math.abs(diff)+'d early'}</span>`;
+    return `<span class="dd-late-cell">${diff}d late</span>`;
+  }
+  // not completed — show days vs today
+  const days = metric==='ifc' ? ifcDaysLeft(due) : ifaDaysLeft(due);
+  if(days<0) return `<span class="dd-late-cell">${Math.abs(days)}d overdue</span>`;
+  if(days===0) return '<span class="dd-open-cell">due today</span>';
+  return `<span class="dd-open-cell">${days}d left</span>`;
+}
+function renderDrillGroup(title, list, metric, countClass){
+  const dueKey = metric==='ifc' ? 'ifcDue' : 'ifaDue';
+  const doneKey = metric;
+  const dueLabel = metric==='ifc' ? 'IFC Due' : 'IFA Due';
+  const doneLabel = metric==='ifc' ? 'IFC Done' : 'IFA Done';
+  let rows='';
+  if(!list.length){
+    rows = `<div class="dd-empty">No projects in this bucket.</div>`;
+  } else {
+    rows = `<table class="dd-tbl"><thead><tr>
+      <th>Project</th><th>Engineer</th><th>${dueLabel}</th><th>${doneLabel}</th><th>Status</th>
+    </tr></thead><tbody>${list.map(p=>`<tr>
+      <td>${ddProjCell(p)}</td>
+      <td style="font-size:11px;color:var(--t2)">${p.engineer||'—'}</td>
+      <td>${ddDateCell(p[dueKey])}</td>
+      <td>${p.ms[doneKey]?ddDateCell(p.msDates&&p.msDates[doneKey]):'<span style="color:var(--t3);font-size:10.5px">not yet</span>'}</td>
+      <td>${ddDeltaCell(metric, p)}</td>
+    </tr>`).join('')}</tbody></table>`;
+  }
+  return `<div class="dd-grp">
+    <div class="dd-grp-hd">
+      <div class="dd-grp-title ${countClass||''}">${title}</div>
+      <div class="dd-grp-count">${list.length}</div>
+    </div>
+    ${rows}
+  </div>`;
+}
+function openDrill(key){
+  const d = DRILL_DATA[key];
+  if(!d){return;}
+  const titleEl = document.getElementById('drill-title');
+  const formulaEl = document.getElementById('drill-formula');
+  const bodyEl = document.getElementById('drill-body');
+  const metricName = d.metric.toUpperCase();
+  titleEl.textContent = d.label + ' — Source Projects';
+  if(d.group==='rate'){
+    // Rate card: show formula + all four constituent buckets
+    const evaluated = d.evaluated;
+    const onTime = d.onTime.length;
+    const lateTotal = d.completedLate.length + d.overdue.length;
+    const ratePct = d.rate===null ? '—' : d.rate + '%';
+    formulaEl.innerHTML = `
+      <strong style="color:var(--t1)">Formula:</strong> On-Time ÷ (On-Time + Late) × 100<br>
+      <strong style="color:var(--t1)">Current:</strong> ${onTime} ÷ ${evaluated||0} = <span style="color:var(--spike);font-weight:700">${ratePct}</span><br>
+      <strong style="color:var(--t1)">Late count includes:</strong> completed-after-due (${d.completedLate.length}) + still-open-past-due (${d.overdue.length}) = ${lateTotal}<br>
+      <strong style="color:var(--t1)">Excluded from rate:</strong> ${metricName} In Progress (${d.open.length}) — due date hasn't arrived yet
+    `;
+    bodyEl.innerHTML =
+      renderDrillGroup(`${metricName} On-Time`, d.onTime, d.metric) +
+      renderDrillGroup(`${metricName} Completed Late`, d.completedLate, d.metric) +
+      renderDrillGroup(`${metricName} Overdue & Still Open`, d.overdue, d.metric) +
+      renderDrillGroup(`${metricName} In Progress (not counted)`, d.open, d.metric);
+  } else {
+    // Single-bucket card
+    const formulas = {
+      'ontime':  `Projects where <strong>${metricName} milestone is complete</strong> AND the completion date is on or before the due date.`,
+      'late':    `Two groups combined: (1) ${metricName} completed but completion date is after the due date, and (2) ${metricName} still open with the due date already past.`,
+      'open':    `Projects where ${metricName} is <strong>not yet complete</strong> and the due date is in the future. These don't count toward the rate yet.`,
+      'overdue': `Projects where ${metricName} is <strong>not yet complete</strong> and the due date has already passed. These count as "late" in the on-time rate.`
+    };
+    formulaEl.innerHTML = `<strong style="color:var(--t1)">Definition:</strong> ${formulas[d.group]||''}<br><strong style="color:var(--t1)">Count:</strong> ${d.list.length}`;
+    if(d.group==='late'){
+      // Split into completed-late vs overdue-open for clarity
+      const dueKey = d.metric==='ifc' ? 'ifcDue' : 'ifaDue';
+      const doneKey = d.metric;
+      const completedLate = d.list.filter(p=>p.ms[doneKey] && p.msDates && p.msDates[doneKey]);
+      const overdueOpen   = d.list.filter(p=>!p.ms[doneKey]);
+      bodyEl.innerHTML =
+        renderDrillGroup(`Completed Late`, completedLate, d.metric) +
+        renderDrillGroup(`Overdue & Still Open`, overdueOpen, d.metric);
+    } else {
+      bodyEl.innerHTML = renderDrillGroup(d.label, d.list, d.metric);
+    }
+  }
+  document.getElementById('drill-modal').classList.add('open');
+}
+
+// ── KPI ───────────────────────────────────────────────────────────────────
+function renderKPI(){
+  document.getElementById('k-ytd').textContent=PROJECTS.length;
+  const bnbPct=PROJECTS.length?Math.round(PROJECTS.filter(p=>p.engineer==='BNB Team').length/PROJECTS.length*100):0;
+  document.getElementById('k-bnbpct').innerHTML=bnbPct+'<span>%</span>';
+  const ifaLate=PROJECTS.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<0&&p.status!=='Complete').length;
+  document.getElementById('k-ifa-late').textContent=ifaLate;
+
+  // ── IFC Throughput KPI ──────────────────────────────────────────────────
+  // On-time: ms.ifc completed AND completion date <= due date.
+  // Late: completed after due date OR still open and past due date (counts as a miss).
+  // In-progress: ms.ifc not done, due date in the future. Not part of the rate denominator.
+  // Rate denominator = on-time + late (i.e. everything that has hit or passed its due date).
+  const ifcOnTimeArr   = PROJECTS.filter(p=>p.ms.ifc && p.ifcDue && p.msDates && p.msDates.ifc && p.msDates.ifc <= p.ifcDue);
+  const ifcLateDoneArr = PROJECTS.filter(p=>p.ms.ifc && p.ifcDue && p.msDates && p.msDates.ifc && p.msDates.ifc >  p.ifcDue);
+  const ifcOverdueArr  = PROJECTS.filter(p=>!p.ms.ifc && p.ifcDue && p.status!=='Complete' && ifcDaysLeft(p.ifcDue)<0);
+  const ifcOpenArr     = PROJECTS.filter(p=>!p.ms.ifc && p.ifcDue && p.status!=='Complete' && ifcDaysLeft(p.ifcDue)>=0);
+  const ifcOnTime   = ifcOnTimeArr.length;
+  const ifcLateDone = ifcLateDoneArr.length;
+  const ifcOverdue  = ifcOverdueArr.length;
+  const ifcOpen     = ifcOpenArr.length;
+  const ifcLateTotal = ifcLateDone + ifcOverdue;       // anything that missed the date, completed or not
+  const ifcEvaluated = ifcOnTime + ifcLateTotal;       // denominator: only items whose due date has been reached
+  const ifcRate = ifcEvaluated ? Math.round(ifcOnTime/ifcEvaluated*100) : null;
+  const rateEl = document.getElementById('k-ifc-ontime');
+  const rateSub= document.getElementById('k-ifc-ontime-sub');
+  if(ifcRate===null){
+    rateEl.textContent='—';
+    rateSub.textContent='No IFC activity yet';
+    rateEl.style.color='';
+  } else {
+    rateEl.innerHTML = ifcRate+'<span>%</span>';
+    rateSub.textContent = `${ifcOnTime} of ${ifcEvaluated} on time (${ifcLateTotal} late)`;
+    rateEl.style.color = ifcRate>=90?'var(--gr)':ifcRate>=75?'var(--am)':'var(--rd)';
+  }
+  document.getElementById('k-ifc-on').textContent       = ifcOnTime;
+  document.getElementById('k-ifc-late-done').textContent= ifcLateTotal;
+  document.getElementById('k-ifc-open').textContent     = ifcOpen;
+  document.getElementById('k-ifc-overdue').textContent  = ifcOverdue;
+
+  // ── IFA Throughput KPI (mirror of IFC) ──────────────────────────────────
+  const ifaOnTimeArr   = PROJECTS.filter(p=>p.ms.ifa && p.ifaDue && p.msDates && p.msDates.ifa && p.msDates.ifa <= p.ifaDue);
+  const ifaLateDoneArr = PROJECTS.filter(p=>p.ms.ifa && p.ifaDue && p.msDates && p.msDates.ifa && p.msDates.ifa >  p.ifaDue);
+  const ifaOverdueArr  = PROJECTS.filter(p=>!p.ms.ifa && p.ifaDue && p.status!=='Complete' && ifaDaysLeft(p.ifaDue)<0);
+  const ifaOpenArr     = PROJECTS.filter(p=>!p.ms.ifa && p.ifaDue && p.status!=='Complete' && ifaDaysLeft(p.ifaDue)>=0);
+  const ifaOnTime   = ifaOnTimeArr.length;
+  const ifaLateDone = ifaLateDoneArr.length;
+  const ifaOverdue  = ifaOverdueArr.length;
+  const ifaOpen     = ifaOpenArr.length;
+  const ifaLateTotal = ifaLateDone + ifaOverdue;
+  const ifaEvaluated = ifaOnTime + ifaLateTotal;
+  const ifaRate = ifaEvaluated ? Math.round(ifaOnTime/ifaEvaluated*100) : null;
+  const ifaRateEl = document.getElementById('k-ifa-ontime');
+  const ifaRateSub= document.getElementById('k-ifa-ontime-sub');
+  if(ifaRateEl){
+    if(ifaRate===null){
+      ifaRateEl.textContent='—';
+      if(ifaRateSub) ifaRateSub.textContent='No IFA activity yet';
+      ifaRateEl.style.color='';
+    } else {
+      ifaRateEl.innerHTML = ifaRate+'<span>%</span>';
+      if(ifaRateSub) ifaRateSub.textContent = `${ifaOnTime} of ${ifaEvaluated} on time (${ifaLateTotal} late)`;
+      ifaRateEl.style.color = ifaRate>=90?'var(--gr)':ifaRate>=75?'var(--am)':'var(--rd)';
+    }
+  }
+  document.getElementById('k-ifa-on').textContent       = ifaOnTime;
+  document.getElementById('k-ifa-late-done').textContent= ifaLateTotal;
+  document.getElementById('k-ifa-open').textContent     = ifaOpen;
+  document.getElementById('k-ifa-late').textContent     = ifaOverdue;
+
+  // Stash project lists so card clicks can drill down to the underlying data
+  DRILL_DATA = {
+    'ifc-ontime':  {label:'IFC On-Time',  metric:'ifc', group:'ontime',  list:ifcOnTimeArr},
+    'ifc-late':    {label:'IFC Late',     metric:'ifc', group:'late',    list:[...ifcLateDoneArr, ...ifcOverdueArr]},
+    'ifc-open':    {label:'IFC In Progress', metric:'ifc', group:'open', list:ifcOpenArr},
+    'ifc-overdue': {label:'IFC Overdue',  metric:'ifc', group:'overdue', list:ifcOverdueArr},
+    'ifa-ontime':  {label:'IFA On-Time',  metric:'ifa', group:'ontime',  list:ifaOnTimeArr},
+    'ifa-late':    {label:'IFA Late',     metric:'ifa', group:'late',    list:[...ifaLateDoneArr, ...ifaOverdueArr]},
+    'ifa-open':    {label:'IFA In Progress', metric:'ifa', group:'open', list:ifaOpenArr},
+    'ifa-overdue': {label:'IFA Overdue',  metric:'ifa', group:'overdue', list:ifaOverdueArr},
+    'ifc-rate':    {label:'IFC On-Time Rate', metric:'ifc', group:'rate',
+                    onTime:ifcOnTimeArr, completedLate:ifcLateDoneArr, overdue:ifcOverdueArr, open:ifcOpenArr,
+                    rate:ifcRate, evaluated:ifcEvaluated},
+    'ifa-rate':    {label:'IFA On-Time Rate', metric:'ifa', group:'rate',
+                    onTime:ifaOnTimeArr, completedLate:ifaLateDoneArr, overdue:ifaOverdueArr, open:ifaOpenArr,
+                    rate:ifaRate, evaluated:ifaEvaluated}
+  };
+
+  destroyChart('cMonthly');
+  // IFC On-Time vs Late by engineer — Late includes both completed-late AND still-open overdue (matches KPI logic)
+  const engsWithIfc = ENGINEERS.filter(e=>!e.isBnb).map(e=>{
+    const mine = PROJECTS.filter(p=>p.engineer===e.name);
+    const onTime  = mine.filter(p=>p.ms.ifc && p.ifcDue && p.msDates && p.msDates.ifc && p.msDates.ifc <= p.ifcDue).length;
+    const doneLt  = mine.filter(p=>p.ms.ifc && p.ifcDue && p.msDates && p.msDates.ifc && p.msDates.ifc >  p.ifcDue).length;
+    const openLt  = mine.filter(p=>!p.ms.ifc && p.ifcDue && p.status!=='Complete' && ifcDaysLeft(p.ifcDue)<0).length;
+    return { name: e.name.split(' ')[0], onTime, late: doneLt + openLt, color: e.color };
+  }).filter(e=>e.onTime+e.late>0);
+  charts.cMonthly=new Chart(document.getElementById('cMonthly'),{type:'bar',data:{labels:engsWithIfc.map(e=>e.name),datasets:[{label:'On Time',data:engsWithIfc.map(e=>e.onTime),backgroundColor:'rgba(34,212,122,.35)',borderColor:'#22d47a',borderWidth:1.5,borderRadius:2,borderSkipped:false},{label:'Late',data:engsWithIfc.map(e=>e.late),backgroundColor:'rgba(245,83,83,.35)',borderColor:'#f55353',borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#666',font:{size:9},boxWidth:8}}},scales:{x:{stacked:true,ticks:{color:'#444',font:{size:9}},grid:{display:false}},y:{stacked:true,ticks:{color:'#444',font:{size:9},stepSize:1},grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true}}}});
+  destroyChart('cCycle');
+  charts.cCycle=new Chart(document.getElementById('cCycle'),{type:'bar',data:{labels:['Switchrack','Switchgear','MCC','Transformer','Panel','Bus Duct','Load Ctr'],datasets:[{label:'Design',data:[3.2,4.1,5.0,2.5,1.8,2.2,1.5],backgroundColor:'rgba(41,171,226,.25)',borderColor:'#29ABE2',borderWidth:1.5,borderRadius:2,borderSkipped:false},{label:'Total',data:[8.5,11.2,14.0,6.8,4.2,5.5,3.8],backgroundColor:'rgba(34,212,122,.15)',borderColor:'#22d47a',borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#666',font:{size:9},boxWidth:8}}},scales:{y:{ticks:{color:'#444',font:{size:9},callback:v=>v+'w'},grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true},x:{ticks:{color:'#444',font:{size:8.5}},grid:{display:false}}}}});
+  const nonBnb=ENGINEERS.filter(e=>!e.isBnb);
+  destroyChart('cThroughput');
+  charts.cThroughput=new Chart(document.getElementById('cThroughput'),{type:'bar',data:{labels:nonBnb.map(e=>e.name.split(' ')[0]),datasets:[{data:nonBnb.map(e=>PROJECTS.filter(p=>p.engineer===e.name&&p.status==='Complete').length),backgroundColor:nonBnb.map(e=>e.color+'33'),borderColor:nonBnb.map(e=>e.color),borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{color:'#444',font:{size:9}},grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true},x:{ticks:{color:'#444',font:{size:9}},grid:{display:false}}}}});
+  const active=PROJECTS.filter(p=>p.status!=='Complete');
+  const msKeys=['design','ifa','ifc','adj','idr','live'],msLabels=['Design','IFA','IFC','ADJ','IDR','Live'];
+  const msVals=active.length?msKeys.map(k=>Math.round(active.filter(p=>p.ms[k]).length/active.length*100)):msKeys.map(()=>0);
+  const msColors=['#29ABE2','#14c4b2','#a96df7','#f5a623','#22d47a','#f55353'];
+  destroyChart('cMsHealth');
+  charts.cMsHealth=new Chart(document.getElementById('cMsHealth'),{type:'bar',data:{labels:msLabels,datasets:[{data:msVals,backgroundColor:msColors.map(c=>c+'33'),borderColor:msColors,borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#444',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.04)'},max:100},y:{ticks:{color:'#444',font:{size:9}},grid:{display:false}}}}});
+}
+
+// ── BNB ───────────────────────────────────────────────────────────────────
+function renderBNB(){
+  const bnb=PROJECTS.filter(p=>p.engineer==='BNB Team');
+  document.getElementById('bnb-active').textContent=bnb.filter(p=>p.status!=='Complete').length;
+  const avg=bnb.length?Math.round(bnb.reduce((a,p)=>a+msPct(p.ms),0)/bnb.length):0;
+  document.getElementById('bnb-prog').textContent=avg+'%';
+  document.getElementById('bnb-idrp').textContent=bnb.filter(p=>!p.ms.idr&&p.status!=='Complete').length;
+  document.getElementById('bnb-ifa-late').textContent=bnb.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<0&&p.status!=='Complete').length;
+  const tbody=document.getElementById('bnb-table');
+  if(!bnb.length){tbody.innerHTML='<tr><td colspan="10" class="empty">No BNB projects yet — add a project and assign to BNB Team</td></tr>';return;}
+  tbody.innerHTML=bnb.map(p=>{const pct=msPct(p.ms);return`<tr>
+    <td><div class="pname">${p.name}</div><div class="pid">${p.id}</div></td>
+    <td><span class="ttag">${p.type}</span></td>
+    <td><span class="vtag ${vcls(p.voltage)}">${vshort(p.voltage)}</span></td>
+    <td style="font-size:11px;color:var(--t2)">${p.pm} / ${p.sales}</td>
+    <td>${ifaBadge(p)}</td>
+    <td>${ifcBadge(p)}</td>
+    <td><div class="ms-row">${msBadges(p.ms,p.msDates)}</div></td>
+    <td><div class="pbar"><div class="ptrack"><div class="pfill" style="width:${pct}%;background:var(--pu)"></div></div><span class="ppct" style="color:var(--pu)">${pct}%</span></div></td>
+    <td>${spill(p.status)}</td>
+    <td style="font-size:11px;color:var(--t2);max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.notes||'').replace(/"/g,'&quot;')}">${p.notes||'—'}</td>
+    <td><button class="btn btn-gh btn-sm" onclick="openEditModal('${p.id}')">Edit</button></td>
+  </tr>`;}).join('');
+}
+
+// ── Engineer Detail ───────────────────────────────────────────────────────
+let engSort={dir:1}; // 1 = asc (default), -1 = desc
+function toggleEngIdSort(name){
+  engSort.dir*=-1;
+  viewEngineer(name,null,true);
+}
+function viewEngineer(name,el,keepSort){
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  if(el)el.classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-engineer').classList.add('active');
+  document.getElementById('page-title').textContent=name;
+  document.getElementById('boss-tag').style.display='none';
+  if(!keepSort) engSort.dir=1;
+  const eng=getEng(name);
+  const allProjs=PROJECTS.filter(p=>p.engineer===name);
+  const projs=[...allProjs].sort((a,b)=>engSort.dir*(a.id<b.id?-1:a.id>b.id?1:0));
+  const active=allProjs.filter(p=>p.status!=='Complete');
+  const done=allProjs.filter(p=>p.status==='Complete');
+  const avgPct=active.length?Math.round(active.reduce((a,p)=>a+msPct(p.ms),0)/active.length):0;
+  const ifaAlert=active.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<=3).length;
+  const ifcAlert=active.filter(p=>!p.ms.live&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<=3).length;
+  const sortArrow=engSort.dir===1?'↑':'↓';
+  document.getElementById('eng-view-content').innerHTML=`
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:14px;background:var(--s2);border:1px solid var(--b1);border-top:2px solid ${eng.color}">
+      ${av(eng,48)}
+      <div><div style="font-family:var(--fh);font-size:20px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.5px">${name}</div><div style="font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px">${eng.role}</div></div>
+      <div style="display:flex;gap:24px;margin-left:28px">
+        <div style="text-align:center"><div style="font-family:var(--fh);font-size:26px;font-weight:900;font-style:italic;color:${eng.color};letter-spacing:-1px">${active.length}</div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Active</div></div>
+        <div style="text-align:center"><div style="font-family:var(--fh);font-size:26px;font-weight:900;font-style:italic;color:var(--gr);letter-spacing:-1px">${done.length}</div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Done</div></div>
+        <div style="text-align:center"><div style="font-family:var(--fh);font-size:26px;font-weight:900;font-style:italic;letter-spacing:-1px">${avgPct}%</div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">Avg Progress</div></div>
+        <div style="text-align:center"><div style="font-family:var(--fh);font-size:26px;font-weight:900;font-style:italic;color:${ifaAlert?'var(--rd)':'var(--am)'};letter-spacing:-1px">${ifaAlert}</div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">IFA Alert</div></div>
+        <div style="text-align:center"><div style="font-family:var(--fh);font-size:26px;font-weight:900;font-style:italic;color:${ifcAlert?'var(--rd)':'var(--pu)'};letter-spacing:-1px">${ifcAlert}</div><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">IFC Alert</div></div>
+      </div>
+    </div>
+    <div class="tw"><table><thead><tr>
+      <th class="sortable" style="color:var(--spike)" onclick="toggleEngIdSort('${name}')">ID <span style="color:var(--spike)">${sortArrow}</span></th>
+      <th>Project</th><th>Type</th><th>Voltage</th><th>PM / Sales</th><th>Target</th><th>IFA Due</th><th>IFC Due</th><th>Milestones</th><th>Progress</th><th>Status</th><th>Notes</th><th></th>
+    </tr></thead>
+    <tbody>${projs.map(p=>{const pc=msPct(p.ms);return`<tr>
+      <td class="pid">${p.id}</td><td class="pname">${p.name}</td>
+      <td><span class="ttag">${p.type}</span></td>
+      <td><span class="vtag ${vcls(p.voltage)}">${vshort(p.voltage)}</span></td>
+      <td style="font-size:11px;color:var(--t2)">${p.pm} / ${p.sales}</td>
+      <td style="font-size:10.5px;color:var(--t2)">${fmt(p.end)}</td>
+      <td>${ifaBadge(p)}</td>
+      <td>${ifcBadge(p)}</td>
+      <td><div class="ms-row">${msBadges(p.ms,p.msDates)}</div></td>
+      <td><div class="pbar"><div class="ptrack"><div class="pfill" style="width:${pc}%"></div></div><span class="ppct">${pc}%</span></div></td>
+      <td>${spill(p.status)}</td>
+      <td style="font-size:11px;color:var(--t2);max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.notes||'').replace(/"/g,'&quot;')}">${p.notes||'—'}</td>
+      <td><button class="btn btn-gh btn-sm" onclick="openEditModal('${p.id}')">Edit</button></td>
+    </tr>`;}).join('')}</tbody></table></div>`;
+}
+
+// ── People (PM & Sales) ───────────────────────────────────────────────────
+// Each entry: {name, role, _dbid} — _dbid is the Supabase row id when connected
+let PM_LIST = [];
+let SALES_LIST = [];
+let peopleModalType = 'pm';
+
+function loadPeopleLocal(){
+  const pms = JSON.parse(localStorage.getItem('spike_pms') || '[]');
+  const sales = JSON.parse(localStorage.getItem('spike_sales') || '[]');
+  // Support old plain-string format
+  PM_LIST = pms.map(x => typeof x==='string' ? {name:x,role:'pm',_dbid:null} : x);
+  SALES_LIST = sales.map(x => typeof x==='string' ? {name:x,role:'sales',_dbid:null} : x);
+  if(!PM_LIST.some(x=>x.name==='TBD')) PM_LIST.unshift({name:'TBD',role:'pm',_dbid:null});
+  if(!SALES_LIST.some(x=>x.name==='TBD')) SALES_LIST.unshift({name:'TBD',role:'sales',_dbid:null});
+}
+function savePeopleLocal(){
+  localStorage.setItem('spike_pms', JSON.stringify(PM_LIST));
+  localStorage.setItem('spike_sales', JSON.stringify(SALES_LIST));
+}
+function populatePMSelect(selectedVal){
+  const sel=document.getElementById('f-pm');
+  sel.innerHTML='<option value="">Select PM…</option>'+PM_LIST.map(p=>`<option value="${p.name}" ${p.name===selectedVal?'selected':''}>${p.name}</option>`).join('');
+}
+function populateSalesSelect(selectedVal){
+  const sel=document.getElementById('f-sales');
+  sel.innerHTML='<option value="">Select Sales…</option>'+SALES_LIST.map(p=>`<option value="${p.name}" ${p.name===selectedVal?'selected':''}>${p.name}</option>`).join('');
+}
+function openPeopleModal(type){
+  if(IS_PM){showToast('Read-only PM view');return;}
+  peopleModalType=type;
+  document.getElementById('people-modal-title').textContent=type==='pm'?'Manage Project Managers':'Manage Sales Reps';
+  document.getElementById('people-new-input').value='';
+  renderPeopleList();
+  document.getElementById('people-modal').classList.add('open');
+}
+function closePeopleModal(){
+  document.getElementById('people-modal').classList.remove('open');
+  populatePMSelect(document.getElementById('f-pm').value);
+  populateSalesSelect(document.getElementById('f-sales').value);
+}
+function renderPeopleList(){
+  const list = peopleModalType==='pm' ? PM_LIST : SALES_LIST;
+  document.getElementById('people-list').innerHTML = list.length
+    ? list.map((p,i)=>`<div style="display:flex;align-items:center;justify-content:space-between;background:var(--s3);border:1px solid var(--b1);padding:7px 11px;">
+        <div>
+          <span style="font-size:12.5px;font-weight:500">${p.name}</span>
+          ${sb&&p._dbid?'<span style="font-size:9px;color:var(--gr);margin-left:6px;font-family:var(--fm)">✓ synced</span>':''}
+          ${sb&&!p._dbid&&p.name!=='TBD'?'<span style="font-size:9px;color:var(--am);margin-left:6px;font-family:var(--fm)">local only</span>':''}
+        </div>
+        ${p.name!=='TBD'?`<button class="btn btn-gh btn-sm" style="padding:3px 8px;font-size:10px" onclick="removePerson(${i})">Remove</button>`:''}
+      </div>`).join('')
+    : '<div style="font-size:11px;color:var(--t3);padding:8px 0">No entries yet.</div>';
+}
+async function addPerson(){
+  const inp=document.getElementById('people-new-input');
+  const name=inp.value.trim();
+  if(!name)return;
+  const list=peopleModalType==='pm'?PM_LIST:SALES_LIST;
+  if(list.some(p=>p.name===name)){showToast('⚡ Name already exists');return;}
+  if(sb){
+    const {data,error}=await sb.from('people').insert([{name,role:peopleModalType}]).select();
+    if(error){alert('Add failed:\n'+error.message+'\n\nMake sure RLS is disabled or policies allow insert on the people table.');return;}
+    const newRow={name,role:peopleModalType,_dbid:data[0].id};
+    list.push(newRow);
+  } else {
+    list.push({name,role:peopleModalType,_dbid:null});
+    savePeopleLocal();
+  }
+  inp.value='';
+  renderPeopleList();
+  showToast('⚡ Added '+name);
+}
+async function removePerson(idx){
+  const list=peopleModalType==='pm'?PM_LIST:SALES_LIST;
+  const person=list[idx];
+  if(!person||person.name==='TBD')return;
+  if(sb){
+    if(!person._dbid){
+      // Not in DB yet, just remove locally
+      list.splice(idx,1);
+      savePeopleLocal();
+      renderPeopleList();
+      return;
+    }
+    const {error}=await sb.from('people').delete().eq('id',person._dbid);
+    if(error){alert('Remove failed:\n'+error.message+'\n\nMake sure RLS is disabled or policies allow delete on the people table.');return;}
+    list.splice(idx,1);
+  } else {
+    list.splice(idx,1);
+    savePeopleLocal();
+  }
+  renderPeopleList();
+  showToast('⚡ Removed '+person.name);
+}
+// Initialize local people on load
+loadPeopleLocal();
+
+// ── Product Types ─────────────────────────────────────────────────────────
+const DEFAULT_TYPES=['Switch','Switchboard','Switchrack','Switchgear','MCC','Transformer','Panel','Bus Duct','Load Center'];
+// Each entry: {name, _dbid}
+let PRODUCT_TYPES=DEFAULT_TYPES.map(n=>({name:n,_dbid:null}));
+
+function loadTypesLocal(){
+  const saved=JSON.parse(localStorage.getItem('spike_types')||'[]');
+  if(saved.length){
+    PRODUCT_TYPES=saved.map(x=>typeof x==='string'?{name:x,_dbid:null}:x);
+    // make sure defaults are always present
+    DEFAULT_TYPES.forEach(n=>{if(!PRODUCT_TYPES.some(t=>t.name===n))PRODUCT_TYPES.unshift({name:n,_dbid:null});});
+  }
+}
+function saveTypesLocal(){
+  localStorage.setItem('spike_types',JSON.stringify(PRODUCT_TYPES));
+}
+function populateTypeSelect(selectedVal){
+  const sel=document.getElementById('f-type-m');
+  if(!sel)return;
+  sel.innerHTML='<option value="">Select type…</option>'+PRODUCT_TYPES.map(t=>`<option value="${t.name}"${t.name===selectedVal?' selected':''}>${t.name}</option>`).join('');
+}
+// Also populate the filter dropdowns (All Projects, Gantt, Calendar)
+function populateTypeFilters(){
+  const opts='<option value="">All Types</option>'+PRODUCT_TYPES.map(t=>`<option value="${t.name}">${t.name}</option>`).join('');
+  ['f-type','g-type','cal-type'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=opts;});
+}
+function openTypeModal(){
+  if(IS_PM){showToast('Read-only PM view');return;}
+  document.getElementById('type-new-input').value='';
+  renderTypeList();
+  document.getElementById('type-modal').classList.add('open');
+}
+function closeTypeModal(){
+  document.getElementById('type-modal').classList.remove('open');
+  populateTypeSelect(document.getElementById('f-type-m').value);
+  populateTypeFilters();
+}
+function renderTypeList(){
+  document.getElementById('type-list').innerHTML=PRODUCT_TYPES.length
+    ? PRODUCT_TYPES.map((t,i)=>`<div style="display:flex;align-items:center;justify-content:space-between;background:var(--s3);border:1px solid var(--b1);padding:7px 11px;">
+        <div>
+          <span style="font-size:12.5px;font-weight:500">${t.name}</span>
+          ${DEFAULT_TYPES.includes(t.name)?'<span style="font-size:9px;color:var(--t3);margin-left:6px;text-transform:uppercase;letter-spacing:.5px">default</span>':''}
+          ${sb&&t._dbid?'<span style="font-size:9px;color:var(--gr);margin-left:6px;font-family:var(--fm)">✓ synced</span>':''}
+        </div>
+        ${!DEFAULT_TYPES.includes(t.name)?`<button class="btn btn-gh btn-sm" style="padding:3px 8px;font-size:10px;color:var(--rd);border-color:rgba(245,83,83,.3)" onclick="removeProductType(${i})">Remove</button>`:''}
+      </div>`).join('')
+    : '<div style="font-size:11px;color:var(--t3);padding:8px 0">No types yet.</div>';
+}
+async function addProductType(){
+  const inp=document.getElementById('type-new-input');
+  const name=inp.value.trim();
+  if(!name)return;
+  if(PRODUCT_TYPES.some(t=>t.name===name)){showToast('⚡ Type already exists');return;}
+  if(sb){
+    let data,error;
+    try{const res=await sb.from('product_types').insert([{name}]).select();data=res.data;error=res.error;}
+    catch(e){alert('Add failed:\n'+e.message);return;}
+    if(error){alert('Add failed:\n'+error.message+'\n\nMake sure the product_types table exists and RLS is disabled.');return;}
+    PRODUCT_TYPES.push({name,_dbid:data[0].id});
+  } else {
+    PRODUCT_TYPES.push({name,_dbid:null});
+    saveTypesLocal();
+  }
+  inp.value='';
+  renderTypeList();
+  showToast('⚡ Added '+name);
+}
+async function removeProductType(idx){
+  const t=PRODUCT_TYPES[idx];
+  if(!t||DEFAULT_TYPES.includes(t.name))return;
+  if(sb&&t._dbid){
+    const{error}=await sb.from('product_types').delete().eq('id',t._dbid);
+    if(error){alert('Remove failed:\n'+error.message);return;}
+  }
+  PRODUCT_TYPES.splice(idx,1);
+  if(!sb)saveTypesLocal();
+  renderTypeList();
+  showToast('⚡ Removed '+t.name);
+}
+loadTypesLocal();
+
+
+const ENGINEER_COLORS=[
+  // Blues
+  '#29ABE2','#38bdf8','#0ea5e9','#1d4ed8','#6366f1',
+  // Greens
+  '#22d47a','#4ade80','#a3e635','#c8f026','#14c4b2',
+  // Yellows / Oranges
+  '#f5a623','#fb923c','#f97244','#fbbf24','#fcd34d',
+  // Reds / Pinks
+  '#f55353','#f87171','#e855a0','#fb7185','#f472b6',
+  // Purples
+  '#a96df7','#c084fc','#818cf8','#a78bfa','#e879f9',
+  // Misc
+  '#2dd4bf','#34d399','#67e8f9','#fdba74','#94a3b8',
+];
+let selectedEngColor='#29ABE2';
+
+function hexToRgba(hex,a){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return`rgba(${r},${g},${b},${a})`;}
+
+function renderAdminEngTable(){
+  const tbody=document.getElementById('admin-eng-table');
+  tbody.innerHTML=ENGINEERS.map((e,i)=>`<tr>
+    <td>${av(e,30)}</td>
+    <td><span style="font-family:var(--fm);font-weight:700;color:${e.color};font-size:13px">${e.id}</span></td>
+    <td style="font-weight:600">${e.name}</td>
+    <td><span class="ttag">${e.role}</span>${e.isBnb?'<span class="pill pp" style="margin-left:4px;font-size:9px">BNB</span>':''}</td>
+    <td><div style="width:18px;height:18px;background:${e.color};display:inline-block;border:1px solid rgba(255,255,255,.1)"></div></td>
+    <td style="text-align:right">
+      ${!e._builtin?`<button class="btn btn-gh btn-sm" style="padding:3px 8px;font-size:10px;color:var(--rd);border-color:rgba(245,83,83,.3)" onclick="removeEngineer(${i})">Remove</button>`:'<span style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px">Built-in</span>'}
+    </td>
+  </tr>`).join('');
+}
+
+function openAddEngineerModal(){
+  if(IS_PM){showToast('Read-only PM view');return;}
+  document.getElementById('ef-name').value='';
+  document.getElementById('ef-id').value='';
+  document.getElementById('ef-role').value='Engineer';
+  document.getElementById('ef-isbnb').checked=false;
+  selectedEngColor=ENGINEER_COLORS[0];
+  // Rebuild swatches with expanded palette
+  document.getElementById('ef-color-swatches').innerHTML=ENGINEER_COLORS.map(c=>
+    `<div class="color-swatch${c===selectedEngColor?' selected':''}" data-color="${c}" style="background:${c}" title="${c}"></div>`
+  ).join('');
+  document.getElementById('eng-modal').classList.add('open');
+}
+function closeEngModal(){document.getElementById('eng-modal').classList.remove('open');}
+
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('color-swatch')){
+    selectedEngColor=e.target.dataset.color;
+    document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
+    e.target.classList.add('selected');
+  }
+});
+
+async function saveEngineer(){
+  const name=document.getElementById('ef-name').value.trim();
+  const initials=document.getElementById('ef-id').value.trim().toUpperCase();
+  const role=document.getElementById('ef-role').value;
+  const isBnb=document.getElementById('ef-isbnb').checked;
+  if(!name||!initials){alert('Please fill in Name and Initials.');return;}
+  if(ENGINEERS.some(e=>e.name===name)){alert('An engineer with that name already exists.');return;}
+  if(ENGINEERS.some(e=>e.id===initials)){alert('Those initials are already taken — try different ones.');return;}
+  if(sb){
+    let data, error;
+    try{
+      const res = await sb.from('engineers').insert([{name,initials,color:selectedEngColor,role,is_bnb:isBnb}]).select();
+      data=res.data; error=res.error;
+    } catch(e){
+      alert('Save failed (network error):\n'+e.message+'\n\nCheck:\n1. Your Supabase URL and key are correct\n2. The engineers table exists\n3. RLS is disabled on the engineers table');
+      return;
+    }
+    if(error){
+      alert('Save failed:\n'+error.message+'\n\nMake sure the engineers table exists and RLS is disabled.');
+      return;
+    }
+    const newEng={id:initials,name,color:selectedEngColor,bg:hexToRgba(selectedEngColor,.15),role,...(isBnb?{isBnb:true}:{}),_builtin:false,_dbid:data[0].id};
+    ENGINEERS.push(newEng);
+  } else {
+    ENGINEERS.push({id:initials,name,color:selectedEngColor,bg:hexToRgba(selectedEngColor,.15),role,...(isBnb?{isBnb:true}:{}),_builtin:false});
+  }
+  closeEngModal();
+  buildEngNav();
+  renderAdminEngTable();
+  showToast('⚡ '+name+' added to team');
+}
+
+async function removeEngineer(idx){
+  const eng=ENGINEERS[idx];
+  if(!eng||eng._builtin)return;
+  const activeProjs=PROJECTS.filter(p=>p.engineer===eng.name&&p.status!=='Complete').length;
+  if(activeProjs>0){if(!confirm(`${eng.name} has ${activeProjs} active project(s). Remove anyway?`))return;}
+  if(sb&&eng._dbid){
+    const {error}=await sb.from('engineers').delete().eq('id',eng._dbid);
+    if(error){alert('Remove failed:\n'+error.message);return;}
+  }
+  ENGINEERS.splice(idx,1);
+  buildEngNav();
+  renderAdminEngTable();
+  showToast('⚡ '+eng.name+' removed');
+}
+
+// ── Modal ─────────────────────────────────────────────────────────────────
+let editingId=null;
+function populateModalEngSelect(){document.getElementById('f-engineer').innerHTML='<option value="">Select engineer…</option>'+ENGINEERS.map(e=>`<option value="${e.name}">${e.name}${e.isBnb?' (External)':''}</option>`).join('');}
+function openModal(){
+  if(IS_PM){showToast('Read-only PM view');return;}
+  editingId=null;
+  document.getElementById('modal-title').textContent='Add New Project';
+  document.getElementById('f-id').value='P-'+String(PROJECTS.length+1).padStart(3,'0');
+  ['f-name','f-desc','f-end','f-ifa-due','f-ifc-due','f-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('f-engineer').value='';document.getElementById('f-type-m').value='';document.getElementById('f-voltage').value='';
+  document.getElementById('f-start').value=new Date().toISOString().split('T')[0];
+  document.querySelectorAll('.msc').forEach(m=>{m.classList.remove('on');m.querySelector('input').checked=false;m.querySelector('.msc-dot').textContent='';});
+  resetMilestones();
+  document.getElementById('xfer-history-section').style.display='none';
+  populateModalEngSelect();
+  populatePMSelect('');
+  populateSalesSelect('');
+  populateTypeSelect('');
+  document.getElementById('add-modal').classList.add('open');
+}
+function openEditModal(id){
+  if(IS_PM){showToast('Read-only PM view');return;}
+  const p=PROJECTS.find(x=>x.id===id);if(!p)return;
+  editingId=id;populateModalEngSelect();
+  // If the saved PM/Sales name isn't in the list yet, add it locally so it shows up
+  if(p.pm&&p.pm!=='TBD'&&!PM_LIST.some(x=>x.name===p.pm)){PM_LIST.push({name:p.pm,role:'pm',_dbid:null});savePeopleLocal();}
+  if(p.sales&&p.sales!=='TBD'&&!SALES_LIST.some(x=>x.name===p.sales)){SALES_LIST.push({name:p.sales,role:'sales',_dbid:null});savePeopleLocal();}
+  populatePMSelect(p.pm);
+  populateSalesSelect(p.sales);
+  populateTypeSelect(p.type);
+  document.getElementById('modal-title').textContent='Edit Project';
+  document.getElementById('f-id').value=p.id;
+  document.getElementById('f-name').value=p.name;
+  document.getElementById('f-engineer').value=p.engineer;
+  document.getElementById('f-type-m').value=p.type;
+  document.getElementById('f-voltage').value=p.voltage;
+  document.getElementById('f-start').value=p.start||'';
+  document.getElementById('f-end').value=p.end||'';
+  document.getElementById('f-ifa-due').value=p.ifaDue||'';
+  document.getElementById('f-ifc-due').value=p.ifcDue||'';
+  document.getElementById('f-notes').value=p.notes||'';
+  const msc={design:'mc-design',ifa:'mc-ifa',ifc:'mc-ifc',adj:'mc-adj',idr:'mc-idr',live:'mc-live'};
+  Object.entries(msc).forEach(([k,elid])=>{const el=document.getElementById(elid);const inp=el;inp.checked=p.ms[k];});
+  loadMilestones(p.ms, p.msDates||{});
+  // Render transfer history
+  renderTransferHistory(p.id);
+  document.getElementById('add-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('add-modal').classList.remove('open');}
+
+function renderTransferHistory(projId){
+  const section=document.getElementById('xfer-history-section');
+  const list=document.getElementById('xfer-history-list');
+  const history=TRANSFER_HISTORY[projId]||[];
+  const proj=PROJECTS.find(p=>p.id===projId);
+  if(!proj) return;
+
+  // Build full timeline: original assignment + all transfers
+  const timeline=[];
+  // First engineer = earliest record or current if no history
+  if(history.length===0){
+    timeline.push({eng:proj.engineer,date:proj.start||null,isCurrent:true,isFirst:true});
+  } else {
+    timeline.push({eng:history[0].from,date:proj.start||null,isCurrent:false,isFirst:true});
+    history.forEach((h,i)=>{
+      timeline.push({eng:h.to,date:h.date,isCurrent:i===history.length-1,isFirst:false});
+    });
+  }
+
+  section.style.display='block';
+  list.innerHTML=timeline.map((item,i)=>{
+    const e=getEng(item.eng);
+    const dateStr=item.date?new Date(item.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—';
+    return `<div class="xfer-item">
+      <div class="xfer-dot ${item.isCurrent?'current':''}" style="${!item.isCurrent?`background:${e.bg};color:${e.color};border-color:${e.color}33`:''}">${e.id}</div>
+      <div class="xfer-info">
+        <div class="xfer-name" style="color:${item.isCurrent?'var(--spike)':'var(--t1)'}">${item.eng}${item.isCurrent?' <span style="font-size:9px;color:var(--spike);font-family:var(--fm)">CURRENT</span>':''}</div>
+        <div class="xfer-date">${item.isFirst?'Originally assigned':'Transferred'} · ${dateStr}</div>
+        ${i<timeline.length-1?`<div class="xfer-from" style="margin-top:3px">→ passed to ${timeline[i+1].eng}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+// ── Milestone Progression ─────────────────────────────────────────────────
+const MS_KEYS=['design','ifa','adj','ifc','idr','live','shipped'];
+function toggleMilestone(key, cb){
+  const today=new Date().toISOString().split('T')[0];
+  const dateInp=document.getElementById('md-'+key);
+  const label=document.getElementById('mpl-'+key);
+  const row=document.getElementById('mpr-'+key);
+  if(cb.checked){
+    if(!dateInp.value) dateInp.value=today;
+    label.classList.add('done');
+    row.classList.add('done-row');
+  } else {
+    dateInp.value='';
+    label.classList.remove('done');
+    row.classList.remove('done-row');
+  }
+  updateHistoryLog();
+}
+function syncMilestoneCheck(key){
+  const dateInp=document.getElementById('md-'+key);
+  const cb=document.getElementById('mc-'+key);
+  const label=document.getElementById('mpl-'+key);
+  const row=document.getElementById('mpr-'+key);
+  const hasDate=!!dateInp.value;
+  cb.checked=hasDate;
+  label.classList.toggle('done',hasDate);
+  row.classList.toggle('done-row',hasDate);
+  updateHistoryLog();
+}
+function resetMilestones(){
+  MS_KEYS.forEach(k=>{
+    const cb=document.getElementById('mc-'+k);
+    const di=document.getElementById('md-'+k);
+    const lb=document.getElementById('mpl-'+k);
+    const rw=document.getElementById('mpr-'+k);
+    if(cb) cb.checked=false;
+    if(di) di.value='';
+    if(lb) lb.classList.remove('done');
+    if(rw) rw.classList.remove('done-row');
+  });
+  updateHistoryLog();
+}
+function loadMilestones(ms, msDates){
+  MS_KEYS.forEach(k=>{
+    const cb=document.getElementById('mc-'+k);
+    const di=document.getElementById('md-'+k);
+    const lb=document.getElementById('mpl-'+k);
+    const rw=document.getElementById('mpr-'+k);
+    const checked=ms[k]||false;
+    const date=(msDates&&msDates[k])||'';
+    if(cb) cb.checked=checked;
+    if(di) di.value=date;
+    if(lb) lb.classList.toggle('done',checked);
+    if(rw) rw.classList.toggle('done-row',checked);
+  });
+  updateHistoryLog();
+}
+function getMilestones(){
+  const ms={}, msDates={};
+  MS_KEYS.forEach(k=>{
+    const cb=document.getElementById('mc-'+k);
+    const di=document.getElementById('md-'+k);
+    ms[k]=cb?cb.checked:false;
+    msDates[k]=di?di.value||null:null;
+  });
+  return {ms,msDates};
+}
+const MS_LABELS={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',live:'Live on Floor',shipped:'Project Shipped'};
+function updateHistoryLog(){
+  const ownerEl=document.getElementById('hist-ownership');
+  const msEl=document.getElementById('hist-milestones');
+  if(!ownerEl||!msEl) return;
+  // Ownership: current engineer
+  const eng=document.getElementById('f-engineer')?.value||'—';
+  ownerEl.innerHTML=eng!=='—'?`<span style="color:var(--t1);font-weight:600">${eng}</span>`:'<span style="color:var(--t3)">—</span>';
+  // Milestones: list completed ones with dates
+  const done=MS_KEYS.filter(k=>document.getElementById('mc-'+k)?.checked);
+  if(!done.length){msEl.innerHTML='<span style="color:var(--t3)">None completed yet</span>';return;}
+  msEl.innerHTML=done.map(k=>{
+    const date=document.getElementById('md-'+k)?.value;
+    const dateStr=date?new Date(date+'T00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    return `<div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:3px">
+      <span style="color:var(--gr);font-weight:600">✓ ${MS_LABELS[k]}</span>
+      <span style="color:var(--t3);font-family:var(--fm);font-size:10px">${dateStr}</span>
+    </div>`;
+  }).join('');
+}
+
+
+
+async function saveProject(){
+  const name=document.getElementById('f-name').value.trim();
+  const engineer=document.getElementById('f-engineer').value;
+  const type=document.getElementById('f-type-m').value;
+  const voltage=document.getElementById('f-voltage').value;
+  if(!name||!engineer||!type||!voltage){alert('Please fill in Name, Engineer, Type and Voltage');return;}
+  const {ms, msDates}=getMilestones();
+  const proj={id:document.getElementById('f-id').value||'P-'+Date.now(),name,desc:'',engineer,type,voltage,pm:document.getElementById('f-pm').value||'TBD',sales:document.getElementById('f-sales').value||'TBD',status:ms.live?'Complete':'In Progress',start:document.getElementById('f-start').value||null,end:document.getElementById('f-end').value||null,ifaDue:document.getElementById('f-ifa-due').value||null,ifcDue:document.getElementById('f-ifc-due').value||null,notes:document.getElementById('f-notes').value||'',ms,msDates};
+  if(sb){
+    const dbRow={proj_id:proj.id,name:proj.name,description:'',engineer:proj.engineer,type:proj.type,voltage:proj.voltage,pm:proj.pm,sales:proj.sales,status:proj.status,start_date:proj.start||null,end_date:proj.end||null,ifa_due_date:proj.ifaDue||null,ifc_due_date:proj.ifcDue||null,notes:proj.notes||'',ms_design:proj.ms.design,ms_ifa:proj.ms.ifa,ms_ifc:proj.ms.ifc,ms_adj:proj.ms.adj,ms_idr:proj.ms.idr,ms_live:proj.ms.live,ms_shipped:proj.ms.shipped||false,ms_design_date:msDates.design||null,ms_ifa_date:msDates.ifa||null,ms_ifc_date:msDates.ifc||null,ms_adj_date:msDates.adj||null,ms_idr_date:msDates.idr||null,ms_live_date:msDates.live||null,ms_shipped_date:msDates.shipped||null};
+    let error;
+    if(editingId){
+      const existing=PROJECTS.find(p=>p.id===editingId);
+      if(existing?._dbid){
+        ({error}=await sb.from('projects').update(dbRow).eq('id',existing._dbid));
+        // Log transfer if engineer changed
+        if(!error && existing.engineer !== proj.engineer){
+          await sb.from('project_transfers').insert([{
+            proj_id:proj.id,
+            from_engineer:existing.engineer,
+            to_engineer:proj.engineer,
+            transferred_at:new Date().toISOString()
+          }]);
+          if(!TRANSFER_HISTORY[proj.id]) TRANSFER_HISTORY[proj.id]=[];
+          TRANSFER_HISTORY[proj.id].push({from:existing.engineer,to:proj.engineer,date:new Date().toISOString()});
+          showToast(`⚡ Transferred to ${proj.engineer}`);
+        }
+      }
+    } else {
+      ({error}=await sb.from('projects').insert([dbRow]));
+    }
+    if(error){alert('Save failed: '+error.message);return;}
+    closeModal();showToast('⚡ Project saved');return;
+  }
+  // local fallback — track transfer in memory
+  if(editingId){
+    const existing=PROJECTS.find(p=>p.id===editingId);
+    if(existing && existing.engineer !== proj.engineer){
+      if(!TRANSFER_HISTORY[proj.id]) TRANSFER_HISTORY[proj.id]=[];
+      TRANSFER_HISTORY[proj.id].push({from:existing.engineer,to:proj.engineer,date:new Date().toISOString()});
+    }
+  }
+  // local fallback
+  if(editingId){const idx=PROJECTS.findIndex(p=>p.id===editingId);if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],...proj};}
+  else PROJECTS.push(proj);
+  closeModal();refreshAll();
+  const av2=document.querySelector('.view.active');
+  if(av2?.id==='view-projects')renderProjects();
+  if(av2?.id==='view-gantt')renderGantt();
+  if(av2?.id==='view-bnb')renderBNB();
+  showToast('⚡ Project saved');
+}
+
+// ── Export ────────────────────────────────────────────────────────────────
+function exportCSV(){
+  const h=['ID','Project Name','Engineer','Type','Voltage','PM','Sales','Status','Start','End','IFA Due','Notes','Progress%','Design','IFA','IFC','ADJ','IDR','Live'];
+  const rows=PROJECTS.map(p=>[p.id,`"${p.name}"`,p.engineer,p.type,p.voltage,p.pm,p.sales,p.status,p.start||'',p.end||'',p.ifaDue||'',`"${(p.notes||'').replace(/"/g,'""')}"`,msPct(p.ms),+p.ms.design,+p.ms.ifa,+p.ms.ifc,+p.ms.adj,+p.ms.idr,+p.ms.live]);
+  const csv=[h,...rows].map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='spike-projects-'+new Date().toISOString().split('T')[0]+'.csv';a.click();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+if(sessionStorage.getItem(SESSION_KEY)==='1'){
+  const wasPm = sessionStorage.getItem(PM_SESSION_KEY)==='1';
+  applyPmMode(wasPm);
+  document.getElementById('app-shell').style.display='flex';
+  initSupabaseAndLoad();
+  if(wasPm) setTimeout(()=>showView('projects',document.getElementById('ni-projects')),50);
+} else {
+  document.getElementById('login-screen').style.display='flex';
+  setTimeout(()=>document.getElementById('pw-input')?.focus(),100);
+  buildEngNav();renderDashboard();populateCalFilters();
+  document.getElementById('last-update').textContent=new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+}
+</script>
+</body>
+</html>

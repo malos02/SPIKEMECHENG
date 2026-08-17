@@ -345,6 +345,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
     <div class="tbar-r">
       <div class="user-chip"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="color:var(--spike);font-weight:600;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Team Access</span></div>
       <div class="user-chip" id="sync-chip" title="Shared Supabase connection status"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--am);display:inline-block"></span><span id="sync-text" style="color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Connecting</span></div>
+      <button class="btn btn-gh btn-sm pm-hide" onclick="openScheduleImport()" title="Import the latest ProjectTasks schedule"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>Import Schedule</button>
       <button class="btn btn-gh btn-sm" onclick="exportCSV()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
       <button class="btn btn-pr btn-sm pm-hide" onclick="openModal()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Project</button>
       <button class="btn btn-gh btn-sm" onclick="doLogout()" title="Lock" style="padding:5px 7px"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></button>
@@ -672,6 +673,33 @@ tr:hover td{background:rgba(255,255,255,.018)}
 </div>
 </div>
 
+<!-- SCHEDULE IMPORT MODAL -->
+<div class="mbg" id="schedule-import-modal" onclick="if(event.target===this)closeScheduleImport()">
+<div class="modal" style="width:980px">
+  <div class="modal-title">Import Engineering Schedule</div>
+  <div style="background:var(--s1);border:1px solid var(--b1);border-left:2px solid var(--spike);padding:10px 12px;margin-bottom:14px;font-size:11px;color:var(--t2);line-height:1.6">
+    Upload the latest <strong style="color:var(--t1)">ProjectTasks .xlsm/.xlsx export</strong>. The import reads the <strong style="color:var(--spike)">Engineering</strong> WBS section only. Existing jobs keep team-entered ownership, notes, PM/Sales and milestone history; only <strong style="color:var(--t1)">IFA Due</strong> and <strong style="color:var(--t1)">IFC Due</strong> are schedule-controlled. Jobs missing from the tracker are previewed as new <strong style="color:var(--am)">Unassigned</strong> jobs before anything is saved.
+  </div>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end;margin-bottom:14px">
+    <div class="ff">
+      <div class="flbl">Latest Schedule File</div>
+      <input class="finp" id="schedule-file" type="file" accept=".xlsm,.xlsx,.xls" onchange="previewScheduleFile(this.files&&this.files[0])">
+    </div>
+    <button class="btn btn-gh" id="schedule-repreview" onclick="previewScheduleFile(document.getElementById('schedule-file').files[0])" disabled>Recheck</button>
+  </div>
+  <div id="schedule-import-status" style="display:none;margin-bottom:12px"></div>
+  <div id="schedule-import-summary" style="display:none;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:12px"></div>
+  <div id="schedule-import-warning" style="display:none;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.3);padding:8px 10px;margin-bottom:10px;color:var(--am);font-size:10.5px"></div>
+  <div class="tw" id="schedule-preview-wrap" style="display:none;max-height:390px;overflow:auto">
+    <table style="min-width:900px"><thead><tr><th>Action</th><th>SO</th><th>Project / Customer</th><th>Current IFA</th><th>Schedule IFA</th><th>Current IFC</th><th>Schedule IFC</th><th>PM / Sales</th></tr></thead><tbody id="schedule-preview-body"></tbody></table>
+  </div>
+  <div class="modal-actions">
+    <button class="btn btn-gh" onclick="closeScheduleImport()">Cancel</button>
+    <button class="btn btn-pr" id="schedule-apply-btn" onclick="applyScheduleImport()" disabled>Apply to Shared Live</button>
+  </div>
+</div>
+</div>
+
 <!-- DAY POPUP -->
 <div class="day-popup" id="day-popup">
   <div class="day-popup-title"><span id="dp-title">—</span><span class="day-popup-close" onclick="closeDayPopup()">✕</span></div>
@@ -691,13 +719,14 @@ tr:hover td{background:rgba(255,255,255,.018)}
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 // ══ CONFIG — EDIT THESE ═══════════════════════════════════════════════════
 const TEAM_PASSWORD = 'SPIKE2025';        // 🔧 your team password
 const PM_PASSWORD   = 'PM2026';           // 🔧 PM read-only password (share this w/ PMs)
 const SUPABASE_URL  = 'https://jubvevpjdfkkrrszwjko.supabase.co';    // 🔧 from Supabase settings
 const SUPABASE_KEY  = 'sb_publishable_W5jnoY-a_4FapoGrsuAC7g_rxzicaQh'; // 🔧 from Supabase settings
-const BASELINE_VERSION = '2026-08-17-v3';
+const BASELINE_VERSION = '2026-08-17-v3'; // baseline remains unchanged; V5 adds live schedule import
 const BASELINE_MARKER_NAME = '__SPIKE_BASELINE_2026_08_17_V3__';
 // ══════════════════════════════════════════════════════════════════════════
 
@@ -2312,6 +2341,204 @@ async function saveProject(){
   if(av2?.id==='view-gantt')renderGantt();
   if(av2?.id==='view-bnb')renderBNB();
   showToast('⚡ Project saved');
+}
+
+
+// ── Schedule Import (V5) ─────────────────────────────────────────────────
+let SCHEDULE_IMPORT_PREVIEW=null;
+function openScheduleImport(){
+  if(IS_PM){showToast('Read-only PM view');return;}
+  const modal=document.getElementById('schedule-import-modal');
+  document.getElementById('schedule-file').value='';
+  document.getElementById('schedule-import-status').style.display='none';
+  document.getElementById('schedule-import-summary').style.display='none';
+  document.getElementById('schedule-preview-wrap').style.display='none';
+  document.getElementById('schedule-import-warning').style.display='none';
+  document.getElementById('schedule-apply-btn').disabled=true;
+  document.getElementById('schedule-repreview').disabled=true;
+  SCHEDULE_IMPORT_PREVIEW=null;
+  modal.classList.add('open');
+}
+function closeScheduleImport(){document.getElementById('schedule-import-modal').classList.remove('open');}
+function scheduleDate(v){
+  if(v===null||v===undefined||v==='')return null;
+  if(v instanceof Date && !isNaN(v))return `${v.getFullYear()}-${String(v.getMonth()+1).padStart(2,'0')}-${String(v.getDate()).padStart(2,'0')}`;
+  if(typeof v==='number'){
+    const d=XLSX.SSF.parse_date_code(v);if(d)return `${d.y}-${String(d.m).padStart(2,'0')}-${String(d.d).padStart(2,'0')}`;
+  }
+  const d=new Date(v);return isNaN(d)?null:`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function mapScheduleVoltage(v){
+  const x=String(v||'').trim().toUpperCase().replace(/\s+/g,'');
+  if(!x)return 'Low Voltage';
+  if(x.includes('38KV')||x.includes('35KV')||x.includes('34.5KV'))return '38kV';
+  if(x.includes('15KV'))return '15kV';
+  const m=x.match(/([0-9.]+)KV/);if(m){const n=parseFloat(m[1]);if(n>=10&&n<30)return '15kV';if(n>=30)return '38kV';return 'Medium Voltage';}
+  if(x.includes('MV'))return 'Medium Voltage';
+  return 'Low Voltage';
+}
+function mapScheduleType(v){
+  const x=String(v||'').trim();
+  if(!x)return 'TBD';
+  const u=x.toUpperCase();
+  if(u.includes('BUSSED GUTTER'))return 'BUSSED GUTTER';
+  if(u.includes('CABLE TAP'))return u.includes('MV')?'CABLE TAP BOX MV':'CABLE TAP BOX LV';
+  if(u.includes('DOCKING'))return 'DOCKING STATION';
+  if(u.includes('GIS')||u.includes('RMU'))return 'Gis/Rmu';
+  if(u.includes('MCC'))return 'MCC';
+  if(u.includes('TRANSFORM'))return 'Transformer';
+  if(u.includes('PANEL'))return 'Panel';
+  if(u.includes('LBS')||u==='SWITCH')return 'Switch';
+  if(u.includes('SWB')||u.includes('SWITCHBOARD'))return 'Switchboard';
+  if(u.includes('SWG')||u.includes('SWITCHGEAR'))return 'Switchgear';
+  return x;
+}
+function extractEngineeringSchedule(workbook){
+  const ws=workbook.Sheets['Tasks'];
+  if(!ws)throw new Error('The workbook does not contain a Tasks sheet.');
+  const rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:null});
+  if(rows.length<2)throw new Error('The Tasks sheet is empty.');
+  const headers=rows[0].map(x=>String(x||'').trim());
+  const col=name=>headers.indexOf(name);
+  const ix={pct:col('% Complete'),task:col('Task Name'),customer:col('Customer Name'),start:col('Start'),finish:col('Finish'),wbs:col('WBS'),pm:col('Project Manager'),sales:col('Sales Person'),kv:col('KV Rating'),type:col('Product Type')};
+  if(ix.task<0||ix.finish<0||ix.wbs<0)throw new Error('Tasks sheet is missing Task Name, Finish or WBS columns.');
+
+  // Customer Summary carries Product Type more consistently than the Engineering rows.
+  const summaryMeta=new Map();
+  const cs=workbook.Sheets['Customer Summary'];
+  if(cs){
+    const sr=XLSX.utils.sheet_to_json(cs,{header:1,raw:true,defval:null});
+    for(let i=0;i<sr.length-1;i++){
+      const h=(sr[i]||[]).map(x=>String(x||'').trim());
+      if(h[0]!=='Task Name'||!h.includes('Product Type'))continue;
+      const si={task:h.indexOf('Task Name'),customer:h.indexOf('Customer Name'),pm:h.indexOf('Project Manager'),sales:h.indexOf('Sales Person'),kv:h.indexOf('KV Rating'),type:h.indexOf('Product Type')};
+      for(let j=i+1;j<sr.length;j++){
+        const row=sr[j]||[], task=String(row[si.task]||'').trim();
+        if(task==='Task Name'||task.startsWith('Customer Summary -'))break;
+        const m=task.match(/^(SO\d+[A-Z0-9-]*)/i);if(!m)continue;
+        const id=m[1].toUpperCase();
+        if(!summaryMeta.has(id))summaryMeta.set(id,{customer:String(row[si.customer]||'').trim(),pm:String(row[si.pm]||'').trim(),sales:String(row[si.sales]||'').trim(),kv:String(row[si.kv]||'').trim(),type:String(row[si.type]||'').trim()});
+      }
+    }
+  }
+
+  const engineering=rows.findIndex((r,i)=>i>0&&String(r[ix.task]||'').trim().toLowerCase()==='engineering'&&String(r[ix.wbs]||'').trim()==='1');
+  if(engineering<0)throw new Error('Could not find the Engineering WBS section (WBS 1).');
+  const jobs=[];
+  for(let i=engineering+1;i<rows.length;i++){
+    const row=rows[i], wbs=String(row[ix.wbs]||'').trim();
+    if(/^\d+$/.test(wbs)&&wbs!=='1')break;
+    if(!/^1\.\d+$/.test(wbs))continue;
+    const task=String(row[ix.task]||'').trim();
+    const m=task.match(/^(SO\d+[A-Z0-9-]*)/i);if(!m)continue;
+    const id=m[1].toUpperCase(), meta=summaryMeta.get(id)||{};
+    let ifaDue=null,ifcDue=null,hasIFA=false,hasIFC=false;
+    for(let j=i+1;j<rows.length;j++){
+      const cw=String(rows[j][ix.wbs]||'').trim();
+      if(!cw.startsWith(wbs+'.'))break;
+      const child=String(rows[j][ix.task]||'').trim().toUpperCase();
+      if(child==='IFA'){hasIFA=true;ifaDue=scheduleDate(rows[j][ix.finish]);}
+      else if(child==='IFC'){hasIFC=true;ifcDue=scheduleDate(rows[j][ix.finish]);}
+    }
+    jobs.push({
+      id, name:String(row[ix.customer]||'').trim()||meta.customer||task,
+      start:scheduleDate(row[ix.start]), target:scheduleDate(row[ix.finish]),
+      ifaDue,ifcDue,hasIFA,hasIFC,
+      pm:String(row[ix.pm]||'').trim()||meta.pm||'TBD',sales:String(row[ix.sales]||'').trim()||meta.sales||'TBD',
+      voltage:mapScheduleVoltage(row[ix.kv]||meta.kv),type:mapScheduleType(row[ix.type]||meta.type),
+      pct:Number(row[ix.pct]||0)
+    });
+  }
+  const seen=new Set();
+  return jobs.filter(j=>{if(seen.has(j.id))return false;seen.add(j.id);return true;});
+}
+function scheduleSummaryCard(label,val,color){return `<div class="kc" style="--kc:${color};padding:10px 12px"><div class="kc-lbl">${label}</div><div class="kc-val" style="font-size:22px">${val}</div></div>`;}
+async function previewScheduleFile(file){
+  if(!file)return;
+  const status=document.getElementById('schedule-import-status');
+  const apply=document.getElementById('schedule-apply-btn');
+  document.getElementById('schedule-repreview').disabled=false;
+  apply.disabled=true;SCHEDULE_IMPORT_PREVIEW=null;
+  status.style.display='block';status.innerHTML='<div style="color:var(--spike);font-size:11px">Reading schedule…</div>';
+  try{
+    if(!window.XLSX)throw new Error('Spreadsheet reader did not load. Check your internet connection and reopen the tracker.');
+    const buf=await file.arrayBuffer();
+    const wb=XLSX.read(buf,{type:'array',cellDates:true});
+    const jobs=extractEngineeringSchedule(wb);
+    if(!jobs.length)throw new Error('No SO jobs were found under the Engineering WBS section.');
+    const current=new Map(PROJECTS.map(p=>[String(p.id||'').toUpperCase(),p]));
+    const changes=[],newJobs=[],unchanged=[];
+    jobs.forEach(j=>{
+      const p=current.get(j.id);
+      if(!p){newJobs.push(j);return;}
+      const ifaChanged=j.hasIFA&&(p.ifaDue||null)!==(j.ifaDue||null);
+      const ifcChanged=j.hasIFC&&(p.ifcDue||null)!==(j.ifcDue||null);
+      if(ifaChanged||ifcChanged)changes.push({job:j,project:p,ifaChanged,ifcChanged});
+      else unchanged.push(j);
+    });
+    SCHEDULE_IMPORT_PREVIEW={fileName:file.name,jobs,changes,newJobs,unchanged};
+    const sum=document.getElementById('schedule-import-summary');
+    sum.style.display='grid';
+    sum.innerHTML=scheduleSummaryCard('Engineering SOs',jobs.length,'var(--spike)')+scheduleSummaryCard('Date Updates',changes.length,'var(--am)')+scheduleSummaryCard('New Jobs',newJobs.length,'var(--pu)')+scheduleSummaryCard('No Change',unchanged.length,'var(--gr)')+scheduleSummaryCard('Will Write',changes.length+newJobs.length,'var(--tl)');
+    status.innerHTML=`<div style="font-size:11px;color:var(--t2)"><strong style="color:var(--t1)">${file.name}</strong> · Engineering schedule parsed successfully.</div>`;
+    const rows=[];
+    changes.forEach(({job,project,ifaChanged,ifcChanged})=>rows.push({action:'UPDATE',job,p:project,ifaChanged,ifcChanged}));
+    newJobs.forEach(job=>rows.push({action:'NEW',job,p:null}));
+    const body=document.getElementById('schedule-preview-body');
+    body.innerHTML=rows.length?rows.map(x=>`<tr>
+      <td><span class="pill ${x.action==='NEW'?'pp':'pa'}">${x.action}</span></td>
+      <td><span class="pid">${x.job.id}</span></td>
+      <td><div class="pname">${x.p?.name||x.job.name}</div>${x.action==='NEW'?'<div style="font-size:9px;color:var(--am);margin-top:2px">will be Unassigned</div>':''}</td>
+      <td style="font-family:var(--fm);font-size:10px;color:var(--t2)">${x.p?.ifaDue||'—'}</td>
+      <td style="font-family:var(--fm);font-size:10px;color:${(x.p?.ifaDue||null)!==(x.job.ifaDue||null)?'var(--am)':'var(--t2)'}">${x.job.hasIFA?(x.job.ifaDue||'—'):'not in export'}</td>
+      <td style="font-family:var(--fm);font-size:10px;color:var(--t2)">${x.p?.ifcDue||'—'}</td>
+      <td style="font-family:var(--fm);font-size:10px;color:${(x.p?.ifcDue||null)!==(x.job.ifcDue||null)?'var(--am)':'var(--t2)'}">${x.job.hasIFC?(x.job.ifcDue||'—'):'not in export'}</td>
+      <td style="font-size:10px;color:var(--t2)">${x.job.pm} / ${x.job.sales}</td>
+    </tr>`).join(''):'<tr><td colspan="8" class="empty">Schedule matches Shared Live — no changes to apply</td></tr>';
+    document.getElementById('schedule-preview-wrap').style.display='block';
+    const warn=document.getElementById('schedule-import-warning');
+    warn.style.display=newJobs.length?'block':'none';
+    warn.textContent=newJobs.length?`${newJobs.length} new job${newJobs.length===1?'':'s'} will be added as Unassigned. Existing project ownership and team-entered fields will not be overwritten.`:'';
+    apply.disabled=!sb||!rows.length;
+    apply.title=!sb?'Shared Live must be connected before applying a schedule.':'';
+  }catch(e){
+    console.error('Schedule preview:',e);status.innerHTML=`<div style="color:var(--rd);font-size:11px">⚡ ${e.message||e}</div>`;
+    document.getElementById('schedule-import-summary').style.display='none';document.getElementById('schedule-preview-wrap').style.display='none';
+  }
+}
+async function applyScheduleImport(){
+  if(IS_PM){showToast('Read-only PM view');return;}
+  if(!sb||!SCHEDULE_IMPORT_PREVIEW){showToast('Shared Live connection required');return;}
+  const btn=document.getElementById('schedule-apply-btn');btn.disabled=true;btn.textContent='Applying…';
+  const {changes,newJobs,fileName}=SCHEDULE_IMPORT_PREVIEW;
+  try{
+    setSyncStatus('syncing',`Applying ${fileName} to the shared schedule...`);
+    let updated=0;
+    for(const {job,project,ifaChanged,ifcChanged} of changes){
+      const patch={};
+      if(ifaChanged)patch.ifa_due_date=job.ifaDue||null;
+      if(ifcChanged)patch.ifc_due_date=job.ifcDue||null;
+      const q=project._dbid?sb.from('projects').update(patch).eq('id',project._dbid):sb.from('projects').update(patch).eq('proj_id',project.id);
+      const {error}=await q;if(error)throw new Error(`${job.id}: ${error.message}`);updated++;
+    }
+    let added=0;
+    for(let i=0;i<newJobs.length;i+=40){
+      const chunk=newJobs.slice(i,i+40).map(j=>projectToDbRow({
+        id:j.id,name:j.name,desc:'',engineer:'Unassigned',type:j.type,voltage:j.voltage,pm:j.pm,sales:j.sales,
+        status:'In Progress',start:j.start,end:j.target,ifaDue:j.ifaDue,ifcDue:j.ifcDue,
+        notes:'Added from imported Engineering schedule; engineer assignment not provided by schedule export.',
+        ms:{design:false,ifa:false,ifc:false,adj:false,idr:false,live:false,shipped:false},msDates:{}
+      }));
+      const {error}=await sb.from('projects').insert(chunk);if(error)throw error;added+=chunk.length;
+    }
+    await loadFromDB();
+    setSyncStatus('live',`Schedule import complete: ${updated} date update${updated===1?'':'s'}, ${added} new job${added===1?'':'s'}.`);
+    showToast(`⚡ Schedule imported · ${updated} updated · ${added} added`);
+    closeScheduleImport();
+  }catch(e){
+    console.error('Schedule apply:',e);setSyncStatus('live','Shared Live connected; the last schedule import did not complete.');
+    alert('Schedule import stopped:\n'+(e.message||e));btn.disabled=false;
+  }finally{btn.textContent='Apply to Shared Live';}
 }
 
 // ── Export ────────────────────────────────────────────────────────────────

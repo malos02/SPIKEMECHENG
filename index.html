@@ -726,7 +726,7 @@ const TEAM_PASSWORD = 'SPIKE2025';        // 🔧 your team password
 const PM_PASSWORD   = 'PM2026';           // 🔧 PM read-only password (share this w/ PMs)
 const SUPABASE_URL  = 'https://jubvevpjdfkkrrszwjko.supabase.co';    // 🔧 from Supabase settings
 const SUPABASE_KEY  = 'sb_publishable_W5jnoY-a_4FapoGrsuAC7g_rxzicaQh'; // 🔧 from Supabase settings
-const BASELINE_VERSION = '2026-08-17-v3'; // baseline remains unchanged; V5 adds live schedule import
+const BASELINE_VERSION = '2026-08-17-v3'; // baseline remains unchanged; V6 adds duplicate-safe live schedule import
 const BASELINE_MARKER_NAME = '__SPIKE_BASELINE_2026_08_17_V3__';
 // ══════════════════════════════════════════════════════════════════════════
 
@@ -2498,7 +2498,7 @@ async function previewScheduleFile(file){
     document.getElementById('schedule-preview-wrap').style.display='block';
     const warn=document.getElementById('schedule-import-warning');
     warn.style.display=newJobs.length?'block':'none';
-    warn.textContent=newJobs.length?`${newJobs.length} new job${newJobs.length===1?'':'s'} will be added as Unassigned. Existing project ownership and team-entered fields will not be overwritten.`:'';
+    warn.textContent=newJobs.length?`${newJobs.length} job${newJobs.length===1?'':'s'} appear new in this preview. Before saving, Shared Live will re-check each SO. Any duplicate will be updated in place; only truly new jobs will be added as Unassigned. Existing ownership and team-entered fields will not be overwritten.`:'';
     apply.disabled=!sb||!rows.length;
     apply.title=!sb?'Shared Live must be connected before applying a schedule.':'';
   }catch(e){
@@ -2521,19 +2521,53 @@ async function applyScheduleImport(){
       const q=project._dbid?sb.from('projects').update(patch).eq('id',project._dbid):sb.from('projects').update(patch).eq('proj_id',project.id);
       const {error}=await q;if(error)throw new Error(`${job.id}: ${error.message}`);updated++;
     }
-    let added=0;
-    for(let i=0;i<newJobs.length;i+=40){
-      const chunk=newJobs.slice(i,i+40).map(j=>projectToDbRow({
+    let added=0, duplicateUpdated=0;
+    // Re-check every item that previewed as NEW against Shared Live immediately before writing.
+    // If another copy of the job already exists, update only the schedule-controlled due dates
+    // instead of attempting a duplicate insert. This preserves ownership, notes, milestones, PM/Sales, etc.
+    for(const j of newJobs){
+      const {data:existingRows,error:lookupError}=await sb.from('projects').select('id,proj_id,ifa_due_date,ifc_due_date').eq('proj_id',j.id).limit(1);
+      if(lookupError)throw new Error(`${j.id}: ${lookupError.message}`);
+      const existing=existingRows&&existingRows[0];
+      if(existing){
+        const patch={};
+        if(j.hasIFA&&(existing.ifa_due_date||null)!==(j.ifaDue||null))patch.ifa_due_date=j.ifaDue||null;
+        if(j.hasIFC&&(existing.ifc_due_date||null)!==(j.ifcDue||null))patch.ifc_due_date=j.ifcDue||null;
+        if(Object.keys(patch).length){
+          const {error:updateError}=await sb.from('projects').update(patch).eq('id',existing.id);
+          if(updateError)throw new Error(`${j.id}: ${updateError.message}`);
+        }
+        duplicateUpdated++;
+        continue;
+      }
+      const row=projectToDbRow({
         id:j.id,name:j.name,desc:'',engineer:'Unassigned',type:j.type,voltage:j.voltage,pm:j.pm,sales:j.sales,
         status:'In Progress',start:j.start,end:j.target,ifaDue:j.ifaDue,ifcDue:j.ifcDue,
         notes:'Added from imported Engineering schedule; engineer assignment not provided by schedule export.',
         ms:{design:false,ifa:false,ifc:false,adj:false,idr:false,live:false,shipped:false},msDates:{}
-      }));
-      const {error}=await sb.from('projects').insert(chunk);if(error)throw error;added+=chunk.length;
+      });
+      const {error:insertError}=await sb.from('projects').insert([row]);
+      if(insertError){
+        // Handle a last-millisecond duplicate created after the lookup.
+        if(insertError.code==='23505'||String(insertError.message||'').toLowerCase().includes('duplicate key')){
+          const patch={};
+          if(j.hasIFA)patch.ifa_due_date=j.ifaDue||null;
+          if(j.hasIFC)patch.ifc_due_date=j.ifcDue||null;
+          if(Object.keys(patch).length){
+            const {error:updateError}=await sb.from('projects').update(patch).eq('proj_id',j.id);
+            if(updateError)throw new Error(`${j.id}: ${updateError.message}`);
+          }
+          duplicateUpdated++;
+          continue;
+        }
+        throw new Error(`${j.id}: ${insertError.message}`);
+      }
+      added++;
     }
     await loadFromDB();
-    setSyncStatus('live',`Schedule import complete: ${updated} date update${updated===1?'':'s'}, ${added} new job${added===1?'':'s'}.`);
-    showToast(`⚡ Schedule imported · ${updated} updated · ${added} added`);
+    const totalUpdated=updated+duplicateUpdated;
+    setSyncStatus('live',`Schedule import complete: ${totalUpdated} job${totalUpdated===1?'':'s'} updated, ${added} new job${added===1?'':'s'} added.`);
+    showToast(`⚡ Schedule imported · ${totalUpdated} updated · ${added} added`);
     closeScheduleImport();
   }catch(e){
     console.error('Schedule apply:',e);setSyncStatus('live','Shared Live connected; the last schedule import did not complete.');

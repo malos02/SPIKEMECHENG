@@ -1,0 +1,92 @@
+[
+  {
+    "id": "UA",
+    "name": "Unassigned",
+    "role": "Unassigned",
+    "assignable": false
+  },
+  {
+    "id": "BH",
+    "name": "Bryan Haro",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "EO",
+    "name": "Edwin Ojeda",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "MG",
+    "name": "Mario Galdamez",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "CK",
+    "name": "Corey Kidd",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "JJ",
+    "name": "Jose Jasso",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "MP",
+    "name": "Masoom Patel",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "OP",
+    "name": "Osvaldo Perez",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "EL",
+    "name": "Erik Leal",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "MW",
+    "name": "Micaiah Williams",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "TP",
+    "name": "Tanner Phillips",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "KS",
+    "name": "KAIYI SHI",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "LK",
+    "name": "Logesh Kumar M S",
+    "role": "Engineer",
+    "assignable": true
+  },
+  {
+    "id": "BN",
+    "name": "BNB Team",
+    "role": "External Designer",
+    "assignable": true
+  },
+  {
+    "id": "NA",
+    "name": "NO ENGINEER NEEDED",
+    "role": "Engineer",
+    "assignable": false
+  }
+]

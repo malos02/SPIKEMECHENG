@@ -1,0 +1,1883 @@
+[
+  {
+    "id": "110598",
+    "name": "EATON/CROUSE CUSTOM PLATE MOUNTED ESD PUSH BUTTON STATION",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "MAIN GEN NEXUS",
+    "name": "2000A MAIN GEN, NEMA 3R",
+    "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "CUSTOMER QUOTE SUBMITTED 4/23/26"
+  },
+  {
+    "id": "SO108870",
+    "name": "38kV 1200A_N1_4 SECTIONS",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Need to make enclosure for breakers"
+  },
+  {
+    "id": "SO108935",
+    "name": "38KV_2000A_METALCALD_N3R_6 SECTION",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "38KV_2000A_METALCALD_N3R_6 SECTION"
+  },
+  {
+    "id": "SO108936",
+    "name": "38KV_2000A_METALCALD_N3R_4 SECTION",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "38KV_2000A_METALCALD_N3R_4 SECTION"
+  },
+  {
+    "id": "SO108938",
+    "name": "15KV 50KA ABB ADVAC METAL-CLAD SWITCHGEAR",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "15KV 50KA ABB ADVAC METAL-CLAD SWITCHGEAR\n95kV BIL, 3 Phase, 60 Hz"
+  },
+  {
+    "id": "SO108957",
+    "name": "15kv metal clad switchgear Lonestar",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "made PT and CT changes on 4/16.\nNeed a new LV door on section 4 for Chad (4/17)"
+  },
+  {
+    "id": "SO108971",
+    "name": "15kV 600A Square D LBS",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "On hold possibly cancelled "
+  },
+  {
+    "id": "SO109021",
+    "name": "ATS(AUTOMATIC TRANSFER BREAKER SYSTEM)",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "LS/SOCOMEC AUTOMATIC TRANSFER BREAKER SYSTEM, 120/208V, 3PH-4W."
+  },
+  {
+    "id": "SO109144",
+    "name": "15kV 1200A N3R Utility Line up",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2025-05-28",
+    "ifc_due_date": "2026-10-05",
+    "notes": ""
+  },
+  {
+    "id": "SO109196",
+    "name": "SWGR, 5KV,",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2025-07-08",
+    "ifc_due_date": "2026-05-06",
+    "notes": "Top instrument pans, HRG display plate, and breaker instrument panels submitted to fab."
+  },
+  {
+    "id": "SO109196MV",
+    "name": "5kV METAL CLAD",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO109557",
+    "name": "Relay Panel",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-05-12",
+    "ifc_due_date": "2026-09-04",
+    "notes": "APPROVED 6-11-26. NEW DELIVERY DATE IN NOVEMBER 2026"
+  },
+  {
+    "id": "SO109639",
+    "name": "DROP OVER",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-19",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO109748",
+    "name": "38kV 1200A METAL CLAD N3R SWGR",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO109779",
+    "name": "SWBD, SQD, 3000A, NEMA 3R, 16 LINEUPS",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "0026-03-31",
+    "ifc_due_date": null,
+    "notes": "BATCH 2 (LINEUPS 5-9) STARTED LIVE ON FLOOR 4/8"
+  },
+  {
+    "id": "SO109779-LBS",
+    "name": "15kV LBS with transformer",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO109820",
+    "name": "(6) section fused 38Kv LBS",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-01",
+    "ifc_due_date": null,
+    "notes": "At spike 3"
+  },
+  {
+    "id": "SO109829",
+    "name": "15kV 1200A Nema 1",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Re-Released LV doors on 4/21"
+  },
+  {
+    "id": "SO109840",
+    "name": "MASTER BREAK SWITCH",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "at BMC getting cut 4/17"
+  },
+  {
+    "id": "SO109841",
+    "name": "HIRELI LLC",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2025-10-08",
+    "ifc_due_date": "2026-09-11",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO109924",
+    "name": "15kV ARC RESISTANT 16 SECTION",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-01-16",
+    "ifc_due_date": "2026-11-24",
+    "notes": ""
+  },
+  {
+    "id": "SO109953",
+    "name": "15KV METAL ENCLOSED SWGR",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": "2025-10-15",
+    "ifc_due_date": "2026-05-07",
+    "notes": "Making small adjustments. \n\nProduction kickoff has been made. Files not released. still have customer changes as of 5-8-26\n\nIDR has been completed. Second IDR Made. Have to complete LV Panel. Parts released"
+  },
+  {
+    "id": "SO109954",
+    "name": "15KV METAL ENCLOSED SWGR",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": "2025-10-15",
+    "ifc_due_date": "2026-07-01",
+    "notes": "Waiting on adjustments to be made to release. "
+  },
+  {
+    "id": "SO109958",
+    "name": "38kV METAL CLAD SWITCHGEAR",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2025-12-01",
+    "ifc_due_date": "2026-08-06",
+    "notes": ""
+  },
+  {
+    "id": "SO110003",
+    "name": "15KV_600A NON-FUSED_STANDALONE",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-29",
+    "ifc_due_date": null,
+    "notes": "15KV_600A_N3R_NON-FUSED_STANDALONE"
+  },
+  {
+    "id": "SO110019",
+    "name": "15KV_600A NON-FUSED_STANDALONE",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-24",
+    "ifc_due_date": null,
+    "notes": "15KV_600A_N3R_NON-FUSED_STANDALONE"
+  },
+  {
+    "id": "SO110057",
+    "name": "ECB-3000A ABB",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-09",
+    "ifc_due_date": null,
+    "notes": "ABB ENCLOSED BREAKER, 480/277 3P 4W 65KA 3000A MCB 3200AF/3000AT\nBREAKER TERMINATION LUGS (8) #3/0-750MCM, GROUND BAR (1) #6-350MCM\nENCLOSURE LAYOUT\nSO110057-001"
+  },
+  {
+    "id": "SO110082",
+    "name": "SW, 17KV, 600AA, NEMA 1, 2 SECTION",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "IN QC PRODUCTION (BAY OAKS) "
+  },
+  {
+    "id": "SO110092",
+    "name": "SWITCH RACK",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-10",
+    "ifc_due_date": null,
+    "notes": "SHIPPED 6/19/26"
+  },
+  {
+    "id": "SO110112",
+    "name": "38Kv 3000A 18 Total vertical",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-01-17",
+    "ifc_due_date": "2026-05-30",
+    "notes": "AJITH"
+  },
+  {
+    "id": "SO110113",
+    "name": "NEMA 1 ATS",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": "2026-01-20",
+    "ifc_due_date": "2026-06-15",
+    "notes": "This was released yesterday by Edwin. I will be monitoring and reviewing the files."
+  },
+  {
+    "id": "SO110113 ",
+    "name": "15KV",
+    "engineer": "Logesh Kumar M S",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110137",
+    "name": "5KV MASTER BREAK SWITCH",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110140",
+    "name": "SWITCH RACK / BUS GUTTER",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-04",
+    "ifc_due_date": null,
+    "notes": "COMPLETED 05/11/26"
+  },
+  {
+    "id": "SO110155",
+    "name": "15KV_600A_N3R_NON-FUSED SWITCH",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-23",
+    "ifc_due_date": null,
+    "notes": "15KV_600A_N3R_NON-FUSED\nLOAD INTERRUPTER"
+  },
+  {
+    "id": "SO110158",
+    "name": "SWITCH RACK / BUS GUTTER",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-05",
+    "ifc_due_date": null,
+    "notes": "IN QC 6/18/26"
+  },
+  {
+    "id": "SO110183",
+    "name": "15kV INDOOR 1200A",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-05",
+    "ifc_due_date": "2026-06-03",
+    "notes": "Moved date from original 6/3\n\nBNB to submit on 6/9"
+  },
+  {
+    "id": "SO110228",
+    "name": "ECB-1600A ABB",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-01",
+    "ifc_due_date": null,
+    "notes": "ABB ENCLOSED BREAKER, 480/277 3P,4W, 65KA 1600A RATED MCB\n1600AF/1600AT LSIG + RELT MAIN BREAKER\nENCLOSURE LAYOUT"
+  },
+  {
+    "id": "SO110244",
+    "name": "SWBD, ABB, 2000A, NEMA 1, 4 LINEUPS",
+    "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": "2025-12-17",
+    "ifc_due_date": "2026-09-02",
+    "notes": "ELECTRICAL WORKING ON UPDATED ONELINE. SCHEDULED TO RECEIVE FROM ELECTRICAL AROUND 6/19. ESTIMATED SCHEDULED TO START IFC ON 6/19."
+  },
+  {
+    "id": "SO110260",
+    "name": "7 Section Switch 1200A",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Section 1 and 2 parts released 3/20"
+  },
+  {
+    "id": "SO110279",
+    "name": "SWITCH RACK / BUS GUTTER",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-11",
+    "ifc_due_date": null,
+    "notes": "Shipped "
+  },
+  {
+    "id": "SO110286",
+    "name": "SQD 3 sec swbd",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110299",
+    "name": "15KV_600A FUSED_LOAD_BREAK_SWITCH",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-01-16",
+    "ifc_due_date": null,
+    "notes": "15KV_600A_40KA_FUSED_LOAD_BREAK_SWITCH"
+  },
+  {
+    "id": "SO110302",
+    "name": "B3R-S-T-12-P-12-K6-3G+N-PD,BD",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-11",
+    "ifc_due_date": null,
+    "notes": "IDR complete and IFC drawings/files released in Vault."
+  },
+  {
+    "id": "SO110314",
+    "name": "SWITCH RACKS (24FT)(2) - (8FT)(1)",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-01-02",
+    "ifc_due_date": null,
+    "notes": "IN PRODUCTION 6/17/26"
+  },
+  {
+    "id": "SO110323",
+    "name": "COPPER DESIGN",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2025-12-15",
+    "ifc_due_date": null,
+    "notes": "COPPER DESIGN "
+  },
+  {
+    "id": "SO110342",
+    "name": "38kV METAL CLAD SWITCHGEAR",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-03-19",
+    "ifc_due_date": "2026-10-08",
+    "notes": ""
+  },
+  {
+    "id": "SO110345",
+    "name": "ECB-3000A SQD",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "SQD ENCLOSED MTZ BREAKER 600V 3PH 4W, 65KA, 3000A RATED \nMCB 3000AF/3000AT, LSIG+ERMS\nENCLOSURE LAYOUT"
+  },
+  {
+    "id": "SO110382",
+    "name": "SWBD, 3000A, NEMA1, 5 SECTION, UL1558",
+    "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": "2026-02-09",
+    "ifc_due_date": "2026-09-10",
+    "notes": "IFA SUBMITTED TO CUSTOMER. AWAITING APPROVAL"
+  },
+  {
+    "id": "SO110387",
+    "name": "38kV 2000A 7 section Nema1",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Multiple people are working on this (Mohan, Harsh, Logesh) IFC DUE 4/20/26"
+  },
+  {
+    "id": "SO110423",
+    "name": "FUSED, 1200A, 3P, 4W, 480V, ROTARY STYLE HAND",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "NEMA 3R MTS, FUSED, 1200A, 3P, 4W, 480V, ROTARY STYLE HAND.\n1200A FEMALE CAMLOK SET (3EA) W/ WP CAPS (480V), SER"
+  },
+  {
+    "id": "SO110461",
+    "name": "4000A Bussed Enclosure",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-02",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110473",
+    "name": "38kV METALCLAD",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-04-14",
+    "ifc_due_date": "2026-07-28",
+    "notes": "Waiting on customer send back updated SLD (3/31/2026)"
+  },
+  {
+    "id": "SO110481",
+    "name": "DROP OVER",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "5MCC DROP OVER\n1. remove vent and add fan - 04.29.2026\n2. customer approved We have to sent this back to NEMA and send fan cut out detail. "
+  },
+  {
+    "id": "SO110488",
+    "name": "15KV STANDALONE SWITCHES 400AM FUSED",
+    "engineer": "Tanner Phillips",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-21",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110518",
+    "name": "ALUMINUM SWRK",
+    "engineer": "Jose Jasso",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-19",
+    "ifc_due_date": null,
+    "notes": "Welding at Spike Fab 2."
+  },
+  {
+    "id": "SO110540",
+    "name": "BOLTSWITCH VLB369AG60 FUSIBLE BOLTED",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": "2026-02-06",
+    "ifc_due_date": "2026-08-01",
+    "notes": "job canceled\n\nCUSTOM TYPE 4X 72X42X36 FREESTANDING ENCLOSURE \nENCLOSING BOLTSWITCH VLB369AG60 FUSIBLE BOLTED"
+  },
+  {
+    "id": "SO110550",
+    "name": "27kV LOAD BREAK SWITCH LINE UP",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110567",
+    "name": "BOLT-SWITCH FUSIBLE SWITCH 5000A N3R",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-02",
+    "ifc_due_date": "2026-07-30",
+    "notes": "BOLT-SWITCH FUSIBLE SWITCH 5000A N3R 480Y/277V 3PH 4W, GROUND-FAULT W/VIEW WINDOW, 100KAIC\n1. CUSTOMER ADD FEW CHNAGES ON ENCLOSURE SIZE AND LUG PER PHASE. \n2. IFA revB submitted 04.28.2026"
+  },
+  {
+    "id": "SO110590",
+    "name": "38KV ANTHROPIC IES 10 SECTIONS",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-18",
+    "ifc_due_date": "2026-05-08",
+    "notes": "STILL NEED TO RELEASE LV DOORS. WAITING ON ELECTRICAL LAYOUT AS OF 7-21-26"
+  },
+  {
+    "id": "SO110591",
+    "name": "DH3 — INDUSTRIAL ELECTRICAL SUPPLY",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-18",
+    "ifc_due_date": "2026-05-08",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110592",
+    "name": "DH4 — INDUSTRIAL ELECTRICAL SUPPLY",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-18",
+    "ifc_due_date": "2026-05-08",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110593",
+    "name": "DH1 — INDUSTRIAL ELECTRICAL SUPPLY",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-14",
+    "ifc_due_date": "2026-05-05",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110594",
+    "name": "DH2 — INDUSTRIAL ELECTRICAL SUPPLY",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-18",
+    "ifc_due_date": "2026-05-08",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110595",
+    "name": "GIS DH3 — INDUSTRIAL ELECTRICAL SUPPLY",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-18",
+    "ifc_due_date": "2026-05-08",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110596",
+    "name": "GIS DH4 — INDUSTRIAL ELECTRICAL SUPPLY",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-18",
+    "ifc_due_date": "2026-05-08",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110597",
+    "name": "ECB-2500A ABB",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "2500A BOTTOM ENCLOSED BREAKER "
+  },
+  {
+    "id": "SO110599",
+    "name": "27kv CTB",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-05",
+    "ifc_due_date": null,
+    "notes": "Production started on 3/19/26"
+  },
+  {
+    "id": "SO110602",
+    "name": "NEXUS POWER - BILLINGS, MT",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-26",
+    "ifc_due_date": "2026-05-22",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110604",
+    "name": "6ft bussed gutter",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-06",
+    "ifc_due_date": null,
+    "notes": "IFCs were sent to the machining folder."
+  },
+  {
+    "id": "SO110607",
+    "name": "POWER SKID",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-13",
+    "ifc_due_date": null,
+    "notes": "SHIPPED 3/31/26"
+  },
+  {
+    "id": "SO110613",
+    "name": "REXEL - ALBUQUERQUE",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": "2026-02-26",
+    "ifc_due_date": "2026-05-22",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110614",
+    "name": "BOLTSWITCH FUSED 2000A",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "NEMA 3R MANUAL TRANSFER SWITCH, FUSED, 2000A, 4P, 480V\nENCLOSURE LAYOUT.\n1. IFC COPPER DUE 03/30/2026\n\n1.COPPER DRAWING PENDING "
+  },
+  {
+    "id": "SO110616",
+    "name": "BUS GUTTER",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-02-12",
+    "ifc_due_date": null,
+    "notes": "SHIPPED 4/15/26"
+  },
+  {
+    "id": "SO110636",
+    "name": "ECB-1600A ABB",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "1600A TOP AND BOTTOM ENCLOSED BREAKER "
+  },
+  {
+    "id": "SO110637",
+    "name": "(2) section 15Kv LBS",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-11",
+    "ifc_due_date": "2026-07-13",
+    "notes": "On hold due to mating dimensions not being provided.\n4/16/26 the transformer dimensions received. Waiting on new due dates from PM\nReceived SLD/BOM on 5/4/26.  \nBNB will have IFA package on 5/6. \nIFA rev_B sent out from mechanical on 6/1."
+  },
+  {
+    "id": "SO110639",
+    "name": "(6) section 38Kv Switchgear",
+    "engineer": "Mario Galdamez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-03-28",
+    "ifc_due_date": "2026-09-09",
+    "notes": "IFA rev C sent out on 06/02/26\n06/24/26 IFA not approved"
+  },
+  {
+    "id": "SO110655",
+    "name": "Eaton Magnums 2500A ENCLOSED",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Eaton Magnums 2500A ENCLOSED \n1. WAITING FOR BREAKER  03/13/2026\n2. BREAKER RECEIVE 04/30/2026\n3.IFC COMPLETED 05/01/2026"
+  },
+  {
+    "id": "SO110658",
+    "name": "15kv CTB",
+    "engineer": "Micaiah Williams",
+    "status": "In Progress",
+    "ifa_due_date": "2026-03-18",
+    "ifc_due_date": null,
+    "notes": "IFA was sent. still waiting on approval "
+  },
+  {
+    "id": "SO110677",
+    "name": "Medium Voltage Metal Enclosed Switchgear Lineup  -  (6) Sections",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-17",
+    "ifc_due_date": "2026-05-28",
+    "notes": "27kV, 1200a, 3 Phase, 3 Wire, 60HZ, 25kaic\n1. ADD FORKLIFT PROV\n2. IFA SUBMITTED \n3.Waiting for Breaker 3D model\n4. IFC package received 06/02/26\n5. outsource package sent 06/02/26"
+  },
+  {
+    "id": "SO110681",
+    "name": "ECB-1600A ABB",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "1600A ABB BOTTOM ENCLOSED ENCLOSURE"
+  },
+  {
+    "id": "SO110703",
+    "name": "SWITCH RACK / BUS GUTTER",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-23",
+    "ifc_due_date": null,
+    "notes": "IN PRODUCTION 6/22/26"
+  },
+  {
+    "id": "SO110712",
+    "name": "CABLE TAP BOX",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-09",
+    "ifc_due_date": null,
+    "notes": "Enclosure is now in field service for adjustments."
+  },
+  {
+    "id": "SO110715",
+    "name": "SWBD, SQD, 1200A, NEMA 1, STAINLESS STEEL",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-12",
+    "ifc_due_date": null,
+    "notes": "**316 STAINLESS STEEL. NEW SPD SELECTED BY EE. DESIGN TO ADD TO DEAD FRONT AND VERTICAL LV BACKPAN REQD"
+  },
+  {
+    "id": "SO110724",
+    "name": "ALUMINUM SWRK",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-30",
+    "ifc_due_date": null,
+    "notes": "IN PRODUCTION 6/22/26\n"
+  },
+  {
+    "id": "SO110728",
+    "name": "3 section 15Kv (fused) LBS",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-16",
+    "ifc_due_date": null,
+    "notes": "Expedited job. Will need outsource package."
+  },
+  {
+    "id": "SO110730",
+    "name": "CTB-16-3P4W-N3",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-02",
+    "ifc_due_date": null,
+    "notes": "Customer requested custom enclosure due to size constraints."
+  },
+  {
+    "id": "SO110731",
+    "name": "ABB GIS AGGREKO LLC",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "In Progress",
+    "ifa_due_date": "2026-06-19",
+    "ifc_due_date": "2027-02-02",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110732",
+    "name": "ABB GIS AGGREKO LLC",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "In Progress",
+    "ifa_due_date": "2026-06-19",
+    "ifc_due_date": "2027-02-02",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110737",
+    "name": "CTB 3000A 3P4W",
+    "engineer": "Osvaldo Perez",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-15",
+    "ifc_due_date": null,
+    "notes": "\nSubmitted for IFC and being made in the shop "
+  },
+  {
+    "id": "SO110742",
+    "name": "SWITCH",
+    "engineer": "Osvaldo Perez",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "On floor "
+  },
+  {
+    "id": "SO110744",
+    "name": "5KV & 15KV SWITCH",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-01",
+    "ifc_due_date": null,
+    "notes": "1.ABB - 5KV 1200A 40KA  LOAD BREAK SWITCH - FUSED AT 600A (qty 4)\n2.ABB - 15KV  600A 40KA  FUSED LOAD BREAK SWITCH - FUSED AT 400A (qty2)\n "
+  },
+  {
+    "id": "SO110745",
+    "name": "5KV_1200A NON-FUSED_STANDALONE",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-19",
+    "ifc_due_date": null,
+    "notes": "5KV_1200A_N3R_NON-FUSED_STANDALONE"
+  },
+  {
+    "id": "SO110746",
+    "name": "ALUMINUM SWRK",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-04",
+    "ifc_due_date": null,
+    "notes": "IN PRODUCTION 6/22/26"
+  },
+  {
+    "id": "SO110751",
+    "name": "SWRK 7FT",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-01",
+    "ifc_due_date": null,
+    "notes": "CUSTOMER APPROVED 5-15-26. SHIP DATE OF 7-13-26. Not our standard switchrack assembly. IFA Rev B sent 4/30"
+  },
+  {
+    "id": "SO110757",
+    "name": "SWBD, 4000A, NEMA 1 (FIELD RETROFIT)",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-17",
+    "ifc_due_date": null,
+    "notes": "PRODUCTION SCHEDULE TO SHIP 6/20/26. REVIEW WITH PM FIELD INSTALL INSTRUCTIONS."
+  },
+  {
+    "id": "SO110769",
+    "name": "SMALL SWRK",
+    "engineer": "Jose Jasso",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-16",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110775",
+    "name": "SQ6 1200A MLO HORZ 600A VERT - 3 SECTION 1G",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-02",
+    "ifc_due_date": null,
+    "notes": "MCC SIDE COVER MISSING. Completed "
+  },
+  {
+    "id": "SO110793",
+    "name": "Spike 15kV Load Break Switch Lineup- Fused 1200a 61ka",
+    "engineer": "Osvaldo Perez",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-06",
+    "ifc_due_date": null,
+    "notes": "BNB UPDATING LIFT OFF PLAN "
+  },
+  {
+    "id": "SO110826",
+    "name": "JUNCTION BOX",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "JUNCTION BOX SWING DOOR PANEL "
+  },
+  {
+    "id": "SO110828",
+    "name": "BUS GUTTER",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-30",
+    "ifc_due_date": null,
+    "notes": "SHIPPED 6/18/26"
+  },
+  {
+    "id": "SO110831",
+    "name": "ECB-2000A-SQD",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-03",
+    "ifc_due_date": null,
+    "notes": "ECB-2000A-SQD, FS Enclosure 90H X 36W X 36D\n1. SHIP DATE 04/20"
+  },
+  {
+    "id": "SO110832",
+    "name": "POWER SKID, 112.5 KVA, NEMA 3R",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-26",
+    "ifc_due_date": null,
+    "notes": "SHIPPED"
+  },
+  {
+    "id": "SO110845",
+    "name": "CTB-25-N3-3P3W",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-27",
+    "ifc_due_date": null,
+    "notes": "IDR complete and IFC drawings/files released in Vault."
+  },
+  {
+    "id": "SO110846",
+    "name": "5KV 4000A  INDOOR METALCLAD SWGR",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-01",
+    "ifc_due_date": "2026-09-15",
+    "notes": ""
+  },
+  {
+    "id": "SO110849",
+    "name": "SWBD, 2000A, SGL SECTION, NEMA1,",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "ASSEMBLY STARTED - SPIKE 4"
+  },
+  {
+    "id": "SO110851",
+    "name": "SPK SWITCH GEAR",
+    "engineer": "Osvaldo Perez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-04-18",
+    "ifc_due_date": "2026-09-09",
+    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***NO APPROVAL FROM CUSTOMER YET***\n"
+  },
+  {
+    "id": "SO110852",
+    "name": "(2) section 15Kv 61kA Non-Fused LBS w/ CPT on SKID",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-07",
+    "ifc_due_date": "2026-06-25",
+    "notes": "Released 06/02\n\nfuse changed\n\nApproved with comments. No skid, will sit on a 2\" C channel. \n\nJob was released on 06/02"
+  },
+  {
+    "id": "SO110855",
+    "name": "SWBD, SQD, NEMA 1, DH1",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-14",
+    "ifc_due_date": "2026-04-20",
+    "notes": "STATUS: ADDING BUS FOR NEUTRAL SENSOR LUG CONNECTIONS. UPDATE 4000A MAINS TO REAR ENTRY.  UPDATE ROOFS OF ALL BUS STACKS TO TOP FEED. UPDATE DUAL FEEDER ROOFS TO REMOVE TOP FEED OPENING. REVISE REVISIONS FOR MATERIAL TRAVELERS AND 3D STEP FILES."
+  },
+  {
+    "id": "SO110856",
+    "name": "SWBD, SQD, NEMA 1, DH2",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-14",
+    "ifc_due_date": "2026-04-20",
+    "notes": ""
+  },
+  {
+    "id": "SO110857",
+    "name": "SWBD, SQD, NEMA 1, DH3",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-28",
+    "ifc_due_date": "2026-05-04",
+    "notes": ""
+  },
+  {
+    "id": "SO110858",
+    "name": "SWBD, SQD, NEMA 1, DH4",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-15",
+    "ifc_due_date": "2026-05-21",
+    "notes": ""
+  },
+  {
+    "id": "SO110871",
+    "name": "Power Skid",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-03-31",
+    "ifc_due_date": null,
+    "notes": "IN PRODUCTION 6/22/26"
+  },
+  {
+    "id": "SO110883",
+    "name": "NEMA 3R SWBD ENCLOSURE",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-16",
+    "ifc_due_date": null,
+    "notes": "IDR complete and IFC drawings/files released in Vault."
+  },
+  {
+    "id": "SO110898",
+    "name": "ECB-1200A-ABB",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-12",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110901",
+    "name": "SQD 4000A SWBD WITH 2 2500A FEEDERS TYPE 3R",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-16",
+    "ifc_due_date": "2026-04-23",
+    "notes": "THIS IS FAST TRACK WITH A SHIP DATE OF 6/1/2026"
+  },
+  {
+    "id": "SO110902",
+    "name": "SWBD, SQD, 1200A, NEMA 3R, 3 SECTION,  316 SS",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-16",
+    "ifc_due_date": "2026-06-22",
+    "notes": "*316 SS, HRG UNIT SECTION 2. MECH ELEV SUBMITTED TO ELEC ON 4/15/26\n\nStainless Steel\n\nSent to BNB 5/21"
+  },
+  {
+    "id": "SO110904",
+    "name": "SFZ-SF15-E-X-S",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "SHEETMETAL PARTS-HOOD "
+  },
+  {
+    "id": "SO110909",
+    "name": "BOLTSWITCH 3000A",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "1. WAITING FOR ENCLOSURE DEATIL 04/14\n2. IFA submitted 04.28.2026\n3. IFC submitted 05.20.26"
+  },
+  {
+    "id": "SO110916",
+    "name": "CTB-5-N3-6-3P3W",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-22",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110917",
+    "name": "38KV FUSED LBS 4 SECTIONS",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-08",
+    "ifc_due_date": "2026-06-16",
+    "notes": "IFA Submitted; Hasnt been approved."
+  },
+  {
+    "id": "SO110924",
+    "name": "1200A LUG IN LUG OUT",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-01",
+    "ifc_due_date": null,
+    "notes": "IFC Submitted - 04.28.2026"
+  },
+  {
+    "id": "SO110942",
+    "name": "2000A 38KV 11 SECT NON AR FOR ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-14",
+    "ifc_due_date": "2026-10-19",
+    "notes": ""
+  },
+  {
+    "id": "SO110944",
+    "name": "BLD 1 ABB ATS INDUSTRIAL ELECTRICAL SUPPLY",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-02",
+    "ifc_due_date": "2026-05-06",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO110955",
+    "name": "Copper",
+    "engineer": "Osvaldo Perez",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "LIVE"
+  },
+  {
+    "id": "SO110956",
+    "name": "MASTER BREAK SWITCH",
+    "engineer": "Osvaldo Perez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-05-18",
+    "ifc_due_date": "2026-09-07",
+    "notes": "REVISION B IFA SUBMITTED 7/28/2026 FOR CUSTOMER APPROVAL as of 8-4-26"
+  },
+  {
+    "id": "SO110966",
+    "name": "4000A CABLE TAP BOX CTB-4-N3-P",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-07",
+    "ifc_due_date": null,
+    "notes": "IFC's released."
+  },
+  {
+    "id": "SO110971",
+    "name": "BUSSED GUTTER B3R-D-T-06-P-12-K6-3G+N-PD,BD",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-04-22",
+    "ifc_due_date": null,
+    "notes": "IFC approved 110971 5-13-26"
+  },
+  {
+    "id": "SO110972",
+    "name": "2000A SQD ENCLOSED BREAKER",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-08",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO110978",
+    "name": "SQD 2000A SWBD",
+    "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": "2026-05-07",
+    "ifc_due_date": null,
+    "notes": "ORDER IS ON HOLD"
+  },
+  {
+    "id": "SO110984",
+    "name": "CABLE TAP BOX 400A",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-05",
+    "ifc_due_date": "2026-06-23",
+    "notes": "IFA's sent, waiting for customer approval."
+  },
+  {
+    "id": "SO110985",
+    "name": "2000A FIELD RETROFIT. BUS ADDITION.",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-07",
+    "ifc_due_date": null,
+    "notes": "FIELD RETROFIT (BUS). TOOK FIELD MEASUREMENTS ON 5/5. WORKING ON DRAWINGS TO SUBMIT TO CUSTOMER FOR APPROVAL AND FABRICATION."
+  },
+  {
+    "id": "SO111025",
+    "name": "SQD SWBD TYPE 1 3 SECTION",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-25",
+    "ifc_due_date": "2026-06-01",
+    "notes": "Released 06/02"
+  },
+  {
+    "id": "SO111044",
+    "name": "QTY 20 38KV LBS RESA EXPANDABLE",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": "2026-05-21",
+    "notes": ""
+  },
+  {
+    "id": "SO111047",
+    "name": "4000A SWBD 65KAIS",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-05-11",
+    "ifc_due_date": "2026-06-01",
+    "notes": "PRODUCTION BAY AREA STARTED ASSY 6/15/26"
+  },
+  {
+    "id": "SO111050",
+    "name": "MMR 38KV LBS",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-05",
+    "ifc_due_date": "2026-07-06",
+    "notes": ""
+  },
+  {
+    "id": "SO111051",
+    "name": "MMR SWBD",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-05",
+    "ifc_due_date": "2026-07-06",
+    "notes": "MECH IFA SUBMITTED TO ELECTRICAL"
+  },
+  {
+    "id": "SO111052",
+    "name": "METAL ENCLOSED SWGR",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-06-05",
+    "ifc_due_date": "2026-07-18",
+    "notes": "NEED NEW DATE FOR IFC. PT INFO RECIEVED 7-20-26. SCHEDULED IFC 7-27-26"
+  },
+  {
+    "id": "SO111071",
+    "name": "3200A ABB SWBD",
+    "engineer": "Mario Galdamez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-05-27",
+    "ifc_due_date": "2026-08-25",
+    "notes": "5/21/26 - Vault difficulties, using P: drive\n5/21/26 - Start of design\n7/24/26 - IFA not approved"
+  },
+  {
+    "id": "SO111078",
+    "name": "16 JUNCTION BOX",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "TOTAL 16 VARIOUS JUNCTION BOXs"
+  },
+  {
+    "id": "SO111080",
+    "name": "38KV LOAD BREAK SWITCH",
+    "engineer": "Osvaldo Perez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-06-24",
+    "ifc_due_date": "2026-09-03",
+    "notes": "IFA REVISION B APPROVED 8/4/2026\n"
+  },
+  {
+    "id": "SO111087",
+    "name": "15KV 600A LBS LINE UP",
+    "engineer": "Osvaldo Perez",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-10",
+    "ifc_due_date": "2026-08-03",
+    "notes": "IFC complete/Released on Vault 7/28/2026\nNeed Electrical final IFC BOM/One line "
+  },
+  {
+    "id": "SO111092",
+    "name": "NEMA 1 SQD 5000A MAIN STRAIGHT TO IFC",
+    "engineer": "Mario Galdamez",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-05",
+    "ifc_due_date": "2026-06-22",
+    "notes": "STRAIGHT TO IFC. RDD 7/24/26\n\nSales ordered the wrong breaker, re-design needed."
+  },
+  {
+    "id": "SO111094",
+    "name": "ABB SWBD 2SECT",
+    "engineer": "Corey Kidd",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-10",
+    "ifc_due_date": "2026-09-23",
+    "notes": "NOTIFIED BY SALES THAT THIS UNIT IS NEMA 3R NOT NEMA 1. NEED TO RESUBMIT MECHANICALS. MECHANICAL ELEV SUBMITTED 6/10/26. DUE 6/10/26."
+  },
+  {
+    "id": "SO111106",
+    "name": "TAP BOX",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-05",
+    "ifc_due_date": "2026-06-25",
+    "notes": "IN PRODUCTION 6/22/26"
+  },
+  {
+    "id": "SO111109",
+    "name": "5KV LOAD BREAK SWITCH",
+    "engineer": "KAIYI SHI",
+    "status": "In Progress",
+    "ifa_due_date": "2026-06-19",
+    "ifc_due_date": "2026-07-28",
+    "notes": "This is out for approval as of 7-28-26"
+  },
+  {
+    "id": "SO111112",
+    "name": "B-3R-S-B-2-A-12-K6-N-PD,BD BUSSED GUTTER",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-02",
+    "ifc_due_date": "2026-06-11",
+    "notes": "IN PRODUCTION 6/22/26 BMC"
+  },
+  {
+    "id": "SO111114",
+    "name": "Panel Board",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-22",
+    "ifc_due_date": "2026-07-10",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111115",
+    "name": "38KV LBS",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-09",
+    "ifc_due_date": "2026-06-16",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111131",
+    "name": "38KV SWITCH LINE UP 4 UNITS",
+    "engineer": "Osvaldo Perez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-13",
+    "ifc_due_date": "2026-09-24",
+    "notes": "SENT TO ELECTRICAL IFA 7/13/2026\nIFA SENT\n*WAITING FOR APPROVAL*\n"
+  },
+  {
+    "id": "SO111143",
+    "name": "COPPER BUS",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "2 COPPER BUS BAR"
+  },
+  {
+    "id": "SO111147",
+    "name": "LOAD BREAK SWITCH LINEUP",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": "2026-06-29",
+    "ifc_due_date": "2026-09-11",
+    "notes": "15KV 600A FUSED LOAD BREAK TYPE 1 (QTY-9)\n15KV 600A FUSED LOAD BREAK TYPE 3R (QTY-3)\nKICK OFF 06/03/26 (WAITING FOR CUSTOMER APPROVAL FOR SECTION 1 OR 2)"
+  },
+  {
+    "id": "SO111148",
+    "name": "SWBD 4000A SINGLE SECTION",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": "2026-06-26",
+    "ifc_due_date": "2026-08-19",
+    "notes": ""
+  },
+  {
+    "id": "SO111158",
+    "name": "B-3R-S-T-10-P-6-K6-3NG-BD",
+    "engineer": "Erik Leal",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-07",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111170",
+    "name": "CTB-4000-N4X-3P3W",
+    "engineer": "KAIYI SHI",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-12",
+    "ifc_due_date": "2026-08-11",
+    "notes": ""
+  },
+  {
+    "id": "SO111179",
+    "name": "38KV SINGLE SWITCH 600A",
+    "engineer": "KAIYI SHI",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-14",
+    "ifc_due_date": "2026-09-11",
+    "notes": ""
+  },
+  {
+    "id": "SO111211",
+    "name": "2 SECTION SQ D SWBD 4ka & 2ka",
+    "engineer": "Mario Galdamez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-14",
+    "ifc_due_date": "2026-08-27",
+    "notes": "Double line up"
+  },
+  {
+    "id": "SO111220",
+    "name": "UPS BUILD",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-07",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111232",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-05",
+    "ifc_due_date": "2026-09-26",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111260",
+    "name": "38KV METALCLAD INDOOR 14 SECTIONS",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-09-05",
+    "ifc_due_date": "2026-10-12",
+    "notes": "PRELIM REQUESTED FOR 7-24-26"
+  },
+  {
+    "id": "SO111264",
+    "name": "15kV Switchgear",
+    "engineer": "KAIYI SHI",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-21",
+    "ifc_due_date": "2026-10-06",
+    "notes": "08/24~25 meeting and IFA revisions"
+  },
+  {
+    "id": "SO111268",
+    "name": "ABB 2 SECTION SWBD",
+    "engineer": "Mario Galdamez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-07",
+    "ifc_due_date": "2026-09-02",
+    "notes": "DRAWING IS APPROVED AS OF 8-10-26"
+  },
+  {
+    "id": "SO111279",
+    "name": "ECBXSS6 ABB 1600A ENCLOSED BREAKER",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-02",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111288",
+    "name": "SINGLE SECTION LBS 5KV 600A",
+    "engineer": "KAIYI SHI",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-24",
+    "ifc_due_date": "2026-08-29",
+    "notes": ""
+  },
+  {
+    "id": "SO111306",
+    "name": "SQD SWBD 2000A 2 SECT",
+    "engineer": "Bryan Haro",
+    "status": "Complete",
+    "ifa_due_date": "2026-06-09",
+    "ifc_due_date": "2026-08-08",
+    "notes": "SAME AS 111103. SUBMITTED MECH LAYOUT TO ELECTRICAL"
+  },
+  {
+    "id": "SO111316",
+    "name": "CABLE TAP BOX 4000A",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-08",
+    "ifc_due_date": "2026-07-11",
+    "notes": ""
+  },
+  {
+    "id": "SO111340",
+    "name": "DOCKING STATION-CAMLOCK",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-22",
+    "ifc_due_date": null,
+    "notes": "docking station with camlock"
+  },
+  {
+    "id": "SO111343",
+    "name": "IDENTICAL TO 111051  MMR CONSTRUCTORS, INC - BATON ROUGE",
+    "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-05",
+    "ifc_due_date": "2026-09-04",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111346",
+    "name": "MMR SWBD 4 SECTION",
+    "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-05",
+    "ifc_due_date": "2026-09-04",
+    "notes": "Mechanical IFA's submitted to electrical 8/3"
+  },
+  {
+    "id": "SO111352",
+    "name": "38KV SWITCH 40KA",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-08-05",
+    "ifc_due_date": "2026-09-04",
+    "notes": ""
+  },
+  {
+    "id": "SO111353",
+    "name": "38KV SWITCH FOR MMR",
+    "engineer": "Edwin Ojeda",
+    "status": "Complete",
+    "ifa_due_date": "2026-08-07",
+    "ifc_due_date": "2026-09-07",
+    "notes": ""
+  },
+  {
+    "id": "SO111356",
+    "name": "38KV 1250A IS LIMITER",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-09-02",
+    "ifc_due_date": "2026-10-23",
+    "notes": ""
+  },
+  {
+    "id": "SO111358",
+    "name": "15KV PARALLELING SWITCHGEAR",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-09-24",
+    "ifc_due_date": "2026-11-14",
+    "notes": ""
+  },
+  {
+    "id": "SO111378",
+    "name": "SPK BUS GUTTER 16' & 12'",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-20",
+    "ifc_due_date": "2026-08-03",
+    "notes": ""
+  },
+  {
+    "id": "SO111379",
+    "name": "CTB-4000-3P4W-N3R",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-18",
+    "ifc_due_date": null,
+    "notes": "IFA drawings approved 8/12. Proceeding with IFC."
+  },
+  {
+    "id": "SO111415",
+    "name": "GIS IE US DEVELOPMENT HOLDINGS 3 INC.",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "In Progress",
+    "ifa_due_date": "2026-09-26",
+    "ifc_due_date": "2026-11-09",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111420",
+    "name": "BREAK LOAD INTERRUPTER SWITCHGEAR",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": "2026-09-18",
+    "ifc_due_date": "2026-11-02",
+    "notes": "SWITCH 15KV AND BREAKER 1200A FIXED "
+  },
+  {
+    "id": "SO111425",
+    "name": "BUS GUTTER",
+    "engineer": "Erik Leal",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-28",
+    "ifc_due_date": null,
+    "notes": "IFA 7/22/26"
+  },
+  {
+    "id": "SO111437",
+    "name": "CTB-15-N3-12-3P3W",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-21",
+    "ifc_due_date": null,
+    "notes": "APPROVED 7-28-26. PROCEED TO IFC"
+  },
+  {
+    "id": "SO111446",
+    "name": "MCC FREEDOM 2100 72 HEIGHT SECTION\"",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "HOOD WITH DOOR"
+  },
+  {
+    "id": "SO111452",
+    "name": "CASH ACCOUNT C.O.D",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-02",
+    "ifc_due_date": "2026-11-14",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111455",
+    "name": "3 SINGLE LBS 38KV RBA FUSED",
+    "engineer": "Tanner Phillips",
+    "status": "In Progress",
+    "ifa_due_date": "2026-09-03",
+    "ifc_due_date": "2026-10-16",
+    "notes": ""
+  },
+  {
+    "id": "SO111463",
+    "name": "15KV SINGLE SECTION SWITCH",
+    "engineer": "Tanner Phillips",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-19",
+    "ifc_due_date": "2026-10-03",
+    "notes": ""
+  },
+  {
+    "id": "SO111464",
+    "name": "VENUS",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-07-30",
+    "ifc_due_date": "2026-09-05",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111467",
+    "name": "TRANSFORMER FIX",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-07-28",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111468",
+    "name": "EPPI INC.",
+    "engineer": "BNB Team",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-20",
+    "ifc_due_date": "2026-10-05",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111473",
+    "name": "15KV SWITCH",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-06",
+    "ifc_due_date": "2026-09-02",
+    "notes": ""
+  },
+  {
+    "id": "SO111488",
+    "name": "TRYSTAR",
+    "engineer": "Tanner Phillips",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-25",
+    "ifc_due_date": "2026-10-09",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111496",
+    "name": "MILLENNIUM CONTROL SYSTEMS",
+    "engineer": "Erik Leal",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-26",
+    "ifc_due_date": "2026-10-10",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111521",
+    "name": "SQD 5 SECTION SWBD 4000A SO3 UPS BLOCK",
+    "engineer": "Mario Galdamez",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-01",
+    "ifc_due_date": "2026-11-14",
+    "notes": ""
+  },
+  {
+    "id": "SO111530",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-02",
+    "ifc_due_date": "2026-11-16",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111531",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-02",
+    "ifc_due_date": "2026-11-16",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111532",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-02",
+    "ifc_due_date": "2026-11-16",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111536",
+    "name": "B3R-S-T-06-P-12-K6-3N-SP.PD.BD",
+    "engineer": "Micaiah Williams",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-13",
+    "ifc_due_date": null,
+    "notes": "IFA drawings sent 8/12. Waiting on customer approval."
+  },
+  {
+    "id": "SO111542",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-05",
+    "ifc_due_date": "2026-11-18",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111544",
+    "name": "ABB AWS SITE SBN752 6 SECTION",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-05",
+    "ifc_due_date": "2026-11-18",
+    "notes": ""
+  },
+  {
+    "id": "SO111547",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-07",
+    "ifc_due_date": "2026-11-20",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111548",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-07",
+    "ifc_due_date": "2026-11-20",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111551",
+    "name": "ABB",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-07",
+    "ifc_due_date": "2026-11-20",
+    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+  },
+  {
+    "id": "SO111591",
+    "name": "REYNOLDS - BEAUMONT",
+    "engineer": "Tanner Phillips",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-16",
+    "ifc_due_date": "2026-12-02",
+    "notes": "Added from imported Engineering schedule; engineer assignment not provided by schedule export."
+  },
+  {
+    "id": "SO111593",
+    "name": "5KV 3000A METAL CLAD",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-03",
+    "ifc_due_date": "2026-11-16",
+    "notes": ""
+  },
+  {
+    "id": "SO111599",
+    "name": "THE WILLIAMS COMPANIES, INC.",
+    "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": "2026-10-17",
+    "ifc_due_date": "2026-12-03",
+    "notes": "Added from imported Engineering schedule; engineer assignment not provided by schedule export."
+  },
+  {
+    "id": "SO111602",
+    "name": "B3R-S-T-6-P-20-K6-3P+G-PD BD BUS GUTTER",
+    "engineer": "Micaiah Williams",
+    "status": "Complete",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Direct to IFC, working on release as of 8/24."
+  },
+  {
+    "id": "SO111611",
+    "name": "B3R-S-T-4-P-20-K6-3G+N-PD,BD 2000A 6ft STEEL GUTTER",
+    "engineer": "Micaiah Williams",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "IFA drawings submitted 8/28."
+  },
+  {
+    "id": "SO111628",
+    "name": "ECB-1200A-ABB",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": "2026-08-31",
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111674",
+    "name": "B3RSS-S-T-6-S4-6-K2-G,N-SP,PD,BD,SS",
+    "engineer": "Micaiah Williams",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111684",
+    "name": "CTB-2000-N3R-3P4W",
+    "engineer": "KAIYI SHI",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111692",
+    "name": "15KV SWITCH 600A",
+    "engineer": "KAIYI SHI",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  }
+]

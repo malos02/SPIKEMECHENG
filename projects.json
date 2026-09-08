@@ -1872,6 +1872,15 @@
     "notes": ""
   },
   {
+    "id": "SO111689",
+    "name": "SO111689",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111692",
     "name": "15KV SWITCH 600A",
     "engineer": "KAIYI SHI",

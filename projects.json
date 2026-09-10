@@ -650,7 +650,7 @@
   {
     "id": "SO110613",
     "name": "REXEL - ALBUQUERQUE",
-    "engineer": "Unassigned",
+    "engineer": "Mario Galdamez",
     "status": "In Progress",
     "ifa_due_date": "2026-02-26",
     "ifc_due_date": "2026-05-22",
@@ -1873,8 +1873,8 @@
   },
   {
     "id": "SO111689",
-    "name": "SO111689",
-    "engineer": "Unassigned",
+    "name": "B-3R-S-T-10-A-30-K10-3NG-PD,BD",
+    "engineer": "Micaiah Williams",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

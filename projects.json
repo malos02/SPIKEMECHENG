@@ -969,7 +969,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-04-18",
     "ifc_due_date": "2026-09-09",
-    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***NO APPROVAL FROM CUSTOMER YET***\n"
+    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***NO APPROVAL FROM CUSTOMER YET***\n9/10/2026\n**STILL WAITING FOR APPROVAL**\n"
   },
   {
     "id": "SO110852",
@@ -1140,7 +1140,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-05-18",
     "ifc_due_date": "2026-09-07",
-    "notes": "REVISION B IFA SUBMITTED 7/28/2026 FOR CUSTOMER APPROVAL as of 8-4-26"
+    "notes": "IDR 9/10/2026\n"
   },
   {
     "id": "SO110966",
@@ -1356,7 +1356,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-07-13",
     "ifc_due_date": "2026-09-24",
-    "notes": "SENT TO ELECTRICAL IFA 7/13/2026\nIFA SENT\n*WAITING FOR APPROVAL*\n"
+    "notes": "9/4/2026\n*WAITING FOR APPROVAL*\n"
   },
   {
     "id": "SO111143",

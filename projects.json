@@ -969,7 +969,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-04-18",
     "ifc_due_date": "2026-09-09",
-    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***NO APPROVAL FROM CUSTOMER YET***\n9/10/2026\n**STILL WAITING FOR APPROVAL**\n"
+    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***WAITINO APPROVAL FROM CUSTOMER ***\n9/10/2026\n**STILL WAITING FOR APPROVAL**\n"
   },
   {
     "id": "SO110852",
@@ -1140,7 +1140,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-05-18",
     "ifc_due_date": "2026-09-07",
-    "notes": "IDR 9/10/2026\n"
+    "notes": "IDR 9/10/2026\nIFC SUBMITTED 8/11/2026"
   },
   {
     "id": "SO110966",

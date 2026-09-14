@@ -117,6 +117,8 @@ th{text-align:left;font-size:9.5px;font-weight:700;color:var(--t3);text-transfor
 th.sortable{cursor:pointer;user-select:none}th.sortable:hover{color:var(--spike)}
 th.sort-asc::after{content:' ↑';color:var(--spike)}th.sort-desc::after{content:' ↓';color:var(--spike)}
 td{padding:10px 12px;border-bottom:1px solid var(--b1);font-size:12px;vertical-align:middle}
+.actions-col{position:sticky;right:0;z-index:3;background:var(--s1);box-shadow:-8px 0 12px rgba(0,0,0,.38);min-width:112px;text-align:right}
+td.actions-col{z-index:2;background:var(--s2);white-space:nowrap}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(255,255,255,.018)}
 .pname{font-weight:600;color:var(--t1)}
@@ -395,7 +397,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <select class="fsel" id="f-stat" onchange="renderProjects()"><option value="">All Statuses</option><option>In Progress</option><option>Complete</option><option>On Hold</option></select>
       <select class="fsel" id="f-ms" onchange="renderProjects()"><option value="">All Milestones</option><option value="design_done">Design Done</option><option value="ifa_pending">IFA Pending</option><option value="ifa_done">IFA Done</option><option value="adj_done">Customer Approval Done</option><option value="ifc_done">IFC Done</option><option value="idr_pending">IDR Pending</option><option value="idr_done">IDR Done</option><option value="live">Live on Floor</option><option value="shipped">Project Shipped</option></select>
     </div>
-    <div class="tw"><table><thead><tr><th class="sortable" id="th-id" onclick="setSort('id')">ID</th><th class="sortable" id="th-name" onclick="setSort('name')">Project Name</th><th class="sortable" id="th-engineer" onclick="setSort('engineer')">Engineer</th><th class="sortable" id="th-type" onclick="setSort('type')">Type</th><th class="sortable" id="th-voltage" onclick="setSort('voltage')">Voltage</th><th class="sortable" id="th-pm" onclick="setSort('pm')">PM</th><th class="sortable" id="th-sales" onclick="setSort('sales')">Sales</th><th class="sortable" id="th-start" onclick="setSort('start')">Start</th><th class="sortable" id="th-end" onclick="setSort('end')">Target</th><th class="sortable" id="th-ifaDue" onclick="setSort('ifaDue')">IFA Due</th><th class="sortable" id="th-ifcDue" onclick="setSort('ifcDue')">IFC Due</th><th class="sortable" id="th-milestones" onclick="setSort('milestones')">Milestones</th><th class="sortable" id="th-progress" onclick="setSort('progress')">Progress</th><th class="sortable" id="th-status" onclick="setSort('status')">Status</th><th>Notes</th><th></th></tr></thead><tbody id="proj-table"></tbody></table></div>
+      <div class="tw"><table><thead><tr><th class="sortable" id="th-id" onclick="setSort('id')">ID</th><th class="sortable" id="th-name" onclick="setSort('name')">Project Name</th><th class="sortable" id="th-engineer" onclick="setSort('engineer')">Engineer</th><th class="sortable" id="th-type" onclick="setSort('type')">Type</th><th class="sortable" id="th-voltage" onclick="setSort('voltage')">Voltage</th><th class="sortable" id="th-pm" onclick="setSort('pm')">PM</th><th class="sortable" id="th-sales" onclick="setSort('sales')">Sales</th><th class="sortable" id="th-start" onclick="setSort('start')">Start</th><th class="sortable" id="th-end" onclick="setSort('end')">Target</th><th class="sortable" id="th-ifaDue" onclick="setSort('ifaDue')">IFA Due</th><th class="sortable" id="th-ifcDue" onclick="setSort('ifcDue')">IFC Due</th><th class="sortable" id="th-milestones" onclick="setSort('milestones')">Milestones</th><th class="sortable" id="th-progress" onclick="setSort('progress')">Progress</th><th class="sortable" id="th-status" onclick="setSort('status')">Status</th><th>Notes</th><th class="actions-col">Actions</th></tr></thead><tbody id="proj-table"></tbody></table></div>
   </div>
 
   <!-- GANTT -->
@@ -484,7 +486,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="kc" style="--kc:var(--am)"><div class="kc-lbl">IDR Pending</div><div class="kc-val" id="bnb-idrp">0</div><div class="kc-sub">Needs internal review</div></div>
       <div class="kc" style="--kc:var(--rd)"><div class="kc-lbl">IFA Overdue</div><div class="kc-val" id="bnb-ifa-late">0</div><div class="kc-sub">Past IFA due date</div></div>
     </div>
-    <div class="tw"><table><thead><tr><th>Project</th><th>Type</th><th>Voltage</th><th>PM / Sales</th><th>IFA Due</th><th>IFC Due</th><th>Milestones</th><th>Progress</th><th>Status</th><th>Notes</th><th></th></tr></thead><tbody id="bnb-table"></tbody></table></div>
+    <div class="tw"><table><thead><tr><th>Project</th><th>Type</th><th>Voltage</th><th>PM / Sales</th><th>IFA Due</th><th>IFC Due</th><th>Milestones</th><th>Progress</th><th>Status</th><th>Notes</th><th class="actions-col">Actions</th></tr></thead><tbody id="bnb-table"></tbody></table></div>
   </div>
 
   <!-- ENGINEER VIEW -->
@@ -1356,7 +1358,7 @@ function renderProjects(){
       <td><div class="pbar"><div class="ptrack"><div class="pfill" style="width:${pct}%"></div></div><span class="ppct">${pct}%</span></div></td>
       <td>${spill(p.status)}</td>
       <td style="font-size:11px;color:var(--t2);max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.notes||'').replace(/"/g,'&quot;')}">${p.notes||'—'}</td>
-      <td style="white-space:nowrap"><button class="btn btn-gh btn-sm edit-only" onclick="openEditModal('${p.id}')">Edit</button><button class="btn btn-gh btn-sm admin-only" style="margin-left:4px;color:var(--rd);border-color:rgba(245,83,83,.3)" onclick="deleteProject('${p.id}')">Delete</button></td>
+      <td class="actions-col"><button class="btn btn-gh btn-sm edit-only" onclick="openEditModal('${p.id}')">Edit / Update</button><button class="btn btn-gh btn-sm admin-only" style="margin-left:4px;color:var(--rd);border-color:rgba(245,83,83,.3)" onclick="deleteProject('${p.id}')">Delete</button></td>
     </tr>`;
   }).join('');
 }
@@ -1806,7 +1808,7 @@ function renderBNB(){
     <td><div class="pbar"><div class="ptrack"><div class="pfill" style="width:${pct}%;background:var(--pu)"></div></div><span class="ppct" style="color:var(--pu)">${pct}%</span></div></td>
     <td>${spill(p.status)}</td>
     <td style="font-size:11px;color:var(--t2);max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.notes||'').replace(/"/g,'&quot;')}">${p.notes||'—'}</td>
-    <td><button class="btn btn-gh btn-sm edit-only" onclick="openEditModal('${p.id}')">Edit</button></td>
+    <td class="actions-col"><button class="btn btn-gh btn-sm edit-only" onclick="openEditModal('${p.id}')">Edit / Update</button></td>
   </tr>`;}).join('');
 }
 
@@ -1847,7 +1849,7 @@ function viewEngineer(name,el,keepSort){
     </div>
     <div class="tw"><table><thead><tr>
       <th class="sortable" style="color:var(--spike)" onclick="toggleEngIdSort('${name}')">ID <span style="color:var(--spike)">${sortArrow}</span></th>
-      <th>Project</th><th>Type</th><th>Voltage</th><th>PM / Sales</th><th>Target</th><th>IFA Due</th><th>IFC Due</th><th>Milestones</th><th>Progress</th><th>Status</th><th>Notes</th><th></th>
+      <th>Project</th><th>Type</th><th>Voltage</th><th>PM / Sales</th><th>Target</th><th>IFA Due</th><th>IFC Due</th><th>Milestones</th><th>Progress</th><th>Status</th><th>Notes</th><th class="actions-col">Actions</th>
     </tr></thead>
     <tbody>${projs.map(p=>{const pc=msPct(p.ms);return`<tr>
       <td class="pid">${p.id}</td><td class="pname">${p.name}</td>
@@ -1861,7 +1863,7 @@ function viewEngineer(name,el,keepSort){
       <td><div class="pbar"><div class="ptrack"><div class="pfill" style="width:${pc}%"></div></div><span class="ppct">${pc}%</span></div></td>
       <td>${spill(p.status)}</td>
       <td style="font-size:11px;color:var(--t2);max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${(p.notes||'').replace(/"/g,'&quot;')}">${p.notes||'—'}</td>
-      <td><button class="btn btn-gh btn-sm edit-only" onclick="openEditModal('${p.id}')">Edit</button></td>
+      <td class="actions-col"><button class="btn btn-gh btn-sm edit-only" onclick="openEditModal('${p.id}')">Edit / Update</button></td>
     </tr>`;}).join('')}</tbody></table></div>`;
 }
 

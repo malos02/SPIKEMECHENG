@@ -852,7 +852,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-04-04",
     "ifc_due_date": null,
-    "notes": "IN PRODUCTION 6/22/26"
+    "notes": "in QC 8/31/26"
   },
   {
     "id": "SO110751",
@@ -1023,7 +1023,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-03-31",
     "ifc_due_date": null,
-    "notes": "Completed for QC 8/11/26\n"
+    "notes": "Completed on 8/11/26. No update on linear from QC or shipping"
   },
   {
     "id": "SO110883",
@@ -1329,7 +1329,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-06-02",
     "ifc_due_date": "2026-06-11",
-    "notes": "IN PRODUCTION 6/22/26 BMC"
+    "notes": "Product shipped 9/10/26"
   },
   {
     "id": "SO111114",
@@ -1392,7 +1392,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-06-07",
     "ifc_due_date": null,
-    "notes": ""
+    "notes": "Waiting on Customer IFA 6/9/26"
   },
   {
     "id": "SO111170",
@@ -1605,10 +1605,10 @@
     "id": "SO111425",
     "name": "BUS GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-28",
     "ifc_due_date": null,
-    "notes": "IFA 7/22/26"
+    "notes": "Shipped on 9/14/26"
   },
   {
     "id": "SO111437",
@@ -1707,7 +1707,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-08-26",
     "ifc_due_date": "2026-10-10",
-    "notes": "IFA design sent to electrical. 9/14/26"
+    "notes": "Sent IFA to customer on 8/27/26"
   },
   {
     "id": "SO111521",
@@ -1872,9 +1872,18 @@
     "notes": "NEMA 3R BOLTSWITCH"
   },
   {
+    "id": "SO111665",
+    "name": "SWITCH RACK",
+    "engineer": "Erik Leal",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "IFA sent to electrical 9/14/26"
+  },
+  {
     "id": "SO111671",
-    "name": "GRAYBAR - LAPORTE",
-    "engineer": "Unassigned",
+    "name": "CTB-38KV -200-3R NONLOAD BREAK",
+    "engineer": "Micaiah Williams",
     "status": "In Progress",
     "ifa_due_date": "2026-09-23",
     "ifc_due_date": "2026-10-22",
@@ -1917,6 +1926,69 @@
     "notes": ""
   },
   {
+    "id": "SO111697",
+    "name": "SO111697",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111699",
+    "name": "SO111699",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111705",
+    "name": "SO111705",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111709",
+    "name": "SO111709",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111712",
+    "name": "SO111712",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111716",
+    "name": "SO111716",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111717",
+    "name": "SO111717",
+    "engineer": "Edwin Ojeda",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111718",
     "name": "B-3R-D-T-12-S4-12-K6-3NG-H,IS,PD,BD,SS",
     "engineer": "Micaiah Williams",
@@ -1933,6 +2005,33 @@
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": ""
+  },
+  {
+    "id": "SO111727",
+    "name": "SO111727",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111728",
+    "name": "SO111728",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111732",
+    "name": "SO111732",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
   },
   {
     "id": "SO111735",
@@ -1973,6 +2072,24 @@
   {
     "id": "SO111742",
     "name": "SO111742",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111744",
+    "name": "SO111744",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111745",
+    "name": "SO111745",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

@@ -353,7 +353,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
     <div class="tbar-r">
       <div class="user-chip"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span id="access-label" style="color:var(--spike);font-weight:600;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Admin Access</span></div>
       <div class="user-chip" id="sync-chip" title="Shared Supabase connection status"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--am);display:inline-block"></span><span id="sync-text" style="color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Connecting</span></div>
-      <button class="btn btn-gh btn-sm pm-hide" onclick="openScheduleImport()" title="Import the latest ProjectTasks schedule"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>Import Schedule</button>
+      <button class="btn btn-gh btn-sm pm-hide admin-only" onclick="openScheduleImport()" title="Import the latest ProjectTasks schedule"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>Import Schedule</button>
       <button class="btn btn-gh btn-sm" onclick="exportCSV()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
       <button class="btn btn-pr btn-sm pm-hide" onclick="openModal()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Project</button>
       <button class="btn btn-gh btn-sm" onclick="doLogout()" title="Lock" style="padding:5px 7px"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></button>
@@ -2420,7 +2420,7 @@ async function saveProject(){
 // ── Schedule Import (V5) ─────────────────────────────────────────────────
 let SCHEDULE_IMPORT_PREVIEW=null;
 function openScheduleImport(){
-  if(!requireWriteAccess())return;
+  if(!requireAdmin())return;
   const modal=document.getElementById('schedule-import-modal');
   document.getElementById('schedule-file').value='';
   document.getElementById('schedule-import-status').style.display='none';
@@ -2580,7 +2580,7 @@ async function previewScheduleFile(file){
   }
 }
 async function applyScheduleImport(){
-  if(!requireWriteAccess())return;
+  if(!requireAdmin())return;
   if(!sb||!SCHEDULE_IMPORT_PREVIEW){showToast('Shared Live connection required');return;}
   const btn=document.getElementById('schedule-apply-btn');btn.disabled=true;btn.textContent='Applying…';
   const {changes,newJobs,fileName}=SCHEDULE_IMPORT_PREVIEW;

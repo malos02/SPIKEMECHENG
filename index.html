@@ -34,22 +34,10 @@ body.pm-mode #view-engineer table th:last-child,
 body.pm-mode #view-engineer table td:last-child{display:none !important}
 body.pm-mode .g-row{cursor:default !important}
 .pm-badge{display:none;align-items:center;gap:6px;padding:4px 10px;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.4);border-radius:var(--rs);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--am)}
-/* ── ENGINEER MODE — view + add projects, without existing-project/admin changes ── */
-body.engineer-mode #ni-dashboard,
-body.engineer-mode #ni-kpi,
-body.engineer-mode #ni-gantt,
-body.engineer-mode #ni-bnb,
-body.engineer-mode #ni-admin,
-body.engineer-mode .nav-grp:has(#ni-admin) .nav-grp-label,
+/* ── ENGINEER MODE — full access except adding engineers and deleting projects ── */
 body.engineer-mode .admin-only,
-body.engineer-mode .edit-only,
 body.engineer-mode #boss-tag{display:none !important}
 body.engineer-mode .engineer-badge{display:inline-flex !important}
-body.engineer-mode #view-projects table th:last-child,
-body.engineer-mode #view-projects table td:last-child,
-body.engineer-mode #view-engineer table th:last-child,
-body.engineer-mode #view-engineer table td:last-child{display:none !important}
-body.engineer-mode .g-row{cursor:default !important}
 .engineer-badge{display:none;align-items:center;gap:6px;padding:4px 10px;background:rgba(41,171,226,.12);border:1px solid rgba(41,171,226,.4);border-radius:var(--rs);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--spike)}
 .app{display:flex;min-height:100vh}
 .sidebar{width:232px;min-width:232px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:20}
@@ -358,12 +346,12 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="topbar-divider"></div>
       <div class="boss-badge" id="boss-tag">⚡ Executive View</div>
       <div class="pm-badge"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>PM View · Read Only</div>
-      <div class="engineer-badge"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M5 7h14M7 17h10"/></svg>Engineer Mode · Add Only</div>
+      <div class="engineer-badge"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M5 7h14M7 17h10"/></svg>Engineer Mode · Full Access</div>
     </div>
     <div class="tbar-r">
       <div class="user-chip"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span id="access-label" style="color:var(--spike);font-weight:600;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Admin Access</span></div>
       <div class="user-chip" id="sync-chip" title="Shared Supabase connection status"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--am);display:inline-block"></span><span id="sync-text" style="color:var(--t2);font-weight:600;text-transform:uppercase;letter-spacing:.5px;font-size:10px">Connecting</span></div>
-      <button class="btn btn-gh btn-sm pm-hide admin-only" onclick="openScheduleImport()" title="Import the latest ProjectTasks schedule"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>Import Schedule</button>
+      <button class="btn btn-gh btn-sm pm-hide" onclick="openScheduleImport()" title="Import the latest ProjectTasks schedule"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>Import Schedule</button>
       <button class="btn btn-gh btn-sm" onclick="exportCSV()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export</button>
       <button class="btn btn-pr btn-sm pm-hide" onclick="openModal()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Project</button>
       <button class="btn btn-gh btn-sm" onclick="doLogout()" title="Lock" style="padding:5px 7px"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></button>
@@ -507,7 +495,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
     <div class="sec">
       <div class="sec-hd">
         <div><div class="sec-title">Engineer Roster</div><div class="sec-sub">Add or remove engineers — changes apply immediately to the whole app</div></div>
-        <button class="btn btn-pr btn-sm" onclick="openAddEngineerModal()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Engineer</button>
+        <button class="btn btn-pr btn-sm admin-only" onclick="openAddEngineerModal()"><svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Engineer</button>
       </div>
       <div class="tw"><table><thead><tr><th>Avatar</th><th>ID</th><th>Name</th><th>Role</th><th>Color</th><th></th></tr></thead><tbody id="admin-eng-table"></tbody></table></div>
     </div>
@@ -525,10 +513,10 @@ tr:hover td{background:rgba(255,255,255,.018)}
     <div class="ff"><div class="flbl">Project ID</div><input class="finp" id="f-id" placeholder="e.g. P-2025-042"></div>
     <div class="ff"><div class="flbl">Project Name *</div><input class="finp" id="f-name" placeholder="e.g. Bay 3 Switchrack"></div>
     <div class="ff"><div class="flbl">Engineer *</div><select class="fsel2" id="f-engineer" onchange="updateHistoryLog()"><option value="">Select engineer…</option></select></div>
-    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Product Type * <span class="admin-only" onclick="openTypeModal()" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-type-m"><option value="">Select type…</option></select></div>
+    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Product Type * <span onclick="openTypeModal()" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-type-m"><option value="">Select type…</option></select></div>
     <div class="ff"><div class="flbl">Voltage Level *</div><select class="fsel2" id="f-voltage"><option value="">Select voltage…</option><option>15kV</option><option>38kV</option><option>Medium Voltage</option><option>Low Voltage</option></select></div>
-    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Project Manager <span class="admin-only" onclick="openPeopleModal('pm')" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-pm"><option value="">Select PM…</option></select></div>
-    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Sales Rep <span class="admin-only" onclick="openPeopleModal('sales')" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-sales"><option value="">Select Sales…</option></select></div>
+    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Project Manager <span onclick="openPeopleModal('pm')" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-pm"><option value="">Select PM…</option></select></div>
+    <div class="ff"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">Sales Rep <span onclick="openPeopleModal('sales')" style="color:var(--spike);cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase">+ Manage</span></div><select class="fsel2" id="f-sales"><option value="">Select Sales…</option></select></div>
     <div class="ff"><div class="flbl">Start Date</div><input class="finp" id="f-start" type="date"></div>
     <div class="ff"><div class="flbl">Target Live Date</div><input class="finp" id="f-end" type="date"></div>
     <div class="ff"><div class="flbl">IFA Due Date</div><input class="finp" id="f-ifa-due" type="date"></div>
@@ -867,6 +855,7 @@ function applyAccessMode(mode){
 }
 function isAdminMode(){return !IS_PM&&!IS_ENGINEER;}
 function requireAdmin(){if(isAdminMode())return true;showToast(IS_PM?'Read-only PM view':'Admin access required');return false;}
+function requireWriteAccess(){if(!IS_PM)return true;showToast('Read-only PM view');return false;}
 function checkPassword(){
   const entered=document.getElementById('pw-input').value;
   const err=document.getElementById('pw-error');
@@ -883,8 +872,8 @@ function checkPassword(){
     document.getElementById('app-shell').style.display='flex';
     err.style.display='none';
     initSupabaseAndLoad();
-    // Restricted modes land on All Projects since the dashboard nav is hidden.
-    if(isPm||isEngineer) setTimeout(()=>showView('projects',document.getElementById('ni-projects')),50);
+    // PMs land on All Projects since their dashboard navigation is hidden.
+    if(isPm) setTimeout(()=>showView('projects',document.getElementById('ni-projects')),50);
   } else {
     err.style.display='block';
     document.getElementById('pw-input').value='';
@@ -1127,8 +1116,8 @@ function refreshAll(){
 
 // ── Views ─────────────────────────────────────────────────────────────────
 function showView(name,el){
-  if((IS_PM||IS_ENGINEER)&&['dashboard','kpi','gantt','bnb','admin'].includes(name)){
-    showToast(IS_PM?'Read-only PM view':'Engineer mode: view and add projects only');return;
+  if(IS_PM&&['dashboard','kpi','gantt','bnb','admin'].includes(name)){
+    showToast('Read-only PM view');return;
   }
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
@@ -1906,7 +1895,7 @@ function populateSalesSelect(selectedVal){
   sel.innerHTML='<option value="">Select Sales…</option>'+SALES_LIST.map(p=>`<option value="${p.name}" ${p.name===selectedVal?'selected':''}>${p.name}</option>`).join('');
 }
 function openPeopleModal(type){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   peopleModalType=type;
   document.getElementById('people-modal-title').textContent=type==='pm'?'Manage Project Managers':'Manage Sales Reps';
   document.getElementById('people-new-input').value='';
@@ -1932,7 +1921,7 @@ function renderPeopleList(){
     : '<div style="font-size:11px;color:var(--t3);padding:8px 0">No entries yet.</div>';
 }
 async function addPerson(){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   const inp=document.getElementById('people-new-input');
   const name=inp.value.trim();
   if(!name)return;
@@ -1952,7 +1941,7 @@ async function addPerson(){
   showToast('⚡ Added '+name);
 }
 async function removePerson(idx){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   const list=peopleModalType==='pm'?PM_LIST:SALES_LIST;
   const person=list[idx];
   if(!person||person.name==='TBD')return;
@@ -2004,7 +1993,7 @@ function populateTypeFilters(){
   ['f-type','g-type','cal-type'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=opts;});
 }
 function openTypeModal(){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   document.getElementById('type-new-input').value='';
   renderTypeList();
   document.getElementById('type-modal').classList.add('open');
@@ -2027,7 +2016,7 @@ function renderTypeList(){
     : '<div style="font-size:11px;color:var(--t3);padding:8px 0">No types yet.</div>';
 }
 async function addProductType(){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   const inp=document.getElementById('type-new-input');
   const name=inp.value.trim();
   if(!name)return;
@@ -2047,7 +2036,7 @@ async function addProductType(){
   showToast('⚡ Added '+name);
 }
 async function removeProductType(idx){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   const t=PRODUCT_TYPES[idx];
   if(!t||DEFAULT_TYPES.includes(t.name))return;
   if(sb&&t._dbid){
@@ -2151,7 +2140,7 @@ async function saveEngineer(){
 }
 
 async function removeEngineer(idx){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   const eng=ENGINEERS[idx];
   if(!eng||eng._builtin)return;
   const activeProjs=PROJECTS.filter(p=>p.engineer===eng.name&&p.status!=='Complete').length;
@@ -2187,7 +2176,7 @@ function openModal(){
   document.getElementById('add-modal').classList.add('open');
 }
 function openEditModal(id){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   const p=PROJECTS.find(x=>x.id===id);if(!p)return;
   editingId=id;populateModalEngSelect();
   // If the saved PM/Sales name isn't in the list yet, add it locally so it shows up
@@ -2371,7 +2360,6 @@ function updateHistoryLog(){
 
 async function saveProject(){
   if(IS_PM){showToast('Read-only PM view');return;}
-  if(IS_ENGINEER&&editingId){showToast('Engineer mode cannot edit existing projects');return;}
   const name=document.getElementById('f-name').value.trim();
   const engineer=document.getElementById('f-engineer').value;
   const type=document.getElementById('f-type-m').value;
@@ -2430,7 +2418,7 @@ async function saveProject(){
 // ── Schedule Import (V5) ─────────────────────────────────────────────────
 let SCHEDULE_IMPORT_PREVIEW=null;
 function openScheduleImport(){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   const modal=document.getElementById('schedule-import-modal');
   document.getElementById('schedule-file').value='';
   document.getElementById('schedule-import-status').style.display='none';
@@ -2590,7 +2578,7 @@ async function previewScheduleFile(file){
   }
 }
 async function applyScheduleImport(){
-  if(!requireAdmin())return;
+  if(!requireWriteAccess())return;
   if(!sb||!SCHEDULE_IMPORT_PREVIEW){showToast('Shared Live connection required');return;}
   const btn=document.getElementById('schedule-apply-btn');btn.disabled=true;btn.textContent='Applying…';
   const {changes,newJobs,fileName}=SCHEDULE_IMPORT_PREVIEW;
@@ -2673,7 +2661,7 @@ if(sessionStorage.getItem(SESSION_KEY)==='1'){
   applyAccessMode(wasPm?'pm':wasEngineer?'engineer':'admin');
   document.getElementById('app-shell').style.display='flex';
   initSupabaseAndLoad();
-  if(wasPm||wasEngineer) setTimeout(()=>showView('projects',document.getElementById('ni-projects')),50);
+  if(wasPm) setTimeout(()=>showView('projects',document.getElementById('ni-projects')),50);
 } else {
   document.getElementById('login-screen').style.display='flex';
   setTimeout(()=>document.getElementById('pw-input')?.focus(),100);

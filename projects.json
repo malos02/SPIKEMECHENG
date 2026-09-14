@@ -113,7 +113,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-05-12",
-    "ifc_due_date": "2026-09-04",
+    "ifc_due_date": "2026-09-03",
     "notes": "APPROVED 6-11-26. NEW DELIVERY DATE IN NOVEMBER 2026"
   },
   {
@@ -356,7 +356,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2025-12-17",
-    "ifc_due_date": "2026-09-02",
+    "ifc_due_date": "2026-09-01",
     "notes": "ELECTRICAL WORKING ON UPDATED ONELINE. SCHEDULED TO RECEIVE FROM ELECTRICAL AROUND 6/19. ESTIMATED SCHEDULED TO START IFC ON 6/19."
   },
   {
@@ -1023,7 +1023,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-03-31",
     "ifc_due_date": null,
-    "notes": "IN PRODUCTION 6/22/26"
+    "notes": "Completed for QC 8/11/26\n"
   },
   {
     "id": "SO110883",
@@ -1139,7 +1139,7 @@
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": "2026-05-18",
-    "ifc_due_date": "2026-09-07",
+    "ifc_due_date": "2026-09-05",
     "notes": "IDR 9/10/2026\nIFC SUBMITTED 8/11/2026"
   },
   {
@@ -1274,7 +1274,7 @@
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": "2026-06-24",
-    "ifc_due_date": "2026-09-03",
+    "ifc_due_date": "2026-09-02",
     "notes": "IFC APPROVED 9/4/2026\n"
   },
   {
@@ -1444,7 +1444,7 @@
     "name": "38KV METALCLAD INDOOR 14 SECTIONS",
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
-    "ifa_due_date": "2026-09-05",
+    "ifa_due_date": "2026-09-04",
     "ifc_due_date": "2026-10-12",
     "notes": "PRELIM REQUESTED FOR 7-24-26"
   },
@@ -1463,7 +1463,7 @@
     "engineer": "Mario Galdamez",
     "status": "In Progress",
     "ifa_due_date": "2026-07-07",
-    "ifc_due_date": "2026-09-02",
+    "ifc_due_date": "2026-09-01",
     "notes": "DRAWING IS APPROVED AS OF 8-10-26"
   },
   {
@@ -1481,7 +1481,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-07-24",
-    "ifc_due_date": "2026-08-29",
+    "ifc_due_date": "2026-09-14",
     "notes": ""
   },
   {
@@ -1517,7 +1517,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-09-04",
+    "ifc_due_date": "2026-09-25",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1526,7 +1526,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-09-04",
+    "ifc_due_date": "2026-09-25",
     "notes": "Mechanical IFA's submitted to electrical 8/3"
   },
   {
@@ -1535,7 +1535,7 @@
     "engineer": "Edwin Ojeda",
     "status": "Complete",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-09-04",
+    "ifc_due_date": "2026-09-03",
     "notes": ""
   },
   {
@@ -1544,7 +1544,7 @@
     "engineer": "Edwin Ojeda",
     "status": "Complete",
     "ifa_due_date": "2026-08-07",
-    "ifc_due_date": "2026-09-07",
+    "ifc_due_date": "2026-09-05",
     "notes": ""
   },
   {
@@ -1552,8 +1552,8 @@
     "name": "38KV 1250A IS LIMITER",
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
-    "ifa_due_date": "2026-09-02",
-    "ifc_due_date": "2026-10-23",
+    "ifa_due_date": "2026-08-26",
+    "ifc_due_date": "2026-10-09",
     "notes": ""
   },
   {
@@ -1642,7 +1642,7 @@
     "name": "3 SINGLE LBS 38KV RBA FUSED",
     "engineer": "Tanner Phillips",
     "status": "In Progress",
-    "ifa_due_date": "2026-09-03",
+    "ifa_due_date": "2026-09-02",
     "ifc_due_date": "2026-10-16",
     "notes": ""
   },
@@ -1661,7 +1661,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-07-30",
-    "ifc_due_date": "2026-09-05",
+    "ifc_due_date": "2026-09-04",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1688,7 +1688,7 @@
     "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": "2026-08-06",
-    "ifc_due_date": "2026-09-02",
+    "ifc_due_date": "2026-09-01",
     "notes": ""
   },
   {
@@ -1707,7 +1707,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-08-26",
     "ifc_due_date": "2026-10-10",
-    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+    "notes": "IFA design sent to electrical. 9/14/26"
   },
   {
     "id": "SO111521",
@@ -1845,6 +1845,15 @@
     "notes": "IFA drawings submitted 8/28."
   },
   {
+    "id": "SO111618",
+    "name": "SO111618",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111628",
     "name": "ECB-1200A-ABB",
     "engineer": "Masoom Patel",
@@ -1861,6 +1870,15 @@
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "NEMA 3R BOLTSWITCH"
+  },
+  {
+    "id": "SO111671",
+    "name": "GRAYBAR - LAPORTE",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": "2026-09-23",
+    "ifc_due_date": "2026-10-22",
+    "notes": "Added from imported Engineering schedule; engineer assignment not provided by schedule export."
   },
   {
     "id": "SO111674",
@@ -1918,8 +1936,8 @@
   },
   {
     "id": "SO111735",
-    "name": "SO111735",
-    "engineer": "Unassigned",
+    "name": "15kv switch 600a",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1927,7 +1945,34 @@
   },
   {
     "id": "SO111736",
-    "name": "SO111736",
+    "name": "15kv switch 600a",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111740",
+    "name": "ENCLOSED BREAKER",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111741",
+    "name": "SO111741",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111742",
+    "name": "SO111742",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

@@ -1383,7 +1383,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-06-26",
     "ifc_due_date": "2026-08-19",
-    "notes": ""
+    "notes": "waiting for customer "
   },
   {
     "id": "SO111158",
@@ -1820,7 +1820,7 @@
   {
     "id": "SO111599",
     "name": "THE WILLIAMS COMPANIES, INC.",
-    "engineer": "Corey Kidd",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": "2026-10-17",
     "ifc_due_date": "2026-12-03",
@@ -1848,7 +1848,7 @@
     "id": "SO111628",
     "name": "ECB-1200A-ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-08-31",
     "ifc_due_date": null,
     "notes": ""
@@ -1897,5 +1897,41 @@
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": ""
+  },
+  {
+    "id": "SO111718",
+    "name": "B-3R-D-T-12-S4-12-K6-3NG-H,IS,PD,BD,SS",
+    "engineer": "Micaiah Williams",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111725",
+    "name": "SPK MAN TRANS SWITCH",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": ""
+  },
+  {
+    "id": "SO111735",
+    "name": "SO111735",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111736",
+    "name": "SO111736",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
   }
 ]

@@ -1630,7 +1630,7 @@
   },
   {
     "id": "SO111452",
-    "name": "CASH ACCOUNT C.O.D",
+    "name": "IS LIMITER",
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-10-02",
@@ -2009,7 +2009,7 @@
   {
     "id": "SO111727",
     "name": "SO111727",
-    "engineer": "Unassigned",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2052,6 +2052,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111738",
+    "name": "SO111738",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111740",
     "name": "ENCLOSED BREAKER",
     "engineer": "Masoom Patel",
@@ -2063,7 +2072,7 @@
   {
     "id": "SO111741",
     "name": "SO111741",
-    "engineer": "Unassigned",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2072,7 +2081,7 @@
   {
     "id": "SO111742",
     "name": "SO111742",
-    "engineer": "Unassigned",
+    "engineer": "Gustavo Avila",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2081,7 +2090,7 @@
   {
     "id": "SO111744",
     "name": "SO111744",
-    "engineer": "Unassigned",
+    "engineer": "Maria Parrie",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2090,6 +2099,24 @@
   {
     "id": "SO111745",
     "name": "SO111745",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111746",
+    "name": "SO111746",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111749",
+    "name": "SO111749",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

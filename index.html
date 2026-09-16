@@ -395,7 +395,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <select class="fsel" id="f-type" onchange="renderProjects()"><option value="">All Types</option><option>Switch</option><option>Switchboard</option><option>Switchrack</option><option>Switchgear</option><option>MCC</option><option>Transformer</option><option>Panel</option><option>Bus Duct</option><option>Load Center</option></select>
       <select class="fsel" id="f-volt" onchange="renderProjects()"><option value="">All Voltages</option><option>15kV</option><option>38kV</option><option>Medium Voltage</option><option>Low Voltage</option></select>
       <select class="fsel" id="f-stat" onchange="renderProjects()"><option value="">All Statuses</option><option>In Progress</option><option>Complete</option><option>On Hold</option></select>
-      <select class="fsel" id="f-ms" onchange="renderProjects()"><option value="">All Milestones</option><option value="design_done">Design Done</option><option value="ifa_pending">IFA Pending</option><option value="ifa_done">IFA Done</option><option value="adj_done">Customer Approval Done</option><option value="ifc_done">IFC Done</option><option value="idr_pending">IDR Pending</option><option value="idr_done">IDR Done</option><option value="live">Live on Floor</option><option value="shipped">Project Shipped</option></select>
+      <select class="fsel" id="f-ms" onchange="renderProjects()"><option value="">All Milestones</option><option value="design_done">Design Done</option><option value="ifa_pending">IFA Pending</option><option value="ifa_done">IFA Done</option><option value="adj_done">Customer Approval Done</option><option value="ifc_done">IFC Done</option><option value="idr_pending">IDR Pending</option><option value="idr_done">IDR Done</option><option value="mechanical_pending">Mechanical Complete Pending</option><option value="mechanical_done">Mechanical Complete Done</option><option value="live">Live on Floor</option><option value="shipped">Project Shipped</option></select>
     </div>
       <div class="tw"><table><thead><tr><th class="sortable" id="th-id" onclick="setSort('id')">ID</th><th class="sortable" id="th-name" onclick="setSort('name')">Project Name</th><th class="sortable" id="th-engineer" onclick="setSort('engineer')">Engineer</th><th class="sortable" id="th-type" onclick="setSort('type')">Type</th><th class="sortable" id="th-voltage" onclick="setSort('voltage')">Voltage</th><th class="sortable" id="th-pm" onclick="setSort('pm')">PM</th><th class="sortable" id="th-sales" onclick="setSort('sales')">Sales</th><th class="sortable" id="th-start" onclick="setSort('start')">Start</th><th class="sortable" id="th-end" onclick="setSort('end')">Target</th><th class="sortable" id="th-ifaDue" onclick="setSort('ifaDue')">IFA Due</th><th class="sortable" id="th-ifcDue" onclick="setSort('ifcDue')">IFC Due</th><th class="sortable" id="th-milestones" onclick="setSort('milestones')">Milestones</th><th class="sortable" id="th-progress" onclick="setSort('progress')">Progress</th><th class="sortable" id="th-status" onclick="setSort('status')">Status</th><th>Notes</th><th class="actions-col">Actions</th></tr></thead><tbody id="proj-table"></tbody></table></div>
   </div>
@@ -442,6 +442,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--tl)"></span>Cust. Approval</span>
       <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--pu)"></span>IFC Started</span>
       <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--am)"></span>IDR Review</span>
+      <span class="cal-leg-item"><span class="cal-leg-dot" style="background:#38bdf8"></span>Mechanical Complete</span>
       <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--gr)"></span>Live on Floor</span>
       <span class="cal-leg-item"><span class="cal-leg-dot" style="background:var(--co)"></span>Shipped</span>
     </div>
@@ -571,6 +572,12 @@ tr:hover td{background:rgba(255,255,255,.018)}
           <input type="checkbox" class="ms-cb" id="mc-idr" onchange="toggleMilestone('idr',this)">
           <span class="ms-prog-label" id="mpl-idr">IDR Review</span>
           <input type="date" class="ms-date-inp" id="md-idr" onchange="syncMilestoneCheck('idr')">
+        </div>
+        <!-- Mechanical Complete -->
+        <div class="ms-prog-row" id="mpr-mechanical">
+          <input type="checkbox" class="ms-cb" id="mc-mechanical" onchange="toggleMilestone('mechanical',this)">
+          <span class="ms-prog-label" id="mpl-mechanical">Mechanical Complete</span>
+          <input type="date" class="ms-date-inp" id="md-mechanical" onchange="syncMilestoneCheck('mechanical')">
         </div>
         <!-- Live on Floor -->
         <div class="ms-prog-row" id="mpr-live">
@@ -772,18 +779,32 @@ const BUILTIN_ENGINEERS = [
 ];
 let ENGINEERS = [...BUILTIN_ENGINEERS];
 
-let PROJECTS = EMBEDDED_PROJECTS.map(p=>({...p,ms:{...p.ms},msDates:{...p.msDates}}));
+function normalizeMechanicalMilestone(p){
+  const ms={...p.ms},msDates={...p.msDates};
+  if(ms.live&&!Object.prototype.hasOwnProperty.call(ms,'mechanical')){
+    ms.mechanical=true;
+    msDates.mechanical=msDates.live||'';
+    ms.live=false;
+    msDates.live='';
+    return {...p,status:p.status==='Complete'?'In Progress':p.status,ms,msDates};
+  }else{
+    ms.mechanical=!!ms.mechanical;
+    msDates.mechanical=msDates.mechanical||'';
+  }
+  return {...p,ms,msDates};
+}
+let PROJECTS = EMBEDDED_PROJECTS.map(normalizeMechanicalMilestone);
 let TRANSFER_HISTORY = {}; // keyed by proj_id → [{from, to, date}]
 let DRILL_DATA = {}; // populated by renderKPI — backs the click-to-drill-down on KPI cards
 
 // ── Helpers ───────────────────────────────────────────────────────────────
-function msPct(ms){const k=['design','ifa','ifc','adj','idr','live'];return Math.round(k.filter(x=>ms[x]).length/k.length*100)}
+function msPct(ms){const k=['design','ifa','ifc','adj','idr','mechanical','live'];return Math.round(k.filter(x=>ms[x]).length/k.length*100)}
 function getEng(name){return ENGINEERS.find(e=>e.name===name)||{color:'#29ABE2',bg:'rgba(41,171,226,.15)',id:'??'}}
 function vcls(v){return v==='15kV'?'v15':v==='38kV'?'v38':v==='Medium Voltage'?'vmv':'vlv'}
 function vshort(v){return v==='15kV'?'15kV':v==='38kV'?'38kV':v==='Medium Voltage'?'MV':'LV'}
 function spill(s){return s==='Complete'?'<span class="pill pg">Complete</span>':s==='On Hold'?'<span class="pill pa">On Hold</span>':'<span class="pill pb">In Progress</span>'}
 function msBadges(ms,msDates){
-  const map={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',live:'Live on Floor'};
+  const map={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',mechanical:'Mechanical Complete',live:'Live on Floor'};
   return Object.entries(map).map(([k,label])=>{
     let tip=label;
     if(ms[k]){
@@ -901,11 +922,25 @@ function cloneEmbeddedProjects(){
   let deleted=[];
   try{deleted=JSON.parse(localStorage.getItem(DELETED_PROJECTS_KEY)||'[]');}catch(e){deleted=[];}
   const deletedIds=new Set(deleted);
-  return EMBEDDED_PROJECTS.filter(p=>!deletedIds.has(p.id)).map(p=>({...p,ms:{...p.ms},msDates:{...p.msDates}}));
+  return EMBEDDED_PROJECTS.filter(p=>!deletedIds.has(p.id)).map(normalizeMechanicalMilestone);
+}
+const MECHANICAL_META_PREFIX='__SPIKE_MECHANICAL_COMPLETE__=';
+function decodeProjectDescription(value){
+  const raw=String(value||'');
+  const marker=/(?:\r?\n)?__SPIKE_MECHANICAL_COMPLETE__=(\d{4}-\d{2}-\d{2}|1)/;
+  const match=raw.match(marker);
+  return {desc:raw.replace(marker,'').trim(),mechanical:!!match,mechanicalDate:match&&match[1]!=='1'?match[1]:''};
+}
+function encodeProjectDescription(p){
+  const marker=/(?:\r?\n)?__SPIKE_MECHANICAL_COMPLETE__=(\d{4}-\d{2}-\d{2}|1)/g;
+  const base=String(p.desc||'').replace(marker,'').trim();
+  if(!(p.ms?.mechanical||p.msDates?.mechanical))return base;
+  const value=p.msDates?.mechanical||'1';
+  return `${base}${base?'\n':''}${MECHANICAL_META_PREFIX}${value}`;
 }
 function projectToDbRow(p){
   return {
-    proj_id:p.id,name:p.name||p.id,description:p.desc||'',engineer:p.engineer||'Unassigned',
+    proj_id:p.id,name:p.name||p.id,description:encodeProjectDescription(p),engineer:p.engineer||'Unassigned',
     type:p.type||'TBD',voltage:p.voltage||'Low Voltage',pm:p.pm||'TBD',sales:p.sales||'TBD',
     status:p.status||'In Progress',start_date:p.start||null,end_date:p.end||null,
     ifa_due_date:p.ifaDue||null,ifc_due_date:p.ifcDue||null,notes:p.notes||'',
@@ -1031,17 +1066,38 @@ async function loadFromDB(){
     refreshAll();return;
   }
   // V3 shared mode: after the one-time seed, Supabase is the sole project source of truth.
-  PROJECTS=(projRes.data||[]).map(r=>({
-    id:r.proj_id,name:r.name,desc:r.description||'',
+  PROJECTS=(projRes.data||[]).map(r=>{
+    const meta=decodeProjectDescription(r.description);
+    const legacyMechanical=!!r.ms_live&&!meta.mechanical;
+    const mechanical=meta.mechanical||legacyMechanical;
+    const mechanicalDate=meta.mechanicalDate||r.ms_live_date||'';
+    return {
+    id:r.proj_id,name:r.name,desc:meta.desc,
     engineer:r.engineer,type:r.type,voltage:r.voltage,
-    pm:r.pm,sales:r.sales,status:r.status,
+    pm:r.pm,sales:r.sales,status:legacyMechanical&&r.status==='Complete'?'In Progress':r.status,
     start:r.start_date,end:r.end_date,
     ifaDue:r.ifa_due_date||null,ifcDue:r.ifc_due_date||null,
     notes:r.notes||'',
-    ms:{design:r.ms_design||false,ifa:r.ms_ifa||false,ifc:r.ms_ifc||false,adj:r.ms_adj||false,idr:r.ms_idr||false,live:r.ms_live||false,shipped:r.ms_shipped||false},
-    msDates:{design:r.ms_design_date||'',ifa:r.ms_ifa_date||'',ifc:r.ms_ifc_date||'',adj:r.ms_adj_date||'',idr:r.ms_idr_date||'',live:r.ms_live_date||'',shipped:r.ms_shipped_date||''},
+    ms:{design:r.ms_design||false,ifa:r.ms_ifa||false,ifc:r.ms_ifc||false,adj:r.ms_adj||false,idr:r.ms_idr||false,mechanical,live:legacyMechanical?false:r.ms_live||false,shipped:r.ms_shipped||false},
+    msDates:{design:r.ms_design_date||'',ifa:r.ms_ifa_date||'',ifc:r.ms_ifc_date||'',adj:r.ms_adj_date||'',idr:r.ms_idr_date||'',mechanical:mechanicalDate,live:legacyMechanical?'':r.ms_live_date||'',shipped:r.ms_shipped_date||''},
     _dbid:r.id
-  })).filter(p=>p.id&&p.id!==BASELINE_MARKER_NAME);
+  };}).filter(p=>p.id&&p.id!==BASELINE_MARKER_NAME);
+
+  // V11 one-time migration: the old Live on Floor checkbox represented what is now
+  // Mechanical Complete. Admin login permanently moves those legacy flags in Shared Live.
+  if(IS_ADMIN){
+    const legacyRows=(projRes.data||[]).filter(r=>r.ms_live&&!decodeProjectDescription(r.description).mechanical);
+    if(legacyRows.length){
+      const results=await Promise.all(legacyRows.map(r=>{
+        const meta=decodeProjectDescription(r.description);
+        const description=encodeProjectDescription({desc:meta.desc,ms:{mechanical:true},msDates:{mechanical:r.ms_live_date||''}});
+        return sb.from('projects').update({description,ms_live:false,ms_live_date:null,status:r.status==='Complete'?'In Progress':r.status}).eq('id',r.id);
+      }));
+      const failed=results.filter(x=>x.error);
+      if(failed.length)console.warn('Mechanical Complete migration:',failed.map(x=>x.error?.message||x.error));
+      if(failed.length<legacyRows.length)showToast(`⚡ ${legacyRows.length-failed.length} existing project${legacyRows.length-failed.length===1?'':'s'} moved to Mechanical Complete`);
+    }
+  }
 
   TRANSFER_HISTORY={};
   if(!xferRes.error && xferRes.data){
@@ -1312,6 +1368,8 @@ function renderProjects(){
     if(fMs==='ifc_done'&&!p.ms.ifc)return false;
     if(fMs==='idr_pending'&&(p.ms.idr||p.status==='Complete'))return false;
     if(fMs==='idr_done'&&!p.ms.idr)return false;
+    if(fMs==='mechanical_pending'&&(p.ms.mechanical||p.status==='Complete'))return false;
+    if(fMs==='mechanical_done'&&!p.ms.mechanical)return false;
     if(fMs==='live'&&!p.ms.live)return false;
     if(fMs==='shipped'&&!p.ms.shipped)return false;
     if(q&&!p.name.toLowerCase().includes(q)&&!p.id.toLowerCase().includes(q)&&!p.engineer.toLowerCase().includes(q))return false;
@@ -1490,6 +1548,7 @@ function buildMsCalEvents(projs){
     {k:'adj',label:'Cust. Approval',color:'#14c4b2'},
     {k:'ifc',label:'IFC Started',color:'#a96df7'},
     {k:'idr',label:'IDR Review',color:'#f5a623'},
+    {k:'mechanical',label:'Mechanical Complete',color:'#38bdf8'},
     {k:'live',label:'Live on Floor',color:'#22d47a'},
     {k:'shipped',label:'Shipped',color:'#f97244'},
   ];
@@ -1780,9 +1839,9 @@ function renderKPI(){
   destroyChart('cThroughput');
   charts.cThroughput=new Chart(document.getElementById('cThroughput'),{type:'bar',data:{labels:nonBnb.map(e=>e.name.split(' ')[0]),datasets:[{data:nonBnb.map(e=>PROJECTS.filter(p=>p.engineer===e.name&&p.status==='Complete').length),backgroundColor:nonBnb.map(e=>e.color+'33'),borderColor:nonBnb.map(e=>e.color),borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{color:'#444',font:{size:9}},grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true},x:{ticks:{color:'#444',font:{size:9}},grid:{display:false}}}}});
   const active=PROJECTS.filter(p=>p.status!=='Complete');
-  const msKeys=['design','ifa','ifc','adj','idr','live'],msLabels=['Design','IFA','IFC','ADJ','IDR','Live'];
+  const msKeys=['design','ifa','ifc','adj','idr','mechanical','live'],msLabels=['Design','IFA','IFC','ADJ','IDR','Mechanical','Live'];
   const msVals=active.length?msKeys.map(k=>Math.round(active.filter(p=>p.ms[k]).length/active.length*100)):msKeys.map(()=>0);
-  const msColors=['#29ABE2','#14c4b2','#a96df7','#f5a623','#22d47a','#f55353'];
+  const msColors=['#29ABE2','#14c4b2','#a96df7','#f5a623','#f97244','#38bdf8','#22d47a'];
   destroyChart('cMsHealth');
   charts.cMsHealth=new Chart(document.getElementById('cMsHealth'),{type:'bar',data:{labels:msLabels,datasets:[{data:msVals,backgroundColor:msColors.map(c=>c+'33'),borderColor:msColors,borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#444',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.04)'},max:100},y:{ticks:{color:'#444',font:{size:9}},grid:{display:false}}}}});
 }
@@ -2198,7 +2257,7 @@ function openEditModal(id){
   document.getElementById('f-ifa-due').value=p.ifaDue||'';
   document.getElementById('f-ifc-due').value=p.ifcDue||'';
   document.getElementById('f-notes').value=p.notes||'';
-  const msc={design:'mc-design',ifa:'mc-ifa',ifc:'mc-ifc',adj:'mc-adj',idr:'mc-idr',live:'mc-live'};
+  const msc={design:'mc-design',ifa:'mc-ifa',ifc:'mc-ifc',adj:'mc-adj',idr:'mc-idr',mechanical:'mc-mechanical',live:'mc-live'};
   Object.entries(msc).forEach(([k,elid])=>{const el=document.getElementById(elid);const inp=el;inp.checked=p.ms[k];});
   loadMilestones(p.ms, p.msDates||{});
   // Render transfer history
@@ -2271,7 +2330,7 @@ function renderTransferHistory(projId){
   }).join('');
 }
 // ── Milestone Progression ─────────────────────────────────────────────────
-const MS_KEYS=['design','ifa','adj','ifc','idr','live','shipped'];
+const MS_KEYS=['design','ifa','adj','ifc','idr','mechanical','live','shipped'];
 function toggleMilestone(key, cb){
   const today=new Date().toISOString().split('T')[0];
   const dateInp=document.getElementById('md-'+key);
@@ -2337,7 +2396,7 @@ function getMilestones(){
   });
   return {ms,msDates};
 }
-const MS_LABELS={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',live:'Live on Floor',shipped:'Project Shipped'};
+const MS_LABELS={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',mechanical:'Mechanical Complete',live:'Live on Floor',shipped:'Project Shipped'};
 function updateHistoryLog(){
   const ownerEl=document.getElementById('hist-ownership');
   const msEl=document.getElementById('hist-milestones');
@@ -2368,9 +2427,10 @@ async function saveProject(){
   const voltage=document.getElementById('f-voltage').value;
   if(!name||!engineer||!type||!voltage){alert('Please fill in Name, Engineer, Type and Voltage');return;}
   const {ms, msDates}=getMilestones();
-  const proj={id:document.getElementById('f-id').value||'P-'+Date.now(),name,desc:'',engineer,type,voltage,pm:document.getElementById('f-pm').value||'TBD',sales:document.getElementById('f-sales').value||'TBD',status:ms.live?'Complete':'In Progress',start:document.getElementById('f-start').value||null,end:document.getElementById('f-end').value||null,ifaDue:document.getElementById('f-ifa-due').value||null,ifcDue:document.getElementById('f-ifc-due').value||null,notes:document.getElementById('f-notes').value||'',ms,msDates};
+  const existingProject=editingId?PROJECTS.find(p=>p.id===editingId):null;
+  const proj={id:document.getElementById('f-id').value||'P-'+Date.now(),name,desc:existingProject?.desc||'',engineer,type,voltage,pm:document.getElementById('f-pm').value||'TBD',sales:document.getElementById('f-sales').value||'TBD',status:ms.live?'Complete':'In Progress',start:document.getElementById('f-start').value||null,end:document.getElementById('f-end').value||null,ifaDue:document.getElementById('f-ifa-due').value||null,ifcDue:document.getElementById('f-ifc-due').value||null,notes:document.getElementById('f-notes').value||'',ms,msDates};
   if(sb){
-    const dbRow={proj_id:proj.id,name:proj.name,description:'',engineer:proj.engineer,type:proj.type,voltage:proj.voltage,pm:proj.pm,sales:proj.sales,status:proj.status,start_date:proj.start||null,end_date:proj.end||null,ifa_due_date:proj.ifaDue||null,ifc_due_date:proj.ifcDue||null,notes:proj.notes||'',ms_design:proj.ms.design,ms_ifa:proj.ms.ifa,ms_ifc:proj.ms.ifc,ms_adj:proj.ms.adj,ms_idr:proj.ms.idr,ms_live:proj.ms.live,ms_shipped:proj.ms.shipped||false,ms_design_date:msDates.design||null,ms_ifa_date:msDates.ifa||null,ms_ifc_date:msDates.ifc||null,ms_adj_date:msDates.adj||null,ms_idr_date:msDates.idr||null,ms_live_date:msDates.live||null,ms_shipped_date:msDates.shipped||null};
+    const dbRow={proj_id:proj.id,name:proj.name,description:encodeProjectDescription(proj),engineer:proj.engineer,type:proj.type,voltage:proj.voltage,pm:proj.pm,sales:proj.sales,status:proj.status,start_date:proj.start||null,end_date:proj.end||null,ifa_due_date:proj.ifaDue||null,ifc_due_date:proj.ifcDue||null,notes:proj.notes||'',ms_design:proj.ms.design,ms_ifa:proj.ms.ifa,ms_ifc:proj.ms.ifc,ms_adj:proj.ms.adj,ms_idr:proj.ms.idr,ms_live:proj.ms.live,ms_shipped:proj.ms.shipped||false,ms_design_date:msDates.design||null,ms_ifa_date:msDates.ifa||null,ms_ifc_date:msDates.ifc||null,ms_adj_date:msDates.adj||null,ms_idr_date:msDates.idr||null,ms_live_date:msDates.live||null,ms_shipped_date:msDates.shipped||null};
     let error;
     if(editingId){
       const existing=PROJECTS.find(p=>p.id===editingId);
@@ -2617,7 +2677,7 @@ async function applyScheduleImport(){
         id:j.id,name:j.name,desc:'',engineer:'Unassigned',type:j.type,voltage:j.voltage,pm:j.pm,sales:j.sales,
         status:'In Progress',start:j.start,end:j.target,ifaDue:j.ifaDue,ifcDue:j.ifcDue,
         notes:'Added from imported Engineering schedule; engineer assignment not provided by schedule export.',
-        ms:{design:false,ifa:false,ifc:false,adj:false,idr:false,live:false,shipped:false},msDates:{}
+        ms:{design:false,ifa:false,ifc:false,adj:false,idr:false,mechanical:false,live:false,shipped:false},msDates:{}
       });
       const {error:insertError}=await sb.from('projects').insert([row]);
       if(insertError){
@@ -2650,8 +2710,8 @@ async function applyScheduleImport(){
 
 // ── Export ────────────────────────────────────────────────────────────────
 function exportCSV(){
-  const h=['ID','Project Name','Engineer','Type','Voltage','PM','Sales','Status','Start','End','IFA Due','Notes','Progress%','Design','IFA','IFC','ADJ','IDR','Live'];
-  const rows=PROJECTS.map(p=>[p.id,`"${p.name}"`,p.engineer,p.type,p.voltage,p.pm,p.sales,p.status,p.start||'',p.end||'',p.ifaDue||'',`"${(p.notes||'').replace(/"/g,'""')}"`,msPct(p.ms),+p.ms.design,+p.ms.ifa,+p.ms.ifc,+p.ms.adj,+p.ms.idr,+p.ms.live]);
+  const h=['ID','Project Name','Engineer','Type','Voltage','PM','Sales','Status','Start','End','IFA Due','Notes','Progress%','Design','IFA','IFC','ADJ','IDR','Mechanical Complete','Live'];
+  const rows=PROJECTS.map(p=>[p.id,`"${p.name}"`,p.engineer,p.type,p.voltage,p.pm,p.sales,p.status,p.start||'',p.end||'',p.ifaDue||'',`"${(p.notes||'').replace(/"/g,'""')}"`,msPct(p.ms),+p.ms.design,+p.ms.ifa,+p.ms.ifc,+p.ms.adj,+p.ms.idr,+p.ms.mechanical,+p.ms.live]);
   const csv=[h,...rows].map(r=>r.join(',')).join('\n');
   const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='spike-projects-'+new Date().toISOString().split('T')[0]+'.csv';a.click();
 }

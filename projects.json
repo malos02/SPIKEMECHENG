@@ -1926,6 +1926,15 @@
     "notes": ""
   },
   {
+    "id": "SO111695",
+    "name": "CTB-4000-3P4W-N3R",
+    "engineer": "Erik Leal",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111697",
     "name": "SO111697",
     "engineer": "Unassigned",

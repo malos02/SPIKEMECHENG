@@ -1085,7 +1085,7 @@ async function loadFromDB(){
 
   // V11 one-time migration: the old Live on Floor checkbox represented what is now
   // Mechanical Complete. Admin login permanently moves those legacy flags in Shared Live.
-  if(IS_ADMIN){
+  if(isAdminMode()){
     const legacyRows=(projRes.data||[]).filter(r=>r.ms_live&&!decodeProjectDescription(r.description).mechanical);
     if(legacyRows.length){
       const results=await Promise.all(legacyRows.map(r=>{

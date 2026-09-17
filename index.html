@@ -620,7 +620,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
   </div>
   <div class="modal-actions">
     <button class="btn btn-gh" onclick="closeModal()">Cancel</button>
-    <button class="btn btn-pr" onclick="saveProject()">Save Project</button>
+    <button class="btn btn-pr" id="project-save-btn" onclick="saveProject()">Save Project</button>
   </div>
 </div>
 </div>
@@ -1465,7 +1465,7 @@ function renderGantt(){
       const mc=d<=3?'#f55353':d<=7?'#f5a623':'#a96df7';
       ifcMark=`<div style="position:absolute;left:${ifcPct}%;top:calc(50% + 8px);transform:translate(-50%,-50%);width:8px;height:8px;background:${mc};z-index:4;border:1.5px solid var(--bg);border-radius:50%" title="IFC due ${fmt(p.ifcDue)}"></div>`;
     }
-    html+=`<div class="g-row" style="cursor:pointer" onclick="if(isAdminMode())openEditModal('${p.id}')" title="${isAdminMode()?'Click to edit '+p.id:p.id+' · view only'}">
+    html+=`<div class="g-row" style="cursor:${IS_PM?'default':'pointer'}" onclick="if(!IS_PM)openEditModal('${p.id}')" title="${IS_PM?p.id+' · view only':'Click to edit '+p.id}">
       <div class="g-lbl" style="border-left:2px solid ${e.color}"><div class="g-lbl-name">${p.id}</div><div class="g-lbl-meta">${p.engineer} · ${p.type}</div></div>
       <div class="g-track">
         <div class="today-line" style="left:${todayPct*100}%"></div>
@@ -2223,6 +2223,7 @@ function openModal(){
   if(IS_PM){showToast('Read-only PM view');return;}
   editingId=null;
   document.getElementById('modal-title').textContent='Add New Project';
+  document.getElementById('project-save-btn').textContent='Save Project';
   document.getElementById('f-id').value='P-'+String(PROJECTS.length+1).padStart(3,'0');
   ['f-name','f-desc','f-end','f-ifa-due','f-ifc-due','f-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('f-engineer').value='';document.getElementById('f-type-m').value='';document.getElementById('f-voltage').value='';
@@ -2247,6 +2248,7 @@ function openEditModal(id){
   populateSalesSelect(p.sales);
   populateTypeSelect(p.type);
   document.getElementById('modal-title').textContent='Edit Project';
+  document.getElementById('project-save-btn').textContent='Update Project';
   document.getElementById('f-id').value=p.id;
   document.getElementById('f-name').value=p.name;
   document.getElementById('f-engineer').value=p.engineer;
@@ -2420,7 +2422,7 @@ function updateHistoryLog(){
 
 
 async function saveProject(){
-  if(IS_PM){showToast('Read-only PM view');return;}
+  if(!requireWriteAccess())return;
   const name=document.getElementById('f-name').value.trim();
   const engineer=document.getElementById('f-engineer').value;
   const type=document.getElementById('f-type-m').value;
@@ -2429,51 +2431,54 @@ async function saveProject(){
   const {ms, msDates}=getMilestones();
   const existingProject=editingId?PROJECTS.find(p=>p.id===editingId):null;
   const proj={id:document.getElementById('f-id').value||'P-'+Date.now(),name,desc:existingProject?.desc||'',engineer,type,voltage,pm:document.getElementById('f-pm').value||'TBD',sales:document.getElementById('f-sales').value||'TBD',status:ms.live?'Complete':'In Progress',start:document.getElementById('f-start').value||null,end:document.getElementById('f-end').value||null,ifaDue:document.getElementById('f-ifa-due').value||null,ifcDue:document.getElementById('f-ifc-due').value||null,notes:document.getElementById('f-notes').value||'',ms,msDates};
-  if(sb){
-    const dbRow={proj_id:proj.id,name:proj.name,description:encodeProjectDescription(proj),engineer:proj.engineer,type:proj.type,voltage:proj.voltage,pm:proj.pm,sales:proj.sales,status:proj.status,start_date:proj.start||null,end_date:proj.end||null,ifa_due_date:proj.ifaDue||null,ifc_due_date:proj.ifcDue||null,notes:proj.notes||'',ms_design:proj.ms.design,ms_ifa:proj.ms.ifa,ms_ifc:proj.ms.ifc,ms_adj:proj.ms.adj,ms_idr:proj.ms.idr,ms_live:proj.ms.live,ms_shipped:proj.ms.shipped||false,ms_design_date:msDates.design||null,ms_ifa_date:msDates.ifa||null,ms_ifc_date:msDates.ifc||null,ms_adj_date:msDates.adj||null,ms_idr_date:msDates.idr||null,ms_live_date:msDates.live||null,ms_shipped_date:msDates.shipped||null};
-    let error;
-    if(editingId){
-      const existing=PROJECTS.find(p=>p.id===editingId);
-      if(existing?._dbid){
-        ({error}=await sb.from('projects').update(dbRow).eq('id',existing._dbid));
-        // Log transfer if engineer changed
-        if(!error && existing.engineer !== proj.engineer){
-          await sb.from('project_transfers').insert([{
-            proj_id:proj.id,
-            from_engineer:existing.engineer,
-            to_engineer:proj.engineer,
-            transferred_at:new Date().toISOString()
-          }]);
-          if(!TRANSFER_HISTORY[proj.id]) TRANSFER_HISTORY[proj.id]=[];
-          TRANSFER_HISTORY[proj.id].push({from:existing.engineer,to:proj.engineer,date:new Date().toISOString()});
-          showToast(`⚡ Transferred to ${proj.engineer}`);
+  const saveBtn=document.getElementById('project-save-btn');
+  const idleLabel=editingId?'Update Project':'Save Project';
+  if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Saving to Shared Live…';}
+  try{
+    if(sb){
+      const dbRow={proj_id:proj.id,name:proj.name,description:encodeProjectDescription(proj),engineer:proj.engineer,type:proj.type,voltage:proj.voltage,pm:proj.pm,sales:proj.sales,status:proj.status,start_date:proj.start||null,end_date:proj.end||null,ifa_due_date:proj.ifaDue||null,ifc_due_date:proj.ifcDue||null,notes:proj.notes||'',ms_design:proj.ms.design,ms_ifa:proj.ms.ifa,ms_ifc:proj.ms.ifc,ms_adj:proj.ms.adj,ms_idr:proj.ms.idr,ms_live:proj.ms.live,ms_shipped:proj.ms.shipped||false,ms_design_date:msDates.design||null,ms_ifa_date:msDates.ifa||null,ms_ifc_date:msDates.ifc||null,ms_adj_date:msDates.adj||null,ms_idr_date:msDates.idr||null,ms_live_date:msDates.live||null,ms_shipped_date:msDates.shipped||null};
+      let savedRows=[],error=null;
+      if(editingId){
+        const existing=PROJECTS.find(p=>p.id===editingId);
+        let query=sb.from('projects').update(dbRow);
+        query=existing?._dbid?query.eq('id',existing._dbid):query.eq('proj_id',editingId);
+        ({data:savedRows,error}=await query.select('id,proj_id,notes'));
+        if(!error&&(!savedRows||!savedRows.length))throw new Error(`No Shared Live row matched ${editingId}. Refresh the tracker and try again.`);
+        // Log transfers only after the project update is confirmed.
+        if(!error&&existing&&existing.engineer!==proj.engineer){
+          const transferResult=await sb.from('project_transfers').insert([{proj_id:proj.id,from_engineer:existing.engineer,to_engineer:proj.engineer,transferred_at:new Date().toISOString()}]);
+          if(transferResult.error)console.warn('Transfer history:',transferResult.error.message||transferResult.error);
         }
+      }else{
+        const duplicate=PROJECTS.some(p=>p.id===proj.id);
+        if(duplicate)throw new Error('A project with ID '+proj.id+' already exists. Use Edit on the existing project instead.');
+        ({data:savedRows,error}=await sb.from('projects').insert([dbRow]).select('id,proj_id,notes'));
+        if(!error&&(!savedRows||!savedRows.length))throw new Error('Supabase did not confirm the new project row.');
       }
-    } else {
-      const duplicate=PROJECTS.some(p=>p.id===proj.id);
-      if(duplicate){alert('A project with ID '+proj.id+' already exists. Use Edit on the existing project instead.');return;}
-      ({error}=await sb.from('projects').insert([dbRow]));
+      if(error)throw error;
+
+      // Reload from Shared Live and verify the fields that users most often update.
+      await loadFromDB();
+      const confirmed=PROJECTS.find(p=>p.id===proj.id);
+      if(!confirmed)throw new Error(`Shared Live saved no readable row for ${proj.id}.`);
+      const milestoneSaved=MS_KEYS.every(k=>!!confirmed.ms[k]===!!proj.ms[k]&&(confirmed.msDates[k]||'')===(proj.msDates[k]||''));
+      if(confirmed.notes!==(proj.notes||'')||!milestoneSaved)throw new Error('Shared Live did not return the saved notes and milestones. Please retry after checking the connection.');
+      closeModal();
+      showToast(`⚡ ${proj.id} saved to Shared Live`);
+      return;
     }
-    if(error){alert('Save failed: '+error.message);return;}
-    closeModal();showToast('⚡ Project saved');return;
+
+    // Offline fallback is intentionally labeled so it is never mistaken for a shared save.
+    if(editingId){const idx=PROJECTS.findIndex(p=>p.id===editingId);if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],...proj};}
+    else PROJECTS.push(proj);
+    closeModal();refreshAll();
+    showToast('Saved locally only — Shared Live is offline');
+  }catch(e){
+    console.error('Project save:',e);
+    alert('Project was not saved to Shared Live:\n'+(e.message||e));
+  }finally{
+    if(saveBtn){saveBtn.disabled=false;saveBtn.textContent=idleLabel;}
   }
-  // local fallback — track transfer in memory
-  if(editingId){
-    const existing=PROJECTS.find(p=>p.id===editingId);
-    if(existing && existing.engineer !== proj.engineer){
-      if(!TRANSFER_HISTORY[proj.id]) TRANSFER_HISTORY[proj.id]=[];
-      TRANSFER_HISTORY[proj.id].push({from:existing.engineer,to:proj.engineer,date:new Date().toISOString()});
-    }
-  }
-  // local fallback
-  if(editingId){const idx=PROJECTS.findIndex(p=>p.id===editingId);if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],...proj};}
-  else PROJECTS.push(proj);
-  closeModal();refreshAll();
-  const av2=document.querySelector('.view.active');
-  if(av2?.id==='view-projects')renderProjects();
-  if(av2?.id==='view-gantt')renderGantt();
-  if(av2?.id==='view-bnb')renderBNB();
-  showToast('⚡ Project saved');
 }
 
 

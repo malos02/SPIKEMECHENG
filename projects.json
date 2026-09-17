@@ -156,7 +156,7 @@
     "id": "SO109820",
     "name": "(6) section fused 38Kv LBS",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-01",
     "ifc_due_date": null,
     "notes": "At spike 3"
@@ -381,7 +381,7 @@
     "id": "SO110286",
     "name": "SQD 3 sec swbd",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": ""
@@ -471,7 +471,7 @@
     "id": "SO110461",
     "name": "4000A Bussed Enclosure",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-02-02",
     "ifc_due_date": null,
     "notes": ""
@@ -651,7 +651,7 @@
     "id": "SO110613",
     "name": "REXEL - ALBUQUERQUE",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-02-26",
     "ifc_due_date": "2026-05-22",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
@@ -687,7 +687,7 @@
     "id": "SO110637",
     "name": "(2) section 15Kv LBS",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-11",
     "ifc_due_date": "2026-07-13",
     "notes": "On hold due to mating dimensions not being provided.\n4/16/26 the transformer dimensions received. Waiting on new due dates from PM\nReceived SLD/BOM on 5/4/26.  \nBNB will have IFA package on 5/6. \nIFA rev_B sent out from mechanical on 6/1."
@@ -759,7 +759,7 @@
     "id": "SO110715",
     "name": "SWBD, SQD, 1200A, NEMA 1, STAINLESS STEEL",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-12",
     "ifc_due_date": null,
     "notes": "**316 STAINLESS STEEL. NEW SPD SELECTED BY EE. DESIGN TO ADD TO DEAD FRONT AND VERTICAL LV BACKPAN REQD"
@@ -975,7 +975,7 @@
     "id": "SO110852",
     "name": "(2) section 15Kv 61kA Non-Fused LBS w/ CPT on SKID",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-07",
     "ifc_due_date": "2026-06-25",
     "notes": "Released 06/02\n\nfuse changed\n\nApproved with comments. No skid, will sit on a 2\" C channel. \n\nJob was released on 06/02"
@@ -1056,7 +1056,7 @@
     "id": "SO110902",
     "name": "SWBD, SQD, 1200A, NEMA 3R, 3 SECTION,  316 SS",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-16",
     "ifc_due_date": "2026-06-22",
     "notes": "*316 SS, HRG UNIT SECTION 2. MECH ELEV SUBMITTED TO ELEC ON 4/15/26\n\nStainless Steel\n\nSent to BNB 5/21"
@@ -1200,7 +1200,7 @@
     "id": "SO111025",
     "name": "SQD SWBD TYPE 1 3 SECTION",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-25",
     "ifc_due_date": "2026-06-01",
     "notes": "Released 06/02"
@@ -1419,7 +1419,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-07-14",
     "ifc_due_date": "2026-08-27",
-    "notes": "Double line up"
+    "notes": "released"
   },
   {
     "id": "SO111220",
@@ -1716,7 +1716,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-10-01",
     "ifc_due_date": "2026-11-14",
-    "notes": "Test"
+    "notes": "Waiting on sales, they do not know what was sold. Electrical is unable to work on the one-line. "
   },
   {
     "id": "SO111530",
@@ -2126,6 +2126,96 @@
   {
     "id": "SO111749",
     "name": "SO111749",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111752",
+    "name": "SO111752",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111753",
+    "name": "SO111753",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111754",
+    "name": "SO111754",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111755",
+    "name": "SO111755",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111756",
+    "name": "SO111756",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111757",
+    "name": "SO111757",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111759",
+    "name": "SO111759",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111762",
+    "name": "SO111762",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111763",
+    "name": "SO111763",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111765",
+    "name": "SO111765",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

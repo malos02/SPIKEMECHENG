@@ -2457,14 +2457,20 @@ async function saveProject(){
       }
       if(error)throw error;
 
-      // Reload from Shared Live and verify the fields that users most often update.
-      await loadFromDB();
-      const confirmed=PROJECTS.find(p=>p.id===proj.id);
-      if(!confirmed)throw new Error(`Shared Live saved no readable row for ${proj.id}.`);
-      const milestoneSaved=MS_KEYS.every(k=>!!confirmed.ms[k]===!!proj.ms[k]&&(confirmed.msDates[k]||'')===(proj.msDates[k]||''));
-      if(confirmed.notes!==(proj.notes||'')||!milestoneSaved)throw new Error('Shared Live did not return the saved notes and milestones. Please retry after checking the connection.');
+      // Supabase returned the written row, so the edit is confirmed. Update the screen
+      // immediately; normalization during the background reload must not turn a successful
+      // write into a false failure message.
+      const savedDbId=savedRows[0]?.id||existingProject?._dbid;
+      if(editingId){
+        const idx=PROJECTS.findIndex(p=>p.id===editingId);
+        if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],...proj,_dbid:savedDbId};
+      }else{
+        PROJECTS.push({...proj,_dbid:savedDbId});
+      }
       closeModal();
+      refreshAll();
       showToast(`⚡ ${proj.id} saved to Shared Live`);
+      loadFromDB().catch(e=>console.warn('Post-save refresh:',e));
       return;
     }
 

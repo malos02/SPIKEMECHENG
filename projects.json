@@ -1847,7 +1847,7 @@
   {
     "id": "SO111618",
     "name": "SO111618",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1937,7 +1937,7 @@
   {
     "id": "SO111697",
     "name": "SO111697",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1946,7 +1946,7 @@
   {
     "id": "SO111699",
     "name": "SO111699",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1955,7 +1955,7 @@
   {
     "id": "SO111705",
     "name": "SO111705",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1964,7 +1964,7 @@
   {
     "id": "SO111709",
     "name": "SO111709",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1973,7 +1973,7 @@
   {
     "id": "SO111712",
     "name": "SO111712",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1982,7 +1982,7 @@
   {
     "id": "SO111716",
     "name": "SO111716",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2027,7 +2027,7 @@
   {
     "id": "SO111728",
     "name": "SO111728",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2036,7 +2036,7 @@
   {
     "id": "SO111732",
     "name": "SO111732",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2063,7 +2063,7 @@
   {
     "id": "SO111738",
     "name": "SO111738",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2108,7 +2108,7 @@
   {
     "id": "SO111745",
     "name": "SO111745",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2117,7 +2117,7 @@
   {
     "id": "SO111746",
     "name": "SO111746",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2126,7 +2126,7 @@
   {
     "id": "SO111749",
     "name": "SO111749",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2135,7 +2135,7 @@
   {
     "id": "SO111752",
     "name": "SO111752",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2144,7 +2144,7 @@
   {
     "id": "SO111753",
     "name": "SO111753",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2153,7 +2153,7 @@
   {
     "id": "SO111754",
     "name": "SO111754",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2162,7 +2162,7 @@
   {
     "id": "SO111755",
     "name": "SO111755",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2180,7 +2180,7 @@
   {
     "id": "SO111757",
     "name": "SO111757",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2189,7 +2189,7 @@
   {
     "id": "SO111759",
     "name": "SO111759",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2197,8 +2197,8 @@
   },
   {
     "id": "SO111762",
-    "name": "SO111762",
-    "engineer": "Unassigned",
+    "name": "mts",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2207,7 +2207,7 @@
   {
     "id": "SO111763",
     "name": "SO111763",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2216,7 +2216,7 @@
   {
     "id": "SO111765",
     "name": "SO111765",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2225,7 +2225,16 @@
   {
     "id": "SO111766",
     "name": "SO111766",
-    "engineer": "Unassigned",
+    "engineer": "NO ENGINEER NEEDED",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111768",
+    "name": "38KV SWITCH LINE UP",
+    "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

@@ -264,7 +264,7 @@
     "id": "SO110092",
     "name": "SWITCH RACK",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-12-10",
     "ifc_due_date": null,
     "notes": "SHIPPED 6/19/26"
@@ -327,7 +327,7 @@
     "id": "SO110158",
     "name": "SWITCH RACK / BUS GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-02-05",
     "ifc_due_date": null,
     "notes": "IN QC 6/18/26"
@@ -372,7 +372,7 @@
     "id": "SO110279",
     "name": "SWITCH RACK / BUS GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-12-11",
     "ifc_due_date": null,
     "notes": "Shipped "
@@ -408,7 +408,7 @@
     "id": "SO110314",
     "name": "SWITCH RACKS (24FT)(2) - (8FT)(1)",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-01-02",
     "ifc_due_date": null,
     "notes": "IN PRODUCTION 6/17/26"
@@ -741,7 +741,7 @@
     "id": "SO110703",
     "name": "SWITCH RACK / BUS GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-23",
     "ifc_due_date": null,
     "notes": "IN PRODUCTION 6/22/26"
@@ -768,7 +768,7 @@
     "id": "SO110724",
     "name": "ALUMINUM SWRK",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-30",
     "ifc_due_date": null,
     "notes": "IN PRODUCTION 6/22/26\n"
@@ -849,7 +849,7 @@
     "id": "SO110746",
     "name": "ALUMINUM SWRK",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-04",
     "ifc_due_date": null,
     "notes": "in QC 8/31/26"
@@ -912,7 +912,7 @@
     "id": "SO110828",
     "name": "BUS GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-30",
     "ifc_due_date": null,
     "notes": "SHIPPED 6/18/26"
@@ -1308,7 +1308,7 @@
     "id": "SO111106",
     "name": "TAP BOX",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-06-05",
     "ifc_due_date": "2026-06-25",
     "notes": "IN PRODUCTION 6/22/26"
@@ -1326,7 +1326,7 @@
     "id": "SO111112",
     "name": "B-3R-S-B-2-A-12-K6-N-PD,BD BUSSED GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-06-02",
     "ifc_due_date": "2026-06-11",
     "notes": "Product shipped 9/10/26"

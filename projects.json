@@ -2074,9 +2074,9 @@
     "name": "ENCLOSED BREAKER",
     "engineer": "Masoom Patel",
     "status": "In Progress",
-    "ifa_due_date": null,
+    "ifa_due_date": "2026-09-18",
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "enclosed breaker with camlocks"
   },
   {
     "id": "SO111741",
@@ -2170,8 +2170,8 @@
   },
   {
     "id": "SO111756",
-    "name": "SO111756",
-    "engineer": "Unassigned",
+    "name": "15kv METALCLAD SWGR 3 SECTION",
+    "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2216,6 +2216,15 @@
   {
     "id": "SO111765",
     "name": "SO111765",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111766",
+    "name": "SO111766",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

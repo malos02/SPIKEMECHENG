@@ -763,6 +763,7 @@ const EMBEDDED_SALES = ["Chance Arriaga","Chance Arriaga ","Chase Satterwhite","
 // ── Engineers ─────────────────────────────────────────────────────────────
 const BUILTIN_ENGINEERS = [
   {id:'UA', name:'Unassigned',       color:'#94a3b8', bg:'rgba(148,163,184,.15)', role:'Unassigned', _builtin:true},
+  {id:'NE', name:'No Engineer Needed',color:'#64748b', bg:'rgba(100,116,139,.15)', role:'No Engineering Required', _builtin:true},
   {id:'BH', name:'Bryan Haro',       color:'#29ABE2', bg:'rgba(41,171,226,.15)', role:'Engineer', _builtin:true},
   {id:'EO', name:'Edwin Ojeda',      color:'#22d47a', bg:'rgba(34,212,122,.15)', role:'Engineer', _builtin:true},
   {id:'MG', name:'Mario Galdamez',   color:'#f5a623', bg:'rgba(245,166,35,.15)', role:'Engineer', _builtin:true},
@@ -2421,12 +2422,49 @@ function updateHistoryLog(){
 
 
 
+const NO_ENGINEER_NEEDED='No Engineer Needed';
+async function saveNoEngineerNeededAssignment(){
+  const existing=PROJECTS.find(p=>p.id===editingId);
+  if(!existing){alert('Open an existing project before assigning No Engineer Needed.');return;}
+  const saveBtn=document.getElementById('project-save-btn');
+  if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Saving assignment…';}
+  try{
+    if(sb){
+      let query=sb.from('projects').update({engineer:NO_ENGINEER_NEEDED});
+      query=existing._dbid?query.eq('id',existing._dbid):query.eq('proj_id',editingId);
+      const {data,error}=await query.select('id,proj_id,engineer');
+      if(error)throw error;
+      if(!data||!data.length)throw new Error(`No Shared Live row matched ${editingId}. Refresh the tracker and try again.`);
+      if(existing.engineer!==NO_ENGINEER_NEEDED){
+        const transferResult=await sb.from('project_transfers').insert([{proj_id:existing.id,from_engineer:existing.engineer,to_engineer:NO_ENGINEER_NEEDED,transferred_at:new Date().toISOString()}]);
+        if(transferResult.error)console.warn('Transfer history:',transferResult.error.message||transferResult.error);
+      }
+      const idx=PROJECTS.findIndex(p=>p.id===editingId);
+      if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],engineer:NO_ENGINEER_NEEDED,_dbid:data[0].id||existing._dbid};
+      closeModal();
+      refreshAll();
+      showToast(`⚡ ${existing.id} assigned No Engineer Needed`);
+      loadFromDB().catch(e=>console.warn('Post-save refresh:',e));
+      return;
+    }
+    const idx=PROJECTS.findIndex(p=>p.id===editingId);
+    if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],engineer:NO_ENGINEER_NEEDED};
+    closeModal();refreshAll();showToast('Assignment saved locally only — Shared Live is offline');
+  }catch(e){
+    console.error('No Engineer Needed assignment:',e);
+    alert('Assignment was not saved to Shared Live:\n'+(e.message||e));
+  }finally{
+    if(saveBtn){saveBtn.disabled=false;saveBtn.textContent='Update Project';}
+  }
+}
+
 async function saveProject(){
   if(!requireWriteAccess())return;
   const name=document.getElementById('f-name').value.trim();
   const engineer=document.getElementById('f-engineer').value;
   const type=document.getElementById('f-type-m').value;
   const voltage=document.getElementById('f-voltage').value;
+  if(engineer===NO_ENGINEER_NEEDED&&editingId){await saveNoEngineerNeededAssignment();return;}
   if(!name||!engineer||!type||!voltage){alert('Please fill in Name, Engineer, Type and Voltage');return;}
   const {ms, msDates}=getMilestones();
   const existingProject=editingId?PROJECTS.find(p=>p.id===editingId):null;

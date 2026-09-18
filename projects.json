@@ -93,10 +93,10 @@
     "id": "SO109196",
     "name": "SWGR, 5KV,",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-07-08",
     "ifc_due_date": "2026-05-06",
-    "notes": "Top instrument pans, HRG display plate, and breaker instrument panels submitted to fab."
+    "notes": ""
   },
   {
     "id": "SO109196MV",
@@ -138,10 +138,10 @@
     "id": "SO109779",
     "name": "SWBD, SQD, 3000A, NEMA 3R, 16 LINEUPS",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "0026-03-31",
     "ifc_due_date": null,
-    "notes": "BATCH 2 (LINEUPS 5-9) STARTED LIVE ON FLOOR 4/8"
+    "notes": "SKID 13 COMPLETE. SKID 14 STARTED"
   },
   {
     "id": "SO109779-LBS",
@@ -255,10 +255,10 @@
     "id": "SO110082",
     "name": "SW, 17KV, 600AA, NEMA 1, 2 SECTION",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "IN QC PRODUCTION (BAY OAKS) "
+    "notes": "SHIPPED"
   },
   {
     "id": "SO110092",
@@ -357,7 +357,7 @@
     "status": "In Progress",
     "ifa_due_date": "2025-12-17",
     "ifc_due_date": "2026-09-01",
-    "notes": "ELECTRICAL WORKING ON UPDATED ONELINE. SCHEDULED TO RECEIVE FROM ELECTRICAL AROUND 6/19. ESTIMATED SCHEDULED TO START IFC ON 6/19."
+    "notes": "MECHANICAL STARTED. MAIN AND FEEDER CABINETS 95% COMPLETE. WAITING ON SPD TO ARRIVE OPN SITE TO FINISH DOOR DESIGN. TIE CABINETS 95% COMPLETE. WILL WORK ON BUS STACKS OVER WEEKEND. PLAN IS TO START FAB DETAILS, ASSEMBLY DRAWINGS, AND MATERIAL TRAVELERS NEXT WEEK. SHOOTING FOR 9/25 RELEASE."
   },
   {
     "id": "SO110260",
@@ -447,7 +447,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-02-09",
     "ifc_due_date": "2026-09-10",
-    "notes": "IFA SUBMITTED TO CUSTOMER. AWAITING APPROVAL"
+    "notes": "CUSTOMER APPROVED TO PURCHASE PARTS. IFA STILL IN CUSTOMER REVIEW. NEED TO COMPILE LIST OF UPDATES ON 109196 (UL 1558) TO PUT ON THIS JOB."
   },
   {
     "id": "SO110387",
@@ -957,10 +957,10 @@
     "id": "SO110849",
     "name": "SWBD, 2000A, SGL SECTION, NEMA1,",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "ASSEMBLY STARTED - SPIKE 4"
+    "notes": "SHIPPED"
   },
   {
     "id": "SO110851",
@@ -984,37 +984,37 @@
     "id": "SO110855",
     "name": "SWBD, SQD, NEMA 1, DH1",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-14",
     "ifc_due_date": "2026-04-20",
-    "notes": "STATUS: ADDING BUS FOR NEUTRAL SENSOR LUG CONNECTIONS. UPDATE 4000A MAINS TO REAR ENTRY.  UPDATE ROOFS OF ALL BUS STACKS TO TOP FEED. UPDATE DUAL FEEDER ROOFS TO REMOVE TOP FEED OPENING. REVISE REVISIONS FOR MATERIAL TRAVELERS AND 3D STEP FILES."
+    "notes": "NEUTRAL DESIGN UPDATE (PER CUSTOMER) AND APPROVED. FIELD INSTALL EN ROUTE. "
   },
   {
     "id": "SO110856",
     "name": "SWBD, SQD, NEMA 1, DH2",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-14",
     "ifc_due_date": "2026-04-20",
-    "notes": ""
+    "notes": "NEUTRAL UPDATE (PER CUSTOMER). BUS TO BE INSTALLED IN FIELD."
   },
   {
     "id": "SO110857",
     "name": "SWBD, SQD, NEMA 1, DH3",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-28",
     "ifc_due_date": "2026-05-04",
-    "notes": ""
+    "notes": "PRODUCTION FABRICATION IN PROCESS"
   },
   {
     "id": "SO110858",
     "name": "SWBD, SQD, NEMA 1, DH4",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-15",
     "ifc_due_date": "2026-05-21",
-    "notes": ""
+    "notes": "PRODUCTION OUTSOURCED"
   },
   {
     "id": "SO110871",
@@ -1218,10 +1218,10 @@
     "id": "SO111047",
     "name": "4000A SWBD 65KAIS",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-11",
     "ifc_due_date": "2026-06-01",
-    "notes": "PRODUCTION BAY AREA STARTED ASSY 6/15/26"
+    "notes": "SHIPPED"
   },
   {
     "id": "SO111050",
@@ -1236,10 +1236,10 @@
     "id": "SO111051",
     "name": "MMR SWBD",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-06-05",
     "ifc_due_date": "2026-07-06",
-    "notes": "MECH IFA SUBMITTED TO ELECTRICAL"
+    "notes": "SHIPPED. FIELD SERVICE FINISHING INSTALLATION AND TESTING ON SITE."
   },
   {
     "id": "SO111052",

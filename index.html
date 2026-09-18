@@ -338,7 +338,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="ni" id="ni-admin" onclick="showView('admin',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M12 14c-5 0-7 2-7 3v1h14v-1c0-1-2-3-7-3z"/><path d="M18 8l1.5-1.5M18 8l1.5 1.5M6 8L4.5 6.5M6 8L4.5 9.5"/></svg>Manage Team</div>
     </div>
   </nav>
-  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Last sync: <span id="last-update">—</span></div>
+  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Tracker: V17<br>Last sync: <span id="last-update">—</span></div>
 </aside>
 
 <main class="main">
@@ -2423,7 +2423,7 @@ function updateHistoryLog(){
 
 
 const NO_ENGINEER_NEEDED='No Engineer Needed';
-function isNoEngineerNeeded(value){return String(value||'').trim().toLowerCase()===NO_ENGINEER_NEEDED.toLowerCase();}
+function isNoEngineerNeeded(value){return String(value||'').toLowerCase().replace(/[^a-z]/g,'').includes('noengineerneeded');}
 async function saveNoEngineerNeededAssignment(){
   const existing=PROJECTS.find(p=>p.id===editingId);
   if(!existing){alert('Open an existing project before assigning No Engineer Needed.');return;}
@@ -2462,10 +2462,12 @@ async function saveNoEngineerNeededAssignment(){
 async function saveProject(){
   if(!requireWriteAccess())return;
   const name=document.getElementById('f-name').value.trim();
-  const engineer=document.getElementById('f-engineer').value;
+  const engineerSelect=document.getElementById('f-engineer');
+  const engineer=engineerSelect.value;
+  const engineerLabel=engineerSelect.selectedOptions[0]?.textContent||'';
   const type=document.getElementById('f-type-m').value;
   const voltage=document.getElementById('f-voltage').value;
-  if(isNoEngineerNeeded(engineer)&&editingId){await saveNoEngineerNeededAssignment();return;}
+  if((isNoEngineerNeeded(engineer)||isNoEngineerNeeded(engineerLabel))&&editingId){await saveNoEngineerNeededAssignment();return;}
   if(!name||!engineer||!type||!voltage){alert('Please fill in Name, Engineer, Type and Voltage');return;}
   const {ms, msDates}=getMilestones();
   const existingProject=editingId?PROJECTS.find(p=>p.id===editingId):null;

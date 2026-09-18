@@ -2423,6 +2423,7 @@ function updateHistoryLog(){
 
 
 const NO_ENGINEER_NEEDED='No Engineer Needed';
+function isNoEngineerNeeded(value){return String(value||'').trim().toLowerCase()===NO_ENGINEER_NEEDED.toLowerCase();}
 async function saveNoEngineerNeededAssignment(){
   const existing=PROJECTS.find(p=>p.id===editingId);
   if(!existing){alert('Open an existing project before assigning No Engineer Needed.');return;}
@@ -2464,7 +2465,7 @@ async function saveProject(){
   const engineer=document.getElementById('f-engineer').value;
   const type=document.getElementById('f-type-m').value;
   const voltage=document.getElementById('f-voltage').value;
-  if(engineer===NO_ENGINEER_NEEDED&&editingId){await saveNoEngineerNeededAssignment();return;}
+  if(isNoEngineerNeeded(engineer)&&editingId){await saveNoEngineerNeededAssignment();return;}
   if(!name||!engineer||!type||!voltage){alert('Please fill in Name, Engineer, Type and Voltage');return;}
   const {ms, msDates}=getMilestones();
   const existingProject=editingId?PROJECTS.find(p=>p.id===editingId):null;

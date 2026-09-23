@@ -615,7 +615,7 @@
     "id": "SO110599",
     "name": "27kv CTB",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-05",
     "ifc_due_date": null,
     "notes": "Production started on 3/19/26"
@@ -633,7 +633,7 @@
     "id": "SO110604",
     "name": "6ft bussed gutter",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-06",
     "ifc_due_date": null,
     "notes": "IFCs were sent to the machining folder."
@@ -786,7 +786,7 @@
     "id": "SO110730",
     "name": "CTB-16-3P4W-N3",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-02",
     "ifc_due_date": null,
     "notes": "Customer requested custom enclosure due to size constraints."
@@ -858,7 +858,7 @@
     "id": "SO110751",
     "name": "SWRK 7FT",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-01",
     "ifc_due_date": null,
     "notes": "CUSTOMER APPROVED 5-15-26. SHIP DATE OF 7-13-26. Not our standard switchrack assembly. IFA Rev B sent 4/30"
@@ -939,7 +939,7 @@
     "id": "SO110845",
     "name": "CTB-25-N3-3P3W",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-27",
     "ifc_due_date": null,
     "notes": "IDR complete and IFC drawings/files released in Vault."
@@ -1029,7 +1029,7 @@
     "id": "SO110883",
     "name": "NEMA 3R SWBD ENCLOSURE",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-16",
     "ifc_due_date": null,
     "notes": "IDR complete and IFC drawings/files released in Vault."
@@ -1083,7 +1083,7 @@
     "id": "SO110916",
     "name": "CTB-5-N3-6-3P3W",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-22",
     "ifc_due_date": null,
     "notes": ""
@@ -1146,7 +1146,7 @@
     "id": "SO110966",
     "name": "4000A CABLE TAP BOX CTB-4-N3-P",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-07",
     "ifc_due_date": null,
     "notes": "IFC's released."
@@ -1155,7 +1155,7 @@
     "id": "SO110971",
     "name": "BUSSED GUTTER B3R-D-T-06-P-12-K6-3G+N-PD,BD",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-22",
     "ifc_due_date": null,
     "notes": "IFC approved 110971 5-13-26"
@@ -1182,7 +1182,7 @@
     "id": "SO110984",
     "name": "CABLE TAP BOX 400A",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-05",
     "ifc_due_date": "2026-06-23",
     "notes": "IFA's sent, waiting for customer approval."
@@ -1497,7 +1497,7 @@
     "id": "SO111316",
     "name": "CABLE TAP BOX 4000A",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-08",
     "ifc_due_date": "2026-07-11",
     "notes": ""
@@ -1569,7 +1569,7 @@
     "id": "SO111378",
     "name": "SPK BUS GUTTER 16' & 12'",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-20",
     "ifc_due_date": "2026-08-03",
     "notes": ""
@@ -1578,7 +1578,7 @@
     "id": "SO111379",
     "name": "CTB-4000-3P4W-N3R",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-18",
     "ifc_due_date": null,
     "notes": "IFA drawings approved 8/12. Proceeding with IFC."
@@ -1614,7 +1614,7 @@
     "id": "SO111437",
     "name": "CTB-15-N3-12-3P3W",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-21",
     "ifc_due_date": null,
     "notes": "APPROVED 7-28-26. PROCEED TO IFC"
@@ -1830,7 +1830,7 @@
     "id": "SO111602",
     "name": "B3R-S-T-6-P-20-K6-3P+G-PD BD BUS GUTTER",
     "engineer": "Micaiah Williams",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "Direct to IFC, working on release as of 8/24."

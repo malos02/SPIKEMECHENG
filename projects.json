@@ -86,7 +86,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2025-05-28",
-    "ifc_due_date": "2026-10-05",
+    "ifc_due_date": "2026-12-18",
     "notes": ""
   },
   {
@@ -113,7 +113,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-05-12",
-    "ifc_due_date": "2026-09-03",
+    "ifc_due_date": "2026-09-08",
     "notes": "APPROVED 6-11-26. NEW DELIVERY DATE IN NOVEMBER 2026"
   },
   {
@@ -185,7 +185,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2025-10-08",
-    "ifc_due_date": "2026-09-11",
+    "ifc_due_date": "2026-11-23",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -194,7 +194,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-01-16",
-    "ifc_due_date": "2026-11-24",
+    "ifc_due_date": "2027-01-27",
     "notes": ""
   },
   {
@@ -356,7 +356,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2025-12-17",
-    "ifc_due_date": "2026-09-01",
+    "ifc_due_date": "2026-10-01",
     "notes": "MECHANICAL STARTED. MAIN AND FEEDER CABINETS 95% COMPLETE. WAITING ON SPD TO ARRIVE OPN SITE TO FINISH DOOR DESIGN. TIE CABINETS 95% COMPLETE. WILL WORK ON BUS STACKS OVER WEEKEND. PLAN IS TO START FAB DETAILS, ASSEMBLY DRAWINGS, AND MATERIAL TRAVELERS NEXT WEEK. SHOOTING FOR 9/25 RELEASE."
   },
   {
@@ -446,7 +446,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-02-09",
-    "ifc_due_date": "2026-09-10",
+    "ifc_due_date": "2026-10-09",
     "notes": "CUSTOMER APPROVED TO PURCHASE PARTS. IFA STILL IN CUSTOMER REVIEW. NEED TO COMPILE LIST OF UPDATES ON 109196 (UL 1558) TO PUT ON THIS JOB."
   },
   {
@@ -482,7 +482,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-04-14",
-    "ifc_due_date": "2026-07-28",
+    "ifc_due_date": "2026-10-02",
     "notes": "Waiting on customer send back updated SLD (3/31/2026)"
   },
   {
@@ -689,7 +689,7 @@
     "engineer": "Mario Galdamez",
     "status": "Complete",
     "ifa_due_date": "2026-03-11",
-    "ifc_due_date": "2026-07-13",
+    "ifc_due_date": "2026-09-17",
     "notes": "On hold due to mating dimensions not being provided.\n4/16/26 the transformer dimensions received. Waiting on new due dates from PM\nReceived SLD/BOM on 5/4/26.  \nBNB will have IFA package on 5/6. \nIFA rev_B sent out from mechanical on 6/1."
   },
   {
@@ -950,7 +950,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-07-01",
-    "ifc_due_date": "2026-09-15",
+    "ifc_due_date": "2026-09-23",
     "notes": ""
   },
   {
@@ -968,7 +968,7 @@
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": "2026-04-18",
-    "ifc_due_date": "2026-09-09",
+    "ifc_due_date": "2026-11-06",
     "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***WAITINO APPROVAL FROM CUSTOMER ***\n9/10/2026\n**STILL WAITING FOR APPROVAL**\n"
   },
   {
@@ -1112,7 +1112,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-07-14",
-    "ifc_due_date": "2026-10-19",
+    "ifc_due_date": "2026-11-09",
     "notes": ""
   },
   {
@@ -1139,7 +1139,7 @@
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": "2026-05-18",
-    "ifc_due_date": "2026-09-07",
+    "ifc_due_date": "2026-09-05",
     "notes": "IDR 9/10/2026\nIFC SUBMITTED 8/11/2026"
   },
   {
@@ -1256,7 +1256,7 @@
     "engineer": "Mario Galdamez",
     "status": "In Progress",
     "ifa_due_date": "2026-05-27",
-    "ifc_due_date": "2026-08-25",
+    "ifc_due_date": "2026-09-09",
     "notes": "5/21/26 - Vault difficulties, using P: drive\n5/21/26 - Start of design\n7/24/26 - IFA not approved"
   },
   {
@@ -1274,7 +1274,7 @@
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": "2026-06-24",
-    "ifc_due_date": "2026-09-03",
+    "ifc_due_date": "2026-09-02",
     "notes": "IFC APPROVED 9/4/2026\n"
   },
   {
@@ -1301,7 +1301,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-06-10",
-    "ifc_due_date": "2026-09-23",
+    "ifc_due_date": "2026-10-22",
     "notes": "NOTIFIED BY SALES THAT THIS UNIT IS NEMA 3R NOT NEMA 1. NEED TO RESUBMIT MECHANICALS. MECHANICAL ELEV SUBMITTED 6/10/26. DUE 6/10/26."
   },
   {
@@ -1319,7 +1319,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-06-19",
-    "ifc_due_date": "2026-07-28",
+    "ifc_due_date": "2026-10-31",
     "notes": "This is out for approval as of 7-28-26"
   },
   {
@@ -1355,7 +1355,7 @@
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": "2026-07-13",
-    "ifc_due_date": "2026-09-24",
+    "ifc_due_date": "2026-11-07",
     "notes": "9/4/2026\n*WAITING FOR APPROVAL*\n"
   },
   {
@@ -1382,7 +1382,7 @@
     "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": "2026-06-26",
-    "ifc_due_date": "2026-08-19",
+    "ifc_due_date": "2026-10-24",
     "notes": "waiting for customer "
   },
   {
@@ -1400,7 +1400,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-06-12",
-    "ifc_due_date": "2026-08-11",
+    "ifc_due_date": "2026-08-25",
     "notes": ""
   },
   {
@@ -1409,7 +1409,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-07-14",
-    "ifc_due_date": "2026-09-11",
+    "ifc_due_date": "2026-11-02",
     "notes": ""
   },
   {
@@ -1445,7 +1445,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-09-04",
-    "ifc_due_date": "2026-10-12",
+    "ifc_due_date": "2026-10-10",
     "notes": "PRELIM REQUESTED FOR 7-24-26"
   },
   {
@@ -1454,7 +1454,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-08-21",
-    "ifc_due_date": "2026-10-06",
+    "ifc_due_date": "2026-11-04",
     "notes": "08/24~25 meeting and IFA revisions"
   },
   {
@@ -1490,7 +1490,7 @@
     "engineer": "Bryan Haro",
     "status": "In Progress",
     "ifa_due_date": "2026-06-09",
-    "ifc_due_date": "2026-08-08",
+    "ifc_due_date": "2026-08-31",
     "notes": "SAME AS 111103. SUBMITTED MECH LAYOUT TO ELECTRICAL"
   },
   {
@@ -1517,7 +1517,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-09-25",
+    "ifc_due_date": "2026-10-26",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1526,7 +1526,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-09-25",
+    "ifc_due_date": "2026-10-26",
     "notes": "Mechanical IFA's submitted to electrical 8/3"
   },
   {
@@ -1633,8 +1633,8 @@
     "name": "IS LIMITER",
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
-    "ifa_due_date": "2026-10-02",
-    "ifc_due_date": "2026-11-14",
+    "ifa_due_date": "2026-09-23",
+    "ifc_due_date": "2026-11-06",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1643,7 +1643,7 @@
     "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": "2026-09-02",
-    "ifc_due_date": "2026-10-16",
+    "ifc_due_date": "2026-09-22",
     "notes": ""
   },
   {
@@ -1652,7 +1652,7 @@
     "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": "2026-08-19",
-    "ifc_due_date": "2026-10-03",
+    "ifc_due_date": "2026-11-02",
     "notes": "Still waiting for approval as of 9/22/26"
   },
   {
@@ -1661,7 +1661,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-07-30",
-    "ifc_due_date": "2026-09-04",
+    "ifc_due_date": "2026-09-08",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1679,7 +1679,7 @@
     "engineer": "BNB Team",
     "status": "In Progress",
     "ifa_due_date": "2026-08-20",
-    "ifc_due_date": "2026-10-05",
+    "ifc_due_date": "2026-11-03",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1688,7 +1688,7 @@
     "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": "2026-08-06",
-    "ifc_due_date": "2026-09-01",
+    "ifc_due_date": "2026-09-10",
     "notes": ""
   },
   {
@@ -1921,8 +1921,8 @@
     "name": "15KV SWITCH 600A",
     "engineer": "KAIYI SHI",
     "status": "In Progress",
-    "ifa_due_date": null,
-    "ifc_due_date": null,
+    "ifa_due_date": "2026-10-03",
+    "ifc_due_date": "2026-11-02",
     "notes": ""
   },
   {
@@ -1993,8 +1993,8 @@
     "name": "SO111717",
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
-    "ifa_due_date": null,
-    "ifc_due_date": null,
+    "ifa_due_date": "2026-11-06",
+    "ifc_due_date": "2026-12-23",
     "notes": "Automatically added from Linear assignment sync."
   },
   {
@@ -2047,8 +2047,8 @@
     "name": "15kv switch 600a",
     "engineer": "Masoom Patel",
     "status": "In Progress",
-    "ifa_due_date": null,
-    "ifc_due_date": null,
+    "ifa_due_date": "2026-10-27",
+    "ifc_due_date": "2026-12-04",
     "notes": "Automatically added from Linear assignment sync."
   },
   {
@@ -2056,8 +2056,8 @@
     "name": "15kv switch 600a",
     "engineer": "Masoom Patel",
     "status": "In Progress",
-    "ifa_due_date": null,
-    "ifc_due_date": null,
+    "ifa_due_date": "2026-11-10",
+    "ifc_due_date": "2026-12-29",
     "notes": "Automatically added from Linear assignment sync."
   },
   {

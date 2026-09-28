@@ -1398,7 +1398,7 @@
     "id": "SO111170",
     "name": "CTB-4000-N4X-3P3W",
     "engineer": "KAIYI SHI",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-06-12",
     "ifc_due_date": "2026-08-25",
     "notes": ""
@@ -2315,7 +2315,7 @@
   {
     "id": "SO111793",
     "name": "SO111793",
-    "engineer": "Unassigned",
+    "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2378,6 +2378,42 @@
   {
     "id": "SO111803",
     "name": "SO111803",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111804",
+    "name": "SO111804",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111805",
+    "name": "SO111805",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111806",
+    "name": "SO111806",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111809",
+    "name": "SO111809",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

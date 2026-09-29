@@ -1707,7 +1707,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-08-26",
     "ifc_due_date": "2026-10-10",
-    "notes": "Sent IFA to customer on 8/27/26"
+    "notes": "Needing an update on the lock out/ kirk key write up. Also about the ground and switch mechanism. \n9/25/26"
   },
   {
     "id": "SO111521",
@@ -1929,10 +1929,10 @@
     "id": "SO111695",
     "name": "CTB-4000-3P4W-N3R",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "Live on the floor 9/28/26\n"
   },
   {
     "id": "SO111697",

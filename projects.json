@@ -1599,7 +1599,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-09-18",
     "ifc_due_date": "2026-11-02",
-    "notes": "SWITCH 15KV AND BREAKER 1200A FIXED "
+    "notes": "customer wants design change (main section + trans)"
   },
   {
     "id": "SO111425",
@@ -2297,7 +2297,7 @@
   {
     "id": "SO111791",
     "name": "SO111791",
-    "engineer": "Unassigned",
+    "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2432,7 +2432,7 @@
   {
     "id": "SO111814",
     "name": "SO111814",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2441,7 +2441,7 @@
   {
     "id": "SO111815",
     "name": "SO111815",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2450,7 +2450,7 @@
   {
     "id": "SO111824",
     "name": "SO111824",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2459,7 +2459,7 @@
   {
     "id": "SO111827",
     "name": "SO111827",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

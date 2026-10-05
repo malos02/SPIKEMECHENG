@@ -357,7 +357,7 @@
     "status": "In Progress",
     "ifa_due_date": "2025-12-17",
     "ifc_due_date": "2026-10-01",
-    "notes": "MECHANICAL STARTED. MAIN AND FEEDER CABINETS 95% COMPLETE. WAITING ON SPD TO ARRIVE OPN SITE TO FINISH DOOR DESIGN. TIE CABINETS 95% COMPLETE. WILL WORK ON BUS STACKS OVER WEEKEND. PLAN IS TO START FAB DETAILS, ASSEMBLY DRAWINGS, AND MATERIAL TRAVELERS NEXT WEEK. SHOOTING FOR 9/25 RELEASE."
+    "notes": "IDR REVIEW SCHEDULED FOR 10/5 @2-4PM"
   },
   {
     "id": "SO110260",
@@ -2367,6 +2367,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111801",
+    "name": "SO111801",
+    "engineer": "Gustavo Avila",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111802",
     "name": "SO111802",
     "engineer": "Unassigned",
@@ -2387,7 +2396,7 @@
   {
     "id": "SO111804",
     "name": "SO111804",
-    "engineer": "Unassigned",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2396,7 +2405,7 @@
   {
     "id": "SO111805",
     "name": "SO111805",
-    "engineer": "Unassigned",
+    "engineer": "Jordan Dunn",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2406,6 +2415,24 @@
     "id": "SO111806",
     "name": "SO111806",
     "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111807",
+    "name": "SO111807",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111808",
+    "name": "SO111808",
+    "engineer": "Maria Parrie",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2423,7 +2450,16 @@
   {
     "id": "SO111812",
     "name": "SO111812",
-    "engineer": "Unassigned",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111813",
+    "name": "SO111813",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2448,6 +2484,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111816",
+    "name": "SO111816",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111824",
     "name": "SO111824",
     "engineer": "No Engineer Needed",
@@ -2457,9 +2502,72 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111825",
+    "name": "SO111825",
+    "engineer": "Khai Hua",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111827",
     "name": "SO111827",
     "engineer": "No Engineer Needed",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111828",
+    "name": "SO111828",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111830",
+    "name": "SO111830",
+    "engineer": "Caleb Essel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111831",
+    "name": "SO111831",
+    "engineer": "Kaiyi Shi",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111832",
+    "name": "SO111832",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111834",
+    "name": "SO111834",
+    "engineer": "Jordan Dunn",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111835",
+    "name": "SO111835",
+    "engineer": "Gustavo Avila",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

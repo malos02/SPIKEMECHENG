@@ -744,7 +744,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-03-23",
     "ifc_due_date": null,
-    "notes": "IN PRODUCTION 6/22/26"
+    "notes": "shipped"
   },
   {
     "id": "SO110712",
@@ -1605,7 +1605,7 @@
     "id": "SO111425",
     "name": "BUS GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-28",
     "ifc_due_date": null,
     "notes": "Shipped on 9/14/26"
@@ -1707,7 +1707,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-08-26",
     "ifc_due_date": "2026-10-10",
-    "notes": "Needing an update on the lock out/ kirk key write up. Also about the ground and switch mechanism. \n9/25/26"
+    "notes": "Needing an update on the lock out/ kirk key write up.\n10/6/26"
   },
   {
     "id": "SO111521",
@@ -2493,6 +2493,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111819",
+    "name": "SO111819",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111824",
     "name": "SO111824",
     "engineer": "No Engineer Needed",
@@ -2539,8 +2548,8 @@
   },
   {
     "id": "SO111831",
-    "name": "SO111831",
-    "engineer": "Kaiyi Shi",
+    "name": "15kv LBS",
+    "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2568,6 +2577,15 @@
     "id": "SO111835",
     "name": "SO111835",
     "engineer": "Gustavo Avila",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111838",
+    "name": "SO111838",
+    "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

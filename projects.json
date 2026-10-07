@@ -357,7 +357,7 @@
     "status": "In Progress",
     "ifa_due_date": "2025-12-17",
     "ifc_due_date": "2026-10-01",
-    "notes": "IDR REVIEW SCHEDULED FOR 10/5 @2-4PM"
+    "notes": "RELEASED TO PRODUCTION 10/6"
   },
   {
     "id": "SO110260",
@@ -2558,7 +2558,7 @@
   {
     "id": "SO111832",
     "name": "SO111832",
-    "engineer": "Unassigned",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2586,6 +2586,15 @@
     "id": "SO111838",
     "name": "SO111838",
     "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111840",
+    "name": "SO111840",
+    "engineer": "Emilio Baez",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

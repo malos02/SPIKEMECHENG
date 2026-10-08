@@ -30,7 +30,7 @@
     "id": "SO108935",
     "name": "38KV_2000A_METALCALD_N3R_6 SECTION",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "38KV_2000A_METALCALD_N3R_6 SECTION"
@@ -39,7 +39,7 @@
     "id": "SO108936",
     "name": "38KV_2000A_METALCALD_N3R_4 SECTION",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "38KV_2000A_METALCALD_N3R_4 SECTION"
@@ -48,7 +48,7 @@
     "id": "SO108938",
     "name": "15KV 50KA ABB ADVAC METAL-CLAD SWITCHGEAR",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "15KV 50KA ABB ADVAC METAL-CLAD SWITCHGEAR\n95kV BIL, 3 Phase, 60 Hz"
@@ -75,7 +75,7 @@
     "id": "SO109021",
     "name": "ATS(AUTOMATIC TRANSFER BREAKER SYSTEM)",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "LS/SOCOMEC AUTOMATIC TRANSFER BREAKER SYSTEM, 120/208V, 3PH-4W."
@@ -86,7 +86,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2025-05-28",
-    "ifc_due_date": "2026-12-18",
+    "ifc_due_date": "2027-01-06",
     "notes": ""
   },
   {
@@ -120,7 +120,7 @@
     "id": "SO109639",
     "name": "DROP OVER",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-12-19",
     "ifc_due_date": null,
     "notes": ""
@@ -185,7 +185,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2025-10-08",
-    "ifc_due_date": "2026-11-23",
+    "ifc_due_date": "2026-12-26",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -194,7 +194,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-01-16",
-    "ifc_due_date": "2027-01-27",
+    "ifc_due_date": "2027-04-09",
     "notes": ""
   },
   {
@@ -228,7 +228,7 @@
     "id": "SO110003",
     "name": "15KV_600A NON-FUSED_STANDALONE",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-12-29",
     "ifc_due_date": null,
     "notes": "15KV_600A_N3R_NON-FUSED_STANDALONE"
@@ -237,7 +237,7 @@
     "id": "SO110019",
     "name": "15KV_600A NON-FUSED_STANDALONE",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-02-24",
     "ifc_due_date": null,
     "notes": "15KV_600A_N3R_NON-FUSED_STANDALONE"
@@ -246,7 +246,7 @@
     "id": "SO110057",
     "name": "ECB-3000A ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-12-09",
     "ifc_due_date": null,
     "notes": "ABB ENCLOSED BREAKER, 480/277 3P 4W 65KA 3000A MCB 3200AF/3000AT\nBREAKER TERMINATION LUGS (8) #3/0-750MCM, GROUND BAR (1) #6-350MCM\nENCLOSURE LAYOUT\nSO110057-001"
@@ -318,7 +318,7 @@
     "id": "SO110155",
     "name": "15KV_600A_N3R_NON-FUSED SWITCH",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-12-23",
     "ifc_due_date": null,
     "notes": "15KV_600A_N3R_NON-FUSED\nLOAD INTERRUPTER"
@@ -345,7 +345,7 @@
     "id": "SO110228",
     "name": "ECB-1600A ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-01",
     "ifc_due_date": null,
     "notes": "ABB ENCLOSED BREAKER, 480/277 3P,4W, 65KA 1600A RATED MCB\n1600AF/1600AT LSIG + RELT MAIN BREAKER\nENCLOSURE LAYOUT"
@@ -356,7 +356,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2025-12-17",
-    "ifc_due_date": "2026-10-01",
+    "ifc_due_date": "2026-10-08",
     "notes": "RELEASED TO PRODUCTION 10/6"
   },
   {
@@ -390,7 +390,7 @@
     "id": "SO110299",
     "name": "15KV_600A FUSED_LOAD_BREAK_SWITCH",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-01-16",
     "ifc_due_date": null,
     "notes": "15KV_600A_40KA_FUSED_LOAD_BREAK_SWITCH"
@@ -417,7 +417,7 @@
     "id": "SO110323",
     "name": "COPPER DESIGN",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2025-12-15",
     "ifc_due_date": null,
     "notes": "COPPER DESIGN "
@@ -435,7 +435,7 @@
     "id": "SO110345",
     "name": "ECB-3000A SQD",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "SQD ENCLOSED MTZ BREAKER 600V 3PH 4W, 65KA, 3000A RATED \nMCB 3000AF/3000AT, LSIG+ERMS\nENCLOSURE LAYOUT"
@@ -462,7 +462,7 @@
     "id": "SO110423",
     "name": "FUSED, 1200A, 3P, 4W, 480V, ROTARY STYLE HAND",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "NEMA 3R MTS, FUSED, 1200A, 3P, 4W, 480V, ROTARY STYLE HAND.\n1200A FEMALE CAMLOK SET (3EA) W/ WP CAPS (480V), SER"
@@ -489,7 +489,7 @@
     "id": "SO110481",
     "name": "DROP OVER",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "5MCC DROP OVER\n1. remove vent and add fan - 04.29.2026\n2. customer approved We have to sent this back to NEMA and send fan cut out detail. "
@@ -534,7 +534,7 @@
     "id": "SO110567",
     "name": "BOLT-SWITCH FUSIBLE SWITCH 5000A N3R",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-06-02",
     "ifc_due_date": "2026-07-30",
     "notes": "BOLT-SWITCH FUSIBLE SWITCH 5000A N3R 480Y/277V 3PH 4W, GROUND-FAULT W/VIEW WINDOW, 100KAIC\n1. CUSTOMER ADD FEW CHNAGES ON ENCLOSURE SIZE AND LUG PER PHASE. \n2. IFA revB submitted 04.28.2026"
@@ -606,7 +606,7 @@
     "id": "SO110597",
     "name": "ECB-2500A ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "2500A BOTTOM ENCLOSED BREAKER "
@@ -660,7 +660,7 @@
     "id": "SO110614",
     "name": "BOLTSWITCH FUSED 2000A",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "NEMA 3R MANUAL TRANSFER SWITCH, FUSED, 2000A, 4P, 480V\nENCLOSURE LAYOUT.\n1. IFC COPPER DUE 03/30/2026\n\n1.COPPER DRAWING PENDING "
@@ -678,7 +678,7 @@
     "id": "SO110636",
     "name": "ECB-1600A ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "1600A TOP AND BOTTOM ENCLOSED BREAKER "
@@ -698,14 +698,14 @@
     "engineer": "Mario Galdamez",
     "status": "In Progress",
     "ifa_due_date": "2026-03-28",
-    "ifc_due_date": "2026-09-09",
+    "ifc_due_date": "2026-09-17",
     "notes": "IFA rev C sent out on 06/02/26\n06/24/26 IFA not approved"
   },
   {
     "id": "SO110655",
     "name": "Eaton Magnums 2500A ENCLOSED",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "Eaton Magnums 2500A ENCLOSED \n1. WAITING FOR BREAKER  03/13/2026\n2. BREAKER RECEIVE 04/30/2026\n3.IFC COMPLETED 05/01/2026"
@@ -732,7 +732,7 @@
     "id": "SO110681",
     "name": "ECB-1600A ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "1600A ABB BOTTOM ENCLOSED ENCLOSURE"
@@ -797,7 +797,7 @@
     "engineer": "NO ENGINEER NEEDED",
     "status": "In Progress",
     "ifa_due_date": "2026-06-19",
-    "ifc_due_date": "2027-02-02",
+    "ifc_due_date": "2027-01-19",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -806,7 +806,7 @@
     "engineer": "NO ENGINEER NEEDED",
     "status": "In Progress",
     "ifa_due_date": "2026-06-19",
-    "ifc_due_date": "2027-02-02",
+    "ifc_due_date": "2027-01-19",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -831,7 +831,7 @@
     "id": "SO110744",
     "name": "5KV & 15KV SWITCH",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-01",
     "ifc_due_date": null,
     "notes": "1.ABB - 5KV 1200A 40KA  LOAD BREAK SWITCH - FUSED AT 600A (qty 4)\n2.ABB - 15KV  600A 40KA  FUSED LOAD BREAK SWITCH - FUSED AT 400A (qty2)\n "
@@ -840,7 +840,7 @@
     "id": "SO110745",
     "name": "5KV_1200A NON-FUSED_STANDALONE",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-19",
     "ifc_due_date": null,
     "notes": "5KV_1200A_N3R_NON-FUSED_STANDALONE"
@@ -885,7 +885,7 @@
     "id": "SO110775",
     "name": "SQ6 1200A MLO HORZ 600A VERT - 3 SECTION 1G",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-02",
     "ifc_due_date": null,
     "notes": "MCC SIDE COVER MISSING. Completed "
@@ -903,7 +903,7 @@
     "id": "SO110826",
     "name": "JUNCTION BOX",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "JUNCTION BOX SWING DOOR PANEL "
@@ -921,7 +921,7 @@
     "id": "SO110831",
     "name": "ECB-2000A-SQD",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-03",
     "ifc_due_date": null,
     "notes": "ECB-2000A-SQD, FS Enclosure 90H X 36W X 36D\n1. SHIP DATE 04/20"
@@ -950,7 +950,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-07-01",
-    "ifc_due_date": "2026-09-23",
+    "ifc_due_date": "2026-10-09",
     "notes": ""
   },
   {
@@ -1038,7 +1038,7 @@
     "id": "SO110898",
     "name": "ECB-1200A-ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-12",
     "ifc_due_date": null,
     "notes": ""
@@ -1065,7 +1065,7 @@
     "id": "SO110904",
     "name": "SFZ-SF15-E-X-S",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "SHEETMETAL PARTS-HOOD "
@@ -1074,7 +1074,7 @@
     "id": "SO110909",
     "name": "BOLTSWITCH 3000A",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "1. WAITING FOR ENCLOSURE DEATIL 04/14\n2. IFA submitted 04.28.2026\n3. IFC submitted 05.20.26"
@@ -1101,7 +1101,7 @@
     "id": "SO110924",
     "name": "1200A LUG IN LUG OUT",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-01",
     "ifc_due_date": null,
     "notes": "IFC Submitted - 04.28.2026"
@@ -1164,7 +1164,7 @@
     "id": "SO110972",
     "name": "2000A SQD ENCLOSED BREAKER",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-08",
     "ifc_due_date": null,
     "notes": ""
@@ -1256,14 +1256,14 @@
     "engineer": "Mario Galdamez",
     "status": "Complete",
     "ifa_due_date": "2026-05-27",
-    "ifc_due_date": "2026-08-25",
+    "ifc_due_date": "2026-09-09",
     "notes": "5/21/26 - Vault difficulties, using P: drive\n5/21/26 - Start of design\n7/24/26 - IFA not approved"
   },
   {
     "id": "SO111078",
     "name": "16 JUNCTION BOX",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "TOTAL 16 VARIOUS JUNCTION BOXs"
@@ -1319,7 +1319,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-06-19",
-    "ifc_due_date": "2026-10-31",
+    "ifc_due_date": "2026-11-16",
     "notes": "This is out for approval as of 7-28-26"
   },
   {
@@ -1355,14 +1355,14 @@
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
     "ifa_due_date": "2026-07-13",
-    "ifc_due_date": "2026-11-07",
+    "ifc_due_date": "2026-11-21",
     "notes": "9/4/2026\n*WAITING FOR APPROVAL*\n"
   },
   {
     "id": "SO111143",
     "name": "COPPER BUS",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "2 COPPER BUS BAR"
@@ -1382,7 +1382,7 @@
     "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": "2026-06-26",
-    "ifc_due_date": "2026-10-24",
+    "ifc_due_date": "2026-11-07",
     "notes": "waiting for customer "
   },
   {
@@ -1409,7 +1409,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-07-14",
-    "ifc_due_date": "2026-11-02",
+    "ifc_due_date": "2026-11-17",
     "notes": ""
   },
   {
@@ -1425,7 +1425,7 @@
     "id": "SO111220",
     "name": "UPS BUILD",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-07",
     "ifc_due_date": null,
     "notes": ""
@@ -1436,7 +1436,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-09-26",
+    "ifc_due_date": "2026-10-24",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1454,7 +1454,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-08-21",
-    "ifc_due_date": "2026-11-04",
+    "ifc_due_date": "2026-11-18",
     "notes": "08/24~25 meeting and IFA revisions"
   },
   {
@@ -1470,7 +1470,7 @@
     "id": "SO111279",
     "name": "ECBXSS6 ABB 1600A ENCLOSED BREAKER",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-02",
     "ifc_due_date": null,
     "notes": ""
@@ -1506,7 +1506,7 @@
     "id": "SO111340",
     "name": "DOCKING STATION-CAMLOCK",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-22",
     "ifc_due_date": null,
     "notes": "docking station with camlock"
@@ -1517,7 +1517,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-10-26",
+    "ifc_due_date": "2026-10-08",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1526,7 +1526,7 @@
     "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-10-26",
+    "ifc_due_date": "2026-10-08",
     "notes": "Mechanical IFA's submitted to electrical 8/3"
   },
   {
@@ -1535,7 +1535,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-09-03",
+    "ifc_due_date": "2026-10-01",
     "notes": ""
   },
   {
@@ -1544,7 +1544,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-08-07",
-    "ifc_due_date": "2026-09-05",
+    "ifc_due_date": "2026-09-30",
     "notes": ""
   },
   {
@@ -1652,7 +1652,7 @@
     "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": "2026-08-19",
-    "ifc_due_date": "2026-11-02",
+    "ifc_due_date": "2026-11-16",
     "notes": "Still waiting for approval as of 9/22/26"
   },
   {
@@ -1668,7 +1668,7 @@
     "id": "SO111467",
     "name": "TRANSFORMER FIX",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-28",
     "ifc_due_date": null,
     "notes": ""
@@ -1679,7 +1679,7 @@
     "engineer": "BNB Team",
     "status": "In Progress",
     "ifa_due_date": "2026-08-20",
-    "ifc_due_date": "2026-11-03",
+    "ifc_due_date": "2026-10-22",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1696,8 +1696,8 @@
     "name": "TRYSTAR",
     "engineer": "Tanner Phillips",
     "status": "In Progress",
-    "ifa_due_date": "2026-08-25",
-    "ifc_due_date": "2026-10-09",
+    "ifa_due_date": "2026-08-22",
+    "ifc_due_date": "2026-11-12",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1706,7 +1706,7 @@
     "engineer": "Erik Leal",
     "status": "In Progress",
     "ifa_due_date": "2026-08-26",
-    "ifc_due_date": "2026-10-10",
+    "ifc_due_date": "2026-10-21",
     "notes": "Needing an update on the lock out/ kirk key write up.\n10/6/26"
   },
   {
@@ -1857,7 +1857,7 @@
     "id": "SO111628",
     "name": "ECB-1200A-ABB",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-08-31",
     "ifc_due_date": null,
     "notes": ""
@@ -2010,7 +2010,7 @@
     "id": "SO111725",
     "name": "SPK MAN TRANS SWITCH",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": ""

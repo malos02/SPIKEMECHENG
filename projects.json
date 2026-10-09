@@ -2369,7 +2369,7 @@
   {
     "id": "SO111801",
     "name": "SO111801",
-    "engineer": "Gustavo Avila",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2423,7 +2423,7 @@
   {
     "id": "SO111807",
     "name": "SO111807",
-    "engineer": "Emilio Baez",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2432,7 +2432,7 @@
   {
     "id": "SO111808",
     "name": "SO111808",
-    "engineer": "Maria Parrie",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2449,8 +2449,8 @@
   },
   {
     "id": "SO111812",
-    "name": "SO111812",
-    "engineer": "Emilio Baez",
+    "name": "mts",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2459,7 +2459,7 @@
   {
     "id": "SO111813",
     "name": "SO111813",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2486,7 +2486,7 @@
   {
     "id": "SO111816",
     "name": "SO111816",
-    "engineer": "Emilio Baez",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2494,8 +2494,8 @@
   },
   {
     "id": "SO111819",
-    "name": "SO111819",
-    "engineer": "Unassigned",
+    "name": "SQD SWBD 2000A",
+    "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2513,7 +2513,7 @@
   {
     "id": "SO111825",
     "name": "SO111825",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2530,8 +2530,8 @@
   },
   {
     "id": "SO111828",
-    "name": "SO111828",
-    "engineer": "Emilio Baez",
+    "name": "mts",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2539,8 +2539,8 @@
   },
   {
     "id": "SO111830",
-    "name": "SO111830",
-    "engineer": "Caleb Essel",
+    "name": "38KV SWITCH LINE UP",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2567,7 +2567,7 @@
   {
     "id": "SO111834",
     "name": "SO111834",
-    "engineer": "Jordan Dunn",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2576,7 +2576,7 @@
   {
     "id": "SO111835",
     "name": "SO111835",
-    "engineer": "Gustavo Avila",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2585,7 +2585,7 @@
   {
     "id": "SO111838",
     "name": "SO111838",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2593,8 +2593,8 @@
   },
   {
     "id": "SO111840",
-    "name": "SO111840",
-    "engineer": "Emilio Baez",
+    "name": "ENCLOSED BREAKER",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

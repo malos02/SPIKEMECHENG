@@ -2018,7 +2018,7 @@
   {
     "id": "SO111727",
     "name": "SO111727",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2081,7 +2081,7 @@
   {
     "id": "SO111741",
     "name": "SO111741",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2090,7 +2090,7 @@
   {
     "id": "SO111742",
     "name": "SO111742",
-    "engineer": "Gustavo Avila",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2098,8 +2098,8 @@
   },
   {
     "id": "SO111744",
-    "name": "SO111744",
-    "engineer": "Maria Parrie",
+    "name": "mts",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2243,7 +2243,7 @@
   {
     "id": "SO111769",
     "name": "SO111769",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2252,7 +2252,7 @@
   {
     "id": "SO111775",
     "name": "SO111775",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2261,7 +2261,7 @@
   {
     "id": "SO111776",
     "name": "SO111776",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2270,7 +2270,7 @@
   {
     "id": "SO111783",
     "name": "SO111783",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2278,17 +2278,17 @@
   },
   {
     "id": "SO111785",
-    "name": "SO111785",
-    "engineer": "Unassigned",
+    "name": "SQD SWBD",
+    "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "in and out. no mechanical needed"
   },
   {
     "id": "SO111786",
     "name": "SO111786",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2306,7 +2306,7 @@
   {
     "id": "SO111792",
     "name": "SO111792",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2324,7 +2324,7 @@
   {
     "id": "SO111794",
     "name": "SO111794",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2333,7 +2333,7 @@
   {
     "id": "SO111795",
     "name": "SO111795",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2342,7 +2342,7 @@
   {
     "id": "SO111796",
     "name": "SO111796",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2360,7 +2360,7 @@
   {
     "id": "SO111800",
     "name": "SO111800",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2378,7 +2378,7 @@
   {
     "id": "SO111802",
     "name": "SO111802",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2386,8 +2386,8 @@
   },
   {
     "id": "SO111803",
-    "name": "SO111803",
-    "engineer": "Unassigned",
+    "name": "mts",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2396,7 +2396,7 @@
   {
     "id": "SO111804",
     "name": "SO111804",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2414,7 +2414,7 @@
   {
     "id": "SO111806",
     "name": "SO111806",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2557,8 +2557,8 @@
   },
   {
     "id": "SO111832",
-    "name": "SO111832",
-    "engineer": "Khai Hua",
+    "name": "ENCLOSED BREAKER",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

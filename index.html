@@ -395,7 +395,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <select class="fsel" id="f-type" onchange="renderProjects()"><option value="">All Types</option><option>Switch</option><option>Switchboard</option><option>Switchrack</option><option>Switchgear</option><option>MCC</option><option>Transformer</option><option>Panel</option><option>Bus Duct</option><option>Load Center</option></select>
       <select class="fsel" id="f-volt" onchange="renderProjects()"><option value="">All Voltages</option><option>15kV</option><option>38kV</option><option>Medium Voltage</option><option>Low Voltage</option></select>
       <select class="fsel" id="f-stat" onchange="renderProjects()"><option value="">All Statuses</option><option>In Progress</option><option>Complete</option><option>On Hold</option></select>
-      <select class="fsel" id="f-ms" onchange="renderProjects()"><option value="">All Milestones</option><option value="design_done">Design Done</option><option value="ifa_pending">IFA Pending</option><option value="ifa_done">IFA Done</option><option value="adj_done">Customer Approval Done</option><option value="ifc_done">IFC Done</option><option value="idr_pending">IDR Pending</option><option value="idr_done">IDR Done</option><option value="mechanical_pending">Mechanical Complete Pending</option><option value="mechanical_done">Mechanical Complete Done</option><option value="live">Live on Floor</option><option value="shipped">Project Shipped</option></select>
+      <select class="fsel" id="f-ms" onchange="renderProjects()"><option value="">All Milestones</option><option value="design_done">Design Done</option><option value="ifa_pending">IFA Pending</option><option value="ifa_done">IFA Done</option><option value="adj_done">Customer Approval Done</option><option value="ifc_done">IFC Done</option><option value="idr_pending">IDR Pending</option><option value="idr_done">IDR Done</option><option value="mechanical_pending">Mechanical Complete Pending</option><option value="mechanical_done">Mechanical Complete Done</option></select>
     </div>
       <div class="tw"><table><thead><tr><th class="sortable" id="th-id" onclick="setSort('id')">ID</th><th class="sortable" id="th-name" onclick="setSort('name')">Project Name</th><th class="sortable" id="th-engineer" onclick="setSort('engineer')">Engineer</th><th class="sortable" id="th-type" onclick="setSort('type')">Type</th><th class="sortable" id="th-voltage" onclick="setSort('voltage')">Voltage</th><th class="sortable" id="th-pm" onclick="setSort('pm')">PM</th><th class="sortable" id="th-sales" onclick="setSort('sales')">Sales</th><th class="sortable" id="th-start" onclick="setSort('start')">Start</th><th class="sortable" id="th-end" onclick="setSort('end')">Target</th><th class="sortable" id="th-ifaDue" onclick="setSort('ifaDue')">IFA Due</th><th class="sortable" id="th-ifcDue" onclick="setSort('ifcDue')">IFC Due</th><th class="sortable" id="th-milestones" onclick="setSort('milestones')">Milestones</th><th class="sortable" id="th-progress" onclick="setSort('progress')">Progress</th><th class="sortable" id="th-status" onclick="setSort('status')">Status</th><th>Notes</th><th class="actions-col">Actions</th></tr></thead><tbody id="proj-table"></tbody></table></div>
   </div>
@@ -573,23 +573,14 @@ tr:hover td{background:rgba(255,255,255,.018)}
           <span class="ms-prog-label" id="mpl-idr">IDR Review</span>
           <input type="date" class="ms-date-inp" id="md-idr" onchange="syncMilestoneCheck('idr')">
         </div>
-        <!-- Mechanical Complete -->
-        <div class="ms-prog-row" id="mpr-mechanical">
+        <!-- Mechanical Complete (now the final tracked milestone in this UI;
+             Live on Floor and Project Shipped are retained in the database
+             but no longer editable here — see saveProject() for how their
+             historical values are preserved on every save) -->
+        <div class="ms-prog-row" id="mpr-mechanical" style="border-bottom:none">
           <input type="checkbox" class="ms-cb" id="mc-mechanical" onchange="toggleMilestone('mechanical',this)">
           <span class="ms-prog-label" id="mpl-mechanical">Mechanical Complete</span>
           <input type="date" class="ms-date-inp" id="md-mechanical" onchange="syncMilestoneCheck('mechanical')">
-        </div>
-        <!-- Live on Floor -->
-        <div class="ms-prog-row" id="mpr-live">
-          <input type="checkbox" class="ms-cb" id="mc-live" onchange="toggleMilestone('live',this)">
-          <span class="ms-prog-label" id="mpl-live">Live on Floor</span>
-          <input type="date" class="ms-date-inp" id="md-live" onchange="syncMilestoneCheck('live')">
-        </div>
-        <!-- Project Shipped (ifc_shipped maps to ms.shipped) -->
-        <div class="ms-prog-row" id="mpr-shipped" style="border-bottom:none">
-          <input type="checkbox" class="ms-cb" id="mc-shipped" onchange="toggleMilestone('shipped',this)">
-          <span class="ms-prog-label" id="mpl-shipped" style="color:var(--gr)">Project Shipped</span>
-          <input type="date" class="ms-date-inp" id="md-shipped" onchange="syncMilestoneCheck('shipped')">
         </div>
       </div>
 
@@ -799,13 +790,13 @@ let TRANSFER_HISTORY = {}; // keyed by proj_id → [{from, to, date}]
 let DRILL_DATA = {}; // populated by renderKPI — backs the click-to-drill-down on KPI cards
 
 // ── Helpers ───────────────────────────────────────────────────────────────
-function msPct(ms){const k=['design','ifa','ifc','adj','idr','mechanical','live'];return Math.round(k.filter(x=>ms[x]).length/k.length*100)}
+function msPct(ms){const k=['design','ifa','ifc','adj','idr','mechanical'];return Math.round(k.filter(x=>ms[x]).length/k.length*100)}
 function getEng(name){return ENGINEERS.find(e=>e.name===name)||{color:'#29ABE2',bg:'rgba(41,171,226,.15)',id:'??'}}
 function vcls(v){return v==='15kV'?'v15':v==='38kV'?'v38':v==='Medium Voltage'?'vmv':'vlv'}
 function vshort(v){return v==='15kV'?'15kV':v==='38kV'?'38kV':v==='Medium Voltage'?'MV':'LV'}
 function spill(s){return s==='Complete'?'<span class="pill pg">Complete</span>':s==='On Hold'?'<span class="pill pa">On Hold</span>':'<span class="pill pb">In Progress</span>'}
 function msBadges(ms,msDates){
-  const map={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',mechanical:'Mechanical Complete',live:'Live on Floor'};
+  const map={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',mechanical:'Mechanical Complete'};
   return Object.entries(map).map(([k,label])=>{
     let tip=label;
     if(ms[k]){
@@ -857,7 +848,7 @@ function ifcDaysLeft(ifcDue){
   return Math.round((new Date(ifcDue+'T00:00')-now)/(864e5));
 }
 function ifcBadge(p){
-  if(p.ms.live) return '<span class="pill pg" style="font-size:9px">IFC ✓</span>';
+  if(p.ms.mechanical) return '<span class="pill pg" style="font-size:9px">IFC ✓</span>';
   if(!p.ifcDue) return '<span style="font-size:10px;color:var(--t3)">—</span>';
   const d=ifcDaysLeft(p.ifcDue);
   if(d===null)return '—';
@@ -1220,7 +1211,7 @@ function renderDashboard(){
   const inProg=PROJECTS.filter(p=>p.status==='In Progress');
   const onHold=PROJECTS.filter(p=>p.status==='On Hold');
   const ifaLate=PROJECTS.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<0&&p.status!=='Complete');
-  const ifcLate=PROJECTS.filter(p=>!p.ms.live&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<0&&p.status!=='Complete');
+  const ifcLate=PROJECTS.filter(p=>!p.ms.mechanical&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<0&&p.status!=='Complete');
 
   document.getElementById('kpi-row').innerHTML=`
     <div class="kc" style="--kc:var(--spike)"><div class="kc-lbl">Active Projects</div><div class="kc-val">${active.length}</div><div class="kc-sub">${inProg.length} in progress · ${onHold.length} on hold</div></div>
@@ -1229,7 +1220,7 @@ function renderDashboard(){
     <div class="kc" style="--kc:var(--pu)"><div class="kc-lbl">IFC Overdue</div><div class="kc-val">${ifcLate.length}</div><div class="kc-sub">Past IFC due date</div></div>
     <div class="kc" style="--kc:var(--pu)"><div class="kc-lbl">BNB Projects</div><div class="kc-val">${bnb.length}</div><div class="kc-sub">External team</div></div>
     <div class="kc" style="--kc:var(--am)"><div class="kc-lbl">IDR Pending</div><div class="kc-val">${idrPend.length}</div><div class="kc-sub">Needs review</div></div>
-    <div class="kc" style="--kc:var(--tl)"><div class="kc-lbl">Engineers Active</div><div class="kc-val">${ENGINEERS.filter(e=>!e.isBnb&&PROJECTS.some(p=>p.engineer===e.name&&p.status!=='Complete')).length}<span>/${ENGINEERS.filter(e=>!e.isBnb).length}</span></div><div class="kc-sub">Of total team</div></div>`;
+    <div class="kc" style="--kc:var(--tl)"><div class="kc-lbl">Engineers Active</div><div class="kc-val">${ENGINEERS.filter(e=>!e.isBnb&&!isNoEngineerNeeded(e.name)&&PROJECTS.some(p=>p.engineer===e.name&&p.status!=='Complete')).length}<span>/${ENGINEERS.filter(e=>!e.isBnb&&!isNoEngineerNeeded(e.name)).length}</span></div><div class="kc-sub">Of total team</div></div>`;
 
   const nonBnb=ENGINEERS.filter(e=>!e.isBnb);
   destroyChart('cWorkload');
@@ -1258,7 +1249,7 @@ function renderDashboard(){
   });
 
   const MAX_LOAD=5;
-  document.getElementById('workload-grid').innerHTML=ENGINEERS.map(eng=>{
+  document.getElementById('workload-grid').innerHTML=ENGINEERS.filter(eng=>!isNoEngineerNeeded(eng.name)).map(eng=>{
     const projs=PROJECTS.filter(p=>p.engineer===eng.name&&p.status!=='Complete');
     const pct=Math.min(Math.round(projs.length/MAX_LOAD*100),100);
     const lc=pct>=100?'ov':pct>=70?'hi':'';
@@ -1266,7 +1257,7 @@ function renderDashboard(){
     const dotColor=pct>=100?'#f55353':pct>=70?'#f5a623':'#29ABE2';
     const done=PROJECTS.filter(p=>p.engineer===eng.name&&p.status==='Complete').length;
     const ifaAlert=projs.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<=3).length;
-    const ifcAlert=projs.filter(p=>!p.ms.live&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<=3).length;
+    const ifcAlert=projs.filter(p=>!p.ms.mechanical&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<=3).length;
     return `<div class="ec ${eng.isBnb?'bnb':''} ${pct>=100?'over':''}" onclick="viewEngineer('${eng.name}',null)">
       <div class="ec-hd">${av(eng,34)}<div><div class="ec-name">${eng.name}</div><div class="ec-role">${eng.role}</div></div>
         <div style="margin-left:auto;display:flex;align-items:center;gap:4px">
@@ -1371,9 +1362,8 @@ function renderProjects(){
     if(fMs==='idr_done'&&!p.ms.idr)return false;
     if(fMs==='mechanical_pending'&&(p.ms.mechanical||p.status==='Complete'))return false;
     if(fMs==='mechanical_done'&&!p.ms.mechanical)return false;
-    if(fMs==='live'&&!p.ms.live)return false;
-    if(fMs==='shipped'&&!p.ms.shipped)return false;
     if(q&&!p.name.toLowerCase().includes(q)&&!p.id.toLowerCase().includes(q)&&!p.engineer.toLowerCase().includes(q))return false;
+    if(isNoEngineerNeeded(p.engineer))return false; // No Engineer Needed jobs stay in Supabase but are hidden from this list
     return true;
   });
   if(projSort.col){
@@ -1446,7 +1436,7 @@ function renderGantt(){
     const pct=msPct(p.ms);
     const bc=p.engineer==='BNB Team'?'rgba(169,109,247,.25)':pct===100?'rgba(34,212,122,.2)':pct>=50?'rgba(41,171,226,.2)':'rgba(245,166,35,.18)';
     const tc=p.engineer==='BNB Team'?'#a96df7':pct===100?'#22d47a':pct>=50?'#29ABE2':'#f5a623';
-    const msDots=[{k:'design',pos:.15,done:p.ms.design},{k:'ifa',pos:.35,done:p.ms.ifa},{k:'ifc',pos:.6,done:p.ms.ifc},{k:'live',pos:.95,done:p.ms.live}];
+    const msDots=[{k:'design',pos:.15,done:p.ms.design},{k:'ifa',pos:.35,done:p.ms.ifa},{k:'ifc',pos:.6,done:p.ms.ifc},{k:'mechanical',pos:.95,done:p.ms.mechanical}];
     const dots=msDots.filter(m=>m.done).map(m=>{const mlp=sp+(ep-sp)*m.pos;return`<div class="g-dot" style="left:${mlp}%;background:#22d47a" title="${m.k} complete"></div>`;}).join('');
     // IFA due marker
     let ifaMark='';
@@ -1459,7 +1449,7 @@ function renderGantt(){
     }
     // IFC due marker
     let ifcMark='';
-    if(p.ifcDue&&!p.ms.live){
+    if(p.ifcDue&&!p.ms.mechanical){
       const id=new Date(p.ifcDue+'T00:00');
       const ifcPct=Math.max(0,Math.min(100,(id.getMonth()-startM+id.getDate()/31)/numM*100));
       const d=ifcDaysLeft(p.ifcDue);
@@ -1530,7 +1520,7 @@ function buildCalEvents(projs){
       add(p.ifaDue,{type:evType,label:`IFA: ${p.id}`,color:col,proj:p});
     }
     // IFC due — urgent color coding
-    if(!p.ms.live&&p.ifcDue&&p.status!=='Complete'){
+    if(!p.ms.mechanical&&p.ifcDue&&p.status!=='Complete'){
       const d=ifcDaysLeft(p.ifcDue);
       const evType=d<=3?'ifc_due_urgent':d<=7?'ifc_due_warn':'ifc_due_ok';
       const col=d<=3?'#f55353':d<=7?'#f5a623':'#a96df7';
@@ -1579,7 +1569,7 @@ function renderCalendar(){
       if(p.start&&p.start.slice(0,7)===`${calYear}-${mm}`)n++;
       if(p.end&&p.end.slice(0,7)===`${calYear}-${mm}`)n++;
       if(!p.ms.ifa&&p.ifaDue&&p.ifaDue.slice(0,7)===`${calYear}-${mm}`)n++;
-      if(!p.ms.live&&p.ifcDue&&p.ifcDue.slice(0,7)===`${calYear}-${mm}`)n++;
+      if(!p.ms.mechanical&&p.ifcDue&&p.ifcDue.slice(0,7)===`${calYear}-${mm}`)n++;
       return a+n;
     },0);
     document.getElementById('cal-subtitle').textContent=`${keyDates} key date${keyDates!==1?'s':''} this month`;
@@ -1840,9 +1830,9 @@ function renderKPI(){
   destroyChart('cThroughput');
   charts.cThroughput=new Chart(document.getElementById('cThroughput'),{type:'bar',data:{labels:nonBnb.map(e=>e.name.split(' ')[0]),datasets:[{data:nonBnb.map(e=>PROJECTS.filter(p=>p.engineer===e.name&&p.status==='Complete').length),backgroundColor:nonBnb.map(e=>e.color+'33'),borderColor:nonBnb.map(e=>e.color),borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{color:'#444',font:{size:9}},grid:{color:'rgba(255,255,255,.04)'},beginAtZero:true},x:{ticks:{color:'#444',font:{size:9}},grid:{display:false}}}}});
   const active=PROJECTS.filter(p=>p.status!=='Complete');
-  const msKeys=['design','ifa','ifc','adj','idr','mechanical','live'],msLabels=['Design','IFA','IFC','ADJ','IDR','Mechanical','Live'];
+  const msKeys=['design','ifa','ifc','adj','idr','mechanical'],msLabels=['Design','IFA','IFC','ADJ','IDR','Mechanical'];
   const msVals=active.length?msKeys.map(k=>Math.round(active.filter(p=>p.ms[k]).length/active.length*100)):msKeys.map(()=>0);
-  const msColors=['#29ABE2','#14c4b2','#a96df7','#f5a623','#f97244','#38bdf8','#22d47a'];
+  const msColors=['#29ABE2','#14c4b2','#a96df7','#f5a623','#f97244','#38bdf8'];
   destroyChart('cMsHealth');
   charts.cMsHealth=new Chart(document.getElementById('cMsHealth'),{type:'bar',data:{labels:msLabels,datasets:[{data:msVals,backgroundColor:msColors.map(c=>c+'33'),borderColor:msColors,borderWidth:1.5,borderRadius:2,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#444',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.04)'},max:100},y:{ticks:{color:'#444',font:{size:9}},grid:{display:false}}}}});
 }
@@ -1893,7 +1883,7 @@ function viewEngineer(name,el,keepSort){
   const done=allProjs.filter(p=>p.status==='Complete');
   const avgPct=active.length?Math.round(active.reduce((a,p)=>a+msPct(p.ms),0)/active.length):0;
   const ifaAlert=active.filter(p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<=3).length;
-  const ifcAlert=active.filter(p=>!p.ms.live&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<=3).length;
+  const ifcAlert=active.filter(p=>!p.ms.mechanical&&p.ifcDue&&ifcDaysLeft(p.ifcDue)<=3).length;
   const sortArrow=engSort.dir===1?'↑':'↓';
   document.getElementById('eng-view-content').innerHTML=`
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:14px;background:var(--s2);border:1px solid var(--b1);border-top:2px solid ${eng.color}">
@@ -2260,7 +2250,7 @@ function openEditModal(id){
   document.getElementById('f-ifa-due').value=p.ifaDue||'';
   document.getElementById('f-ifc-due').value=p.ifcDue||'';
   document.getElementById('f-notes').value=p.notes||'';
-  const msc={design:'mc-design',ifa:'mc-ifa',ifc:'mc-ifc',adj:'mc-adj',idr:'mc-idr',mechanical:'mc-mechanical',live:'mc-live'};
+  const msc={design:'mc-design',ifa:'mc-ifa',ifc:'mc-ifc',adj:'mc-adj',idr:'mc-idr',mechanical:'mc-mechanical'};
   Object.entries(msc).forEach(([k,elid])=>{const el=document.getElementById(elid);const inp=el;inp.checked=p.ms[k];});
   loadMilestones(p.ms, p.msDates||{});
   // Render transfer history
@@ -2333,7 +2323,7 @@ function renderTransferHistory(projId){
   }).join('');
 }
 // ── Milestone Progression ─────────────────────────────────────────────────
-const MS_KEYS=['design','ifa','adj','ifc','idr','mechanical','live','shipped'];
+const MS_KEYS=['design','ifa','adj','ifc','idr','mechanical'];
 function toggleMilestone(key, cb){
   const today=new Date().toISOString().split('T')[0];
   const dateInp=document.getElementById('md-'+key);
@@ -2430,8 +2420,17 @@ async function saveNoEngineerNeededAssignment(){
   const saveBtn=document.getElementById('project-save-btn');
   if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Saving assignment…';}
   try{
+    // Assigning No Engineer Needed always marks Mechanical Complete. If it was already
+    // completed, keep the original completion date instead of overwriting it with today.
+    const today=new Date().toISOString().split('T')[0];
+    const alreadyMechanical=!!existing.ms?.mechanical;
+    const mechanicalDate=alreadyMechanical?(existing.msDates?.mechanical||today):today;
+    const ms={...existing.ms,mechanical:true};
+    const msDates={...existing.msDates,mechanical:mechanicalDate};
+    const newStatus='Complete';
     if(sb){
-      let query=sb.from('projects').update({engineer:NO_ENGINEER_NEEDED});
+      const description=encodeProjectDescription({desc:existing.desc,ms,msDates});
+      let query=sb.from('projects').update({engineer:NO_ENGINEER_NEEDED,description,status:newStatus});
       query=existing._dbid?query.eq('id',existing._dbid):query.eq('proj_id',editingId);
       const {data,error}=await query.select('id,proj_id,engineer');
       if(error)throw error;
@@ -2441,15 +2440,15 @@ async function saveNoEngineerNeededAssignment(){
         if(transferResult.error)console.warn('Transfer history:',transferResult.error.message||transferResult.error);
       }
       const idx=PROJECTS.findIndex(p=>p.id===editingId);
-      if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],engineer:NO_ENGINEER_NEEDED,_dbid:data[0].id||existing._dbid};
+      if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],engineer:NO_ENGINEER_NEEDED,status:newStatus,ms,msDates,_dbid:data[0].id||existing._dbid};
       closeModal();
       refreshAll();
-      showToast(`⚡ ${existing.id} assigned No Engineer Needed`);
+      showToast(`⚡ ${existing.id} assigned No Engineer Needed — Mechanical Complete set`);
       loadFromDB().catch(e=>console.warn('Post-save refresh:',e));
       return;
     }
     const idx=PROJECTS.findIndex(p=>p.id===editingId);
-    if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],engineer:NO_ENGINEER_NEEDED};
+    if(idx>=0)PROJECTS[idx]={...PROJECTS[idx],engineer:NO_ENGINEER_NEEDED,status:newStatus,ms,msDates};
     closeModal();refreshAll();showToast('Assignment saved locally only — Shared Live is offline');
   }catch(e){
     console.error('No Engineer Needed assignment:',e);
@@ -2471,7 +2470,21 @@ async function saveProject(){
   if(!name||!engineer||!type||!voltage){alert('Please fill in Name, Engineer, Type and Voltage');return;}
   const {ms, msDates}=getMilestones();
   const existingProject=editingId?PROJECTS.find(p=>p.id===editingId):null;
-  const proj={id:document.getElementById('f-id').value||'P-'+Date.now(),name,desc:existingProject?.desc||'',engineer,type,voltage,pm:document.getElementById('f-pm').value||'TBD',sales:document.getElementById('f-sales').value||'TBD',status:ms.live?'Complete':'In Progress',start:document.getElementById('f-start').value||null,end:document.getElementById('f-end').value||null,ifaDue:document.getElementById('f-ifa-due').value||null,ifcDue:document.getElementById('f-ifc-due').value||null,notes:document.getElementById('f-notes').value||'',ms,msDates};
+  // Live on Floor / Project Shipped are no longer shown in the milestone UI (MS_KEYS no
+  // longer includes them), so getMilestones() won't return them. Carry the existing
+  // historical values forward untouched on every save instead of letting them be lost.
+  ms.live=existingProject?.ms?.live||false;
+  ms.shipped=existingProject?.ms?.shipped||false;
+  msDates.live=existingProject?.msDates?.live||null;
+  msDates.shipped=existingProject?.msDates?.shipped||null;
+  // A project assigned directly to No Engineer Needed (including brand-new projects)
+  // is treated as mechanically complete immediately, same as the dedicated
+  // saveNoEngineerNeededAssignment() path used when reassigning an existing project.
+  if(isNoEngineerNeeded(engineer)&&!ms.mechanical){
+    ms.mechanical=true;
+    msDates.mechanical=new Date().toISOString().split('T')[0];
+  }
+  const proj={id:document.getElementById('f-id').value||'P-'+Date.now(),name,desc:existingProject?.desc||'',engineer,type,voltage,pm:document.getElementById('f-pm').value||'TBD',sales:document.getElementById('f-sales').value||'TBD',status:ms.mechanical?'Complete':'In Progress',start:document.getElementById('f-start').value||null,end:document.getElementById('f-end').value||null,ifaDue:document.getElementById('f-ifa-due').value||null,ifcDue:document.getElementById('f-ifc-due').value||null,notes:document.getElementById('f-notes').value||'',ms,msDates};
   const saveBtn=document.getElementById('project-save-btn');
   const idleLabel=editingId?'Update Project':'Save Project';
   if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Saving to Shared Live…';}

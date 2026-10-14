@@ -969,7 +969,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-04-18",
     "ifc_due_date": "2026-11-06",
-    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***WAITINO APPROVAL FROM CUSTOMER ***\n9/10/2026\n**STILL WAITING FOR APPROVAL**\n"
+    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***WAITINO APPROVAL FROM CUSTOMER ***\n9/10/2026\n**STILL WAITING FOR APPROVAL**\nHaving a meeting with customer 10/14/2026 for additional components\n \n"
   },
   {
     "id": "SO110852",
@@ -1272,10 +1272,10 @@
     "id": "SO111080",
     "name": "38KV LOAD BREAK SWITCH",
     "engineer": "Osvaldo Perez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-06-24",
     "ifc_due_date": "2026-09-02",
-    "notes": "IFC APPROVED 9/4/2026\n"
+    "notes": "IFC APPROVED 9/4/2026\nAll mechanical compete and in Vault"
   },
   {
     "id": "SO111087",
@@ -1356,7 +1356,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-07-13",
     "ifc_due_date": "2026-11-21",
-    "notes": "9/4/2026\n*WAITING FOR APPROVAL*\n"
+    "notes": "9/4/2026\n*WAITING FOR APPROVAL*\nWaiting for customer design specs and waiting for approval \n"
   },
   {
     "id": "SO111143",
@@ -2299,9 +2299,9 @@
     "name": "SO111791",
     "engineer": "Osvaldo Perez",
     "status": "In Progress",
-    "ifa_due_date": null,
+    "ifa_due_date": "2026-10-22",
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "In design process"
   },
   {
     "id": "SO111792",
@@ -2467,9 +2467,9 @@
   },
   {
     "id": "SO111814",
-    "name": "SO111814",
+    "name": "SQD SWBD",
     "engineer": "No Engineer Needed",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "Automatically added from Linear assignment sync."

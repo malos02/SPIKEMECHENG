@@ -357,7 +357,7 @@
     "status": "Complete",
     "ifa_due_date": "2025-12-17",
     "ifc_due_date": "2026-10-08",
-    "notes": "PRE-PRODUCTION REVIEW 10/8/26"
+    "notes": "PRODUCTION FABRICATION"
   },
   {
     "id": "SO110260",
@@ -1515,19 +1515,19 @@
     "id": "SO111343",
     "name": "IDENTICAL TO 111051  MMR CONSTRUCTORS, INC - BATON ROUGE",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-08-05",
     "ifc_due_date": "2026-10-08",
-    "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
+    "notes": "PRODUCTION RELEASE TO FAB 10/15"
   },
   {
     "id": "SO111346",
     "name": "MMR SWBD 4 SECTION",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-08-05",
     "ifc_due_date": "2026-10-08",
-    "notes": "Mechanical IFA's submitted to electrical 8/3"
+    "notes": "PRODUCTION RELEASE 10/15"
   },
   {
     "id": "SO111352",

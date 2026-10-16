@@ -339,7 +339,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="ni" id="ni-admin" onclick="showView('admin',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M12 14c-5 0-7 2-7 3v1h14v-1c0-1-2-3-7-3z"/><path d="M18 8l1.5-1.5M18 8l1.5 1.5M6 8L4.5 6.5M6 8L4.5 9.5"/></svg>Manage Team</div>
     </div>
   </nav>
-  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Tracker: V20<br>Last sync: <span id="last-update">—</span></div>
+  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Tracker: V21<br>Last sync: <span id="last-update">—</span></div>
 </aside>
 
 <main class="main">
@@ -786,6 +786,38 @@ const BUILTIN_ENGINEERS = [
 ];
 let ENGINEERS = [...BUILTIN_ENGINEERS];
 
+function completeIfcForMechanical(p){
+  if(!p.ms?.mechanical)return p;
+  return {...p,ms:{...p.ms,ifc:true},msDates:{...p.msDates,ifc:p.msDates?.ifc||p.msDates?.mechanical||localMilestoneDate()}};
+}
+function applyMechanicalIfc(){
+  if(!document.getElementById('mc-mechanical')?.checked)return;
+  document.getElementById('mc-ifc').checked=true;
+  const date=document.getElementById('md-ifc');
+  if(!date.value)date.value=document.getElementById('md-mechanical').value||localMilestoneDate();
+  document.getElementById('mpl-ifc').classList.add('done');
+  document.getElementById('mpr-ifc').classList.add('done-row');
+}
+let mechanicalIfcSyncRunning=false;
+async function syncMechanicalIfc(){
+  if(!sb||IS_PM||mechanicalIfcSyncRunning)return;
+  mechanicalIfcSyncRunning=true;
+  let failed=0;
+  try{
+    for(const p of PROJECTS.slice()){
+      if(!p._dbid||!p.ms?.mechanical||(p.ms.ifc&&p.msDates?.ifc))continue;
+      const next=completeIfcForMechanical(p);
+      try{
+        const {data,error}=await sb.from('projects').update({ms_ifc:true,ms_ifc_date:next.msDates.ifc,milestone_changed_by:IS_ENGINEER?'Engineer':'Admin'}).eq('id',p._dbid).select('id');
+        if(error||!data?.length)throw error||new Error('No project updated');
+        const current=PROJECTS.find(x=>x._dbid===p._dbid);
+        if(current){current.ms.ifc=true;current.msDates.ifc=next.msDates.ifc;}
+      }catch(error){failed++;console.warn('Mechanical Complete IFC update:',p.id,error);}
+    }
+  }finally{mechanicalIfcSyncRunning=false;}
+  if(failed)showToast('Some IFC updates could not be saved. Reload to retry.');
+}
+
 function completeNoEngineerMilestones(p){
   if(!isNoEngineerNeeded(p.engineer))return p;
   const ms={...p.ms},msDates={...p.msDates};
@@ -842,7 +874,7 @@ function normalizeMechanicalMilestone(p){
   }
   return {...p,ms,msDates};
 }
-let PROJECTS = EMBEDDED_PROJECTS.map(normalizeMechanicalMilestone).map(completeNoEngineerMilestones);
+let PROJECTS = EMBEDDED_PROJECTS.map(normalizeMechanicalMilestone).map(completeNoEngineerMilestones).map(completeIfcForMechanical);
 let TRANSFER_HISTORY = {}; // keyed by proj_id → [{from, to, date}]
 let DRILL_DATA = {}; // populated by renderKPI — backs the click-to-drill-down on KPI cards
 
@@ -1186,6 +1218,7 @@ async function loadFromDB(){
   }
 
   await syncNoEngineerMilestones();
+  await syncMechanicalIfc();
   setSyncStatus('live',`${PROJECTS.length} shared project${PROJECTS.length===1?'':'s'} loaded from Supabase.`);
   refreshAll();
 }
@@ -2437,6 +2470,7 @@ function toggleMilestone(key, cb){
     label.classList.remove('done');
     row.classList.remove('done-row');
   }
+  applyMechanicalIfc();
   updateHistoryLog();
 }
 function syncMilestoneCheck(key){
@@ -2448,6 +2482,7 @@ function syncMilestoneCheck(key){
   cb.checked=hasDate;
   label.classList.toggle('done',hasDate);
   row.classList.toggle('done-row',hasDate);
+  applyMechanicalIfc();
   updateHistoryLog();
 }
 function resetMilestones(){
@@ -2476,6 +2511,7 @@ function loadMilestones(ms, msDates){
     if(lb) lb.classList.toggle('done',checked);
     if(rw) rw.classList.toggle('done-row',checked);
   });
+  applyMechanicalIfc();
   updateHistoryLog();
 }
 function getMilestones(){
@@ -2486,7 +2522,7 @@ function getMilestones(){
     ms[k]=cb?cb.checked:false;
     msDates[k]=di?di.value||null:null;
   });
-  const completed=completeNoEngineerMilestones({engineer:document.getElementById('f-engineer').value,ms,msDates});
+  const completed=completeIfcForMechanical(completeNoEngineerMilestones({engineer:document.getElementById('f-engineer').value,ms,msDates}));
   return {ms:completed.ms,msDates:completed.msDates};
 }
 const MS_LABELS={design:'Design',ifa:'IFA',adj:'Customer Approval',ifc:'IFC Started',idr:'IDR Review',mechanical:'Mechanical Complete',live:'Live on Floor',shipped:'Project Shipped'};

@@ -339,7 +339,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="ni" id="ni-admin" onclick="showView('admin',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M12 14c-5 0-7 2-7 3v1h14v-1c0-1-2-3-7-3z"/><path d="M18 8l1.5-1.5M18 8l1.5 1.5M6 8L4.5 6.5M6 8L4.5 9.5"/></svg>Manage Team</div>
     </div>
   </nav>
-  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Tracker: V22<br>Last sync: <span id="last-update">—</span></div>
+  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Tracker: V23<br>Last sync: <span id="last-update">—</span></div>
 </aside>
 
 <main class="main">
@@ -1257,7 +1257,19 @@ function refreshAll(){
 
 // ── Views ─────────────────────────────────────────────────────────────────
 let dashboardProjectFilter='';
+function isUpcomingMilestone(p,key){
+  if(p.status==='Complete'||p.ms?.[key])return false;
+  const due=p[key+'Due'];
+  if(!due||!/^\d{4}-\d{2}-\d{2}$/.test(due))return false;
+  const today=localMilestoneDate();
+  const end=new Date(today+'T12:00:00');
+  end.setDate(end.getDate()+7);
+  const last=end.getFullYear()+'-'+String(end.getMonth()+1).padStart(2,'0')+'-'+String(end.getDate()).padStart(2,'0');
+  return due>=today&&due<=last;
+}
 const DASHBOARD_JOB_FILTERS={
+  upcomingIfa:{label:'Upcoming IFAs',match:p=>isUpcomingMilestone(p,'ifa')},
+  upcomingIfc:{label:'Upcoming IFCs',match:p=>isUpcomingMilestone(p,'ifc')},
   active:{label:'Active Projects',match:p=>p.status!=='Complete'},
   completed:{label:'Completed',match:p=>p.status==='Complete'},
   ifa:{label:'IFA Overdue',match:p=>!p.ms.ifa&&p.ifaDue&&ifaDaysLeft(p.ifaDue)<0&&p.status!=='Complete'},
@@ -1330,6 +1342,8 @@ function renderDashboard(){
     <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('completed')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('completed')}" style="--kc:var(--gr)"><div class="kc-lbl">Completed</div><div class="kc-val">${done.length}</div><div class="kc-sub">All time completions</div></div>
     <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('ifa')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('ifa')}" style="--kc:var(--rd)"><div class="kc-lbl">IFA Overdue</div><div class="kc-val">${ifaLate.length}</div><div class="kc-sub">Past IFA due date</div></div>
     <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('ifc')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('ifc')}" style="--kc:var(--pu)"><div class="kc-lbl">IFC Overdue</div><div class="kc-val">${ifcLate.length}</div><div class="kc-sub">Past IFC due date</div></div>
+    <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('upcomingIfa')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('upcomingIfa')}" style="--kc:var(--am)"><div class="kc-lbl">Upcoming IFAs</div><div class="kc-val">${PROJECTS.filter(DASHBOARD_JOB_FILTERS.upcomingIfa.match).length}</div><div class="kc-sub">Due today through 7 days ahead</div></div>
+    <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('upcomingIfc')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('upcomingIfc')}" style="--kc:var(--tl)"><div class="kc-lbl">Upcoming IFCs</div><div class="kc-val">${PROJECTS.filter(DASHBOARD_JOB_FILTERS.upcomingIfc.match).length}</div><div class="kc-sub">Due today through 7 days ahead</div></div>
     <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('bnb')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('bnb')}" style="--kc:var(--pu)"><div class="kc-lbl">BNB Projects</div><div class="kc-val">${bnb.length}</div><div class="kc-sub">External team</div></div>
     <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('idr')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('idr')}" style="--kc:var(--am)"><div class="kc-lbl">IDR Pending</div><div class="kc-val">${idrPend.length}</div><div class="kc-sub">Needs review</div></div>
     <div class="kc clickable" role="button" tabindex="0" onclick="openDashboardJobs('engineers')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDashboardJobs('engineers')}" style="--kc:var(--tl)"><div class="kc-lbl">Engineers Active</div><div class="kc-val">${ENGINEERS.filter(e=>!e.isBnb&&PROJECTS.some(p=>p.engineer===e.name&&p.status!=='Complete')).length}<span>/${ENGINEERS.filter(e=>!e.isBnb).length}</span></div><div class="kc-sub">Of total team</div></div>`;

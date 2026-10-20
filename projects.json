@@ -428,7 +428,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-03-19",
-    "ifc_due_date": "2026-10-08",
+    "ifc_due_date": "2026-10-22",
     "notes": ""
   },
   {
@@ -1436,7 +1436,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-08-05",
-    "ifc_due_date": "2026-10-24",
+    "ifc_due_date": "2026-10-29",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -1445,7 +1445,7 @@
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
     "ifa_due_date": "2026-09-04",
-    "ifc_due_date": "2026-10-10",
+    "ifc_due_date": "2026-10-16",
     "notes": "PRELIM REQUESTED FOR 7-24-26"
   },
   {
@@ -1652,7 +1652,7 @@
     "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": "2026-08-19",
-    "ifc_due_date": "2026-11-16",
+    "ifc_due_date": "2026-12-03",
     "notes": "Still waiting for approval as of 9/22/26"
   },
   {
@@ -1914,7 +1914,7 @@
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "10/20/2026 - Customer requesting full rework of job to meet their criteria."
   },
   {
     "id": "SO111692",
@@ -1922,7 +1922,7 @@
     "engineer": "KAIYI SHI",
     "status": "In Progress",
     "ifa_due_date": "2026-10-03",
-    "ifc_due_date": "2026-11-02",
+    "ifc_due_date": "2026-11-10",
     "notes": ""
   },
   {
@@ -2236,8 +2236,8 @@
     "name": "38KV SWITCH LINE UP",
     "engineer": "Edwin Ojeda",
     "status": "In Progress",
-    "ifa_due_date": null,
-    "ifc_due_date": null,
+    "ifa_due_date": "2026-12-16",
+    "ifc_due_date": "2027-02-02",
     "notes": "Automatically added from Linear assignment sync."
   },
   {

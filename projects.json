@@ -1707,7 +1707,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-08-26",
     "ifc_due_date": "2026-10-21",
-    "notes": "Needing an update on the lock out/ kirk key write up.\n10/6/26"
+    "notes": "No customer feed back so continuing with IFC on 10/16/26"
   },
   {
     "id": "SO111521",
@@ -1878,7 +1878,7 @@
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "IFA sent to electrical 9/14/26"
+    "notes": "IFC started 10/14/26"
   },
   {
     "id": "SO111671",
@@ -2099,7 +2099,7 @@
   {
     "id": "SO111744",
     "name": "mts",
-    "engineer": "Masoom Patel",
+    "engineer": "Mykel Corral",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2198,7 +2198,7 @@
   {
     "id": "SO111762",
     "name": "mts",
-    "engineer": "Masoom Patel",
+    "engineer": "Mykel Corral",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2355,7 +2355,7 @@
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "Released on 10/19/26\n"
   },
   {
     "id": "SO111800",
@@ -2387,7 +2387,7 @@
   {
     "id": "SO111803",
     "name": "mts",
-    "engineer": "Masoom Patel",
+    "engineer": "Mykel Corral",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2450,7 +2450,7 @@
   {
     "id": "SO111812",
     "name": "mts",
-    "engineer": "Masoom Patel",
+    "engineer": "Mykel Corral",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2495,7 +2495,7 @@
   {
     "id": "SO111819",
     "name": "SQD SWBD 2000A",
-    "engineer": "Corey Kidd",
+    "engineer": "David Zepeda",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2503,12 +2503,12 @@
   },
   {
     "id": "SO111822",
-    "name": "SO111822",
-    "engineer": "Unassigned",
+    "name": "B3R-D-B-14-SS-4-K6-3G+N-PD-SS",
+    "engineer": "Erik Leal",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "Resubmitted IFA sent to customer 10/21/26"
   },
   {
     "id": "SO111824",
@@ -2540,7 +2540,7 @@
   {
     "id": "SO111828",
     "name": "mts",
-    "engineer": "Masoom Patel",
+    "engineer": "Mykel Corral",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2612,7 +2612,7 @@
   {
     "id": "SO111864",
     "name": "SO111864",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2702,7 +2702,7 @@
   {
     "id": "SO111879",
     "name": "SO111879",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2828,7 +2828,7 @@
   {
     "id": "SO111899",
     "name": "SO111899",
-    "engineer": "Unassigned",
+    "engineer": "Maria Parrie",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2837,7 +2837,7 @@
   {
     "id": "SO111900",
     "name": "SO111900",
-    "engineer": "Unassigned",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

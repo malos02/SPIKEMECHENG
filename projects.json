@@ -21,7 +21,7 @@
     "id": "SO108870",
     "name": "38kV 1200A_N1_4 SECTIONS",
     "engineer": "Edwin Ojeda",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "Need to make enclosure for breakers"
@@ -57,7 +57,7 @@
     "id": "SO108957",
     "name": "15kv metal clad switchgear Lonestar",
     "engineer": "Edwin Ojeda",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "made PT and CT changes on 4/16.\nNeed a new LV door on section 4 for Chad (4/17)"
@@ -111,7 +111,7 @@
     "id": "SO109557",
     "name": "Relay Panel",
     "engineer": "Edwin Ojeda",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-12",
     "ifc_due_date": "2026-09-08",
     "notes": "APPROVED 6-11-26. NEW DELIVERY DATE IN NOVEMBER 2026"
@@ -1316,7 +1316,7 @@
   {
     "id": "SO111109",
     "name": "5KV LOAD BREAK SWITCH",
-    "engineer": "KAIYI SHI",
+    "engineer": "Erik Leal",
     "status": "In Progress",
     "ifa_due_date": "2026-06-19",
     "ifc_due_date": "2026-11-16",
@@ -1406,7 +1406,7 @@
   {
     "id": "SO111179",
     "name": "38KV SINGLE SWITCH 600A",
-    "engineer": "KAIYI SHI",
+    "engineer": "Erik Leal",
     "status": "In Progress",
     "ifa_due_date": "2026-07-14",
     "ifc_due_date": "2026-11-17",
@@ -1451,7 +1451,7 @@
   {
     "id": "SO111264",
     "name": "15kV Switchgear",
-    "engineer": "KAIYI SHI",
+    "engineer": "Mario Galdamez",
     "status": "In Progress",
     "ifa_due_date": "2026-08-21",
     "ifc_due_date": "2026-11-18",
@@ -1563,7 +1563,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-09-24",
     "ifc_due_date": "2026-11-14",
-    "notes": ""
+    "notes": "Waiting on customer approval and confirmation of CT and PT"
   },
   {
     "id": "SO111378",
@@ -1919,7 +1919,7 @@
   {
     "id": "SO111692",
     "name": "15KV SWITCH 600A",
-    "engineer": "KAIYI SHI",
+    "engineer": "Mario Galdamez",
     "status": "In Progress",
     "ifa_due_date": "2026-10-03",
     "ifc_due_date": "2026-11-10",
@@ -2558,7 +2558,7 @@
   {
     "id": "SO111831",
     "name": "15kv LBS",
-    "engineer": "KAIYI SHI",
+    "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2710,8 +2710,8 @@
   },
   {
     "id": "SO111880",
-    "name": "SO111880",
-    "engineer": "Unassigned",
+    "name": "B-3R-B-T-24-P-25-K6-3G+N-PD,BD BUS GUTTER",
+    "engineer": "Erik Leal",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2720,7 +2720,7 @@
   {
     "id": "SO111881",
     "name": "SO111881",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2747,7 +2747,7 @@
   {
     "id": "SO111887",
     "name": "SO111887",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2765,7 +2765,7 @@
   {
     "id": "SO111891",
     "name": "SO111891",
-    "engineer": "Unassigned",
+    "engineer": "Micaiah Williams",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2774,7 +2774,7 @@
   {
     "id": "SO111892",
     "name": "SO111892",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2792,7 +2792,7 @@
   {
     "id": "SO111894",
     "name": "SO111894",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2801,7 +2801,7 @@
   {
     "id": "SO111896",
     "name": "SO111896",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2846,6 +2846,15 @@
   {
     "id": "SO111901",
     "name": "SO111901",
+    "engineer": "No Engineer Needed",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111904",
+    "name": "SO111904",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

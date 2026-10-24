@@ -2855,9 +2855,9 @@
   {
     "id": "SO111904",
     "name": "SO111904",
-    "engineer": "Unassigned",
+    "engineer": "Tanner Phillips",
     "status": "In Progress",
-    "ifa_due_date": null,
+    "ifa_due_date": "2026-11-19",
     "ifc_due_date": null,
     "notes": "Automatically added from Linear assignment sync."
   },

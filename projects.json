@@ -2853,11 +2853,38 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111902",
+    "name": "SO111902",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111904",
     "name": "SO111904",
     "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": "2026-11-19",
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111907",
+    "name": "SO111907",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111908",
+    "name": "SO111908",
+    "engineer": "Khai Hua",
+    "status": "In Progress",
+    "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "Automatically added from Linear assignment sync."
   },

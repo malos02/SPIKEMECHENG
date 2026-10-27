@@ -1869,7 +1869,7 @@
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "NEMA 3R BOLTSWITCH"
+    "notes": "NEMA 3R BOLTSWITCH IFC SUBMITTED "
   },
   {
     "id": "SO111665",
@@ -2882,11 +2882,11 @@
   {
     "id": "SO111908",
     "name": "SO111908",
-    "engineer": "Khai Hua",
+    "engineer": "Masoom Patel",
     "status": "In Progress",
-    "ifa_due_date": null,
+    "ifa_due_date": "2026-10-30",
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "2500ABB ECB WITH CAMLOCK "
   },
   {
     "id": "SO111909",
@@ -2919,7 +2919,7 @@
     "id": "SP111725",
     "name": "MTS-MTSR-FN-1200-32  SWITCH",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "WAITING TO ELECTRICAL (09/17/26)"

@@ -969,7 +969,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-04-18",
     "ifc_due_date": "2026-11-06",
-    "notes": "IFC IN PROGRESS AND WAITING FOR APPROVAL FROM CUSTOMER\n***WAITINO APPROVAL FROM CUSTOMER ***\n9/10/2026\n**STILL WAITING FOR APPROVAL**\nHaving a meeting with customer 10/14/2026 for additional components\n \n"
+    "notes": "IDR COMPLETE AND RELEASEDON 11/2/2026"
   },
   {
     "id": "SO110852",
@@ -2817,6 +2817,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111895",
+    "name": "SO111895",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111896",
     "name": "SO111896",
     "engineer": "No Engineer Needed",
@@ -3099,6 +3108,33 @@
     "id": "SO111935",
     "name": "SO111935",
     "engineer": "Gustavo Avila",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111937",
+    "name": "SO111937",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111938",
+    "name": "SO111938",
+    "engineer": "Khai Hua",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111939",
+    "name": "SO111939",
+    "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

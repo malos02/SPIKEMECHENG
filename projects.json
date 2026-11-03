@@ -200,8 +200,8 @@
   {
     "id": "SO109953",
     "name": "15KV METAL ENCLOSED SWGR",
-    "engineer": "Unassigned",
-    "status": "Complete",
+    "engineer": "Erik Leal",
+    "status": "In Progress",
     "ifa_due_date": "2025-10-15",
     "ifc_due_date": "2026-05-07",
     "notes": "Making small adjustments. \n\nProduction kickoff has been made. Files not released. still have customer changes as of 5-8-26\n\nIDR has been completed. Second IDR Made. Have to complete LV Panel. Parts released"
@@ -447,7 +447,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-02-09",
     "ifc_due_date": "2026-10-09",
-    "notes": "CUSTOMER APPROVED TO PURCHASE PARTS. IFA STILL IN CUSTOMER REVIEW. NEED TO COMPILE LIST OF UPDATES ON 109196 (UL 1558) TO PUT ON THIS JOB."
+    "notes": "PRODUCTION KICKOFF REVIEW 10/30. MECHANICAL LV SIDE PANELS UPDATED PER ELECTRICAL REVIEW OF WIRING INTO OTHER CABINET. "
   },
   {
     "id": "SO110387",
@@ -867,7 +867,7 @@
     "id": "SO110757",
     "name": "SWBD, 4000A, NEMA 1 (FIELD RETROFIT)",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-04-17",
     "ifc_due_date": null,
     "notes": "PRODUCTION SCHEDULE TO SHIP 6/20/26. REVIEW WITH PM FIELD INSTALL INSTRUCTIONS."
@@ -930,7 +930,7 @@
     "id": "SO110832",
     "name": "POWER SKID, 112.5 KVA, NEMA 3R",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-03-26",
     "ifc_due_date": null,
     "notes": "SHIPPED"
@@ -1191,7 +1191,7 @@
     "id": "SO110985",
     "name": "2000A FIELD RETROFIT. BUS ADDITION.",
     "engineer": "Corey Kidd",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-05-07",
     "ifc_due_date": null,
     "notes": "FIELD RETROFIT (BUS). TOOK FIELD MEASUREMENTS ON 5/5. WORKING ON DRAWINGS TO SUBMIT TO CUSTOMER FOR APPROVAL AND FABRICATION."
@@ -2495,7 +2495,7 @@
   {
     "id": "SO111817",
     "name": "SO111817",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2819,7 +2819,7 @@
   {
     "id": "SO111895",
     "name": "SO111895",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2900,7 +2900,7 @@
   {
     "id": "SO111905",
     "name": "SO111905",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2922,7 +2922,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-10-30",
     "ifc_due_date": null,
-    "notes": "2500ABB ECB WITH CAMLOCK "
+    "notes": "2500ABB ECB WITH CAMLOCK ,\napproved 11/02/2026"
   },
   {
     "id": "SO111909",
@@ -2963,7 +2963,7 @@
   {
     "id": "SO111914",
     "name": "SO111914",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2999,7 +2999,7 @@
   {
     "id": "SO111919",
     "name": "SO111919",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3044,7 +3044,7 @@
   {
     "id": "SO111925",
     "name": "SO111925",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3061,8 +3061,8 @@
   },
   {
     "id": "SO111928",
-    "name": "SO111928",
-    "engineer": "Unassigned",
+    "name": "CTB-1600-3P3W-N3R",
+    "engineer": "Micaiah Williams",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3116,7 +3116,7 @@
   {
     "id": "SO111937",
     "name": "SO111937",
-    "engineer": "Unassigned",
+    "engineer": "Caleb Essel",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3134,7 +3134,25 @@
   {
     "id": "SO111939",
     "name": "SO111939",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111940",
+    "name": "ECBX6SSC-400-D-36-65-LSI-S756V",
+    "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111941",
+    "name": "SO111941",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

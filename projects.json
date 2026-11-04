@@ -357,7 +357,7 @@
     "status": "Complete",
     "ifa_due_date": "2025-12-17",
     "ifc_due_date": "2026-10-08",
-    "notes": "PRODUCTION FABRICATION"
+    "notes": "PRODUCTION FABRICATION. SPD UPDATE COMPLETED. REVISED DOOR SUBMITTED TO OUTSOURCE FAB. FINGER SAFE BARRIERS SUBMITTED TO SPIKE FAB."
   },
   {
     "id": "SO110260",
@@ -870,7 +870,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-04-17",
     "ifc_due_date": null,
-    "notes": "PRODUCTION SCHEDULE TO SHIP 6/20/26. REVIEW WITH PM FIELD INSTALL INSTRUCTIONS."
+    "notes": "SHIPPED"
   },
   {
     "id": "SO110769",
@@ -987,7 +987,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-04-14",
     "ifc_due_date": "2026-04-20",
-    "notes": "NEUTRAL DESIGN UPDATE (PER CUSTOMER) AND APPROVED. FIELD INSTALL EN ROUTE. "
+    "notes": "SHIPPED"
   },
   {
     "id": "SO110856",
@@ -996,7 +996,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-04-14",
     "ifc_due_date": "2026-04-20",
-    "notes": "NEUTRAL UPDATE (PER CUSTOMER). BUS TO BE INSTALLED IN FIELD."
+    "notes": "SHIPPED"
   },
   {
     "id": "SO110857",
@@ -1194,7 +1194,7 @@
     "status": "Complete",
     "ifa_due_date": "2026-05-07",
     "ifc_due_date": null,
-    "notes": "FIELD RETROFIT (BUS). TOOK FIELD MEASUREMENTS ON 5/5. WORKING ON DRAWINGS TO SUBMIT TO CUSTOMER FOR APPROVAL AND FABRICATION."
+    "notes": "SHIPPED"
   },
   {
     "id": "SO111025",
@@ -2613,6 +2613,15 @@
     "id": "SO111840",
     "name": "ENCLOSED BREAKER",
     "engineer": "Masoom Patel",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111843",
+    "name": "SO111843",
+    "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

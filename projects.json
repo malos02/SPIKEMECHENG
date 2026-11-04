@@ -3078,6 +3078,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111930",
+    "name": "SO111930",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111932",
     "name": "SO111932",
     "engineer": "Jordan Dunn",
@@ -3170,7 +3179,7 @@
   {
     "id": "SO111943",
     "name": "SO111943",
-    "engineer": "Unassigned",
+    "engineer": "Emilio Baez",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

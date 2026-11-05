@@ -1647,6 +1647,15 @@
     "notes": ""
   },
   {
+    "id": "SO111457",
+    "name": "ECB-3000A SQD",
+    "engineer": "Masoom Patel",
+    "status": "Complete",
+    "ifa_due_date": "2026-11-05",
+    "ifc_due_date": "2026-11-05",
+    "notes": "IFC RELEASED "
+  },
+  {
     "id": "SO111463",
     "name": "15KV SINGLE SECTION SWITCH",
     "engineer": "Tanner Phillips",
@@ -1875,10 +1884,10 @@
     "id": "SO111665",
     "name": "SWITCH RACK",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "IFC started 10/14/26"
+    "notes": "IFC started 11-4-26"
   },
   {
     "id": "SO111671",
@@ -2733,7 +2742,7 @@
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "Automatically added from Linear assignment sync."
+    "notes": "Sent customer REV_B on 11-4-26 for the change in the copper design."
   },
   {
     "id": "SO111881",
@@ -3260,6 +3269,24 @@
   {
     "id": "SO111950",
     "name": "SO111950",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111951",
+    "name": "SO111951",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111952",
+    "name": "SO111952",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

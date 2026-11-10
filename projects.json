@@ -1757,7 +1757,7 @@
   {
     "id": "SO111535",
     "name": "SO111535",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -1837,7 +1837,7 @@
   },
   {
     "id": "SO111599",
-    "name": "THE WILLIAMS COMPANIES, INC.",
+    "name": "1558 3000A lv switchgear",
     "engineer": "Masoom Patel",
     "status": "In Progress",
     "ifa_due_date": "2026-10-17",
@@ -2244,6 +2244,15 @@
     "id": "SO111766",
     "name": "SO111766",
     "engineer": "NO ENGINEER NEEDED",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111767",
+    "name": "SO111767",
+    "engineer": "Kevin Garcia",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3007,8 +3016,8 @@
   },
   {
     "id": "SO111916",
-    "name": "SO111916",
-    "engineer": "Caleb Essel",
+    "name": "1558 SWITCHGEAR LV",
+    "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3026,7 +3035,7 @@
   {
     "id": "SO111918",
     "name": "SO111918",
-    "engineer": "Unassigned",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3305,7 +3314,7 @@
   {
     "id": "SO111952",
     "name": "SO111952",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3323,6 +3332,33 @@
   {
     "id": "SO111955",
     "name": "SO111955",
+    "engineer": "No Engineer Needed",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111960",
+    "name": "SO111960",
+    "engineer": "No Engineer Needed",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111961",
+    "name": "SO111961",
+    "engineer": "Gustavo Avila",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111962",
+    "name": "SO111962",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

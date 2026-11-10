@@ -339,7 +339,7 @@ tr:hover td{background:rgba(255,255,255,.018)}
       <div class="ni" id="ni-admin" onclick="showView('admin',this)"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M12 14c-5 0-7 2-7 3v1h14v-1c0-1-2-3-7-3z"/><path d="M18 8l1.5-1.5M18 8l1.5 1.5M6 8L4.5 6.5M6 8L4.5 9.5"/></svg>Manage Team</div>
     </div>
   </nav>
-  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Tracker: V23<br>Last sync: <span id="last-update">—</span></div>
+  <div class="sb-footer">Schedule: 170 spreadsheet projects<br>Tracker: V24<br>Last sync: <span id="last-update">—</span></div>
 </aside>
 
 <main class="main">
@@ -1403,7 +1403,7 @@ function renderDashboard(){
   }).join('');
 
   const tbody=document.getElementById('dash-table');
-  let list=PROJECTS.filter(p=>p.status!=='Complete');
+  let list=PROJECTS.filter(p=>p.status!=='Complete'&&!isNoEngineerNeeded(p.engineer));
   // Apply sort if one is active
   if(dashSort.col){
     const c=dashSort.col, d=dashSort.dir;
@@ -1451,7 +1451,7 @@ function renderDashboard(){
 // ── All Projects ──────────────────────────────────────────────────────────
 function projectEngineerLabel(name){return String(name??'').trim()||'Unassigned';}
 function populateFilters(){
-  document.getElementById('f-eng').innerHTML='<option value="">All Engineers</option>'+[...new Set(PROJECTS.map(p=>projectEngineerLabel(p.engineer)))].map(n=>`<option>${n}</option>`).join('');
+  document.getElementById('f-eng').innerHTML='<option value="">All Engineers</option>'+[...new Set(PROJECTS.filter(p=>!isNoEngineerNeeded(p.engineer)).map(p=>projectEngineerLabel(p.engineer)))].map(n=>`<option>${n}</option>`).join('');
 }
 let projSort={col:null,dir:1};
 const PROJ_SORT_COLS=['id','name','engineer','type','voltage','pm','sales','start','end','ifaDue','ifcDue','milestones','progress','status'];
@@ -1477,7 +1477,7 @@ function renderProjects(){
     document.getElementById('view-projects').prepend(banner);
   }
   banner.style.display=drill?'flex':'none';
-  banner.innerHTML=drill?'<span style="flex:1">'+drill.label+' · '+PROJECTS.filter(drill.match).length+' jobs <span style="color:var(--t3)">(before additional filters)</span></span><button class="btn btn-gh btn-sm" onclick="clearDashboardJobs()">Show all projects</button>':'';
+  banner.innerHTML=drill?'<span style="flex:1">'+drill.label+' · '+PROJECTS.filter(p=>!isNoEngineerNeeded(p.engineer)&&drill.match(p)).length+' jobs <span style="color:var(--t3)">(before additional filters)</span></span><button class="btn btn-gh btn-sm" onclick="clearDashboardJobs()">Show all projects</button>':'';
 
   const q=document.getElementById('s-proj').value.toLowerCase();
   const fEng=document.getElementById('f-eng').value;
@@ -1486,6 +1486,7 @@ function renderProjects(){
   const fStat=document.getElementById('f-stat').value;
   const fMs=document.getElementById('f-ms').value;
   let list=PROJECTS.filter(p=>{
+    if(isNoEngineerNeeded(p.engineer))return false;
     if(drill&&!drill.match(p))return false;
     if(fEng&&projectEngineerLabel(p.engineer)!==fEng)return false;
     if(fType&&p.type!==fType)return false;

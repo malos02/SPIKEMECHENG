@@ -1755,6 +1755,15 @@
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
+    "id": "SO111535",
+    "name": "SO111535",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111536",
     "name": "B3R-S-T-06-P-12-K6-3N-SP.PD.BD",
     "engineer": "Micaiah Williams",
@@ -3015,6 +3024,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111918",
+    "name": "SO111918",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111919",
     "name": "SO111919",
     "engineer": "No Engineer Needed",
@@ -3269,7 +3287,7 @@
   {
     "id": "SO111950",
     "name": "SO111950",
-    "engineer": "Unassigned",
+    "engineer": "Khai Hua",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3278,7 +3296,7 @@
   {
     "id": "SO111951",
     "name": "SO111951",
-    "engineer": "Unassigned",
+    "engineer": "Maria Parrie",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3287,6 +3305,24 @@
   {
     "id": "SO111952",
     "name": "SO111952",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111954",
+    "name": "SO111954",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111955",
+    "name": "SO111955",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

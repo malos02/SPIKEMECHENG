@@ -1599,7 +1599,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-09-18",
     "ifc_due_date": "2026-11-02",
-    "notes": "customer wants design change (main section + trans)"
+    "notes": "customer wants design change (main section + trans). IFC submitted - 11/11/2026"
   },
   {
     "id": "SO111425",
@@ -1837,12 +1837,12 @@
   },
   {
     "id": "SO111599",
-    "name": "1558 3000A lv switchgear",
+    "name": "THE WILLIAMS COMPANIES, INC.",
     "engineer": "Masoom Patel",
     "status": "In Progress",
-    "ifa_due_date": "2026-10-17",
+    "ifa_due_date": null,
     "ifc_due_date": "2026-12-03",
-    "notes": "Added from imported Engineering schedule; engineer assignment not provided by schedule export."
+    "notes": "Order change. we receive BOM and one line Thursday 11/05/2026. We need more time to complete IFA. "
   },
   {
     "id": "SO111602",
@@ -3359,7 +3359,34 @@
   {
     "id": "SO111962",
     "name": "SO111962",
+    "engineer": "Jordan Dunn",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111963",
+    "name": "SO111963",
     "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111964",
+    "name": "SO111964",
+    "engineer": "Maria Parrie",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111965",
+    "name": "SO111965",
+    "engineer": "Emilio Baez",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

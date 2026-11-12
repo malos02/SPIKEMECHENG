@@ -2252,7 +2252,7 @@
   {
     "id": "SO111767",
     "name": "SO111767",
-    "engineer": "Kevin Garcia",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -2774,7 +2774,7 @@
   {
     "id": "SO111883",
     "name": "SO111883",
-    "engineer": "Emilio Baez",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3034,8 +3034,8 @@
   },
   {
     "id": "SO111918",
-    "name": "SO111918",
-    "engineer": "Khai Hua",
+    "name": "MTS-MTSRN-NF-600-36-65-SER",
+    "engineer": "Mykel Corral",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3053,7 +3053,7 @@
   {
     "id": "SO111920",
     "name": "SO111920",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3071,7 +3071,7 @@
   {
     "id": "SO111922",
     "name": "SO111922",
-    "engineer": "Jordan Dunn",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3080,7 +3080,7 @@
   {
     "id": "SO111923",
     "name": "SO111923",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3089,7 +3089,7 @@
   {
     "id": "SO111924",
     "name": "SO111924",
-    "engineer": "Emilio Baez",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3188,7 +3188,7 @@
   {
     "id": "SO111937",
     "name": "SO111937",
-    "engineer": "Caleb Essel",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3197,7 +3197,7 @@
   {
     "id": "SO111938",
     "name": "SO111938",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3242,7 +3242,7 @@
   {
     "id": "SO111943",
     "name": "SO111943",
-    "engineer": "Emilio Baez",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3251,7 +3251,7 @@
   {
     "id": "SO111944",
     "name": "SO111944",
-    "engineer": "Jordan Dunn",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3260,7 +3260,7 @@
   {
     "id": "SO111946",
     "name": "SO111946",
-    "engineer": "Maria Parrie",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3278,7 +3278,7 @@
   {
     "id": "SO111948",
     "name": "SO111948",
-    "engineer": "Gustavo Avila",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3287,7 +3287,7 @@
   {
     "id": "SO111949",
     "name": "SO111949",
-    "engineer": "Jordan Dunn",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3296,7 +3296,7 @@
   {
     "id": "SO111950",
     "name": "SO111950",
-    "engineer": "Khai Hua",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3305,7 +3305,7 @@
   {
     "id": "SO111951",
     "name": "SO111951",
-    "engineer": "Maria Parrie",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3323,7 +3323,7 @@
   {
     "id": "SO111954",
     "name": "SO111954",
-    "engineer": "Emilio Baez",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3350,7 +3350,7 @@
   {
     "id": "SO111961",
     "name": "SO111961",
-    "engineer": "Gustavo Avila",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3359,7 +3359,7 @@
   {
     "id": "SO111962",
     "name": "SO111962",
-    "engineer": "Jordan Dunn",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3376,8 +3376,8 @@
   },
   {
     "id": "SO111964",
-    "name": "SO111964",
-    "engineer": "Maria Parrie",
+    "name": "MTS-MTSRR-FN-800-34-SER",
+    "engineer": "Mykel Corral",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3386,7 +3386,34 @@
   {
     "id": "SO111965",
     "name": "SO111965",
-    "engineer": "Emilio Baez",
+    "engineer": "No Engineer Needed",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111966",
+    "name": "SO111966",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111967",
+    "name": "SO111967",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111969",
+    "name": "SO111969",
+    "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

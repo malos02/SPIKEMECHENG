@@ -3447,6 +3447,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111973",
+    "name": "SO111973",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111975",
     "name": "SO111975",
     "engineer": "Unassigned",
@@ -3467,6 +3476,15 @@
   {
     "id": "SO111977",
     "name": "SO111977",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111978",
+    "name": "SO111978",
     "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,

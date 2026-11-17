@@ -3368,7 +3368,7 @@
   {
     "id": "SO111963",
     "name": "SO111963",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3404,7 +3404,7 @@
   {
     "id": "SO111967",
     "name": "SO111967",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3413,7 +3413,7 @@
   {
     "id": "SO111969",
     "name": "SO111969",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3431,7 +3431,7 @@
   {
     "id": "SO111971",
     "name": "SO111971",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3440,7 +3440,7 @@
   {
     "id": "SO111972",
     "name": "SO111972",
-    "engineer": "Unassigned",
+    "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3448,8 +3448,8 @@
   },
   {
     "id": "SO111973",
-    "name": "SO111973",
-    "engineer": "Unassigned",
+    "name": "SWBD FRAMES",
+    "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3458,7 +3458,7 @@
   {
     "id": "SO111975",
     "name": "SO111975",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3467,7 +3467,7 @@
   {
     "id": "SO111976",
     "name": "SO111976",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3476,7 +3476,7 @@
   {
     "id": "SO111977",
     "name": "SO111977",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3486,6 +3486,51 @@
     "id": "SO111978",
     "name": "SO111978",
     "engineer": "Jordan Dunn",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111979",
+    "name": "SO111979",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111981",
+    "name": "SO111981",
+    "engineer": "Maria Parrie",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111982",
+    "name": "SO111982",
+    "engineer": "Khai Hua",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111983",
+    "name": "SO111983",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111984",
+    "name": "SO111984",
+    "engineer": "Maria Parrie",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

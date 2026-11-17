@@ -1320,7 +1320,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-06-19",
     "ifc_due_date": "2026-11-16",
-    "notes": "This is out for approval as of 7-28-26"
+    "notes": "Still out for approval 11/17/26"
   },
   {
     "id": "SO111112",
@@ -1410,7 +1410,7 @@
     "status": "In Progress",
     "ifa_due_date": "2026-07-14",
     "ifc_due_date": "2026-11-17",
-    "notes": ""
+    "notes": "Still waiting for approval 11/17/26"
   },
   {
     "id": "SO111211",
@@ -2757,10 +2757,10 @@
     "id": "SO111880",
     "name": "B-3R-B-T-24-P-25-K6-3G+N-PD,BD BUS GUTTER",
     "engineer": "Erik Leal",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
-    "notes": "Sent customer REV_B on 11-4-26 for the change in the copper design."
+    "notes": "Ready for production."
   },
   {
     "id": "SO111881",
@@ -3411,6 +3411,15 @@
     "notes": "Automatically added from Linear assignment sync."
   },
   {
+    "id": "SO111968",
+    "name": "SO111968",
+    "engineer": "Unassigned",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
     "id": "SO111969",
     "name": "SO111969",
     "engineer": "No Engineer Needed",
@@ -3450,6 +3459,15 @@
     "id": "SO111973",
     "name": "SWBD FRAMES",
     "engineer": "Corey Kidd",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111974",
+    "name": "SO111974",
+    "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3531,6 +3549,15 @@
     "id": "SO111984",
     "name": "SO111984",
     "engineer": "Maria Parrie",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111985",
+    "name": "SO111985",
+    "engineer": "Jordan Dunn",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

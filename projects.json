@@ -1290,7 +1290,7 @@
     "id": "SO111092",
     "name": "NEMA 1 SQD 5000A MAIN STRAIGHT TO IFC",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-06-05",
     "ifc_due_date": "2026-06-22",
     "notes": "STRAIGHT TO IFC. RDD 7/24/26\n\nSales ordered the wrong breaker, re-design needed."

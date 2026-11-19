@@ -357,7 +357,7 @@
     "status": "Complete",
     "ifa_due_date": "2025-12-17",
     "ifc_due_date": "2026-10-08",
-    "notes": "PRODUCTION FABRICATION. SPD UPDATE COMPLETED. REVISED DOOR SUBMITTED TO OUTSOURCE FAB. FINGER SAFE BARRIERS SUBMITTED TO SPIKE FAB."
+    "notes": "PRODUCTION BAY AREA - ASSEMBLY STARTED"
   },
   {
     "id": "SO110260",
@@ -1461,7 +1461,7 @@
     "id": "SO111268",
     "name": "ABB 2 SECTION SWBD",
     "engineer": "Mario Galdamez",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-07-07",
     "ifc_due_date": "2026-09-01",
     "notes": "DRAWING IS APPROVED AS OF 8-10-26"
@@ -1688,7 +1688,7 @@
     "engineer": "BNB Team",
     "status": "In Progress",
     "ifa_due_date": "2026-08-20",
-    "ifc_due_date": "2026-10-22",
+    "ifc_due_date": "2026-11-04",
     "notes": "Added from ProjectTasks Engineering schedule; engineer assignment not provided in this export."
   },
   {
@@ -3558,6 +3558,33 @@
     "id": "SO111985",
     "name": "SO111985",
     "engineer": "Jordan Dunn",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111988",
+    "name": "SO111988",
+    "engineer": "Emilio Baez",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111989",
+    "name": "SO111989",
+    "engineer": "Jordan Dunn",
+    "status": "In Progress",
+    "ifa_due_date": null,
+    "ifc_due_date": null,
+    "notes": "Automatically added from Linear assignment sync."
+  },
+  {
+    "id": "SO111990",
+    "name": "SO111990",
+    "engineer": "Unassigned",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

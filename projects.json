@@ -2478,7 +2478,7 @@
     "id": "SO111812",
     "name": "mts",
     "engineer": "Mykel Corral",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": null,
     "ifc_due_date": null,
     "notes": "Automatically added from Linear assignment sync."
@@ -3413,7 +3413,7 @@
   {
     "id": "SO111968",
     "name": "SO111968",
-    "engineer": "Unassigned",
+    "engineer": "No Engineer Needed",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3466,8 +3466,8 @@
   },
   {
     "id": "SO111974",
-    "name": "SO111974",
-    "engineer": "Unassigned",
+    "name": "38KV LBS SINGLE SECTION",
+    "engineer": "Tanner Phillips",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,
@@ -3583,8 +3583,8 @@
   },
   {
     "id": "SO111990",
-    "name": "SO111990",
-    "engineer": "Unassigned",
+    "name": "CTB-5000-3P4W-N3R",
+    "engineer": "Micaiah Williams",
     "status": "In Progress",
     "ifa_due_date": null,
     "ifc_due_date": null,

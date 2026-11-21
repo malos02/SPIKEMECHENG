@@ -1695,7 +1695,7 @@
     "id": "SO111473",
     "name": "15KV SWITCH",
     "engineer": "Masoom Patel",
-    "status": "In Progress",
+    "status": "Complete",
     "ifa_due_date": "2026-08-06",
     "ifc_due_date": "2026-09-10",
     "notes": ""
@@ -1721,7 +1721,7 @@
   {
     "id": "SO111521",
     "name": "SQD 5 SECTION SWBD 4000A SO3 UPS BLOCK",
-    "engineer": "Mario Galdamez",
+    "engineer": "Corey Kidd",
     "status": "In Progress",
     "ifa_due_date": "2026-10-01",
     "ifc_due_date": "2026-11-14",
